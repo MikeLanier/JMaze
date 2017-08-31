@@ -1,0 +1,127 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<GridPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+	<columnConstraints>
+		<ColumnConstraints percentWidth="25.0" />
+		<ColumnConstraints percentWidth="75.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints percentHeight="100.0" />
+	</rowConstraints>
+
+	<GridPane GridPane.columnIndex="0">
+		<VBox>
+			<!--<padding><Insets bottom="5" top="5" left="5" right="5"></Insets></padding>-->
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Button fx:id="load_maze" minWidth="70" onAction="#LoadMaze" text="Load" />
+				<Label minWidth="5" />
+				<TextField fx:id="load_maze_filename" maxWidth="125" onAction="#LoadMazeFileName" text="filename"/>
+				<Label minWidth="5" />
+				<Button fx:id="load_maze_select" maxWidth="25" minWidth="25" onAction="#LoadMazeSelect" text="^" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Button fx:id="save_maze" minWidth="70" onAction="#SaveMaze" text="Save" />
+				<Label minWidth="5" />
+				<TextField fx:id="save_maze_filename" maxWidth="125" onAction="#SaveMazeFilename" />
+				<Label minWidth="5" />
+				<Button fx:id="save_maze_select" minWidth="25" onAction="#SaveMazeSelect" text="&gt;" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Size" />
+				<Label minWidth="5" />
+				<TextField fx:id="size_x" alignment="CENTER" maxWidth="35.0" onAction="#SizeX" text="512" />
+				<Label minWidth="5" />
+				<Label text="x" />
+				<Label minWidth="5" />
+				<TextField fx:id="size_y" alignment="CENTER" maxWidth="35.0" onAction="#SizeY" text="512" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Cell size" />
+				<Label minWidth="5" />
+				<TextField fx:id="grid_size" alignment="CENTER" maxWidth="35.0" onAction="#GridSize" text="0" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Algorithm" />
+				<Label minWidth="5" />
+				<ComboBox fx:id="algorithm" minWidth="150" onAction="#AlgorithmSelect" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Maze name" />
+				<Label minWidth="5" />
+				<TextField fx:id="maze_name" maxWidth="150" onAction="#MazeName" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" />
+				<Label minWidth="5" />
+				<CheckBox fx:id="maze_2d" onAction="#Maze2D" text="2D" />
+				<Label minWidth="5" />
+				<CheckBox fx:id="maze_3d" onAction="#Maze3D" text="3D" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Start cell" />
+				<Label minWidth="5" />
+				<TextField fx:id="start_cell_x" alignment="CENTER" maxWidth="35.0" onAction="#StartCellX" text="0" />
+				<Label minWidth="5" />
+				<Label text="x" />
+				<Label minWidth="5" />
+				<TextField fx:id="start_cell_y" alignment="CENTER" maxWidth="35.0" onAction="#StartCellY" text="0" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70">Entrance</Label>
+				<Label minWidth="5" />
+				<TextField fx:id="entrance_cell_x" alignment="CENTER" maxWidth="35.0" onAction="#EntranceCellX" text="0" />
+				<Label minWidth="5" />
+				<Label text="x" />
+				<Label minWidth="5" />
+				<TextField fx:id="entrance_cell_y" alignment="CENTER" maxWidth="35.0" onAction="#EntranceCellY" text="0" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Label minWidth="70" text="Exit" />
+				<Label minWidth="5" />
+				<TextField fx:id="exit_cell_x" alignment="CENTER" maxWidth="35.0" onAction="#ExitCellX" text="0" />
+				<Label minWidth="5" />
+				<Label text="x" />
+				<Label minWidth="5" />
+				<TextField fx:id="exit_cell_y" alignment="CENTER" maxWidth="35.0" onAction="#ExitCellY" text="0" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Button fx:id="create_maze" minWidth="70" onAction="#CreateMaze" text="Create" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Button fx:id="solve_maze" minWidth="70" onAction="#SolveMaze" text="Solve" />
+			</HBox>
+			<HBox>
+				<padding><Insets bottom="5" left="5" right="5" top="5" /></padding>
+				<Button fx:id="print_maze" minWidth="70" onAction="#PrintMaze" text="Print" />
+			</HBox>
+		</VBox>
+		<columnConstraints>
+			<ColumnConstraints />
+		</columnConstraints>
+		<rowConstraints>
+			<RowConstraints />
+		</rowConstraints>
+	</GridPane>
+</GridPane>
