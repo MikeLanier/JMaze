@@ -1,18 +1,23 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
 
 public class Controller {
 	public Controller() {
 		System.out.println("Controller: " + this.getClass().getName() );
 	}
 
-	public void LoadMaze(ActionEvent actionEvent) {
+	public void LoadMaze(ActionEvent actionEvent)
+	{
 		System.out.println("LoadMaze");
 	}
 
-	public void LoadMazeFileName(ActionEvent actionEvent) {
+	public void LoadMazeFileName(ActionEvent actionEvent)
+	{
 		System.out.println("LoadMazeFileName");
+		TextField tf = (TextField)actionEvent.getTarget();
+		System.out.println(tf.getText());
 	}
 
 	public void LoadMazeSelect(ActionEvent actionEvent) {
