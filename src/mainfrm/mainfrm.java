@@ -48,10 +48,7 @@ public class mainfrm extends GridPane
 
 	private Label Spacer()
 	{
-		Label spacer = new Label();
-		spacer.setMinWidth(5);
-		spacer.setMaxWidth(5);
-		return spacer;
+		return Marker("", 5);
 	}
 
 	public mainfrm()
