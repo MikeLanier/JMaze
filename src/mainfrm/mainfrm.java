@@ -3,9 +3,16 @@ package mainfrm;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.*;
+
 
 public class mainfrm extends GridPane
 {
@@ -34,6 +41,11 @@ public class mainfrm extends GridPane
 	private Button		btnMazeCreate		= new Button();
 	private Button		btnMazeSolve		= new Button();
 	private Button		btnMazePrint		= new Button();
+	private Canvas		cvsMazePanel		= new Canvas();
+
+	private int		_sizeX = 25;
+	private int		_sizeY = 25;
+	private int		_sizeCell = 12;
 
 	private Label Marker(String title, int size)
 	{
@@ -51,22 +63,53 @@ public class mainfrm extends GridPane
 		return Marker("", 5);
 	}
 
-	public mainfrm()
-	{
+	public mainfrm() {
 		System.out.println("mainfrm");
 
 		// define the grid layout as two columns and one row.
-		ColumnConstraints	col1 = new ColumnConstraints();
-		ColumnConstraints	col2 = new ColumnConstraints();
+		ColumnConstraints col1 = new ColumnConstraints();
+		ColumnConstraints col2 = new ColumnConstraints();
 		col1.setPrefWidth(300);
 		col2.setPercentWidth(70);
 		getColumnConstraints().addAll(col1, col2);
 
-		RowConstraints	row1 = new RowConstraints();
+		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(100);
 		getRowConstraints().addAll(row1);
 
 		setGridLinesVisible(true);
+
+		buildControls();
+		buildMazePanel();
+
+		Integer i = new Integer(_sizeX);
+		tfMazeSizeX.setText(i.toString());
+
+		i = _sizeY;
+		tfMazeSizeY.setText(i.toString());
+
+		i = _sizeCell;
+		tfCellSize.setText(i.toString());
+	}
+
+	private void buildMazePanel()
+	{
+		System.out.println("buildMazepanel");
+
+		cvsMazePanel.setWidth(300);
+		cvsMazePanel.setHeight(300);
+
+		HBox vbMazeBox = new HBox();
+		add(vbMazeBox, 1, 0);
+
+		vbMazeBox.getChildren().add(cvsMazePanel);
+		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
+		gc.setFill(javafx.scene.paint.Color.AQUA);
+		gc.fillRect(0, 0, 300, 300);
+	}
+
+	private void buildControls()
+	{
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 
 		// vertical box for the controls
