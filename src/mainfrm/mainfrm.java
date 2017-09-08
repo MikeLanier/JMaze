@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,9 +46,11 @@ public class mainfrm extends GridPane
 	private Button		btnMazePrint		= new Button();
 	private Canvas		cvsMazePanel		= new Canvas();
 
-	private int		_sizeX = 25;
-	private int		_sizeY = 25;
-	private int		_sizeCell = 12;
+	private int		_sizeX = 5;
+	private int		_sizeY = 5;
+	private int		_sizeCell = 50;
+	private int		_xOffset = 10 + _sizeCell;
+	private int		_yOffset = 10 + _sizeCell;
 
 	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
 	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
@@ -97,6 +100,7 @@ public class mainfrm extends GridPane
 
 		buildControls();
 		buildMazePanel();
+		drawMaze();
 
 		Integer i = new Integer(_sizeX);
 		tfMazeSizeX.setText(i.toString());
@@ -112,57 +116,83 @@ public class mainfrm extends GridPane
 	{
 		System.out.println("buildMazepanel");
 
-		cvsMazePanel.setWidth(300);
-		cvsMazePanel.setHeight(300);
-
 		HBox vbMazeBox = new HBox();
 		add(vbMazeBox, 1, 0);
+
+		int width = (_sizeX + 2) * _sizeCell;
+		int height = (_sizeY + 2) * _sizeCell;
+		System.out.println("width, height: " + width + ", " + height);
+
+		cvsMazePanel.setWidth(width+_xOffset);
+		cvsMazePanel.setHeight(height+_yOffset);
 
 		vbMazeBox.getChildren().add(cvsMazePanel);
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 		gc.setFill(javafx.scene.paint.Color.AQUA);
-		gc.fillRect(0, 0, 300, 300);
+		gc.fillRect(_xOffset, _yOffset, width, height);
 
-		Wall left = walls.get(ID(0, 0, true));
-//		System.out.println("left: " + left);
-		if(left == null)
+//		gc.setLineDashes(0);
+//		gc.setLineWidth(1);
+//		gc.setStroke(Color.BLACK);
+//		gc.strokeLine(_xOffset, _yOffset, _xOffset + _sizeCell, _yOffset + _sizeCell);
+
+		for(int x=0; x<_sizeX; x++)
 		{
-			left = new Wall(0, 0, true);
-//			System.out.println("left.ID(): " + left.ID());
-			walls.put(left.ID(), left);
-		}
+			for(int y=0; y<_sizeY; y++) {
 
-		Wall top = walls.get(ID(0, 0, false));
-//		System.out.println("top: " + top);
-		if(top == null)
-		{
-			top = new Wall(0, 0, false);
-//			System.out.println("top.ID(): " + top.ID());
-			walls.put(top.ID(), top);
-		}
+			Wall left = walls.get(ID(x, y, true));
+//			System.out.println("left: " + left);
+			if(left == null)
+			{
+				left = new Wall(x, y, true);
+//				System.out.println("left.ID(): " + left.ID());
+				walls.put(left.ID(), left);
+			}
 
-		Wall right = walls.get(ID(1, 0, true));
-//		System.out.println("right: " + right);
-		if(right == null)
-		{
-			right = new Wall(1, 0, true);
-//			System.out.println("right.ID(): " + right.ID());
-			walls.put(right.ID(), right);
-		}
+			Wall top = walls.get(ID(x, y, false));
+//			System.out.println("top: " + top);
+			if(top == null)
+			{
+				top = new Wall(x, y, false);
+//				System.out.println("top.ID(): " + top.ID());
+				walls.put(top.ID(), top);
+			}
 
-		Wall bottom = walls.get(ID(0, 1, false));
-//		System.out.println("bottom: " + bottom);
-		if(bottom == null)
-		{
-			bottom = new Wall(0, 1, false);
-//			System.out.println("bottom.ID(): " + bottom.ID());
-			walls.put(bottom.ID(), bottom);
-		}
+			Wall right = walls.get(ID(x+1, y, false));
+//			System.out.println("right: " + right);
+			if(right == null)
+			{
+				right = new Wall(x+1, y, false);
+//				System.out.println("right.ID(): " + right.ID());
+				walls.put(right.ID(), right);
+			}
 
-		Cell cell = new Cell(0, 0, left, top, right, bottom);
-		cells.put(cell.ID(), cell);
+			Wall bottom = walls.get(ID(x, y+1, true));
+//			System.out.println("bottom: " + bottom);
+			if(bottom == null)
+			{
+				bottom = new Wall(x, y+1, true);
+//				System.out.println("bottom.ID(): " + bottom.ID());
+				walls.put(bottom.ID(), bottom);
+			}
+
+			Cell cell = new Cell(x, y, left, top, right, bottom);
+			cells.put(cell.ID(), cell);
+			}
+		}
 		System.out.println("cells.size: " + cells.size());
 		System.out.println("walls.size: " + walls.size());
+	}
+
+	private void drawMaze()
+	{
+		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
+
+		Collection<Wall> wc = walls.values();
+		for(Wall w: wc)
+		{
+			w.draw(gc, _xOffset+_sizeCell, _yOffset+_sizeCell, _sizeCell);
+		}
 	}
 
 	private void buildControls()
