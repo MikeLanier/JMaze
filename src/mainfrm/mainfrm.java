@@ -46,11 +46,11 @@ public class mainfrm extends GridPane
 	private Button		btnMazePrint		= new Button();
 	private Canvas		cvsMazePanel		= new Canvas();
 
-	private int		_sizeX = 5;
-	private int		_sizeY = 5;
-	private int		_sizeCell = 50;
-	private int		_xOffset = 10 + _sizeCell;
-	private int		_yOffset = 10 + _sizeCell;
+	private int			_sizeX = 20;
+	private int			_sizeY = 20;
+	private int			_sizeCell = 25;
+	private int			_xOffset = 10 + _sizeCell;
+	private int			_yOffset = 10 + _sizeCell;
 
 	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
 	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
@@ -131,48 +131,35 @@ public class mainfrm extends GridPane
 		gc.setFill(javafx.scene.paint.Color.AQUA);
 		gc.fillRect(_xOffset, _yOffset, width, height);
 
-//		gc.setLineDashes(0);
-//		gc.setLineWidth(1);
-//		gc.setStroke(Color.BLACK);
-//		gc.strokeLine(_xOffset, _yOffset, _xOffset + _sizeCell, _yOffset + _sizeCell);
-
 		for(int x=0; x<_sizeX; x++)
 		{
 			for(int y=0; y<_sizeY; y++) {
 
 			Wall left = walls.get(ID(x, y, true));
-//			System.out.println("left: " + left);
 			if(left == null)
 			{
 				left = new Wall(x, y, true);
-//				System.out.println("left.ID(): " + left.ID());
 				walls.put(left.ID(), left);
 			}
 
 			Wall top = walls.get(ID(x, y, false));
-//			System.out.println("top: " + top);
 			if(top == null)
 			{
 				top = new Wall(x, y, false);
-//				System.out.println("top.ID(): " + top.ID());
 				walls.put(top.ID(), top);
 			}
 
 			Wall right = walls.get(ID(x+1, y, false));
-//			System.out.println("right: " + right);
 			if(right == null)
 			{
 				right = new Wall(x+1, y, false);
-//				System.out.println("right.ID(): " + right.ID());
 				walls.put(right.ID(), right);
 			}
 
 			Wall bottom = walls.get(ID(x, y+1, true));
-//			System.out.println("bottom: " + bottom);
 			if(bottom == null)
 			{
 				bottom = new Wall(x, y+1, true);
-//				System.out.println("bottom.ID(): " + bottom.ID());
 				walls.put(bottom.ID(), bottom);
 			}
 
@@ -180,8 +167,12 @@ public class mainfrm extends GridPane
 			cells.put(cell.ID(), cell);
 			}
 		}
+
 		System.out.println("cells.size: " + cells.size());
 		System.out.println("walls.size: " + walls.size());
+
+		Wall w = walls.get(ID(2,2,false));
+		w.Open(true);
 	}
 
 	private void drawMaze()

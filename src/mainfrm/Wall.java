@@ -9,6 +9,11 @@ public class Wall {
 	private boolean horizontal = true;
 	private boolean open = false;
 
+	public void Open(boolean _open)
+	{
+		open = _open;
+	}
+
 	public Wall( int _xOrigin, int _yOrigin, boolean _horizontal )
 	{
 		xOrigin = _xOrigin;
@@ -37,7 +42,11 @@ public class Wall {
 
 		gc.setLineDashes(0);
 		gc.setLineWidth(1);
-		gc.setStroke(Color.BLACK);
+
+		if(open)
+			gc.setStroke(Color.YELLOW);
+		else
+			gc.setStroke(Color.BLACK);
 
 		if(horizontal)
 		{
