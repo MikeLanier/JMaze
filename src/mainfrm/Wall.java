@@ -13,12 +13,15 @@ public class Wall {
 		horizontal = _horizontal;
 	}
 
-	public long ID()
+	public Integer ID()
 	{
 		int h = (horizontal) ? 0x40000000 : 0;
 
-		return	(xOrigin & 0x7fff) |
-				(yOrigin & 0x7fff) << 15 |
-				h;
+		int _id = 	(xOrigin & 0x7fff) |
+					(yOrigin & 0x7fff) << 15 |
+					h;
+//		System.out.println(_id);
+
+		return new Integer(_id);
 	}
 }

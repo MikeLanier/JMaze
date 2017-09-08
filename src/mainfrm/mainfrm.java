@@ -1,8 +1,5 @@
 package mainfrm;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.ObjectProperty;
-import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,12 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
-import javafx.collections.ObservableMap;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 
 public class mainfrm extends GridPane
 {
@@ -53,6 +49,9 @@ public class mainfrm extends GridPane
 	private int		_sizeY = 25;
 	private int		_sizeCell = 12;
 
+	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
+	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
+
 	private Label Marker(String title, int size)
 	{
 		Label lbl = new Label();
@@ -62,6 +61,17 @@ public class mainfrm extends GridPane
 			lbl.setMaxWidth(size);
 		}
 		return lbl;
+	}
+
+	private Integer ID(int xOrigin, int yOrigin, boolean horizontal)
+	{
+		int h = (horizontal) ? 0x40000000 : 0;
+
+		int _id = 	(xOrigin & 0x7fff) |
+					(yOrigin & 0x7fff) << 15 |
+					h;
+
+		return new Integer(_id);
 	}
 
 	private Label Spacer()
@@ -112,6 +122,47 @@ public class mainfrm extends GridPane
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 		gc.setFill(javafx.scene.paint.Color.AQUA);
 		gc.fillRect(0, 0, 300, 300);
+
+		Wall left = walls.get(ID(0, 0, true));
+//		System.out.println("left: " + left);
+		if(left == null)
+		{
+			left = new Wall(0, 0, true);
+//			System.out.println("left.ID(): " + left.ID());
+			walls.put(left.ID(), left);
+		}
+
+		Wall top = walls.get(ID(0, 0, false));
+//		System.out.println("top: " + top);
+		if(top == null)
+		{
+			top = new Wall(0, 0, false);
+//			System.out.println("top.ID(): " + top.ID());
+			walls.put(top.ID(), top);
+		}
+
+		Wall right = walls.get(ID(1, 0, true));
+//		System.out.println("right: " + right);
+		if(right == null)
+		{
+			right = new Wall(1, 0, true);
+//			System.out.println("right.ID(): " + right.ID());
+			walls.put(right.ID(), right);
+		}
+
+		Wall bottom = walls.get(ID(0, 1, false));
+//		System.out.println("bottom: " + bottom);
+		if(bottom == null)
+		{
+			bottom = new Wall(0, 1, false);
+//			System.out.println("bottom.ID(): " + bottom.ID());
+			walls.put(bottom.ID(), bottom);
+		}
+
+		Cell cell = new Cell(0, 0, left, top, right, bottom);
+		cells.put(cell.ID(), cell);
+		System.out.println("cells.size: " + cells.size());
+		System.out.println("walls.size: " + walls.size());
 	}
 
 	private void buildControls()

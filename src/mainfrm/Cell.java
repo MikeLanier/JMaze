@@ -15,8 +15,9 @@ public class Cell {
 		walls[3] = bottom;
 	}
 
-	public int ID()
+	public Integer ID()
 	{
-		return (xOrigin & 0x7fff) | ((yOrigin & 0x7fff) << 15);
+		int _id = (xOrigin & 0x7fff) | ((yOrigin & 0x7fff) << 15);
+		return new Integer(_id);
 	}
 }
