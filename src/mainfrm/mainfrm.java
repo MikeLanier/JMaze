@@ -4,18 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class mainfrm extends GridPane
 {
@@ -55,6 +50,17 @@ public class mainfrm extends GridPane
 	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
 	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
 
+	private String algorithms[] = {
+		"Depth-first search",
+		"Recursive backtracker",
+		"Randomized Kruskal's algorithm",
+		"Randomized Prim's algorithm",
+		"Randomized Prim's algorithm: Modified version",
+		"Recursive division method",
+		"Simple algorithms",
+		"Cellular automaton algorithms"
+	};
+
 	private Label Marker(String title, int size)
 	{
 		Label lbl = new Label();
@@ -70,11 +76,9 @@ public class mainfrm extends GridPane
 	{
 		int h = (horizontal) ? 0x40000000 : 0;
 
-		int _id = 	(xOrigin & 0x7fff) |
-					(yOrigin & 0x7fff) << 15 |
-					h;
-
-		return new Integer(_id);
+		return (xOrigin & 0x7fff) |
+				(yOrigin & 0x7fff) << 15 |
+				h;
 	}
 
 	private Label Spacer()
@@ -102,7 +106,7 @@ public class mainfrm extends GridPane
 		buildMazePanel();
 		drawMaze();
 
-		Integer i = new Integer(_sizeX);
+		Integer i = _sizeX;
 		tfMazeSizeX.setText(i.toString());
 
 		i = _sizeY;
@@ -112,6 +116,40 @@ public class mainfrm extends GridPane
 		tfCellSize.setText(i.toString());
 	}
 
+	private void createCell(int x, int y)
+	{
+		Wall west = walls.get(ID(x, y, true));
+		if(west == null)
+		{
+			west = new Wall(x, y, true);
+			walls.put(west.ID(), west);
+		}
+
+		Wall north = walls.get(ID(x, y, false));
+		if(north == null)
+		{
+			north = new Wall(x, y, false);
+			walls.put(north.ID(), north);
+		}
+
+		Wall east = walls.get(ID(x+1, y, false));
+		if(east == null)
+		{
+			east = new Wall(x+1, y, false);
+			walls.put(east.ID(), east);
+		}
+
+		Wall south = walls.get(ID(x, y+1, true));
+		if(south == null)
+		{
+			south = new Wall(x, y+1, true);
+			walls.put(south.ID(), south);
+		}
+
+		Cell cell = new Cell(x, y, west, north, east, south);
+		cells.put(cell.ID(), cell);
+	}
+
 	private void buildMazePanel()
 	{
 		System.out.println("buildMazepanel");
@@ -119,8 +157,8 @@ public class mainfrm extends GridPane
 		HBox vbMazeBox = new HBox();
 		add(vbMazeBox, 1, 0);
 
-		int width = (_sizeX + 2) * _sizeCell;
-		int height = (_sizeY + 2) * _sizeCell;
+		int width = (_sizeX + 2) * _sizeCell + 1;
+		int height = (_sizeY + 2) * _sizeCell + 1;
 		System.out.println("width, height: " + width + ", " + height);
 
 		cvsMazePanel.setWidth(width+_xOffset);
@@ -131,47 +169,18 @@ public class mainfrm extends GridPane
 		gc.setFill(javafx.scene.paint.Color.AQUA);
 		gc.fillRect(_xOffset, _yOffset, width, height);
 
-		for(int x=0; x<_sizeX; x++)
+		for(int x=1; x<=_sizeX; x++)
 		{
-			for(int y=0; y<_sizeY; y++) {
-
-			Wall left = walls.get(ID(x, y, true));
-			if(left == null)
+			for(int y=1; y<=_sizeY; y++)
 			{
-				left = new Wall(x, y, true);
-				walls.put(left.ID(), left);
-			}
-
-			Wall top = walls.get(ID(x, y, false));
-			if(top == null)
-			{
-				top = new Wall(x, y, false);
-				walls.put(top.ID(), top);
-			}
-
-			Wall right = walls.get(ID(x+1, y, false));
-			if(right == null)
-			{
-				right = new Wall(x+1, y, false);
-				walls.put(right.ID(), right);
-			}
-
-			Wall bottom = walls.get(ID(x, y+1, true));
-			if(bottom == null)
-			{
-				bottom = new Wall(x, y+1, true);
-				walls.put(bottom.ID(), bottom);
-			}
-
-			Cell cell = new Cell(x, y, left, top, right, bottom);
-			cells.put(cell.ID(), cell);
+				createCell(x, y);
 			}
 		}
 
 		System.out.println("cells.size: " + cells.size());
 		System.out.println("walls.size: " + walls.size());
 
-		Wall w = walls.get(ID(2,2,false));
+		Wall w = walls.get(ID(3,3,false));
 		w.Open(true);
 	}
 
@@ -182,7 +191,7 @@ public class mainfrm extends GridPane
 		Collection<Wall> wc = walls.values();
 		for(Wall w: wc)
 		{
-			w.draw(gc, _xOffset+_sizeCell, _yOffset+_sizeCell, _sizeCell);
+			w.draw(gc, _xOffset, _yOffset, _sizeCell);
 		}
 	}
 
@@ -374,10 +383,14 @@ public class mainfrm extends GridPane
 				cbAlgorithm.setMaxWidth(150);
 				hbMazeAlgorithmControls.getChildren().add(cbAlgorithm);
 
+				cbAlgorithm.getItems().setAll(algorithms);
+				cbAlgorithm.setValue(algorithms[0]);
+
 				cbAlgorithm.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: cbAlgorithm");
+					public void handle(ActionEvent event)
+					{
+						System.out.println("OnAction: cbAlgorithm: " + cbAlgorithm.getValue());
 					}
 				});
 			}
@@ -417,6 +430,8 @@ public class mainfrm extends GridPane
 				cbMaze2D.setText("2D");
 				cbMaze2D.setMinWidth(40);
 				cbMaze2D.setMaxWidth(40);
+				cbMaze2D.setIndeterminate(false);
+				cbMaze2D.setSelected(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze2D);
 
 				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -451,7 +466,10 @@ public class mainfrm extends GridPane
 				hbMazeStartCellControls.getChildren().add(Marker("Start Cell", 70));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
-				tfStartCellX.setText("512");
+				Integer x = new Integer(_sizeX/2);
+				Integer y = new Integer(_sizeY/2);
+
+				tfStartCellX.setText(x.toString());
 				tfStartCellX.setMinWidth(40);
 				tfStartCellX.setMaxWidth(40);
 				hbMazeStartCellControls.getChildren().add(tfStartCellX);
@@ -471,7 +489,7 @@ public class mainfrm extends GridPane
 
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
-				tfStartCellY.setText("512");
+				tfStartCellY.setText(x.toString());
 				tfStartCellY.setMinWidth(40);
 				tfStartCellY.setMaxWidth(40);
 				hbMazeStartCellControls.getChildren().add(tfStartCellY);
@@ -508,7 +526,11 @@ public class mainfrm extends GridPane
 				hbMazeEntranceControls.getChildren().add(Marker("Entrance", 70));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-				tfEntranceX.setText("512");
+				Integer x = new Integer(0);
+				Integer y = new Integer(_sizeY/3);
+				createCell(x,y);
+
+				tfEntranceX.setText("left");
 				tfEntranceX.setMinWidth(40);
 				tfEntranceX.setMaxWidth(40);
 				hbMazeEntranceControls.getChildren().add(tfEntranceX);
@@ -528,7 +550,7 @@ public class mainfrm extends GridPane
 
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-				tfEntranceY.setText("512");
+				tfEntranceY.setText(y.toString());
 				tfEntranceY.setMinWidth(40);
 				tfEntranceY.setMaxWidth(40);
 				hbMazeEntranceControls.getChildren().add(tfEntranceY);
@@ -565,7 +587,11 @@ public class mainfrm extends GridPane
 				hbMazeExitControls.getChildren().add(Marker("Exit", 70));
 				hbMazeExitControls.getChildren().add(Spacer());
 
-				tfExitX.setText("512");
+				Integer x = new Integer(_sizeX+1);
+				Integer y = new Integer(_sizeY*2/3);
+				createCell(x,y);
+
+				tfExitX.setText("right");
 				tfExitX.setMinWidth(40);
 				tfExitX.setMaxWidth(40);
 				hbMazeExitControls.getChildren().add(tfExitX);
@@ -585,7 +611,7 @@ public class mainfrm extends GridPane
 
 				hbMazeExitControls.getChildren().add(Spacer());
 
-				tfExitY.setText("512");
+				tfExitY.setText(y.toString());
 				tfExitY.setMinWidth(40);
 				tfExitY.setMaxWidth(40);
 				hbMazeExitControls.getChildren().add(tfExitY);
