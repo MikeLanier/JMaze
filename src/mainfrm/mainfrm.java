@@ -217,6 +217,7 @@ public class mainfrm extends GridPane
 				btnMazeOpen.setText("Open");
 				btnMazeOpen.setMinWidth(70);
 				btnMazeOpen.setMaxWidth(70);
+				btnMazeOpen.setDisable(true);
 				hbMazeOpenControls.getChildren().add(btnMazeOpen);
 
 				btnMazeOpen.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -231,6 +232,7 @@ public class mainfrm extends GridPane
 				// contains the name of the filename containing the maze to load
 				tfMazeFilename.setText("filename");
 				tfMazeFilename.setMinWidth(150);
+				tfMazeFilename.setDisable(true);
 				hbMazeOpenControls.getChildren().add(tfMazeFilename);
 
 				tfMazeFilename.setOnAction(new EventHandler<ActionEvent>() {
@@ -245,6 +247,7 @@ public class mainfrm extends GridPane
 				// press this button to show the fileopen dialog.
 				btnMazeSelect.setText("^");
 				btnMazeSelect.setMinWidth(25);
+				btnMazeSelect.setDisable(true);
 				hbMazeOpenControls.getChildren().add(btnMazeSelect);
 
 				btnMazeSelect.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -266,6 +269,7 @@ public class mainfrm extends GridPane
 				btnMazeSave.setText("Save");
 				btnMazeSave.setMinWidth(70);
 				btnMazeSave.setMaxWidth(70);
+				btnMazeSave.setDisable(true);
 				hbMazeSaveControls.getChildren().add(btnMazeSave);
 
 				btnMazeSave.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -280,6 +284,7 @@ public class mainfrm extends GridPane
 				// contains the filename to which the current maze will be saved
 				tfMazeSaveFilename.setText("filename");
 				tfMazeSaveFilename.setMinWidth(150);
+				tfMazeSaveFilename.setDisable(true);
 				hbMazeSaveControls.getChildren().add(tfMazeSaveFilename);
 
 				tfMazeSaveFilename.setOnAction(new EventHandler<ActionEvent>() {
@@ -294,6 +299,7 @@ public class mainfrm extends GridPane
 				// press this button to show the filesave dialog
 				btnMazeSaveSelect.setText(">");
 				btnMazeSaveSelect.setMinWidth(25);
+				btnMazeSaveSelect.setDisable(true);
 				hbMazeSaveControls.getChildren().add(btnMazeSaveSelect);
 
 				btnMazeSaveSelect.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -402,11 +408,14 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeNameControls);
 				hbMazeNameControls.paddingProperty().setValue(margin);
 
-				hbMazeNameControls.getChildren().add(Marker("Maze Name", 70));
+				Label title = Marker("Maze Name", 70);
+				title.setDisable(true);
+				hbMazeNameControls.getChildren().add(title);
 				hbMazeNameControls.getChildren().add(Spacer());
 
 				tfMazeName.setMinWidth(150);
 				tfMazeName.setMaxWidth(150);
+				tfMazeName.setDisable(true);
 				hbMazeNameControls.getChildren().add(tfMazeName);
 
 				tfMazeName.setOnAction(new EventHandler<ActionEvent>() {
@@ -432,6 +441,7 @@ public class mainfrm extends GridPane
 				cbMaze2D.setMaxWidth(40);
 				cbMaze2D.setIndeterminate(false);
 				cbMaze2D.setSelected(true);
+				cbMaze2D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze2D);
 
 				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -446,6 +456,7 @@ public class mainfrm extends GridPane
 				cbMaze3D.setText("3D");
 				cbMaze3D.setMinWidth(40);
 				cbMaze3D.setMaxWidth(40);
+				cbMaze3D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze3D);
 
 				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -506,6 +517,7 @@ public class mainfrm extends GridPane
 				btnStartCellSet.setText("R");
 				btnStartCellSet.setMinWidth(25);
 				btnStartCellSet.setMaxWidth(25);
+				btnStartCellSet.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(btnStartCellSet);
 
 				btnStartCellSet.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -567,6 +579,7 @@ public class mainfrm extends GridPane
 				btnEntranceSet.setText("R");
 				btnEntranceSet.setMinWidth(25);
 				btnEntranceSet.setMaxWidth(25);
+				btnEntranceSet.setDisable(true);
 				hbMazeEntranceControls.getChildren().add(btnEntranceSet);
 
 				btnEntranceSet.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -628,6 +641,7 @@ public class mainfrm extends GridPane
 				btnExitSet.setText("R");
 				btnExitSet.setMinWidth(25);
 				btnExitSet.setMaxWidth(25);
+				btnExitSet.setDisable(true);
 				hbMazeExitControls.getChildren().add(btnExitSet);
 
 				btnExitSet.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -668,6 +682,7 @@ public class mainfrm extends GridPane
 				btnMazeSolve.setText("Solve");
 				btnMazeSolve.setMinWidth(70);
 				btnMazeSolve.setMaxWidth(70);
+				btnMazeSolve.setDisable(true);
 				hbMazeSolveControls.getChildren().add(btnMazeSolve);
 
 				btnMazeSolve.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -688,6 +703,7 @@ public class mainfrm extends GridPane
 				btnMazePrint.setText("Print");
 				btnMazePrint.setMinWidth(70);
 				btnMazePrint.setMaxWidth(70);
+				btnMazePrint.setDisable(true);
 				hbMazePrintControls.getChildren().add(btnMazePrint);
 
 				btnMazePrint.setOnMousePressed(new EventHandler<MouseEvent>() {

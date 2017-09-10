@@ -2,7 +2,7 @@
 In this repository, I'm studing algorithms for making mazes.  The 
 algorithms used are defined at 
 https://en.wikipedia.org/wiki/Maze_generation_algorithm .
-The app to demo these algorithms are written in Java.  I eventually
+The app to demo these algorithms is written in Java.  I eventually
 plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
 create different repositories for these versions.  
   
@@ -13,14 +13,17 @@ worked on will be copied to the next day.  Anything not worked on
 will be moved to the next day.
 
 ## 09/10/2017  
-*[ ] Special cells for entrance/exit  
-*[ ] Add code to cell to show cell as starting point for maze creation  
-*[ ] code for random number  
-*[ ] map selected algorithm to "maze create" function  
-*[ ] create the maze  
+* Special cells for entrance/exit  
+* Add code to cell to show cell as starting point for maze creation  
+[ ] code for random number  
+[ ] map selected algorithm to "maze create" function  
+[ ] create the maze  
+[ ] entrance/exit cell controls  
+....[ ] x control can accept number between 0 and sizeX or 'east', 'west'  
+....[ ] y control can accept number between 0 and sizeY or 'north', 'south'  
 ## 09/09/2017  
-*[x] Move code for creating cell/walls into function  
-*[ ] Special cells for entrance/exit  
+[x] Move code for creating cell/walls into function  
+[ ] Special cells for entrance/exit  
 
 ## Algorithms
 ### Depth-first search
