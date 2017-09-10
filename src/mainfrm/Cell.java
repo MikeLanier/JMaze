@@ -5,14 +5,14 @@ public class Cell {
 	private int yOrigin = 0;
 	private Wall[] walls = new Wall[4];
 
-	public Cell(int _xOrigin, int _yOrigin, Wall left, Wall top, Wall right, Wall bottom)
+	public Cell(int _xOrigin, int _yOrigin, Wall west, Wall north, Wall east, Wall south)
 	{
 		xOrigin = _xOrigin;
 		yOrigin = _yOrigin;
-		walls[0] = left;
-		walls[1] = top;
-		walls[2] = right;
-		walls[3] = bottom;
+		walls[0] = west;
+		walls[1] = north;
+		walls[2] = east;
+		walls[3] = south;
 	}
 
 	public Integer ID()
