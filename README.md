@@ -13,10 +13,10 @@ worked on will be copied to the next day.  Anything not worked on
 will be moved to the next day.
 
 ## 09/10/2017  
--[ ] Special cells for entrance/exit  
--[ ] Add code to cell to show cell as starting point for maze creation  
--[ ] code for random number
--[ ] map selected algorithm to "maze create" function
++[ ] Special cells for entrance/exit  
+*[ ] Add code to cell to show cell as starting point for maze creation  
+-[ ] code for random number  
+-[ ] map selected algorithm to "maze create" function  
 -[ ] create the maze  
 ## 09/09/2017  
 -[x] Move code for creating cell/walls into function  
