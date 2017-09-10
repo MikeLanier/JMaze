@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class mainfrm extends GridPane
 {
@@ -61,7 +62,9 @@ public class mainfrm extends GridPane
 		"Cellular automaton algorithms"
 	};
 
-	private Label Marker(String title, int size)
+	Random rand = new Random(System.currentTimeMillis());
+
+	private Label Marker(String title, int size, boolean disabled)
 	{
 		Label lbl = new Label();
 		lbl.setText(title);
@@ -69,6 +72,7 @@ public class mainfrm extends GridPane
 			lbl.setMinWidth(size);
 			lbl.setMaxWidth(size);
 		}
+		lbl.setDisable(disabled);
 		return lbl;
 	}
 
@@ -83,7 +87,7 @@ public class mainfrm extends GridPane
 
 	private Label Spacer()
 	{
-		return Marker("", 5);
+		return Marker("", 5, false);
 	}
 
 	public mainfrm() {
@@ -105,15 +109,6 @@ public class mainfrm extends GridPane
 		buildControls();
 		buildMazePanel();
 		drawMaze();
-
-		Integer i = _sizeX;
-		tfMazeSizeX.setText(i.toString());
-
-		i = _sizeY;
-		tfMazeSizeY.setText(i.toString());
-
-		i = _sizeCell;
-		tfCellSize.setText(i.toString());
 	}
 
 	private void createCell(int x, int y)
@@ -317,13 +312,15 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeSizeControls);
 				hbMazeSizeControls.paddingProperty().setValue(margin);
 
-				hbMazeSizeControls.getChildren().add(Marker("Size", 70));
+				hbMazeSizeControls.getChildren().add(Marker("Size", 70, true));
 				hbMazeSizeControls.getChildren().add(Spacer());
 
 				// number of cells in x
-				tfMazeSizeX.setText("512");
+				Integer x = _sizeX;
+				tfMazeSizeX.setText(x.toString());
 				tfMazeSizeX.setMinWidth(40);
 				tfMazeSizeX.setMaxWidth(40);
+				tfMazeSizeX.setDisable(true);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeX);
 
 				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
@@ -334,13 +331,15 @@ public class mainfrm extends GridPane
 				});
 
 				hbMazeSizeControls.getChildren().add(Spacer());
-				hbMazeSizeControls.getChildren().add(Marker("x", 0));
+				hbMazeSizeControls.getChildren().add(Marker("x", 0, true));
 				hbMazeSizeControls.getChildren().add(Spacer());
 
 				// number of cells in y
-				tfMazeSizeY.setText("512");
+				Integer y = _sizeY;
+				tfMazeSizeY.setText(y.toString());
 				tfMazeSizeY.setMinWidth(40);
 				tfMazeSizeY.setMaxWidth(40);
+				tfMazeSizeY.setDisable(true);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeY);
 
 				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {
@@ -358,12 +357,14 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeCellSizeControls);
 				hbMazeCellSizeControls.paddingProperty().setValue(margin);
 
-				hbMazeCellSizeControls.getChildren().add(Marker("Cell Size", 70));
+				hbMazeCellSizeControls.getChildren().add(Marker("Cell Size", 70, true));
 				hbMazeCellSizeControls.getChildren().add(Spacer());
 
-				tfCellSize.setText("25");
+				Integer cs = _sizeCell;
+				tfCellSize.setText(cs.toString());
 				tfCellSize.setMinWidth(40);
 				tfCellSize.setMaxWidth(40);
+				tfCellSize.setDisable(true);
 				hbMazeCellSizeControls.getChildren().add(tfCellSize);
 
 				tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
@@ -381,12 +382,13 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeAlgorithmControls);
 				hbMazeAlgorithmControls.paddingProperty().setValue(margin);
 
-				hbMazeAlgorithmControls.getChildren().add(Marker("Algorithm", 70));
+				hbMazeAlgorithmControls.getChildren().add(Marker("Algorithm", 70, true));
 				hbMazeAlgorithmControls.getChildren().add(Spacer());
 
 				// combobox containing the algorithms to use
 				cbAlgorithm.setMinWidth(150);
 				cbAlgorithm.setMaxWidth(150);
+				cbAlgorithm.setDisable(true);
 				hbMazeAlgorithmControls.getChildren().add(cbAlgorithm);
 
 				cbAlgorithm.getItems().setAll(algorithms);
@@ -408,9 +410,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeNameControls);
 				hbMazeNameControls.paddingProperty().setValue(margin);
 
-				Label title = Marker("Maze Name", 70);
-				title.setDisable(true);
-				hbMazeNameControls.getChildren().add(title);
+				hbMazeNameControls.getChildren().add(Marker("Maze Name", 70, true));
 				hbMazeNameControls.getChildren().add(Spacer());
 
 				tfMazeName.setMinWidth(150);
@@ -433,7 +433,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMaze2D3DControls);
 				hbMaze2D3DControls.paddingProperty().setValue(margin);
 
-				hbMaze2D3DControls.getChildren().add(Marker("", 70));
+				hbMaze2D3DControls.getChildren().add(Marker("", 70, false));
 				hbMaze2D3DControls.getChildren().add(Spacer());
 
 				cbMaze2D.setText("2D");
@@ -474,7 +474,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeStartCellControls);
 				hbMazeStartCellControls.paddingProperty().setValue(margin);
 
-				hbMazeStartCellControls.getChildren().add(Marker("Start Cell", 70));
+				hbMazeStartCellControls.getChildren().add(Marker("Start Cell", 70, false));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
 				Integer x = new Integer(_sizeX/2);
@@ -483,6 +483,7 @@ public class mainfrm extends GridPane
 				tfStartCellX.setText(x.toString());
 				tfStartCellX.setMinWidth(40);
 				tfStartCellX.setMaxWidth(40);
+//				tfStartCellX.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(tfStartCellX);
 
 				tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
@@ -493,16 +494,13 @@ public class mainfrm extends GridPane
 				});
 
 				hbMazeStartCellControls.getChildren().add(Spacer());
-
-				Label lblX = new Label();
-				lblX.setText("x");
-				hbMazeStartCellControls.getChildren().add(lblX);
-
+				hbMazeStartCellControls.getChildren().add(Marker("x", 0, false));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
 				tfStartCellY.setText(x.toString());
 				tfStartCellY.setMinWidth(40);
 				tfStartCellY.setMaxWidth(40);
+//				tfStartCellY.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(tfStartCellY);
 
 				tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
@@ -535,7 +533,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeEntranceControls);
 				hbMazeEntranceControls.paddingProperty().setValue(margin);
 
-				hbMazeEntranceControls.getChildren().add(Marker("Entrance", 70));
+				hbMazeEntranceControls.getChildren().add(Marker("Entrance", 70, false));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
 				Integer x = new Integer(0);
@@ -545,6 +543,7 @@ public class mainfrm extends GridPane
 				tfEntranceX.setText("left");
 				tfEntranceX.setMinWidth(40);
 				tfEntranceX.setMaxWidth(40);
+//				tfEntranceX.setDisable(true);
 				hbMazeEntranceControls.getChildren().add(tfEntranceX);
 
 				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
@@ -555,16 +554,13 @@ public class mainfrm extends GridPane
 				});
 
 				hbMazeEntranceControls.getChildren().add(Spacer());
-
-				Label lblX = new Label();
-				lblX.setText("x");
-				hbMazeEntranceControls.getChildren().add(lblX);
-
+				hbMazeEntranceControls.getChildren().add(Marker("x", 0, false));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
 				tfEntranceY.setText(y.toString());
 				tfEntranceY.setMinWidth(40);
 				tfEntranceY.setMaxWidth(40);
+//				tfEntranceY.setDisable(true);
 				hbMazeEntranceControls.getChildren().add(tfEntranceY);
 
 				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
@@ -597,7 +593,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeExitControls);
 				hbMazeExitControls.paddingProperty().setValue(margin);
 
-				hbMazeExitControls.getChildren().add(Marker("Exit", 70));
+				hbMazeExitControls.getChildren().add(Marker("Exit", 70, false));
 				hbMazeExitControls.getChildren().add(Spacer());
 
 				Integer x = new Integer(_sizeX+1);
@@ -607,6 +603,7 @@ public class mainfrm extends GridPane
 				tfExitX.setText("right");
 				tfExitX.setMinWidth(40);
 				tfExitX.setMaxWidth(40);
+//				tfExitX.setDisable(true);
 				hbMazeExitControls.getChildren().add(tfExitX);
 
 				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
@@ -617,16 +614,13 @@ public class mainfrm extends GridPane
 				});
 
 				hbMazeExitControls.getChildren().add(Spacer());
-
-				Label lblX = new Label();
-				lblX.setText("x");
-				hbMazeExitControls.getChildren().add(lblX);
-
+				hbMazeExitControls.getChildren().add(Marker("x", 0, false));
 				hbMazeExitControls.getChildren().add(Spacer());
 
 				tfExitY.setText(y.toString());
 				tfExitY.setMinWidth(40);
 				tfExitY.setMaxWidth(40);
+//				tfExitY.setDisable(true);
 				hbMazeExitControls.getChildren().add(tfExitY);
 
 				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
