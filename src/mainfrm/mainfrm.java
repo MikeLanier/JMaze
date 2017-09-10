@@ -51,6 +51,10 @@ public class mainfrm extends GridPane
 	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
 	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
 
+	private Cell	currentCell = null;
+	private Cell	entranceCell = null;
+	private Cell	exitCell = null;
+
 	private String algorithms[] = {
 		"Depth-first search",
 		"Recursive backtracker",
@@ -108,10 +112,33 @@ public class mainfrm extends GridPane
 
 		buildControls();
 		buildMazePanel();
+
+		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
+		int startCellX = Integer.parseInt(tfStartCellX.getText());
+		int startCellY = Integer.parseInt(tfStartCellY.getText());
+		currentCell = cells.get(ID(startCellX, startCellY, false));
+		if(currentCell != null)
+		{
+			currentCell.SetType(Cell.CellType.eCellTypeStart);
+		}
+
+		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
+		exitCell.SetType(Cell.CellType.eCellTypeExit);
+
+		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
+		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
+		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
+		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
+
+		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
+		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
+		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
+		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
+
 		drawMaze();
 	}
 
-	private void createCell(int x, int y)
+	private Cell createCell(int x, int y)
 	{
 		Wall west = walls.get(ID(x, y, true));
 		if(west == null)
@@ -143,6 +170,8 @@ public class mainfrm extends GridPane
 
 		Cell cell = new Cell(x, y, west, north, east, south);
 		cells.put(cell.ID(), cell);
+
+		return cell;
 	}
 
 	private void buildMazePanel()
@@ -161,7 +190,7 @@ public class mainfrm extends GridPane
 
 		vbMazeBox.getChildren().add(cvsMazePanel);
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
-		gc.setFill(javafx.scene.paint.Color.AQUA);
+		gc.setFill(javafx.scene.paint.Color.WHITE);
 		gc.fillRect(_xOffset, _yOffset, width, height);
 
 		for(int x=1; x<=_sizeX; x++)
@@ -172,16 +201,19 @@ public class mainfrm extends GridPane
 			}
 		}
 
-		System.out.println("cells.size: " + cells.size());
-		System.out.println("walls.size: " + walls.size());
-
-		Wall w = walls.get(ID(3,3,false));
-		w.Open(true);
+//		System.out.println("cells.size: " + cells.size());
+//		System.out.println("walls.size: " + walls.size());
 	}
 
 	private void drawMaze()
 	{
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
+
+		Collection<Cell> cc = cells.values();
+		for(Cell c: cc)
+		{
+			c.draw(gc, _xOffset, _yOffset, _sizeCell);
+		}
 
 		Collection<Wall> wc = walls.values();
 		for(Wall w: wc)
@@ -538,7 +570,7 @@ public class mainfrm extends GridPane
 
 				Integer x = new Integer(0);
 				Integer y = new Integer(_sizeY/3);
-				createCell(x,y);
+				entranceCell = createCell(x,y);
 
 				tfEntranceX.setText("left");
 				tfEntranceX.setMinWidth(40);
@@ -598,7 +630,7 @@ public class mainfrm extends GridPane
 
 				Integer x = new Integer(_sizeX+1);
 				Integer y = new Integer(_sizeY*2/3);
-				createCell(x,y);
+				exitCell = createCell(x,y);
 
 				tfExitX.setText("right");
 				tfExitX.setMinWidth(40);

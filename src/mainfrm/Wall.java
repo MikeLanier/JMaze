@@ -44,7 +44,7 @@ public class Wall {
 		gc.setLineWidth(1);
 
 		if(open)
-			gc.setStroke(Color.YELLOW);
+			gc.setStroke(Color.WHITE);
 		else
 			gc.setStroke(Color.BLACK);
 

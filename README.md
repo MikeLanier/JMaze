@@ -6,16 +6,10 @@ The app to demo these algorithms is written in Java.  I eventually
 plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
 create different repositories for these versions.  
   
-The following is somewhat of a diary of my effort in creating this
-app.  For each day, I'll have a list of what I need to do.  If I
-complete an item, it will get a check and stay under that day.  Anything
-worked on will be copied to the next day.  Anything not worked on
-will be moved to the next day.
-
 ## 09/10/2017  
 * ~~Special cells for entrance/exit~~  
-* show cell as starting point for maze creation  
-* show cell as entrance and exit
+* ~~show cell as starting point for maze creation~~  
+* ~~show cell as entrance and exit~~
 * entrance/exit cell controls  
   * x control can accept number between 0 and sizeX or 'east', 'west'  
   * y control can accept number between 0 and sizeY or 'north', 'south'  
@@ -24,7 +18,6 @@ will be moved to the next day.
 * create the maze  
 ## 09/09/2017  
 * ~~Move code for creating cell/walls into function~~  
-* Special cells for entrance/exit  
 
 ## Algorithms
 ### Depth-first search
