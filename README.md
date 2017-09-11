@@ -6,16 +6,18 @@ The app to demo these algorithms is written in Java.  I eventually
 plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
 create different repositories for these versions.  
   
+## 09/11/2017
+* ~~entrance/exit cell controls: change to combo box. droplist contains "north", 
+"south", "east", "west", and numbers from "0" to sizeX-1 or sizeY-1.~~  
+* on change to entrance/exit combo box, validate selection
+* map selected algorithm to "maze create" function  
+* implement a stack for backtracking steps in maze creation
+* create the maze  
 ## 09/10/2017  
 * ~~Special cells for entrance/exit~~  
 * ~~show cell as starting point for maze creation~~  
 * ~~show cell as entrance and exit~~
-* entrance/exit cell controls  
-  * x control can accept number between 0 and sizeX or 'east', 'west'  
-  * y control can accept number between 0 and sizeY or 'north', 'south'  
 * ~~code for random number~~  
-* map selected algorithm to "maze create" function  
-* create the maze  
 ## 09/09/2017  
 * ~~Move code for creating cell/walls into function~~  
 

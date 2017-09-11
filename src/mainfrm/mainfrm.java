@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -30,11 +29,11 @@ public class mainfrm extends GridPane
 	private TextField	tfStartCellX		= new TextField();
 	private TextField	tfStartCellY		= new TextField();
 	private Button		btnStartCellSet		= new Button();
-	private TextField	tfEntranceX			= new TextField();
-	private TextField	tfEntranceY			= new TextField();
+	private ComboBox<String>	tfEntranceX	= new ComboBox<>();
+	private ComboBox<String>	tfEntranceY	= new ComboBox<>();
 	private Button		btnEntranceSet		= new Button();
-	private TextField	tfExitX				= new TextField();
-	private TextField	tfExitY				= new TextField();
+	private ComboBox<String>	tfExitX		= new ComboBox<>();
+	private ComboBox<String>	tfExitY		= new ComboBox<>();
 	private Button		btnExitSet			= new Button();
 	private Button		btnMazeCreate		= new Button();
 	private Button		btnMazeSolve		= new Button();
@@ -65,7 +64,7 @@ public class mainfrm extends GridPane
 		"Cellular automaton algorithms"
 	};
 
-	Random rand = new Random(System.currentTimeMillis());
+	private Random rand = new Random(System.currentTimeMillis());
 
 	private Label Marker(String title, int size, boolean disabled)
 	{
@@ -231,51 +230,47 @@ public class mainfrm extends GridPane
 		}
 	}
 
-	private void createMaze(Cell _currentCell)
-	{
-		int x = currentCell.X();
-		int y = currentCell.Y();
-
-		System.out.println("createMaze: currentCell: " + x + ", " + y);
-
-		currentCell.Visited(true);
-		System.out.println("currentCell: " + x + ", " + y);
-
-		Cell westCell = cells.get(ID(x-1,y,false));
-		Cell northCell = cells.get(ID(x,y-1,false));
-		Cell eastCell = cells.get(ID(x+1,y,false));
-		Cell southCell = cells.get(ID(x,y+1,false));
-
-		if(westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
-		if(northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
-		if(eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
-		if(southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
-
-		List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
-		if(westCell != null && !westCell.Visited())	cells.add(new Pair(westCell, currentCell.W(Cell.west)));
-		if(northCell != null && !northCell.Visited())	cells.add(new Pair(northCell, currentCell.W(Cell.north)));
-		if(eastCell != null && !eastCell.Visited())	cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
-		if(southCell != null && !southCell.Visited())	cells.add(new Pair(southCell, currentCell.W(Cell.south)));
-
-		System.out.println("number of unvisitor neighbors: " + cells.size());
-
-		int r = 0;
-//		for(int i=0; i<25; i++) {
-			r = rand.nextInt(cells.size());
-			System.out.println("random number: " + r);
-//		}
-
-		cells.get(r).getValue().Open(true);
-		currentCell.SetType(Cell.CellType.eNormal);
-		currentCell = cells.get(r).getKey();
-		currentCell.SetType(Cell.CellType.eCellTypeStart);
-		drawMaze();
-	}
-
 	private void createMaze()
 	{
 		System.out.println("createMaze");
-		createMaze(currentCell);
+
+		if(currentCell != null) {
+			int x = currentCell.X();
+			int y = currentCell.Y();
+
+			System.out.println("createMaze: currentCell: " + x + ", " + y);
+
+			currentCell.Visited(true);
+			System.out.println("currentCell: " + x + ", " + y);
+
+			Cell westCell = cells.get(ID(x - 1, y, false));
+			Cell northCell = cells.get(ID(x, y - 1, false));
+			Cell eastCell = cells.get(ID(x + 1, y, false));
+			Cell southCell = cells.get(ID(x, y + 1, false));
+
+			if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
+			if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
+			if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
+			if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
+
+			List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
+
+			if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
+			if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
+			if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
+			if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
+
+			System.out.println("number of unvisitor neighbors: " + cells.size());
+
+			int r = rand.nextInt(cells.size());
+			System.out.println("random number: " + r);
+
+			cells.get(r).getValue().Open(true);
+			currentCell.SetType(Cell.CellType.eNormal);
+			currentCell = cells.get(r).getKey();
+			currentCell.SetType(Cell.CellType.eCellTypeStart);
+			drawMaze();
+		}
 	}
 
 	private void buildControls()
@@ -565,8 +560,8 @@ public class mainfrm extends GridPane
 				hbMazeStartCellControls.getChildren().add(Marker("Start Cell", 70, false));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
-				Integer x = new Integer(_sizeX/2);
-				Integer y = new Integer(_sizeY/2);
+				Integer x = _sizeX/2;
+				Integer y = _sizeY/2;
 
 				tfStartCellX.setText(x.toString());
 				tfStartCellX.setMinWidth(40);
@@ -628,10 +623,19 @@ public class mainfrm extends GridPane
 				Integer y = new Integer(_sizeY/3);
 				entranceCell = createCell(x,y);
 
-				tfEntranceX.setText("left");
-				tfEntranceX.setMinWidth(40);
-				tfEntranceX.setMaxWidth(40);
-//				tfEntranceX.setDisable(true);
+				ArrayList<String> itemsX = new ArrayList<>();
+				itemsX.add("west");
+				itemsX.add("east");
+				for(Integer i=0; i<_sizeX; i++)
+				{
+					itemsX.add(i.toString());
+				}
+
+				tfEntranceX.getItems().setAll(itemsX);
+				tfEntranceX.setValue(itemsX.get(0));
+				tfEntranceX.setMinWidth(70);
+				tfEntranceX.setMaxWidth(70);
+
 				hbMazeEntranceControls.getChildren().add(tfEntranceX);
 
 				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
@@ -645,10 +649,19 @@ public class mainfrm extends GridPane
 				hbMazeEntranceControls.getChildren().add(Marker("x", 0, false));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-				tfEntranceY.setText(y.toString());
-				tfEntranceY.setMinWidth(40);
-				tfEntranceY.setMaxWidth(40);
-//				tfEntranceY.setDisable(true);
+				ArrayList<String> itemsY = new ArrayList<>();
+				itemsY.add("north");
+				itemsY.add("south");
+				for(Integer i=0; i<_sizeY; i++)
+				{
+					itemsY.add(i.toString());
+				}
+
+				tfEntranceY.getItems().setAll(itemsY);
+				tfEntranceY.setValue(itemsY.get(y+2));
+				tfEntranceY.setMinWidth(70);
+				tfEntranceY.setMaxWidth(70);
+
 				hbMazeEntranceControls.getChildren().add(tfEntranceY);
 
 				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
@@ -688,10 +701,19 @@ public class mainfrm extends GridPane
 				Integer y = new Integer(_sizeY*2/3);
 				exitCell = createCell(x,y);
 
-				tfExitX.setText("right");
-				tfExitX.setMinWidth(40);
-				tfExitX.setMaxWidth(40);
-//				tfExitX.setDisable(true);
+				ArrayList<String> itemsX = new ArrayList<>();
+				itemsX.add("west");
+				itemsX.add("east");
+				for(Integer i=0; i<_sizeX; i++)
+				{
+					itemsX.add(i.toString());
+				}
+
+				tfExitX.getItems().setAll(itemsX);
+				tfExitX.setValue(itemsX.get(1));
+				tfExitX.setMinWidth(70);
+				tfExitX.setMaxWidth(70);
+
 				hbMazeExitControls.getChildren().add(tfExitX);
 
 				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
@@ -705,10 +727,19 @@ public class mainfrm extends GridPane
 				hbMazeExitControls.getChildren().add(Marker("x", 0, false));
 				hbMazeExitControls.getChildren().add(Spacer());
 
-				tfExitY.setText(y.toString());
-				tfExitY.setMinWidth(40);
-				tfExitY.setMaxWidth(40);
-//				tfExitY.setDisable(true);
+				ArrayList<String> itemsY = new ArrayList<>();
+				itemsY.add("north");
+				itemsY.add("south");
+				for(Integer i=0; i<_sizeY; i++)
+				{
+					itemsY.add(i.toString());
+				}
+
+				tfExitY.getItems().setAll(itemsY);
+				tfExitY.setValue(itemsY.get(y+2));
+				tfExitY.setMinWidth(70);
+				tfExitY.setMaxWidth(70);
+
 				hbMazeExitControls.getChildren().add(tfExitY);
 
 				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
