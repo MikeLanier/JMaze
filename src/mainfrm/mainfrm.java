@@ -123,6 +123,9 @@ public class mainfrm extends GridPane
 		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
 		exitCell.SetType(Cell.CellType.eCellTypeExit);
 
+		entranceCell.Visited(true);
+		exitCell.Visited(true);
+
 		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
 		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
 		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
@@ -230,46 +233,71 @@ public class mainfrm extends GridPane
 		}
 	}
 
+	private Stack<Cell> stack = null; //new Stack<Cell>();
 	private void createMaze()
 	{
 		System.out.println("createMaze");
 
 		if(currentCell != null) {
-			int x = currentCell.X();
-			int y = currentCell.Y();
+			if(stack == null) {
+				stack = new Stack<Cell>();
+				stack.push(currentCell);
+			}
 
-			System.out.println("createMaze: currentCell: " + x + ", " + y);
+			while(stack.size()>0) {
+//			for(int i=0; i<1; i++){
+				int x = currentCell.X();
+				int y = currentCell.Y();
 
-			currentCell.Visited(true);
-			System.out.println("currentCell: " + x + ", " + y);
+				System.out.println("createMaze: currentCell: " + x + ", " + y);
 
-			Cell westCell = cells.get(ID(x - 1, y, false));
-			Cell northCell = cells.get(ID(x, y - 1, false));
-			Cell eastCell = cells.get(ID(x + 1, y, false));
-			Cell southCell = cells.get(ID(x, y + 1, false));
+				currentCell.Visited(true);
+				System.out.println("currentCell: " + x + ", " + y);
 
-			if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
-			if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
-			if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
-			if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
+				Cell westCell = cells.get(ID(x - 1, y, false));
+				Cell northCell = cells.get(ID(x, y - 1, false));
+				Cell eastCell = cells.get(ID(x + 1, y, false));
+				Cell southCell = cells.get(ID(x, y + 1, false));
 
-			List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
+				if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
+				if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
+				if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
+				if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
 
-			if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
-			if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
-			if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
-			if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
+				List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
 
-			System.out.println("number of unvisitor neighbors: " + cells.size());
+				if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
+				if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
+				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
+				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
 
-			int r = rand.nextInt(cells.size());
-			System.out.println("random number: " + r);
+				System.out.println("number of unvisited neighbors: " + cells.size());
 
-			cells.get(r).getValue().Open(true);
-			currentCell.SetType(Cell.CellType.eNormal);
-			currentCell = cells.get(r).getKey();
-			currentCell.SetType(Cell.CellType.eCellTypeStart);
-			drawMaze();
+				if(cells.size()>0) {
+					int r = rand.nextInt(cells.size());
+					System.out.println("random number: " + r);
+
+					cells.get(r).getValue().Open(true);
+					currentCell.SetType(Cell.CellType.eNormal);
+					currentCell = cells.get(r).getKey();
+					currentCell.SetType(Cell.CellType.eCellTypeStart);
+					currentCell.Visited(true);
+					stack.push(currentCell);
+					System.out.println("stack size: " + stack.size());
+					drawMaze();
+				}
+				else {
+					currentCell.SetType(Cell.CellType.eNormal);
+					currentCell = stack.pop();
+
+					if(stack.size()>0)
+						currentCell.SetType(Cell.CellType.eCellTypeStart);
+					else
+						currentCell.SetType(Cell.CellType.eNormal);
+
+					drawMaze();
+				}
+			}
 		}
 	}
 
