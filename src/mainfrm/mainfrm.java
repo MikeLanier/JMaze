@@ -7,11 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
+import javafx.util.Pair;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class mainfrm extends GridPane
 {
@@ -42,9 +41,9 @@ public class mainfrm extends GridPane
 	private Button		btnMazePrint		= new Button();
 	private Canvas		cvsMazePanel		= new Canvas();
 
-	private int			_sizeX = 20;
-	private int			_sizeY = 20;
-	private int			_sizeCell = 25;
+	private int			_sizeX = 10;
+	private int			_sizeY = 10;
+	private int			_sizeCell = 50;
 	private int			_xOffset = 10 + _sizeCell;
 	private int			_yOffset = 10 + _sizeCell;
 
@@ -140,17 +139,17 @@ public class mainfrm extends GridPane
 
 	private Cell createCell(int x, int y)
 	{
-		Wall west = walls.get(ID(x, y, true));
+		Wall west = walls.get(ID(x, y, false));
 		if(west == null)
 		{
-			west = new Wall(x, y, true);
+			west = new Wall(x, y, false);
 			walls.put(west.ID(), west);
 		}
 
-		Wall north = walls.get(ID(x, y, false));
+		Wall north = walls.get(ID(x, y, true));
 		if(north == null)
 		{
-			north = new Wall(x, y, false);
+			north = new Wall(x, y, true);
 			walls.put(north.ID(), north);
 		}
 
@@ -209,6 +208,16 @@ public class mainfrm extends GridPane
 	{
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 
+//		currentCell.W(Cell.west).ClosedColor(Color.RED);
+//		currentCell.W(Cell.north).ClosedColor(Color.GREEN);
+//		currentCell.W(Cell.east).ClosedColor(Color.BLUE);
+//		currentCell.W(Cell.south).ClosedColor(Color.ORANGE);
+//
+//		currentCell.W(Cell.west).draw(gc, _xOffset, _yOffset, _sizeCell);
+//		currentCell.W(Cell.north).draw(gc, _xOffset, _yOffset, _sizeCell);
+//		currentCell.W(Cell.east).draw(gc, _xOffset, _yOffset, _sizeCell);
+//		currentCell.W(Cell.south).draw(gc, _xOffset, _yOffset, _sizeCell);
+
 		Collection<Cell> cc = cells.values();
 		for(Cell c: cc)
 		{
@@ -220,6 +229,53 @@ public class mainfrm extends GridPane
 		{
 			w.draw(gc, _xOffset, _yOffset, _sizeCell);
 		}
+	}
+
+	private void createMaze(Cell _currentCell)
+	{
+		int x = currentCell.X();
+		int y = currentCell.Y();
+
+		System.out.println("createMaze: currentCell: " + x + ", " + y);
+
+		currentCell.Visited(true);
+		System.out.println("currentCell: " + x + ", " + y);
+
+		Cell westCell = cells.get(ID(x-1,y,false));
+		Cell northCell = cells.get(ID(x,y-1,false));
+		Cell eastCell = cells.get(ID(x+1,y,false));
+		Cell southCell = cells.get(ID(x,y+1,false));
+
+		if(westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
+		if(northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
+		if(eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
+		if(southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
+
+		List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
+		if(westCell != null && !westCell.Visited())	cells.add(new Pair(westCell, currentCell.W(Cell.west)));
+		if(northCell != null && !northCell.Visited())	cells.add(new Pair(northCell, currentCell.W(Cell.north)));
+		if(eastCell != null && !eastCell.Visited())	cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
+		if(southCell != null && !southCell.Visited())	cells.add(new Pair(southCell, currentCell.W(Cell.south)));
+
+		System.out.println("number of unvisitor neighbors: " + cells.size());
+
+		int r = 0;
+//		for(int i=0; i<25; i++) {
+			r = rand.nextInt(cells.size());
+			System.out.println("random number: " + r);
+//		}
+
+		cells.get(r).getValue().Open(true);
+		currentCell.SetType(Cell.CellType.eNormal);
+		currentCell = cells.get(r).getKey();
+		currentCell.SetType(Cell.CellType.eCellTypeStart);
+		drawMaze();
+	}
+
+	private void createMaze()
+	{
+		System.out.println("createMaze");
+		createMaze(currentCell);
 	}
 
 	private void buildControls()
@@ -692,8 +748,10 @@ public class mainfrm extends GridPane
 
 				btnMazeCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
 					@Override
-					public void handle(MouseEvent event) {
+					public void handle(MouseEvent event)
+					{
 						System.out.println("OnMousePressed: btnMazeCreate");
+						createMaze();
 					}
 				});
 			}

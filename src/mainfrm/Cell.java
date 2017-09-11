@@ -6,7 +6,15 @@ import javafx.scene.paint.Color;
 public class Cell {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
+
+	public int X() { return xOrigin; }
+	public int Y() { return yOrigin; }
+
 	private Wall[] walls = new Wall[4];
+	private boolean visited = false;
+
+	public boolean Visited() { return visited; }
+	public void Visited(boolean _visited) { visited = _visited; }
 
 	public static int	west = 0;
 	public static int	north = 1;
@@ -51,7 +59,8 @@ public class Cell {
 
 	public void draw(GraphicsContext gc, int xOffset, int yOffset, int cellSize)
 	{
-		if(type != CellType.eNormal) {
+//		if(type != CellType.eNormal)
+		{
 			double x = (double) (xOffset + xOrigin * cellSize);
 			double y = (double) (yOffset + yOrigin * cellSize);
 
@@ -95,6 +104,11 @@ public class Cell {
 			{
 				gc.setFill((Color.RED));
 				gc.fillPolygon( xpoints, ypoints, 8);
+			}
+			else
+			{
+				gc.setFill(Color.WHITE);
+				gc.fillRect(x, y, cellSize, cellSize);
 			}
 		}
 	}

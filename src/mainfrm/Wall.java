@@ -8,6 +8,9 @@ public class Wall {
 	private int yOrigin = 0;
 	private boolean horizontal = true;
 	private boolean open = false;
+	private Color closedColor = Color.BLACK;
+
+	public void ClosedColor(Color _closedColor) { closedColor = _closedColor; }
 
 	public void Open(boolean _open)
 	{
@@ -46,7 +49,7 @@ public class Wall {
 		if(open)
 			gc.setStroke(Color.WHITE);
 		else
-			gc.setStroke(Color.BLACK);
+			gc.setStroke(closedColor);
 
 		if(horizontal)
 		{
