@@ -93,7 +93,7 @@ public class mainfrm extends GridPane
 	}
 
 	public mainfrm() {
-		System.out.println("mainfrm");
+//		System.out.println("mainfrm");
 
 		// define the grid layout as two columns and one row.
 		ColumnConstraints col1 = new ColumnConstraints();
@@ -111,7 +111,7 @@ public class mainfrm extends GridPane
 		buildControls();
 		buildMazePanel();
 
-		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
+//		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
 		int startCellX = Integer.parseInt(tfStartCellX.getText());
 		int startCellY = Integer.parseInt(tfStartCellY.getText());
 		currentCell = cells.get(ID(startCellX, startCellY, false));
@@ -119,23 +119,23 @@ public class mainfrm extends GridPane
 		{
 			currentCell.SetType(Cell.CellType.eCellTypeStart);
 		}
-
-		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
-		exitCell.SetType(Cell.CellType.eCellTypeExit);
-
-		entranceCell.Visited(true);
-		exitCell.Visited(true);
-
-		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
-		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
-		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
-		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
-
-		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
-		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
-		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
-		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
-
+//
+//		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
+//		exitCell.SetType(Cell.CellType.eCellTypeExit);
+//
+//		entranceCell.Visited(true);
+//		exitCell.Visited(true);
+//
+//		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
+//		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
+//		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
+//		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
+//
+//		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
+//		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
+//		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
+//		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
+//
 		drawMaze();
 	}
 
@@ -210,16 +210,6 @@ public class mainfrm extends GridPane
 	{
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 
-//		currentCell.W(Cell.west).ClosedColor(Color.RED);
-//		currentCell.W(Cell.north).ClosedColor(Color.GREEN);
-//		currentCell.W(Cell.east).ClosedColor(Color.BLUE);
-//		currentCell.W(Cell.south).ClosedColor(Color.ORANGE);
-//
-//		currentCell.W(Cell.west).draw(gc, _xOffset, _yOffset, _sizeCell);
-//		currentCell.W(Cell.north).draw(gc, _xOffset, _yOffset, _sizeCell);
-//		currentCell.W(Cell.east).draw(gc, _xOffset, _yOffset, _sizeCell);
-//		currentCell.W(Cell.south).draw(gc, _xOffset, _yOffset, _sizeCell);
-
 		Collection<Cell> cc = cells.values();
 		for(Cell c: cc)
 		{
@@ -239,6 +229,50 @@ public class mainfrm extends GridPane
 	{
 		System.out.println("createMaze");
 		System.out.println("algorithm: " + cbAlgorithm.getValue());
+
+		_sizeX = Integer.parseInt(tfMazeSizeX.getText());
+		_sizeY = Integer.parseInt(tfMazeSizeY.getText());
+		_sizeCell = Integer.parseInt(tfCellSize.getText());
+
+		cells = new HashMap<Integer, Cell>();
+		walls = new HashMap<Integer, Wall>();
+
+		buildMazePanel();
+
+		Integer x = 0;
+		Integer y = _sizeY/3;
+		entranceCell = createCell(x,y);
+
+		x = _sizeX+1;
+		y = _sizeY*2/3;
+		exitCell = createCell(x,y);
+
+		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
+		int startCellX = Integer.parseInt(tfStartCellX.getText());
+		int startCellY = Integer.parseInt(tfStartCellY.getText());
+		currentCell = cells.get(ID(startCellX, startCellY, false));
+		if(currentCell != null)
+		{
+			currentCell.SetType(Cell.CellType.eCellTypeStart);
+		}
+
+		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
+		exitCell.SetType(Cell.CellType.eCellTypeExit);
+
+		entranceCell.Visited(true);
+		exitCell.Visited(true);
+
+		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
+		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
+		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
+		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
+
+		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
+		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
+		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
+		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
+
+		drawMaze();
 
 		if(cbAlgorithm.getValue() == algorithms[0]) { depthFirstSearch(); return; }
 		if(cbAlgorithm.getValue() == algorithms[1]) { recursiveBacktracker(); return; }
@@ -282,28 +316,29 @@ public class mainfrm extends GridPane
 		if(currentCell != null) {
 			if(stack == null) {
 				stack = new Stack<Cell>();
-				stack.push(currentCell);
 			}
+			stack.push(currentCell);
+//			System.out.println(stack.size());
 
 			while(stack.size()>0) {
 //			for(int i=0; i<1; i++){
 				int x = currentCell.X();
 				int y = currentCell.Y();
 
-				System.out.println("createMaze: currentCell: " + x + ", " + y);
+//				System.out.println("createMaze: currentCell: " + x + ", " + y);
 
 				currentCell.Visited(true);
-				System.out.println("currentCell: " + x + ", " + y);
+//				System.out.println("currentCell: " + x + ", " + y);
 
 				Cell westCell = cells.get(ID(x - 1, y, false));
 				Cell northCell = cells.get(ID(x, y - 1, false));
 				Cell eastCell = cells.get(ID(x + 1, y, false));
 				Cell southCell = cells.get(ID(x, y + 1, false));
 
-				if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
-				if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
-				if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
-				if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
+//				if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
+//				if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
+//				if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
+//				if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
 
 				List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
 
@@ -312,11 +347,11 @@ public class mainfrm extends GridPane
 				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
 				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
 
-				System.out.println("number of unvisited neighbors: " + cells.size());
+//				System.out.println("number of unvisited neighbors: " + cells.size());
 
 				if(cells.size()>0) {
 					int r = rand.nextInt(cells.size());
-					System.out.println("random number: " + r);
+//					System.out.println("random number: " + r);
 
 					cells.get(r).getValue().Open(true);
 					currentCell.SetType(Cell.CellType.eNormal);
@@ -324,7 +359,7 @@ public class mainfrm extends GridPane
 					currentCell.SetType(Cell.CellType.eCellTypeStart);
 					currentCell.Visited(true);
 					stack.push(currentCell);
-					System.out.println("stack size: " + stack.size());
+//					System.out.println("stack size: " + stack.size());
 					drawMaze();
 				}
 				else {
@@ -464,7 +499,7 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeSizeControls);
 				hbMazeSizeControls.paddingProperty().setValue(margin);
 
-				hbMazeSizeControls.getChildren().add(Marker("Size", 70, true));
+				hbMazeSizeControls.getChildren().add(Marker("Size", 70, false));
 				hbMazeSizeControls.getChildren().add(Spacer());
 
 				// number of cells in x
@@ -472,7 +507,6 @@ public class mainfrm extends GridPane
 				tfMazeSizeX.setText(x.toString());
 				tfMazeSizeX.setMinWidth(40);
 				tfMazeSizeX.setMaxWidth(40);
-				tfMazeSizeX.setDisable(true);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeX);
 
 				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
@@ -483,7 +517,7 @@ public class mainfrm extends GridPane
 				});
 
 				hbMazeSizeControls.getChildren().add(Spacer());
-				hbMazeSizeControls.getChildren().add(Marker("x", 0, true));
+				hbMazeSizeControls.getChildren().add(Marker("x", 0, false));
 				hbMazeSizeControls.getChildren().add(Spacer());
 
 				// number of cells in y
@@ -491,7 +525,6 @@ public class mainfrm extends GridPane
 				tfMazeSizeY.setText(y.toString());
 				tfMazeSizeY.setMinWidth(40);
 				tfMazeSizeY.setMaxWidth(40);
-				tfMazeSizeY.setDisable(true);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeY);
 
 				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {
@@ -509,14 +542,13 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeCellSizeControls);
 				hbMazeCellSizeControls.paddingProperty().setValue(margin);
 
-				hbMazeCellSizeControls.getChildren().add(Marker("Cell Size", 70, true));
+				hbMazeCellSizeControls.getChildren().add(Marker("Cell Size", 70, false));
 				hbMazeCellSizeControls.getChildren().add(Spacer());
 
 				Integer cs = _sizeCell;
 				tfCellSize.setText(cs.toString());
 				tfCellSize.setMinWidth(40);
 				tfCellSize.setMaxWidth(40);
-				tfCellSize.setDisable(true);
 				hbMazeCellSizeControls.getChildren().add(tfCellSize);
 
 				tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
@@ -687,9 +719,9 @@ public class mainfrm extends GridPane
 				hbMazeEntranceControls.getChildren().add(Marker("Entrance", 70, false));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-				Integer x = new Integer(0);
-				Integer y = new Integer(_sizeY/3);
-				entranceCell = createCell(x,y);
+//				Integer x = new Integer(0);
+//				Integer y = new Integer(_sizeY/3);
+//				entranceCell = createCell(x,y);
 
 				ArrayList<String> itemsX = new ArrayList<>();
 				itemsX.add("west");
@@ -726,7 +758,7 @@ public class mainfrm extends GridPane
 				}
 
 				tfEntranceY.getItems().setAll(itemsY);
-				tfEntranceY.setValue(itemsY.get(y+2));
+				tfEntranceY.setValue(itemsY.get(_sizeY/3+2));
 				tfEntranceY.setMinWidth(70);
 				tfEntranceY.setMaxWidth(70);
 
@@ -765,9 +797,9 @@ public class mainfrm extends GridPane
 				hbMazeExitControls.getChildren().add(Marker("Exit", 70, false));
 				hbMazeExitControls.getChildren().add(Spacer());
 
-				Integer x = new Integer(_sizeX+1);
-				Integer y = new Integer(_sizeY*2/3);
-				exitCell = createCell(x,y);
+//				Integer x = new Integer(_sizeX+1);
+//				Integer y = new Integer(_sizeY*2/3);
+//				exitCell = createCell(x,y);
 
 				ArrayList<String> itemsX = new ArrayList<>();
 				itemsX.add("west");
@@ -804,7 +836,7 @@ public class mainfrm extends GridPane
 				}
 
 				tfExitY.getItems().setAll(itemsY);
-				tfExitY.setValue(itemsY.get(y+2));
+				tfExitY.setValue(itemsY.get(_sizeY*2/3+2));
 				tfExitY.setMinWidth(70);
 				tfExitY.setMaxWidth(70);
 
