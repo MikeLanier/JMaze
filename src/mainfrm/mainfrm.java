@@ -234,9 +234,50 @@ public class mainfrm extends GridPane
 	}
 
 	private Stack<Cell> stack = null; //new Stack<Cell>();
+
 	private void createMaze()
 	{
 		System.out.println("createMaze");
+		System.out.println("algorithm: " + cbAlgorithm.getValue());
+
+		if(cbAlgorithm.getValue() == algorithms[0]) { depthFirstSearch(); return; }
+		if(cbAlgorithm.getValue() == algorithms[1]) { recursiveBacktracker(); return; }
+		if(cbAlgorithm.getValue() == algorithms[2]) { randomizedKruskalAlgorithm(); return; }
+		if(cbAlgorithm.getValue() == algorithms[3]) { randomizedPrimAlgorithm(); return; }
+		if(cbAlgorithm.getValue() == algorithms[4]) { randomizedPrimAlgorithmModified(); return; }
+		if(cbAlgorithm.getValue() == algorithms[5]) { recursiveDivision(); return; }
+//		simple algorithms",
+//		cellular automaton algorithms"
+	}
+
+	private void recursiveBacktracker()
+	{
+		System.out.println("recursiveBacktracker");
+	}
+
+	private void randomizedKruskalAlgorithm()
+	{
+		System.out.println("randomizedKruskalAlgorithm");
+	}
+
+	private void randomizedPrimAlgorithm()
+	{
+		System.out.println("randomizedPrimAlgorithm");
+	}
+
+	private void randomizedPrimAlgorithmModified()
+	{
+		System.out.println("randomizedPrimAlgorithmModified");
+	}
+
+	private void recursiveDivision()
+	{
+		System.out.println("recursiveDivision");
+	}
+
+	private void depthFirstSearch()
+	{
+		System.out.println("depthFirstSearch");
 
 		if(currentCell != null) {
 			if(stack == null) {
@@ -493,13 +534,12 @@ public class mainfrm extends GridPane
 				vbControlBox.getChildren().add(hbMazeAlgorithmControls);
 				hbMazeAlgorithmControls.paddingProperty().setValue(margin);
 
-				hbMazeAlgorithmControls.getChildren().add(Marker("Algorithm", 70, true));
+				hbMazeAlgorithmControls.getChildren().add(Marker("Algorithm", 70, false));
 				hbMazeAlgorithmControls.getChildren().add(Spacer());
 
 				// combobox containing the algorithms to use
 				cbAlgorithm.setMinWidth(150);
 				cbAlgorithm.setMaxWidth(150);
-				cbAlgorithm.setDisable(true);
 				hbMazeAlgorithmControls.getChildren().add(cbAlgorithm);
 
 				cbAlgorithm.getItems().setAll(algorithms);

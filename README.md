@@ -10,7 +10,8 @@ create different repositories for these versions.
 * ~~entrance/exit cell controls: change to combo box. droplist contains "north", 
 "south", "east", "west", and numbers from "0" to sizeX-1 or sizeY-1.~~  
 * on change to entrance/exit combo box, validate selection
-* map selected algorithm to "maze create" function  
+* ~~map selected algorithm to "maze create" function~~  
+* reset maze when sizeX, sizeY or cellSize changes
 * ~~implement a stack for backtracking steps in maze creation~~
 * ~~create the maze~~  
 ## 09/10/2017  
