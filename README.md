@@ -11,7 +11,7 @@ create different repositories for these versions.
 "south", "east", "west", and numbers from "0" to sizeX-1 or sizeY-1.~~  
 * on change to entrance/exit combo box, validate selection
 * ~~map selected algorithm to "maze create" function~~  
-* reset maze when create clicked second time
+* ~~reset maze when create clicked second time~~
 * ~~implement a stack for backtracking steps in maze creation~~
 * ~~create the maze~~  
 ## 09/10/2017  

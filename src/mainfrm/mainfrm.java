@@ -50,8 +50,6 @@ public class mainfrm extends GridPane
 	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
 
 	private Cell	currentCell = null;
-	private Cell	entranceCell = null;
-	private Cell	exitCell = null;
 
 	private String algorithms[] = {
 		"Depth-first search",
@@ -119,23 +117,7 @@ public class mainfrm extends GridPane
 		{
 			currentCell.SetType(Cell.CellType.eCellTypeStart);
 		}
-//
-//		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
-//		exitCell.SetType(Cell.CellType.eCellTypeExit);
-//
-//		entranceCell.Visited(true);
-//		exitCell.Visited(true);
-//
-//		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
-//		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
-//		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
-//		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
-//
-//		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
-//		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
-//		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
-//		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
-//
+
 		drawMaze();
 	}
 
@@ -208,6 +190,8 @@ public class mainfrm extends GridPane
 
 	private void drawMaze()
 	{
+		System.out.println("drawMaze");
+
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 
 		Collection<Cell> cc = cells.values();
@@ -241,11 +225,11 @@ public class mainfrm extends GridPane
 
 		Integer x = 0;
 		Integer y = _sizeY/3;
-		entranceCell = createCell(x,y);
+		Cell entranceCell = createCell(x,y);
 
 		x = _sizeX+1;
 		y = _sizeY*2/3;
-		exitCell = createCell(x,y);
+		Cell exitCell = createCell(x,y);
 
 		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
 		int startCellX = Integer.parseInt(tfStartCellX.getText());
@@ -272,16 +256,16 @@ public class mainfrm extends GridPane
 		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
 		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
 
-		drawMaze();
-
-		if(cbAlgorithm.getValue() == algorithms[0]) { depthFirstSearch(); return; }
-		if(cbAlgorithm.getValue() == algorithms[1]) { recursiveBacktracker(); return; }
-		if(cbAlgorithm.getValue() == algorithms[2]) { randomizedKruskalAlgorithm(); return; }
-		if(cbAlgorithm.getValue() == algorithms[3]) { randomizedPrimAlgorithm(); return; }
-		if(cbAlgorithm.getValue() == algorithms[4]) { randomizedPrimAlgorithmModified(); return; }
-		if(cbAlgorithm.getValue() == algorithms[5]) { recursiveDivision(); return; }
+		if(cbAlgorithm.getValue().equals(algorithms[0])) { depthFirstSearch(); } else
+		if(cbAlgorithm.getValue().equals(algorithms[1])) { recursiveBacktracker(); } else
+		if(cbAlgorithm.getValue().equals(algorithms[2])) { randomizedKruskalAlgorithm(); } else
+		if(cbAlgorithm.getValue().equals(algorithms[3])) { randomizedPrimAlgorithm(); } else
+		if(cbAlgorithm.getValue().equals(algorithms[4])) { randomizedPrimAlgorithmModified(); } else
+		if(cbAlgorithm.getValue().equals(algorithms[5])) { recursiveDivision(); }
 //		simple algorithms",
 //		cellular automaton algorithms"
+
+		drawMaze();
 	}
 
 	private void recursiveBacktracker()
@@ -318,37 +302,31 @@ public class mainfrm extends GridPane
 				stack = new Stack<Cell>();
 			}
 			stack.push(currentCell);
-//			System.out.println(stack.size());
 
 			while(stack.size()>0) {
-//			for(int i=0; i<1; i++){
 				int x = currentCell.X();
 				int y = currentCell.Y();
 
-//				System.out.println("createMaze: currentCell: " + x + ", " + y);
-
 				currentCell.Visited(true);
-//				System.out.println("currentCell: " + x + ", " + y);
 
 				Cell westCell = cells.get(ID(x - 1, y, false));
 				Cell northCell = cells.get(ID(x, y - 1, false));
 				Cell eastCell = cells.get(ID(x + 1, y, false));
 				Cell southCell = cells.get(ID(x, y + 1, false));
 
-//				if (westCell != null) System.out.println("West Cell Visited: " + westCell.Visited());
-//				if (northCell != null) System.out.println("North Cell Visited: " + northCell.Visited());
-//				if (eastCell != null) System.out.println("East Cell Visited: " + eastCell.Visited());
-//				if (southCell != null) System.out.println("South Cell Visited: " + southCell.Visited());
-
+//				List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
+//
+//				if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
+//				if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
+//				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
+//				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
+//
 				List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
 
 				if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
 				if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
 				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
 				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
-
-//				System.out.println("number of unvisited neighbors: " + cells.size());
-
 				if(cells.size()>0) {
 					int r = rand.nextInt(cells.size());
 //					System.out.println("random number: " + r);
@@ -360,7 +338,7 @@ public class mainfrm extends GridPane
 					currentCell.Visited(true);
 					stack.push(currentCell);
 //					System.out.println("stack size: " + stack.size());
-					drawMaze();
+//					drawMaze();
 				}
 				else {
 					currentCell.SetType(Cell.CellType.eNormal);
@@ -371,7 +349,7 @@ public class mainfrm extends GridPane
 					else
 						currentCell.SetType(Cell.CellType.eNormal);
 
-					drawMaze();
+//					drawMaze();
 				}
 			}
 		}
@@ -392,7 +370,6 @@ public class mainfrm extends GridPane
 			HBox hbMazeOpenControls = new HBox();
 //			if(hbMazeOpenControls != null)
 			{
-				vbControlBox.getChildren().add(hbMazeOpenControls);
 				hbMazeOpenControls.paddingProperty().setValue(margin);
 
 				// press this button to open the maze in the filename in the TextField
@@ -400,7 +377,7 @@ public class mainfrm extends GridPane
 				btnMazeOpen.setMinWidth(70);
 				btnMazeOpen.setMaxWidth(70);
 				btnMazeOpen.setDisable(true);
-				hbMazeOpenControls.getChildren().add(btnMazeOpen);
+				boolean add = hbMazeOpenControls.getChildren().add(btnMazeOpen);
 
 				btnMazeOpen.setOnMousePressed(new EventHandler<MouseEvent>() {
 					@Override
@@ -719,10 +696,6 @@ public class mainfrm extends GridPane
 				hbMazeEntranceControls.getChildren().add(Marker("Entrance", 70, false));
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-//				Integer x = new Integer(0);
-//				Integer y = new Integer(_sizeY/3);
-//				entranceCell = createCell(x,y);
-
 				ArrayList<String> itemsX = new ArrayList<>();
 				itemsX.add("west");
 				itemsX.add("east");
@@ -796,10 +769,6 @@ public class mainfrm extends GridPane
 
 				hbMazeExitControls.getChildren().add(Marker("Exit", 70, false));
 				hbMazeExitControls.getChildren().add(Spacer());
-
-//				Integer x = new Integer(_sizeX+1);
-//				Integer y = new Integer(_sizeY*2/3);
-//				exitCell = createCell(x,y);
 
 				ArrayList<String> itemsX = new ArrayList<>();
 				itemsX.add("west");
