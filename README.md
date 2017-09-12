@@ -1,7 +1,8 @@
 # JMaze
 In this repository, I'm studing algorithms for making mazes.  The 
 algorithms used are defined at 
-https://en.wikipedia.org/wiki/Maze_generation_algorithm .
+https://en.wikipedia.org/wiki/Maze_generation_algorithm and 
+http://www.astrolog.org/labyrnth/algrithm.htm .
 The app to demo these algorithms is written in Java.  I eventually
 plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
 create different repositories for these versions.  
@@ -53,7 +54,12 @@ implementation for_ Recursize backtracker.
   
 ## 09/12/2017
 * on change to entrance/exit combo box, validate selection
+* pick start cell by clicking the random button
 * look at other algorithms
+* images for the random buttons
+* tooltips for controls
+* 3D display of a 2D maze.
+* how to split code in mainframe.java into multiple source files
 ## 09/11/2017
 * ~~entrance/exit cell controls: change to combo box. droplist contains "north", 
 "south", "east", "west", and numbers from "0" to sizeX-1 or sizeY-1.~~  

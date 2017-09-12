@@ -25,6 +25,7 @@ public class mainfrm extends GridPane
 	private ComboBox<String> cbAlgorithm	= new ComboBox<>();
 	private TextField	tfMazeName			= new TextField();
 	private CheckBox	cbMaze2D			= new CheckBox();
+	private CheckBox	cbMaze3D2D			= new CheckBox();
 	private CheckBox	cbMaze3D			= new CheckBox();
 	private TextField	tfStartCellX		= new TextField();
 	private TextField	tfStartCellY		= new TextField();
@@ -53,18 +54,18 @@ public class mainfrm extends GridPane
 
 	class Group2
 	{
-		public String	title;
-		public int		index;
+		String	title;
+		int		index;
 
-		public Group2(String _title, int _index)
+		Group2(String _title, int _index)
 		{
 			title =  _title;
 			index = _index;
 		}
-	};
+	}
 
 	private Group2 algorithms[] = {
-		new Group2("Depth-first search", 0),
+		new Group2("Depth-first search/Recursive backtracker", 0),
 //		new Group2("Recursive backtracker", 1),
 		new Group2("Randomized Kruskal's algorithm", 2),
 		new Group2("Randomized Prim's algorithm", 3),
@@ -339,18 +340,29 @@ public class mainfrm extends GridPane
 //				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
 //				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
 //
-				List<Pair<Cell, Wall>> cells = new ArrayList<Pair<Cell, Wall>>();
+				class Group3
+				{
+					private Cell	cell;
+					private Wall	wall;
 
-				if (westCell != null && !westCell.Visited()) cells.add(new Pair(westCell, currentCell.W(Cell.west)));
-				if (northCell != null && !northCell.Visited()) cells.add(new Pair(northCell, currentCell.W(Cell.north)));
-				if (eastCell != null && !eastCell.Visited()) cells.add(new Pair(eastCell, currentCell.W(Cell.east)));
-				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
+					private Group3(Cell _cell, Wall _wall) {
+						cell = _cell;
+						wall = _wall;
+					}
+				}
+
+				List<Group3> cells = new ArrayList<Group3>();
+
+				if (westCell != null && !westCell.Visited()) cells.add(new Group3(westCell, currentCell.W(Cell.west)));
+				if (northCell != null && !northCell.Visited()) cells.add(new Group3(northCell, currentCell.W(Cell.north)));
+				if (eastCell != null && !eastCell.Visited()) cells.add(new Group3(eastCell, currentCell.W(Cell.east)));
+				if (southCell != null && !southCell.Visited()) cells.add(new Group3(southCell, currentCell.W(Cell.south)));
 				if(cells.size()>0) {
 					int r = rand.nextInt(cells.size());
 
-					cells.get(r).getValue().Open(true);
+					cells.get(r).wall.Open(true);
 					currentCell.SetType(Cell.CellType.eNormal);
-					currentCell = cells.get(r).getKey();
+					currentCell = cells.get(r).cell;
 					currentCell.SetType(Cell.CellType.eCellTypeStart);
 					currentCell.Visited(true);
 					stack.push(currentCell);
@@ -391,7 +403,7 @@ public class mainfrm extends GridPane
 				btnMazeOpen.setMinWidth(70);
 				btnMazeOpen.setMaxWidth(70);
 				btnMazeOpen.setDisable(true);
-				boolean add = hbMazeOpenControls.getChildren().add(btnMazeOpen);
+				hbMazeOpenControls.getChildren().add(btnMazeOpen);
 
 				btnMazeOpen.setOnMousePressed(new EventHandler<MouseEvent>() {
 					@Override
@@ -620,7 +632,7 @@ public class mainfrm extends GridPane
 				cbMaze2D.setMaxWidth(40);
 				cbMaze2D.setIndeterminate(false);
 				cbMaze2D.setSelected(true);
-				cbMaze2D.setDisable(true);
+//				cbMaze2D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze2D);
 
 //				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -632,10 +644,18 @@ public class mainfrm extends GridPane
 
 				hbMaze2D3DControls.getChildren().add(Spacer());
 
+				cbMaze3D2D.setText("3D/2D");
+				cbMaze3D2D.setMinWidth(60);
+				cbMaze3D2D.setMaxWidth(60);
+//				cbMaze3D2D.setDisable(true);
+				hbMaze2D3DControls.getChildren().add(cbMaze3D2D);
+
+				hbMaze2D3DControls.getChildren().add(Spacer());
+
 				cbMaze3D.setText("3D");
 				cbMaze3D.setMinWidth(40);
 				cbMaze3D.setMaxWidth(40);
-				cbMaze3D.setDisable(true);
+//				cbMaze3D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze3D);
 
 //				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -676,7 +696,7 @@ public class mainfrm extends GridPane
 				hbMazeStartCellControls.getChildren().add(Marker("x", 0, false));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
-				tfStartCellY.setText(x.toString());
+				tfStartCellY.setText(y.toString());
 				tfStartCellY.setMinWidth(40);
 				tfStartCellY.setMaxWidth(40);
 //				tfStartCellY.setDisable(true);
