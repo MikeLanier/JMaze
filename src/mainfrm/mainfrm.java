@@ -65,14 +65,11 @@ public class mainfrm extends GridPane
 	}
 
 	private Group2 algorithms[] = {
-		new Group2("Depth-first search/Recursive backtracker", 0),
-//		new Group2("Recursive backtracker", 1),
-		new Group2("Randomized Kruskal's algorithm", 2),
-		new Group2("Randomized Prim's algorithm", 3),
-		new Group2("Randomized Prim's algorithm: Modified version", 4),
-		new Group2("Recursive division method", 5),
-		new Group2("Simple algorithms", 6),
-		new Group2("Cellular automaton algorithms", 7)
+		new Group2("Recursive backtracker", 0),
+		new Group2("Randomized Kruskal's algorithm", 1),
+		new Group2("Randomized Prim's algorithm", 2),
+		new Group2("Randomized Prim's algorithm: Modified version", 3),
+		new Group2("Recursive division method", 4),
 	};
 
 	private Random rand = new Random(System.currentTimeMillis());
@@ -272,12 +269,11 @@ public class mainfrm extends GridPane
 			if (cbAlgorithm.getValue().equals(algorithms[i].title)) {
 				switch(algorithms[i].index)
 				{
-					case 0:	depthFirstSearch();	break;
-					case 1:	recursiveBacktracker();	break;
-					case 2:	randomizedKruskalAlgorithm();	break;
-					case 3:	randomizedPrimAlgorithm();	break;
-					case 4:	randomizedPrimAlgorithmModified();	break;
-					case 5:	recursiveDivision();	break;
+					case 0:	recursiveBacktracker();	break;
+					case 1:	randomizedKruskalAlgorithm();	break;
+					case 2:	randomizedPrimAlgorithm();	break;
+					case 3:	randomizedPrimAlgorithmModified();	break;
+					case 4:	recursiveDivision();	break;
 				}
 			}
 		}
@@ -285,11 +281,6 @@ public class mainfrm extends GridPane
 //		cellular automaton algorithms"
 
 		drawMaze();
-	}
-
-	private void recursiveBacktracker()
-	{
-		System.out.println("recursiveBacktracker");
 	}
 
 	private void randomizedKruskalAlgorithm()
@@ -312,9 +303,9 @@ public class mainfrm extends GridPane
 		System.out.println("recursiveDivision");
 	}
 
-	private void depthFirstSearch()
+	private void recursiveBacktracker()
 	{
-		System.out.println("depthFirstSearch");
+		System.out.println("recursiveBacktracker");
 
 		if(currentCell != null) {
 			if(stack == null) {
