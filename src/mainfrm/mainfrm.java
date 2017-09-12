@@ -51,15 +51,27 @@ public class mainfrm extends GridPane
 
 	private Cell	currentCell = null;
 
-	private String algorithms[] = {
-		"Depth-first search",
-		"Recursive backtracker",
-		"Randomized Kruskal's algorithm",
-		"Randomized Prim's algorithm",
-		"Randomized Prim's algorithm: Modified version",
-		"Recursive division method",
-		"Simple algorithms",
-		"Cellular automaton algorithms"
+	class Group2
+	{
+		public String	title;
+		public int		index;
+
+		public Group2(String _title, int _index)
+		{
+			title =  _title;
+			index = _index;
+		}
+	};
+
+	private Group2 algorithms[] = {
+		new Group2("Depth-first search", 0),
+//		new Group2("Recursive backtracker", 1),
+		new Group2("Randomized Kruskal's algorithm", 2),
+		new Group2("Randomized Prim's algorithm", 3),
+		new Group2("Randomized Prim's algorithm: Modified version", 4),
+		new Group2("Recursive division method", 5),
+		new Group2("Simple algorithms", 6),
+		new Group2("Cellular automaton algorithms", 7)
 	};
 
 	private Random rand = new Random(System.currentTimeMillis());
@@ -166,7 +178,7 @@ public class mainfrm extends GridPane
 
 		int width = (_sizeX + 2) * _sizeCell + 1;
 		int height = (_sizeY + 2) * _sizeCell + 1;
-		System.out.println("width, height: " + width + ", " + height);
+//		System.out.println("width, height: " + width + ", " + height);
 
 		cvsMazePanel.setWidth(width+_xOffset);
 		cvsMazePanel.setHeight(height+_yOffset);
@@ -231,7 +243,6 @@ public class mainfrm extends GridPane
 		y = _sizeY*2/3;
 		Cell exitCell = createCell(x,y);
 
-		System.out.println("start cell: " + tfStartCellX.getText() + "," + tfStartCellX.getText());
 		int startCellX = Integer.parseInt(tfStartCellX.getText());
 		int startCellY = Integer.parseInt(tfStartCellY.getText());
 		currentCell = cells.get(ID(startCellX, startCellY, false));
@@ -256,12 +267,19 @@ public class mainfrm extends GridPane
 		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
 		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
 
-		if(cbAlgorithm.getValue().equals(algorithms[0])) { depthFirstSearch(); } else
-		if(cbAlgorithm.getValue().equals(algorithms[1])) { recursiveBacktracker(); } else
-		if(cbAlgorithm.getValue().equals(algorithms[2])) { randomizedKruskalAlgorithm(); } else
-		if(cbAlgorithm.getValue().equals(algorithms[3])) { randomizedPrimAlgorithm(); } else
-		if(cbAlgorithm.getValue().equals(algorithms[4])) { randomizedPrimAlgorithmModified(); } else
-		if(cbAlgorithm.getValue().equals(algorithms[5])) { recursiveDivision(); }
+		for(int i=0; i<algorithms.length; ++i) {
+			if (cbAlgorithm.getValue().equals(algorithms[i].title)) {
+				switch(algorithms[i].index)
+				{
+					case 0:	depthFirstSearch();	break;
+					case 1:	recursiveBacktracker();	break;
+					case 2:	randomizedKruskalAlgorithm();	break;
+					case 3:	randomizedPrimAlgorithm();	break;
+					case 4:	randomizedPrimAlgorithmModified();	break;
+					case 5:	recursiveDivision();	break;
+				}
+			}
+		}
 //		simple algorithms",
 //		cellular automaton algorithms"
 
@@ -329,7 +347,6 @@ public class mainfrm extends GridPane
 				if (southCell != null && !southCell.Visited()) cells.add(new Pair(southCell, currentCell.W(Cell.south)));
 				if(cells.size()>0) {
 					int r = rand.nextInt(cells.size());
-//					System.out.println("random number: " + r);
 
 					cells.get(r).getValue().Open(true);
 					currentCell.SetType(Cell.CellType.eNormal);
@@ -337,8 +354,6 @@ public class mainfrm extends GridPane
 					currentCell.SetType(Cell.CellType.eCellTypeStart);
 					currentCell.Visited(true);
 					stack.push(currentCell);
-//					System.out.println("stack size: " + stack.size());
-//					drawMaze();
 				}
 				else {
 					currentCell.SetType(Cell.CellType.eNormal);
@@ -348,8 +363,6 @@ public class mainfrm extends GridPane
 						currentCell.SetType(Cell.CellType.eCellTypeStart);
 					else
 						currentCell.SetType(Cell.CellType.eNormal);
-
-//					drawMaze();
 				}
 			}
 		}
@@ -357,6 +370,7 @@ public class mainfrm extends GridPane
 
 	private void buildControls()
 	{
+		System.out.println("buildControls");
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 
 		// vertical box for the controls
@@ -486,12 +500,12 @@ public class mainfrm extends GridPane
 				tfMazeSizeX.setMaxWidth(40);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeX);
 
-				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfMazeSizeX");
-					}
-				});
+//				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfMazeSizeX");
+//					}
+//				});
 
 				hbMazeSizeControls.getChildren().add(Spacer());
 				hbMazeSizeControls.getChildren().add(Marker("x", 0, false));
@@ -504,12 +518,12 @@ public class mainfrm extends GridPane
 				tfMazeSizeY.setMaxWidth(40);
 				hbMazeSizeControls.getChildren().add(tfMazeSizeY);
 
-				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfMazeSizeY");
-					}
-				});
+//				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfMazeSizeY");
+//					}
+//				});
 			}
 
 			// control for defining the size of a cell in pixels
@@ -528,12 +542,12 @@ public class mainfrm extends GridPane
 				tfCellSize.setMaxWidth(40);
 				hbMazeCellSizeControls.getChildren().add(tfCellSize);
 
-				tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfCellSize");
-					}
-				});
+//				tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfCellSize");
+//					}
+//				});
 			}
 
 			// controls for defining the algorithm used to create the maze
@@ -551,16 +565,21 @@ public class mainfrm extends GridPane
 				cbAlgorithm.setMaxWidth(150);
 				hbMazeAlgorithmControls.getChildren().add(cbAlgorithm);
 
-				cbAlgorithm.getItems().setAll(algorithms);
-				cbAlgorithm.setValue(algorithms[0]);
+				System.out.println("algorithms.length: " + algorithms.length);
+				for(int i=0; i<algorithms.length; i++)
+				{
+					System.out.println("algorithms[" + i + "].title: " + algorithms[i].title);
+					cbAlgorithm.getItems().add(algorithms[i].title);
+				}
+				cbAlgorithm.setValue(algorithms[0].title);
 
-				cbAlgorithm.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event)
-					{
-						System.out.println("OnAction: cbAlgorithm: " + cbAlgorithm.getValue());
-					}
-				});
+//				cbAlgorithm.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event)
+//					{
+//						System.out.println("OnAction: cbAlgorithm: " + cbAlgorithm.getValue());
+//					}
+//				});
 			}
 
 			// controls for setting the name of the maze
@@ -578,12 +597,12 @@ public class mainfrm extends GridPane
 				tfMazeName.setDisable(true);
 				hbMazeNameControls.getChildren().add(tfMazeName);
 
-				tfMazeName.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfMazeName");
-					}
-				});
+//				tfMazeName.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfMazeName");
+//					}
+//				});
 			}
 
 			// controls to define the maze as 2D or 3D
@@ -604,12 +623,12 @@ public class mainfrm extends GridPane
 				cbMaze2D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze2D);
 
-				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						System.out.println("OnMouseClicked: cbMaze2D");
-					}
-				});
+//				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//					@Override
+//					public void handle(MouseEvent event) {
+//						System.out.println("OnMouseClicked: cbMaze2D");
+//					}
+//				});
 
 				hbMaze2D3DControls.getChildren().add(Spacer());
 
@@ -619,12 +638,12 @@ public class mainfrm extends GridPane
 				cbMaze3D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze3D);
 
-				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						System.out.println("OnMouseClicked: cbMAze3D");
-					}
-				});
+//				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//					@Override
+//					public void handle(MouseEvent event) {
+//						System.out.println("OnMouseClicked: cbMAze3D");
+//					}
+//				});
 			}
 
 			// controls for setting the start cell
@@ -646,12 +665,12 @@ public class mainfrm extends GridPane
 //				tfStartCellX.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(tfStartCellX);
 
-				tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfStartCellX");
-					}
-				});
+//				tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfStartCellX");
+//					}
+//				});
 
 				hbMazeStartCellControls.getChildren().add(Spacer());
 				hbMazeStartCellControls.getChildren().add(Marker("x", 0, false));
@@ -663,12 +682,12 @@ public class mainfrm extends GridPane
 //				tfStartCellY.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(tfStartCellY);
 
-				tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfStartCellY");
-					}
-				});
+//				tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfStartCellY");
+//					}
+//				});
 
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
@@ -711,12 +730,12 @@ public class mainfrm extends GridPane
 
 				hbMazeEntranceControls.getChildren().add(tfEntranceX);
 
-				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfEntranceX");
-					}
-				});
+//				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfEntranceX");
+//					}
+//				});
 
 				hbMazeEntranceControls.getChildren().add(Spacer());
 				hbMazeEntranceControls.getChildren().add(Marker("x", 0, false));
@@ -737,12 +756,12 @@ public class mainfrm extends GridPane
 
 				hbMazeEntranceControls.getChildren().add(tfEntranceY);
 
-				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfEntranceY");
-					}
-				});
+//				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfEntranceY");
+//					}
+//				});
 
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
@@ -785,12 +804,12 @@ public class mainfrm extends GridPane
 
 				hbMazeExitControls.getChildren().add(tfExitX);
 
-				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfExitX");
-					}
-				});
+//				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfExitX");
+//					}
+//				});
 
 				hbMazeExitControls.getChildren().add(Spacer());
 				hbMazeExitControls.getChildren().add(Marker("x", 0, false));
@@ -811,12 +830,12 @@ public class mainfrm extends GridPane
 
 				hbMazeExitControls.getChildren().add(tfExitY);
 
-				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("OnAction: tfExitY");
-					}
-				});
+//				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
+//					@Override
+//					public void handle(ActionEvent event) {
+//						System.out.println("OnAction: tfExitY");
+//					}
+//				});
 
 				hbMazeExitControls.getChildren().add(Spacer());
 
