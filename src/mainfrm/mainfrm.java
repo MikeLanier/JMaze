@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.canvas.Canvas;
-import javafx.util.Pair;
 
+import javax.swing.*;
 import java.util.*;
 
 public class mainfrm extends GridPane
@@ -702,10 +704,13 @@ public class mainfrm extends GridPane
 
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
-				btnStartCellSet.setText("R");
+				Image img = new Image(getClass().getResource("random.png").toString());
+				ImageView iv = new ImageView(img);
+
+				btnStartCellSet.setGraphic(iv);
 				btnStartCellSet.setMinWidth(25);
 				btnStartCellSet.setMaxWidth(25);
-				btnStartCellSet.setDisable(true);
+//				btnStartCellSet.setDisable(true);
 				hbMazeStartCellControls.getChildren().add(btnStartCellSet);
 
 				btnStartCellSet.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -776,7 +781,10 @@ public class mainfrm extends GridPane
 
 				hbMazeEntranceControls.getChildren().add(Spacer());
 
-				btnEntranceSet.setText("R");
+				Image img = new Image(getClass().getResource("random.png").toString());
+				ImageView iv = new ImageView(img);
+
+				btnEntranceSet.setGraphic(iv);
 				btnEntranceSet.setMinWidth(25);
 				btnEntranceSet.setMaxWidth(25);
 				btnEntranceSet.setDisable(true);
@@ -850,7 +858,10 @@ public class mainfrm extends GridPane
 
 				hbMazeExitControls.getChildren().add(Spacer());
 
-				btnExitSet.setText("R");
+				Image img = new Image(getClass().getResource("random.png").toString());
+				ImageView iv = new ImageView(img);
+
+				btnExitSet.setGraphic(iv);
 				btnExitSet.setMinWidth(25);
 				btnExitSet.setMaxWidth(25);
 				btnExitSet.setDisable(true);
