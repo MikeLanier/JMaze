@@ -389,6 +389,7 @@ public class mainfrm extends GridPane
 			HBox hbMazeOpenControls = new HBox();
 //			if(hbMazeOpenControls != null)
 			{
+				vbControlBox.getChildren().add(hbMazeOpenControls);
 				hbMazeOpenControls.paddingProperty().setValue(margin);
 
 				// press this button to open the maze in the filename in the TextField
