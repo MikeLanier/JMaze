@@ -90,12 +90,13 @@ This simple algorithm is very similar to the binary tree algorithm, and only sli
 
 ## 09/18/2017
 * move maze display to separate module
-* create module for 3D display of a 2D maze.  Code stated in J3DSandbox repository
+* separate ControlPanel into sub-module.  One for each control group
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button
 * look at other algorithms
 * tooltips for controls
-* 3D display of a 2D maze.
+* 3D display of a 2D maze. create module for 3D display of a 2D maze.
+Code stated in J3DSandbox repository
 ## 09/12/2017
 * ~~images for the random buttons~~
 * ~~how to split code in mainframe.java into multiple source files~~
