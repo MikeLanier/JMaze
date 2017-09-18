@@ -10,6 +10,7 @@ public class MainFrm extends GridPane
 {
 	private ControlPanel controlPanel = null;
 	public Maze2DPanel	maze2DPanel = null;
+	public Maze3D2DPanel	maze3D2DPanel = null;
 
 	public MainFrm() {
 //		System.out.println("MainFrm");
@@ -29,6 +30,7 @@ public class MainFrm extends GridPane
 
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		add(maze2DPanel=new Maze2DPanel(controlPanel), 1, 0);
+//		add(maze3D2DPanel=new Maze3D2DPanel(), 1, 0);
 
 		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
