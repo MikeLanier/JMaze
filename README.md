@@ -93,7 +93,7 @@ This simple algorithm is very similar to the binary tree algorithm, and only sli
 display panel
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel
-* move maze display to separate module
+* ~~move maze display to separate module~~
 * separate ControlPanel into sub-module.  One for each control group
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button

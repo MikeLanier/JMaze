@@ -599,7 +599,7 @@ public class ControlPanel extends VBox {
 					@Override
 					public void handle(MouseEvent event) {
 						System.out.println("OnMousePressed: btnMazeCreate");
-						mainFrm.createMaze();
+						mainFrm.maze2DPanel.createMaze();
 					}
 				});
 			}
