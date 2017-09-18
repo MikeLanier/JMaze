@@ -96,11 +96,11 @@ public class Maze2DPanel extends Canvas {
 	public void createMaze()
 	{
 		System.out.println("createMaze");
-		System.out.println("algorithm: " + controlPanel.cbAlgorithm.getValue());
+		System.out.println("algorithm: " + controlPanel.algorithmControl.cbAlgorithm.getValue());
 
-		controlPanel._sizeX = Integer.parseInt(controlPanel.tfMazeSizeX.getText());
-		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
-		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
+		controlPanel._sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
+		controlPanel._sizeY = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeY.getText());
+		controlPanel._sizeCell = Integer.parseInt(controlPanel.cellSizeControl.tfCellSize.getText());
 
 		cells = new HashMap<Integer, Maze2DCell>();
 		walls = new HashMap<Integer, Maze2DWall>();
@@ -115,8 +115,8 @@ public class Maze2DPanel extends Canvas {
 		y = controlPanel._sizeY*2/3;
 		Maze2DCell exitMaze2DCell = createCell(x,y);
 
-		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
-		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
+		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
+		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
 		currentMaze2DCell = cells.get(ID(startCellX, startCellY, false));
 		if(currentMaze2DCell != null)
 		{
@@ -139,9 +139,9 @@ public class Maze2DPanel extends Canvas {
 		if(exitMaze2DCell.W(Maze2DCell.east) != null)	exitMaze2DCell.W(Maze2DCell.east).Open(true);
 		if(exitMaze2DCell.W(Maze2DCell.south) != null)	exitMaze2DCell.W(Maze2DCell.south).Open(true);
 
-		for(int i=0; i<controlPanel.algorithms.length; ++i) {
-			if (controlPanel.cbAlgorithm.getValue().equals(controlPanel.algorithms[i].title)) {
-				switch(controlPanel.algorithms[i].index)
+		for(int i=0; i<controlPanel.algorithmControl.algorithms.length; ++i) {
+			if (controlPanel.algorithmControl.cbAlgorithm.getValue().equals(controlPanel.algorithmControl.algorithms[i].title)) {
+				switch(controlPanel.algorithmControl.algorithms[i].index)
 				{
 					case 0:	recursiveBacktracker();	break;
 					case 1:	randomizedKruskalAlgorithm();	break;

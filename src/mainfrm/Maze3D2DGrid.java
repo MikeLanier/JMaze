@@ -80,11 +80,11 @@ public class Maze3D2DGrid extends Xform {
 	public void createMaze()
 	{
 		System.out.println("createMaze");
-		System.out.println("algorithm: " + controlPanel.cbAlgorithm.getValue());
+		System.out.println("algorithm: " + controlPanel.algorithmControl.cbAlgorithm.getValue());
 
-		controlPanel._sizeX = Integer.parseInt(controlPanel.tfMazeSizeX.getText());
-		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
-		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
+		controlPanel._sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
+		controlPanel._sizeY = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeY.getText());
+		controlPanel._sizeCell = Integer.parseInt(controlPanel.cellSizeControl.tfCellSize.getText());
 
 //		cells = new HashMap<Integer, Maze3D2DCell>();
 //		walls = new HashMap<Integer, Maze3D2DWall>();
@@ -101,8 +101,8 @@ public class Maze3D2DGrid extends Xform {
 //		Maze2DCell exitMaze2DCell = createCell(x,y);
 		Maze3D2DCell exitMaze2DCell = createCell(60, 0, 20);
 //
-		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
-		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
+		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
+		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
 //		currentMaze2DCell = cells.get(ID(startCellX, 0, startCellY, false));
 		currentMaze2DCell = cells.get(ID(0, 0, 0, false));
 		if(currentMaze2DCell != null)

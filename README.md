@@ -94,14 +94,15 @@ display panel
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel
 * ~~move maze display to separate module~~
-* separate ControlPanel into sub-module.  One for each control group
+* ~~separate ControlPanel into sub-module.  One for each control group~~
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button
 * look at other algorithms
 * tooltips for controls
 * ~~3D display of a 2D maze. create module for 3D display of a 2D maze.~~
-* For 3D maze, draw arrow at entrance/exit
-* For 3D maze, tie to controls
+* For 3D/2D maze, draw arrow at entrance/exit
+* For 3D/2D maze, tie to controls
+* For 3D/2D maze, walkthrough 
 
 ## 09/12/2017
 * ~~images for the random buttons~~
