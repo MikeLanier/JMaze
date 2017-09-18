@@ -340,12 +340,16 @@ public class ControlPanel extends VBox {
 //				cbMaze2D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze2D);
 
-//				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//					@Override
-//					public void handle(MouseEvent event) {
-//						System.out.println("OnMouseClicked: cbMaze2D");
-//					}
-//				});
+				cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						System.out.println("OnMouseClicked: cbMaze2D");
+						if(cbMaze2D.isSelected()) {
+							cbMaze3D2D.setSelected(false);
+							mainFrm.SwitchTo2DMaze();
+						}
+					}
+				});
 
 				hbMaze2D3DControls.getChildren().add(Spacer());
 
@@ -355,6 +359,16 @@ public class ControlPanel extends VBox {
 //				cbMaze3D2D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze3D2D);
 
+				cbMaze3D2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						if(cbMaze3D2D.isSelected())	{
+							cbMaze2D.setSelected(false);
+							mainFrm.SwitchTo3D2DMaze();
+						}
+					}
+				});
+
 				hbMaze2D3DControls.getChildren().add(Spacer());
 
 				cbMaze3D.setText("3D");
@@ -363,12 +377,12 @@ public class ControlPanel extends VBox {
 //				cbMaze3D.setDisable(true);
 				hbMaze2D3DControls.getChildren().add(cbMaze3D);
 
-//				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//					@Override
-//					public void handle(MouseEvent event) {
-//						System.out.println("OnMouseClicked: cbMAze3D");
-//					}
-//				});
+				cbMaze3D.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						System.out.println("OnMouseClicked: cbMAze3D");
+					}
+				});
 			}
 
 			// controls for setting the start cell

@@ -30,7 +30,10 @@ public class MainFrm extends GridPane
 
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		add(maze2DPanel=new Maze2DPanel(controlPanel), 1, 0);
-//		add(maze3D2DPanel=new Maze3D2DPanel(), 1, 0);
+		add(maze3D2DPanel=new Maze3D2DPanel(), 1, 0);
+		maze3D2DPanel.ShowMazeGrid(true);
+		maze2DPanel.setVisible(controlPanel.cbMaze2D.isSelected());
+		maze3D2DPanel.setVisible(controlPanel.cbMaze3D2D.isSelected());
 
 		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
@@ -41,5 +44,17 @@ public class MainFrm extends GridPane
 		}
 
 		maze2DPanel.drawMaze();
+	}
+
+	public void SwitchTo2DMaze()
+	{
+		maze2DPanel.setVisible(true);
+		maze3D2DPanel.setVisible(false);
+	}
+
+	public void SwitchTo3D2DMaze()
+	{
+		maze2DPanel.setVisible(false);
+		maze3D2DPanel.setVisible(true);
 	}
 }
