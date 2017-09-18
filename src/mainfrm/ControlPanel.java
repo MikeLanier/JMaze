@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ControlPanel extends VBox {
-	public Button btnMazeOpen			= new Button();
-	public TextField tfMazeFilename		= new TextField();
+	public Button		btnMazeOpen			= new Button();
+	public TextField	tfMazeFilename		= new TextField();
 	public Button		btnMazeSelect		= new Button();
 	public Button		btnMazeSave			= new Button();
 	public TextField	tfMazeSaveFilename	= new TextField();
@@ -22,19 +22,19 @@ public class ControlPanel extends VBox {
 	public TextField	tfMazeSizeX			= new TextField();
 	public TextField	tfMazeSizeY			= new TextField();
 	public TextField	tfCellSize			= new TextField();
-	public ComboBox<String> cbAlgorithm	= new ComboBox<>();
+	public ComboBox<String> cbAlgorithm		= new ComboBox<>();
 	public TextField	tfMazeName			= new TextField();
-	public CheckBox cbMaze2D			= new CheckBox();
-	public CheckBox	cbMaze3D2D			= new CheckBox();
-	public CheckBox	cbMaze3D			= new CheckBox();
+	public CheckBox 	cbMaze2D			= new CheckBox();
+	public CheckBox		cbMaze3D2D			= new CheckBox();
+	public CheckBox		cbMaze3D			= new CheckBox();
 	public TextField	tfStartCellX		= new TextField();
 	public TextField	tfStartCellY		= new TextField();
 	public Button		btnStartCellSet		= new Button();
-	public ComboBox<String>	tfEntranceX	= new ComboBox<>();
-	public ComboBox<String>	tfEntranceY	= new ComboBox<>();
+	public ComboBox<String>	tfEntranceX		= new ComboBox<>();
+	public ComboBox<String>	tfEntranceY		= new ComboBox<>();
 	public Button		btnEntranceSet		= new Button();
-	public ComboBox<String>	tfExitX		= new ComboBox<>();
-	public ComboBox<String>	tfExitY		= new ComboBox<>();
+	public ComboBox<String>	tfExitX			= new ComboBox<>();
+	public ComboBox<String>	tfExitY			= new ComboBox<>();
 	public Button		btnExitSet			= new Button();
 	public Button		btnMazeCreate		= new Button();
 	public Button		btnMazeSolve		= new Button();
