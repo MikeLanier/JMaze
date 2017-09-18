@@ -251,7 +251,7 @@ public class ControlPanel extends VBox {
 				getChildren().add(hbMazeCellSizeControls);
 				hbMazeCellSizeControls.paddingProperty().setValue(margin);
 
-				hbMazeCellSizeControls.getChildren().add(Marker("Cell Size", 70, false));
+				hbMazeCellSizeControls.getChildren().add(Marker("MazeCell Size", 70, false));
 				hbMazeCellSizeControls.getChildren().add(Spacer());
 
 				Integer cs = _sizeCell;
@@ -378,7 +378,7 @@ public class ControlPanel extends VBox {
 				getChildren().add(hbMazeStartCellControls);
 				hbMazeStartCellControls.paddingProperty().setValue(margin);
 
-				hbMazeStartCellControls.getChildren().add(Marker("Start Cell", 70, false));
+				hbMazeStartCellControls.getChildren().add(Marker("Start MazeCell", 70, false));
 				hbMazeStartCellControls.getChildren().add(Spacer());
 
 				Integer x = _sizeX / 2;

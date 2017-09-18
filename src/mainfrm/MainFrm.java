@@ -11,10 +11,10 @@ public class MainFrm extends GridPane
 	private ControlPanel controlPanel = null;
 	private Canvas		cvsMazePanel		= new Canvas();
 
-	private Map<Integer, Cell> cells = new HashMap<Integer, Cell>();
-	private Map<Integer, Wall> walls = new HashMap<Integer, Wall>();
+	private Map<Integer, MazeCell> cells = new HashMap<Integer, MazeCell>();
+	private Map<Integer, MazeCellWall> walls = new HashMap<Integer, MazeCellWall>();
 
-	private Cell	currentCell = null;
+	private MazeCell currentMazeCell = null;
 
 	private Integer ID(int xOrigin, int yOrigin, boolean horizontal)
 	{
@@ -41,55 +41,54 @@ public class MainFrm extends GridPane
 
 		setGridLinesVisible(true);
 
-
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		buildMazePanel();
 
 		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
-		currentCell = cells.get(ID(startCellX, startCellY, false));
-		if(currentCell != null)
+		currentMazeCell = cells.get(ID(startCellX, startCellY, false));
+		if(currentMazeCell != null)
 		{
-			currentCell.SetType(Cell.CellType.eCellTypeStart);
+			currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
 		}
 
 		drawMaze();
 	}
 
-	private Cell createCell(int x, int y)
+	private MazeCell createCell(int x, int y)
 	{
-		Wall west = walls.get(ID(x, y, false));
+		MazeCellWall west = walls.get(ID(x, y, false));
 		if(west == null)
 		{
-			west = new Wall(x, y, false);
+			west = new MazeCellWall(x, y, false);
 			walls.put(west.ID(), west);
 		}
 
-		Wall north = walls.get(ID(x, y, true));
+		MazeCellWall north = walls.get(ID(x, y, true));
 		if(north == null)
 		{
-			north = new Wall(x, y, true);
+			north = new MazeCellWall(x, y, true);
 			walls.put(north.ID(), north);
 		}
 
-		Wall east = walls.get(ID(x+1, y, false));
+		MazeCellWall east = walls.get(ID(x+1, y, false));
 		if(east == null)
 		{
-			east = new Wall(x+1, y, false);
+			east = new MazeCellWall(x+1, y, false);
 			walls.put(east.ID(), east);
 		}
 
-		Wall south = walls.get(ID(x, y+1, true));
+		MazeCellWall south = walls.get(ID(x, y+1, true));
 		if(south == null)
 		{
-			south = new Wall(x, y+1, true);
+			south = new MazeCellWall(x, y+1, true);
 			walls.put(south.ID(), south);
 		}
 
-		Cell cell = new Cell(x, y, west, north, east, south);
-		cells.put(cell.ID(), cell);
+		MazeCell mazeCell = new MazeCell(x, y, west, north, east, south);
+		cells.put(mazeCell.ID(), mazeCell);
 
-		return cell;
+		return mazeCell;
 	}
 
 	private void buildMazePanel()
@@ -126,20 +125,20 @@ public class MainFrm extends GridPane
 
 		GraphicsContext gc = cvsMazePanel.getGraphicsContext2D();
 
-		Collection<Cell> cc = cells.values();
-		for(Cell c: cc)
+		Collection<MazeCell> cc = cells.values();
+		for(MazeCell c: cc)
 		{
 			c.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
 		}
 
-		Collection<Wall> wc = walls.values();
-		for(Wall w: wc)
+		Collection<MazeCellWall> wc = walls.values();
+		for(MazeCellWall w: wc)
 		{
 			w.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
 		}
 	}
 
-	private Stack<Cell> stack = null; //new Stack<Cell>();
+	private Stack<MazeCell> stack = null; //new Stack<MazeCell>();
 
 	public void createMaze()
 	{
@@ -150,42 +149,42 @@ public class MainFrm extends GridPane
 		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
 		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
 
-		cells = new HashMap<Integer, Cell>();
-		walls = new HashMap<Integer, Wall>();
+		cells = new HashMap<Integer, MazeCell>();
+		walls = new HashMap<Integer, MazeCellWall>();
 
 		buildMazePanel();
 
 		Integer x = 0;
 		Integer y = controlPanel._sizeY/3;
-		Cell entranceCell = createCell(x,y);
+		MazeCell entranceMazeCell = createCell(x,y);
 
 		x = controlPanel._sizeX+1;
 		y = controlPanel._sizeY*2/3;
-		Cell exitCell = createCell(x,y);
+		MazeCell exitMazeCell = createCell(x,y);
 
 		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
-		currentCell = cells.get(ID(startCellX, startCellY, false));
-		if(currentCell != null)
+		currentMazeCell = cells.get(ID(startCellX, startCellY, false));
+		if(currentMazeCell != null)
 		{
-			currentCell.SetType(Cell.CellType.eCellTypeStart);
+			currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
 		}
 
-		entranceCell.SetType(Cell.CellType.eCellTypeEntrance);
-		exitCell.SetType(Cell.CellType.eCellTypeExit);
+		entranceMazeCell.SetType(MazeCell.CellType.eCellTypeEntrance);
+		exitMazeCell.SetType(MazeCell.CellType.eCellTypeExit);
 
-		entranceCell.Visited(true);
-		exitCell.Visited(true);
+		entranceMazeCell.Visited(true);
+		exitMazeCell.Visited(true);
 
-		if(entranceCell.W(Cell.west) != null)	entranceCell.W(Cell.west).Open(true);
-		if(entranceCell.W(Cell.north) != null)	entranceCell.W(Cell.north).Open(true);
-		if(entranceCell.W(Cell.east) != null)	entranceCell.W(Cell.east).Open(true);
-		if(entranceCell.W(Cell.south) != null)	entranceCell.W(Cell.south).Open(true);
+		if(entranceMazeCell.W(MazeCell.west) != null)	entranceMazeCell.W(MazeCell.west).Open(true);
+		if(entranceMazeCell.W(MazeCell.north) != null)	entranceMazeCell.W(MazeCell.north).Open(true);
+		if(entranceMazeCell.W(MazeCell.east) != null)	entranceMazeCell.W(MazeCell.east).Open(true);
+		if(entranceMazeCell.W(MazeCell.south) != null)	entranceMazeCell.W(MazeCell.south).Open(true);
 
-		if(exitCell.W(Cell.west) != null)	exitCell.W(Cell.west).Open(true);
-		if(exitCell.W(Cell.north) != null)	exitCell.W(Cell.north).Open(true);
-		if(exitCell.W(Cell.east) != null)	exitCell.W(Cell.east).Open(true);
-		if(exitCell.W(Cell.south) != null)	exitCell.W(Cell.south).Open(true);
+		if(exitMazeCell.W(MazeCell.west) != null)	exitMazeCell.W(MazeCell.west).Open(true);
+		if(exitMazeCell.W(MazeCell.north) != null)	exitMazeCell.W(MazeCell.north).Open(true);
+		if(exitMazeCell.W(MazeCell.east) != null)	exitMazeCell.W(MazeCell.east).Open(true);
+		if(exitMazeCell.W(MazeCell.south) != null)	exitMazeCell.W(MazeCell.south).Open(true);
 
 		for(int i=0; i<controlPanel.algorithms.length; ++i) {
 			if (controlPanel.cbAlgorithm.getValue().equals(controlPanel.algorithms[i].title)) {
@@ -227,29 +226,29 @@ public class MainFrm extends GridPane
 	{
 		System.out.println("recursiveBacktracker");
 
-		if(currentCell != null) {
+		if(currentMazeCell != null) {
 			if(stack == null) {
-				stack = new Stack<Cell>();
+				stack = new Stack<MazeCell>();
 			}
-			stack.push(currentCell);
+			stack.push(currentMazeCell);
 
 			while(stack.size()>0) {
-				int x = currentCell.X();
-				int y = currentCell.Y();
+				int x = currentMazeCell.X();
+				int y = currentMazeCell.Y();
 
-				currentCell.Visited(true);
+				currentMazeCell.Visited(true);
 
-				Cell westCell = cells.get(ID(x - 1, y, false));
-				Cell northCell = cells.get(ID(x, y - 1, false));
-				Cell eastCell = cells.get(ID(x + 1, y, false));
-				Cell southCell = cells.get(ID(x, y + 1, false));
+				MazeCell westMazeCell = cells.get(ID(x - 1, y, false));
+				MazeCell northMazeCell = cells.get(ID(x, y - 1, false));
+				MazeCell eastMazeCell = cells.get(ID(x + 1, y, false));
+				MazeCell southMazeCell = cells.get(ID(x, y + 1, false));
 
 				class Group3
 				{
-					private Cell	cell;
-					private Wall	wall;
+					private MazeCell cell;
+					private MazeCellWall wall;
 
-					private Group3(Cell _cell, Wall _wall) {
+					private Group3(MazeCell _cell, MazeCellWall _wall) {
 						cell = _cell;
 						wall = _wall;
 					}
@@ -257,28 +256,28 @@ public class MainFrm extends GridPane
 
 				List<Group3> cells = new ArrayList<Group3>();
 
-				if (westCell != null && !westCell.Visited()) cells.add(new Group3(westCell, currentCell.W(Cell.west)));
-				if (northCell != null && !northCell.Visited()) cells.add(new Group3(northCell, currentCell.W(Cell.north)));
-				if (eastCell != null && !eastCell.Visited()) cells.add(new Group3(eastCell, currentCell.W(Cell.east)));
-				if (southCell != null && !southCell.Visited()) cells.add(new Group3(southCell, currentCell.W(Cell.south)));
+				if (westMazeCell != null && !westMazeCell.Visited()) cells.add(new Group3(westMazeCell, currentMazeCell.W(MazeCell.west)));
+				if (northMazeCell != null && !northMazeCell.Visited()) cells.add(new Group3(northMazeCell, currentMazeCell.W(MazeCell.north)));
+				if (eastMazeCell != null && !eastMazeCell.Visited()) cells.add(new Group3(eastMazeCell, currentMazeCell.W(MazeCell.east)));
+				if (southMazeCell != null && !southMazeCell.Visited()) cells.add(new Group3(southMazeCell, currentMazeCell.W(MazeCell.south)));
 				if(cells.size()>0) {
 					int r = controlPanel.rand.nextInt(cells.size());
 
 					cells.get(r).wall.Open(true);
-					currentCell.SetType(Cell.CellType.eNormal);
-					currentCell = cells.get(r).cell;
-					currentCell.SetType(Cell.CellType.eCellTypeStart);
-					currentCell.Visited(true);
-					stack.push(currentCell);
+					currentMazeCell.SetType(MazeCell.CellType.eNormal);
+					currentMazeCell = cells.get(r).cell;
+					currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+					currentMazeCell.Visited(true);
+					stack.push(currentMazeCell);
 				}
 				else {
-					currentCell.SetType(Cell.CellType.eNormal);
-					currentCell = stack.pop();
+					currentMazeCell.SetType(MazeCell.CellType.eNormal);
+					currentMazeCell = stack.pop();
 
 					if(stack.size()>0)
-						currentCell.SetType(Cell.CellType.eCellTypeStart);
+						currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
 					else
-						currentCell.SetType(Cell.CellType.eNormal);
+						currentMazeCell.SetType(MazeCell.CellType.eNormal);
 				}
 			}
 		}

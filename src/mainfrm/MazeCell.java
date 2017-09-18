@@ -3,14 +3,14 @@ package mainfrm;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Cell {
+public class MazeCell {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
 
 	public int X() { return xOrigin; }
 	public int Y() { return yOrigin; }
 
-	private Wall[] walls = new Wall[4];
+	private MazeCellWall[] mazeCellWalls = new MazeCellWall[4];
 	private boolean visited = false;
 
 	public boolean Visited() { return visited; }
@@ -21,9 +21,9 @@ public class Cell {
 	public static int	east = 2;
 	public static int	south = 3;
 
-	public Wall	W(int which)
+	public MazeCellWall W(int which)
 	{
-		return walls[which];
+		return mazeCellWalls[which];
 	}
 
 	public static enum CellType
@@ -41,14 +41,14 @@ public class Cell {
 		type = _type;
 	}
 
-	public Cell(int _xOrigin, int _yOrigin, Wall west, Wall north, Wall east, Wall south)
+	public MazeCell(int _xOrigin, int _yOrigin, MazeCellWall west, MazeCellWall north, MazeCellWall east, MazeCellWall south)
 	{
 		xOrigin = _xOrigin;
 		yOrigin = _yOrigin;
-		walls[0] = west;
-		walls[1] = north;
-		walls[2] = east;
-		walls[3] = south;
+		mazeCellWalls[0] = west;
+		mazeCellWalls[1] = north;
+		mazeCellWalls[2] = east;
+		mazeCellWalls[3] = south;
 	}
 
 	public Integer ID()
