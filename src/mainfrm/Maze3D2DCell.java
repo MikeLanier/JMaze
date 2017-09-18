@@ -45,7 +45,7 @@ public class Maze3D2DCell {
 
 	public Integer ID()
 	{
-		int _id = (xOrigin & 0x7fff) | ((yOrigin & 0x7fff) << 15);
+		int _id = (xOrigin & 0x7fff) | ((zOrigin & 0x7fff) << 15);
 		return new Integer(_id);
 	}
 }

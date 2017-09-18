@@ -20,13 +20,10 @@ public class Maze3D2DGrid extends Xform {
 		int color = 4;
 		for(int x=-50; x<=50; x+=10) {
 			for(int z=-50; z<=50; z+=10) {
-//				if(x!=50) getChildren().add(new Maze3D2DWall(x, 0, z, true, color));
-//				if(z!=50) getChildren().add(new Maze3D2DWall(x, 0, z, false, color));
-//				color++;
-//				if(color>=5) color = 0;
 				createCell(x, 0, z);
 			}
 		}
+		createMaze();
 	}
 
 	public Integer ID(int xOrigin, int yOrigin, int zOrigin, boolean horizonal)
@@ -59,7 +56,7 @@ public class Maze3D2DGrid extends Xform {
 		Maze3D2DWall east = walls.get(ID(x+10, y, z, false));
 		if(east == null)
 		{
-			east = new Maze3D2DWall(x+1, y, z, false, 0);
+			east = new Maze3D2DWall(x+10, y, z, false, 0);
 			walls.put(east.ID(), east);
 			getChildren().add(east);
 		}
@@ -67,7 +64,7 @@ public class Maze3D2DGrid extends Xform {
 		Maze3D2DWall south = walls.get(ID(x, y, z+10, true));
 		if(south == null)
 		{
-			south = new Maze3D2DWall(x, y, z+1, true, 0);
+			south = new Maze3D2DWall(x, y, z+10, true, 0);
 			walls.put(south.ID(), south);
 			getChildren().add(south);
 		}
@@ -78,82 +75,57 @@ public class Maze3D2DGrid extends Xform {
 		return maze2DCell;
 	}
 
-//	private void buildMazePanel()
-//	{
-//		System.out.println("buildMazepanel");
-//
-////		HBox vbMazeBox = new HBox();
-////		add(vbMazeBox, 1, 0);
-//
-//		int width = (controlPanel._sizeX + 2) * controlPanel._sizeCell + 1;
-//		int height = (controlPanel._sizeY + 2) * controlPanel._sizeCell + 1;
-////		System.out.println("width, height: " + width + ", " + height);
-//
-////		this.setWidth(width+controlPanel._xOffset);
-////		this.setHeight(height+controlPanel._yOffset);
-////
-//////		vbMazeBox.getChildren().add(this);
-////		GraphicsContext gc = this.getGraphicsContext2D();
-////		gc.setFill(javafx.scene.paint.Color.WHITE);
-////		gc.fillRect(controlPanel._xOffset, controlPanel._yOffset, width, height);
-////
-////		for(int x=1; x<=controlPanel._sizeX; x++)
-////		{
-////			for(int y=1; y<=controlPanel._sizeY; y++)
-////			{
-////				createCell(x, y);
-////			}
-////		}
-//	}
-//
-//	private Stack<Maze2DCell> stack = null; //new Stack<Maze2DCell>();
-//
-//	public void createMaze()
-//	{
-//		System.out.println("createMaze");
-//		System.out.println("algorithm: " + controlPanel.cbAlgorithm.getValue());
-//
-//		controlPanel._sizeX = Integer.parseInt(controlPanel.tfMazeSizeX.getText());
-//		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
-//		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
-//
-//		cells = new HashMap<Integer, Maze2DCell>();
-//		walls = new HashMap<Integer, Maze2DWall>();
+	private Stack<Maze3D2DCell> stack = null; //new Stack<Maze2DCell>();
+
+	public void createMaze()
+	{
+		System.out.println("createMaze");
+		System.out.println("algorithm: " + controlPanel.cbAlgorithm.getValue());
+
+		controlPanel._sizeX = Integer.parseInt(controlPanel.tfMazeSizeX.getText());
+		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
+		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
+
+//		cells = new HashMap<Integer, Maze3D2DCell>();
+//		walls = new HashMap<Integer, Maze3D2DWall>();
 //
 //		buildMazePanel();
-//
+
 //		Integer x = 0;
-//		Integer y = controlPanel._sizeY/3;
-//		Maze2DCell entranceMaze2DCell = createCell(x,y);
+//		Integer z = controlPanel._sizeY/3;
+//		Maze3D2DCell entranceMaze2DCell = createCell(x,y);
+		Maze3D2DCell entranceMaze2DCell = createCell(-60, 0, -20);
 //
 //		x = controlPanel._sizeX+1;
-//		y = controlPanel._sizeY*2/3;
+//		z = controlPanel._sizeY*2/3;
 //		Maze2DCell exitMaze2DCell = createCell(x,y);
+		Maze3D2DCell exitMaze2DCell = createCell(60, 0, 20);
 //
-//		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
-//		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
-//		currentMaze2DCell = cells.get(ID(startCellX, startCellY, false));
-//		if(currentMaze2DCell != null)
-//		{
-//			currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
-//		}
-//
-//		entranceMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeEntrance);
-//		exitMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeExit);
-//
-//		entranceMaze2DCell.Visited(true);
-//		exitMaze2DCell.Visited(true);
-//
-//		if(entranceMaze2DCell.W(Maze2DCell.west) != null)	entranceMaze2DCell.W(Maze2DCell.west).Open(true);
-//		if(entranceMaze2DCell.W(Maze2DCell.north) != null)	entranceMaze2DCell.W(Maze2DCell.north).Open(true);
-//		if(entranceMaze2DCell.W(Maze2DCell.east) != null)	entranceMaze2DCell.W(Maze2DCell.east).Open(true);
-//		if(entranceMaze2DCell.W(Maze2DCell.south) != null)	entranceMaze2DCell.W(Maze2DCell.south).Open(true);
-//
-//		if(exitMaze2DCell.W(Maze2DCell.west) != null)	exitMaze2DCell.W(Maze2DCell.west).Open(true);
-//		if(exitMaze2DCell.W(Maze2DCell.north) != null)	exitMaze2DCell.W(Maze2DCell.north).Open(true);
-//		if(exitMaze2DCell.W(Maze2DCell.east) != null)	exitMaze2DCell.W(Maze2DCell.east).Open(true);
-//		if(exitMaze2DCell.W(Maze2DCell.south) != null)	exitMaze2DCell.W(Maze2DCell.south).Open(true);
-//
+		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
+		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
+//		currentMaze2DCell = cells.get(ID(startCellX, 0, startCellY, false));
+		currentMaze2DCell = cells.get(ID(0, 0, 0, false));
+		if(currentMaze2DCell != null)
+		{
+			currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+		}
+
+		entranceMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeEntrance);
+		exitMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeExit);
+
+		entranceMaze2DCell.Visited(true);
+		exitMaze2DCell.Visited(true);
+
+		if(entranceMaze2DCell.W(Maze2DCell.west) != null)	entranceMaze2DCell.W(Maze2DCell.west).setVisible(false);
+		if(entranceMaze2DCell.W(Maze2DCell.north) != null)	entranceMaze2DCell.W(Maze2DCell.north).setVisible(false);
+		if(entranceMaze2DCell.W(Maze2DCell.east) != null)	entranceMaze2DCell.W(Maze2DCell.east).setVisible(false);
+		if(entranceMaze2DCell.W(Maze2DCell.south) != null)	entranceMaze2DCell.W(Maze2DCell.south).setVisible(false);
+
+		if(exitMaze2DCell.W(Maze2DCell.west) != null)	exitMaze2DCell.W(Maze2DCell.west).setVisible(false);
+		if(exitMaze2DCell.W(Maze2DCell.north) != null)	exitMaze2DCell.W(Maze2DCell.north).setVisible(false);
+		if(exitMaze2DCell.W(Maze2DCell.east) != null)	exitMaze2DCell.W(Maze2DCell.east).setVisible(false);
+		if(exitMaze2DCell.W(Maze2DCell.south) != null)	exitMaze2DCell.W(Maze2DCell.south).setVisible(false);
+
 //		for(int i=0; i<controlPanel.algorithms.length; ++i) {
 //			if (controlPanel.cbAlgorithm.getValue().equals(controlPanel.algorithms[i].title)) {
 //				switch(controlPanel.algorithms[i].index)
@@ -166,108 +138,89 @@ public class Maze3D2DGrid extends Xform {
 //				}
 //			}
 //		}
-//
-//		drawMaze();
-//	}
-//
-//	public void drawMaze()
-//	{
-//		System.out.println("drawMaze");
-//
-//		GraphicsContext gc = getGraphicsContext2D();
-//
-//		Collection<Maze2DCell> cc = cells.values();
-//		for(Maze2DCell c: cc)
-//		{
-//			c.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
-//		}
-//
-//		Collection<Maze2DWall> wc = walls.values();
-//		for(Maze2DWall w: wc)
-//		{
-//			w.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
-//		}
-//	}
-//
-//	private void randomizedKruskalAlgorithm()
-//	{
-//		System.out.println("randomizedKruskalAlgorithm");
-//	}
-//
-//	private void randomizedPrimAlgorithm()
-//	{
-//		System.out.println("randomizedPrimAlgorithm");
-//	}
-//
-//	private void randomizedPrimAlgorithmModified()
-//	{
-//		System.out.println("randomizedPrimAlgorithmModified");
-//	}
-//
-//	private void recursiveDivision()
-//	{
-//		System.out.println("recursiveDivision");
-//	}
-//
-//	private void recursiveBacktracker() {
-//		System.out.println("recursiveBacktracker");
-//
-//		if (currentMaze2DCell != null) {
-//			if (stack == null) {
-//				stack = new Stack<Maze2DCell>();
-//			}
-//			stack.push(currentMaze2DCell);
-//
-//			while (stack.size() > 0) {
-//				int x = currentMaze2DCell.X();
-//				int y = currentMaze2DCell.Y();
-//
-//				currentMaze2DCell.Visited(true);
-//
-//				Maze2DCell westMaze2DCell = cells.get(ID(x - 1, y, false));
-//				Maze2DCell northMaze2DCell = cells.get(ID(x, y - 1, false));
-//				Maze2DCell eastMaze2DCell = cells.get(ID(x + 1, y, false));
-//				Maze2DCell southMaze2DCell = cells.get(ID(x, y + 1, false));
-//
-//				class Group3 {
-//					private Maze2DCell cell;
-//					private Maze2DWall wall;
-//
-//					private Group3(Maze2DCell _cell, Maze2DWall _wall) {
-//						cell = _cell;
-//						wall = _wall;
-//					}
-//				}
-//
-//				List<Group3> cells = new ArrayList<Group3>();
-//
-//				if (westMaze2DCell != null && !westMaze2DCell.Visited())
-//					cells.add(new Group3(westMaze2DCell, currentMaze2DCell.W(Maze2DCell.west)));
-//				if (northMaze2DCell != null && !northMaze2DCell.Visited())
-//					cells.add(new Group3(northMaze2DCell, currentMaze2DCell.W(Maze2DCell.north)));
-//				if (eastMaze2DCell != null && !eastMaze2DCell.Visited())
-//					cells.add(new Group3(eastMaze2DCell, currentMaze2DCell.W(Maze2DCell.east)));
-//				if (southMaze2DCell != null && !southMaze2DCell.Visited())
-//					cells.add(new Group3(southMaze2DCell, currentMaze2DCell.W(Maze2DCell.south)));
-//				if (cells.size() > 0) {
-//					int r = controlPanel.rand.nextInt(cells.size());
-//
-//					cells.get(r).wall.Open(true);
-//					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
-//					currentMaze2DCell = cells.get(r).cell;
-//					currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
-//					currentMaze2DCell.Visited(true);
-//					stack.push(currentMaze2DCell);
-//				} else {
-//					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
-//					currentMaze2DCell = stack.pop();
-//
-//					if (stack.size() > 0)
-//						currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
-//					else
-//						currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
-//				}
-//			}
-//		}
-//	}
+		recursiveBacktracker();
+	}
+
+	private void randomizedKruskalAlgorithm()
+	{
+		System.out.println("randomizedKruskalAlgorithm");
+	}
+
+	private void randomizedPrimAlgorithm()
+	{
+		System.out.println("randomizedPrimAlgorithm");
+	}
+
+	private void randomizedPrimAlgorithmModified()
+	{
+		System.out.println("randomizedPrimAlgorithmModified");
+	}
+
+	private void recursiveDivision()
+	{
+		System.out.println("recursiveDivision");
+	}
+
+	private void recursiveBacktracker() {
+		System.out.println("recursiveBacktracker");
+
+		if (currentMaze2DCell != null) {
+			if (stack == null) {
+				stack = new Stack<Maze3D2DCell>();
+			}
+			stack.push(currentMaze2DCell);
+
+			while (stack.size() > 0) {
+				int x = currentMaze2DCell.X();
+				int z = currentMaze2DCell.Z();
+
+				currentMaze2DCell.Visited(true);
+
+				Maze3D2DCell westMaze2DCell = cells.get(ID(x - 10, 0, z, false));
+				Maze3D2DCell northMaze2DCell = cells.get(ID(x, 0, z - 10, false));
+				Maze3D2DCell eastMaze2DCell = cells.get(ID(x + 10, 0, z, false));
+				Maze3D2DCell southMaze2DCell = cells.get(ID(x, 0, z + 10, false));
+
+				class Group3 {
+					private Maze3D2DCell cell;
+					private Maze3D2DWall wall;
+
+					private Group3(Maze3D2DCell _cell, Maze3D2DWall _wall) {
+						cell = _cell;
+						wall = _wall;
+					}
+				}
+
+				List<Group3> cells = new ArrayList<Group3>();
+
+				if (westMaze2DCell != null && !westMaze2DCell.Visited())
+					cells.add(new Group3(westMaze2DCell, currentMaze2DCell.W(Maze2DCell.west)));
+				if (northMaze2DCell != null && !northMaze2DCell.Visited())
+					cells.add(new Group3(northMaze2DCell, currentMaze2DCell.W(Maze2DCell.north)));
+				if (eastMaze2DCell != null && !eastMaze2DCell.Visited())
+					cells.add(new Group3(eastMaze2DCell, currentMaze2DCell.W(Maze2DCell.east)));
+				if (southMaze2DCell != null && !southMaze2DCell.Visited())
+					cells.add(new Group3(southMaze2DCell, currentMaze2DCell.W(Maze2DCell.south)));
+				if (cells.size() > 0) {
+					int r = controlPanel.rand.nextInt(cells.size());
+
+					//cells.get(r).wall.Open(true);
+					cells.get(r).wall.setVisible(false);
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+					currentMaze2DCell = cells.get(r).cell;
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+					currentMaze2DCell.Visited(true);
+					stack.push(currentMaze2DCell);
+				} else {
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+					currentMaze2DCell = stack.pop();
+
+					if (stack.size() > 0)
+						currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+					else
+						currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+				}
+			}
+		}
+	}
 }

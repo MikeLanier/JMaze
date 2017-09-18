@@ -99,8 +99,10 @@ MainFrm or Maze display panel
 * pick start cell by clicking the random button
 * look at other algorithms
 * tooltips for controls
-* 3D display of a 2D maze. create module for 3D display of a 2D maze.
-Code stated in J3DSandbox repository
+* ~~3D display of a 2D maze. create module for 3D display of a 2D maze.~~
+* For 3D maze, draw arrow at entrance/exit
+* For 3D maze, tie to controls
+
 ## 09/12/2017
 * ~~images for the random buttons~~
 * ~~how to split code in mainframe.java into multiple source files~~
