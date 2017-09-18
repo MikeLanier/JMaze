@@ -5,9 +5,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 
-public class MazeGridWall extends Xform {
-	public MazeGridWall(int xOrigin, int yOrigin, int zOrigin, boolean horizonal, int color)
+public class Maze3D2DWall extends Xform {
+	private int	xOrigin = 0;
+	private int yOrigin = 0;
+	private int zOrigin = 0;
+	private boolean horizonal = true;
+	private boolean open = false;
+
+	public Integer ID()
 	{
+		int h = (horizonal) ? 0x40000000 : 0;
+
+		return (xOrigin & 0x7fff) |
+				(zOrigin & 0x7fff) << 15 |
+				h;
+	}
+
+	public Maze3D2DWall(int _xOrigin, int _yOrigin, int _zOrigin, boolean _horizonal, int color)
+	{
+		xOrigin = _xOrigin;
+		yOrigin = _yOrigin;
+		zOrigin = _zOrigin;
+		horizonal = _horizonal;
+
 		final PhongMaterial blueMaterial = new PhongMaterial();
 		blueMaterial.setDiffuseColor(Color.DARKBLUE);
 		blueMaterial.setSpecularColor(Color.BLUE);

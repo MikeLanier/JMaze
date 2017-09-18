@@ -2,7 +2,6 @@ package mainfrm;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.HBox;
 
 import java.util.*;
 
@@ -14,10 +13,10 @@ public class Maze2DPanel extends Canvas {
 		buildMazePanel();
 	}
 
-	public Map<Integer, MazeCell> cells = new HashMap<Integer, MazeCell>();
-	public Map<Integer, MazeCellWall> walls = new HashMap<Integer, MazeCellWall>();
+	public Map<Integer, Maze2DCell> cells = new HashMap<Integer, Maze2DCell>();
+	public Map<Integer, Maze2DWall> walls = new HashMap<Integer, Maze2DWall>();
 
-	public MazeCell currentMazeCell = null;
+	public Maze2DCell currentMaze2DCell = null;
 
 	public Integer ID(int xOrigin, int yOrigin, boolean horizontal)
 	{
@@ -56,43 +55,43 @@ public class Maze2DPanel extends Canvas {
 		}
 	}
 
-	private MazeCell createCell(int x, int y)
+	private Maze2DCell createCell(int x, int y)
 	{
-		MazeCellWall west = walls.get(ID(x, y, false));
+		Maze2DWall west = walls.get(ID(x, y, false));
 		if(west == null)
 		{
-			west = new MazeCellWall(x, y, false);
+			west = new Maze2DWall(x, y, false);
 			walls.put(west.ID(), west);
 		}
 
-		MazeCellWall north = walls.get(ID(x, y, true));
+		Maze2DWall north = walls.get(ID(x, y, true));
 		if(north == null)
 		{
-			north = new MazeCellWall(x, y, true);
+			north = new Maze2DWall(x, y, true);
 			walls.put(north.ID(), north);
 		}
 
-		MazeCellWall east = walls.get(ID(x+1, y, false));
+		Maze2DWall east = walls.get(ID(x+1, y, false));
 		if(east == null)
 		{
-			east = new MazeCellWall(x+1, y, false);
+			east = new Maze2DWall(x+1, y, false);
 			walls.put(east.ID(), east);
 		}
 
-		MazeCellWall south = walls.get(ID(x, y+1, true));
+		Maze2DWall south = walls.get(ID(x, y+1, true));
 		if(south == null)
 		{
-			south = new MazeCellWall(x, y+1, true);
+			south = new Maze2DWall(x, y+1, true);
 			walls.put(south.ID(), south);
 		}
 
-		MazeCell mazeCell = new MazeCell(x, y, west, north, east, south);
-		cells.put(mazeCell.ID(), mazeCell);
+		Maze2DCell maze2DCell = new Maze2DCell(x, y, west, north, east, south);
+		cells.put(maze2DCell.ID(), maze2DCell);
 
-		return mazeCell;
+		return maze2DCell;
 	}
 
-	private Stack<MazeCell> stack = null; //new Stack<MazeCell>();
+	private Stack<Maze2DCell> stack = null; //new Stack<Maze2DCell>();
 
 	public void createMaze()
 	{
@@ -103,42 +102,42 @@ public class Maze2DPanel extends Canvas {
 		controlPanel._sizeY = Integer.parseInt(controlPanel.tfMazeSizeY.getText());
 		controlPanel._sizeCell = Integer.parseInt(controlPanel.tfCellSize.getText());
 
-		cells = new HashMap<Integer, MazeCell>();
-		walls = new HashMap<Integer, MazeCellWall>();
+		cells = new HashMap<Integer, Maze2DCell>();
+		walls = new HashMap<Integer, Maze2DWall>();
 
 		buildMazePanel();
 
 		Integer x = 0;
 		Integer y = controlPanel._sizeY/3;
-		MazeCell entranceMazeCell = createCell(x,y);
+		Maze2DCell entranceMaze2DCell = createCell(x,y);
 
 		x = controlPanel._sizeX+1;
 		y = controlPanel._sizeY*2/3;
-		MazeCell exitMazeCell = createCell(x,y);
+		Maze2DCell exitMaze2DCell = createCell(x,y);
 
 		int startCellX = Integer.parseInt(controlPanel.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.tfStartCellY.getText());
-		currentMazeCell = cells.get(ID(startCellX, startCellY, false));
-		if(currentMazeCell != null)
+		currentMaze2DCell = cells.get(ID(startCellX, startCellY, false));
+		if(currentMaze2DCell != null)
 		{
-			currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+			currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
 		}
 
-		entranceMazeCell.SetType(MazeCell.CellType.eCellTypeEntrance);
-		exitMazeCell.SetType(MazeCell.CellType.eCellTypeExit);
+		entranceMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeEntrance);
+		exitMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeExit);
 
-		entranceMazeCell.Visited(true);
-		exitMazeCell.Visited(true);
+		entranceMaze2DCell.Visited(true);
+		exitMaze2DCell.Visited(true);
 
-		if(entranceMazeCell.W(MazeCell.west) != null)	entranceMazeCell.W(MazeCell.west).Open(true);
-		if(entranceMazeCell.W(MazeCell.north) != null)	entranceMazeCell.W(MazeCell.north).Open(true);
-		if(entranceMazeCell.W(MazeCell.east) != null)	entranceMazeCell.W(MazeCell.east).Open(true);
-		if(entranceMazeCell.W(MazeCell.south) != null)	entranceMazeCell.W(MazeCell.south).Open(true);
+		if(entranceMaze2DCell.W(Maze2DCell.west) != null)	entranceMaze2DCell.W(Maze2DCell.west).Open(true);
+		if(entranceMaze2DCell.W(Maze2DCell.north) != null)	entranceMaze2DCell.W(Maze2DCell.north).Open(true);
+		if(entranceMaze2DCell.W(Maze2DCell.east) != null)	entranceMaze2DCell.W(Maze2DCell.east).Open(true);
+		if(entranceMaze2DCell.W(Maze2DCell.south) != null)	entranceMaze2DCell.W(Maze2DCell.south).Open(true);
 
-		if(exitMazeCell.W(MazeCell.west) != null)	exitMazeCell.W(MazeCell.west).Open(true);
-		if(exitMazeCell.W(MazeCell.north) != null)	exitMazeCell.W(MazeCell.north).Open(true);
-		if(exitMazeCell.W(MazeCell.east) != null)	exitMazeCell.W(MazeCell.east).Open(true);
-		if(exitMazeCell.W(MazeCell.south) != null)	exitMazeCell.W(MazeCell.south).Open(true);
+		if(exitMaze2DCell.W(Maze2DCell.west) != null)	exitMaze2DCell.W(Maze2DCell.west).Open(true);
+		if(exitMaze2DCell.W(Maze2DCell.north) != null)	exitMaze2DCell.W(Maze2DCell.north).Open(true);
+		if(exitMaze2DCell.W(Maze2DCell.east) != null)	exitMaze2DCell.W(Maze2DCell.east).Open(true);
+		if(exitMaze2DCell.W(Maze2DCell.south) != null)	exitMaze2DCell.W(Maze2DCell.south).Open(true);
 
 		for(int i=0; i<controlPanel.algorithms.length; ++i) {
 			if (controlPanel.cbAlgorithm.getValue().equals(controlPanel.algorithms[i].title)) {
@@ -162,14 +161,14 @@ public class Maze2DPanel extends Canvas {
 
 		GraphicsContext gc = getGraphicsContext2D();
 
-		Collection<MazeCell> cc = cells.values();
-		for(MazeCell c: cc)
+		Collection<Maze2DCell> cc = cells.values();
+		for(Maze2DCell c: cc)
 		{
 			c.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
 		}
 
-		Collection<MazeCellWall> wc = walls.values();
-		for(MazeCellWall w: wc)
+		Collection<Maze2DWall> wc = walls.values();
+		for(Maze2DWall w: wc)
 		{
 			w.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
 		}
@@ -198,28 +197,28 @@ public class Maze2DPanel extends Canvas {
 	private void recursiveBacktracker() {
 		System.out.println("recursiveBacktracker");
 
-		if (currentMazeCell != null) {
+		if (currentMaze2DCell != null) {
 			if (stack == null) {
-				stack = new Stack<MazeCell>();
+				stack = new Stack<Maze2DCell>();
 			}
-			stack.push(currentMazeCell);
+			stack.push(currentMaze2DCell);
 
 			while (stack.size() > 0) {
-				int x = currentMazeCell.X();
-				int y = currentMazeCell.Y();
+				int x = currentMaze2DCell.X();
+				int y = currentMaze2DCell.Y();
 
-				currentMazeCell.Visited(true);
+				currentMaze2DCell.Visited(true);
 
-				MazeCell westMazeCell = cells.get(ID(x - 1, y, false));
-				MazeCell northMazeCell = cells.get(ID(x, y - 1, false));
-				MazeCell eastMazeCell = cells.get(ID(x + 1, y, false));
-				MazeCell southMazeCell = cells.get(ID(x, y + 1, false));
+				Maze2DCell westMaze2DCell = cells.get(ID(x - 1, y, false));
+				Maze2DCell northMaze2DCell = cells.get(ID(x, y - 1, false));
+				Maze2DCell eastMaze2DCell = cells.get(ID(x + 1, y, false));
+				Maze2DCell southMaze2DCell = cells.get(ID(x, y + 1, false));
 
 				class Group3 {
-					private MazeCell cell;
-					private MazeCellWall wall;
+					private Maze2DCell cell;
+					private Maze2DWall wall;
 
-					private Group3(MazeCell _cell, MazeCellWall _wall) {
+					private Group3(Maze2DCell _cell, Maze2DWall _wall) {
 						cell = _cell;
 						wall = _wall;
 					}
@@ -227,31 +226,31 @@ public class Maze2DPanel extends Canvas {
 
 				List<Group3> cells = new ArrayList<Group3>();
 
-				if (westMazeCell != null && !westMazeCell.Visited())
-					cells.add(new Group3(westMazeCell, currentMazeCell.W(MazeCell.west)));
-				if (northMazeCell != null && !northMazeCell.Visited())
-					cells.add(new Group3(northMazeCell, currentMazeCell.W(MazeCell.north)));
-				if (eastMazeCell != null && !eastMazeCell.Visited())
-					cells.add(new Group3(eastMazeCell, currentMazeCell.W(MazeCell.east)));
-				if (southMazeCell != null && !southMazeCell.Visited())
-					cells.add(new Group3(southMazeCell, currentMazeCell.W(MazeCell.south)));
+				if (westMaze2DCell != null && !westMaze2DCell.Visited())
+					cells.add(new Group3(westMaze2DCell, currentMaze2DCell.W(Maze2DCell.west)));
+				if (northMaze2DCell != null && !northMaze2DCell.Visited())
+					cells.add(new Group3(northMaze2DCell, currentMaze2DCell.W(Maze2DCell.north)));
+				if (eastMaze2DCell != null && !eastMaze2DCell.Visited())
+					cells.add(new Group3(eastMaze2DCell, currentMaze2DCell.W(Maze2DCell.east)));
+				if (southMaze2DCell != null && !southMaze2DCell.Visited())
+					cells.add(new Group3(southMaze2DCell, currentMaze2DCell.W(Maze2DCell.south)));
 				if (cells.size() > 0) {
 					int r = controlPanel.rand.nextInt(cells.size());
 
 					cells.get(r).wall.Open(true);
-					currentMazeCell.SetType(MazeCell.CellType.eNormal);
-					currentMazeCell = cells.get(r).cell;
-					currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
-					currentMazeCell.Visited(true);
-					stack.push(currentMazeCell);
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+					currentMaze2DCell = cells.get(r).cell;
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+					currentMaze2DCell.Visited(true);
+					stack.push(currentMaze2DCell);
 				} else {
-					currentMazeCell.SetType(MazeCell.CellType.eNormal);
-					currentMazeCell = stack.pop();
+					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+					currentMaze2DCell = stack.pop();
 
 					if (stack.size() > 0)
-						currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+						currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
 					else
-						currentMazeCell.SetType(MazeCell.CellType.eNormal);
+						currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
 				}
 			}
 		}

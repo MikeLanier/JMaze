@@ -3,14 +3,14 @@ package mainfrm;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class MazeCell {
+public class Maze2DCell {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
 
 	public int X() { return xOrigin; }
 	public int Y() { return yOrigin; }
 
-	private MazeCellWall[] mazeCellWalls = new MazeCellWall[4];
+	private Maze2DWall[] maze2DWalls = new Maze2DWall[4];
 	private boolean visited = false;
 
 	public boolean Visited() { return visited; }
@@ -21,9 +21,9 @@ public class MazeCell {
 	public static int	east = 2;
 	public static int	south = 3;
 
-	public MazeCellWall W(int which)
+	public Maze2DWall W(int which)
 	{
-		return mazeCellWalls[which];
+		return maze2DWalls[which];
 	}
 
 	public static enum CellType
@@ -41,14 +41,14 @@ public class MazeCell {
 		type = _type;
 	}
 
-	public MazeCell(int _xOrigin, int _yOrigin, MazeCellWall west, MazeCellWall north, MazeCellWall east, MazeCellWall south)
+	public Maze2DCell(int _xOrigin, int _yOrigin, Maze2DWall west, Maze2DWall north, Maze2DWall east, Maze2DWall south)
 	{
 		xOrigin = _xOrigin;
 		yOrigin = _yOrigin;
-		mazeCellWalls[0] = west;
-		mazeCellWalls[1] = north;
-		mazeCellWalls[2] = east;
-		mazeCellWalls[3] = south;
+		maze2DWalls[0] = west;
+		maze2DWalls[1] = north;
+		maze2DWalls[2] = east;
+		maze2DWalls[3] = south;
 	}
 
 	public Integer ID()

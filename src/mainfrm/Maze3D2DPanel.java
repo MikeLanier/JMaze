@@ -9,7 +9,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
 public class Maze3D2DPanel extends HBox {
@@ -46,8 +45,12 @@ public class Maze3D2DPanel extends HBox {
 	double mouseDeltaX;
 	double mouseDeltaY;
 
-	public Maze3D2DPanel()
+	private ControlPanel controlPanel = null;
+
+	public Maze3D2DPanel(ControlPanel _controlPanel)
 	{
+		controlPanel = _controlPanel;
+
 		root.getChildren().add(world);
 		root.setDepthTest(DepthTest.ENABLE);
 
@@ -64,8 +67,6 @@ public class Maze3D2DPanel extends HBox {
 		subScene.heightProperty().bind(this.heightProperty());
 		subScene.widthProperty().bind(this.widthProperty());
 		this.getChildren().add(subScene);
-
-		Polygon p = new Polygon();
 	}
 
 	private void buildCamera() {
@@ -84,7 +85,7 @@ public class Maze3D2DPanel extends HBox {
 	}
 
 	private void buildMazeGrid() {
-		mazeGridGroup = new MazeGrid();
+		mazeGridGroup = new Maze3D2DGrid(controlPanel);
 		mazeGridGroup.setVisible(false);
 		world.getChildren().addAll(mazeGridGroup);
 	}
