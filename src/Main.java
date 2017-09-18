@@ -1,8 +1,8 @@
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import mainfrm.MainFrm;
 
 import java.util.prefs.Preferences;
 
@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage = _primaryStage;
 
 		//GridPane root = FXMLLoader.load(getClass().getResource("sample\\sample.fxml"));
-        GridPane root = new mainfrm.mainfrm();
+        GridPane root = new MainFrm();
         System.out.println(root.getClass().getName());
         primaryStage.setTitle("Maze");
 //        primaryStage.setScene(new Scene(root, 800, 500));
