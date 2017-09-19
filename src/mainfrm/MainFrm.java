@@ -1,5 +1,6 @@
 package mainfrm;
 
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import mainfrm.ControlPanel.ControlPanel;
 
@@ -41,6 +42,15 @@ public class MainFrm extends GridPane
 		}
 
 		maze2DPanel.drawMaze();
+
+		setOnKeyPressed(new javafx.event.EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				System.out.println("GridPane: OnKeyPressed");
+				maze3D2DPanel.OnKeyPressed(event);
+			}
+		});
+
 	}
 
 	public void SwitchTo2DMaze()

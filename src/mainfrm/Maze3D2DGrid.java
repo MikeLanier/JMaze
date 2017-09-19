@@ -71,6 +71,7 @@ public class Maze3D2DGrid extends Xform {
 
 		Maze3D2DCell maze2DCell = new Maze3D2DCell(x, y, z, west, north, east, south);
 		cells.put(maze2DCell.ID(), maze2DCell);
+		getChildren().add(maze2DCell);
 
 		return maze2DCell;
 	}

@@ -25,14 +25,14 @@ public class ControlPanelMaze2D3D extends HBox {
 		cbMaze2D.setMinWidth(40);
 		cbMaze2D.setMaxWidth(40);
 		cbMaze2D.setIndeterminate(false);
-		cbMaze2D.setSelected(true);
-//				cbMaze2D.setDisable(true);
+		cbMaze2D.setSelected(false);
+//		cbMaze2D.setDisable(true);
 		getChildren().add(cbMaze2D);
 
 		cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMouseClicked: cbMaze2D");
+				System.out.println("OnMouseClicked: cbMaze2D: " + cbMaze2D.isSelected());
 				if(cbMaze2D.isSelected()) {
 					cbMaze3D2D.setSelected(false);
 					mainFrm.SwitchTo2DMaze();
@@ -45,13 +45,15 @@ public class ControlPanelMaze2D3D extends HBox {
 		cbMaze3D2D.setText("3D/2D");
 		cbMaze3D2D.setMinWidth(60);
 		cbMaze3D2D.setMaxWidth(60);
-//				cbMaze3D2D.setDisable(true);
+		cbMaze3D2D.setSelected(true);
+//		cbMaze3D2D.setDisable(true);
 		getChildren().add(cbMaze3D2D);
 
 		cbMaze3D2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				if(cbMaze3D2D.isSelected())	{
+					System.out.println("OnMouseClicked: cbMaze3D2D: " + cbMaze3D2D.isSelected());
 					cbMaze2D.setSelected(false);
 					mainFrm.SwitchTo3D2DMaze();
 				}

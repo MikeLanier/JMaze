@@ -188,11 +188,21 @@ public class Maze3D2DPanel extends HBox {
 		System.out.println("DisplayPanel: OnKeyPressed");
 		switch (event.getCode()) {
 			case Z:
+				System.out.println("Z is pressed");
 				cameraXform2.t.setX(0.0);
 				cameraXform2.t.setY(0.0);
 				camera.setTranslateZ(CAMERA_INITIAL_DISTANCE);
 				cameraXform.ry.setAngle(CAMERA_INITIAL_Y_ANGLE);
 				cameraXform.rx.setAngle(CAMERA_INITIAL_X_ANGLE);
+				break;
+			case T:
+				System.out.println("T is pressed");
+				cameraXform2.t.setX(0.0);
+				cameraXform2.t.setY(0.0);
+				camera.setTranslateZ(CAMERA_INITIAL_DISTANCE);
+				cameraXform.ry.setAngle(0);
+				cameraXform.rx.setAngle(90);
+				cameraXform.rz.setAngle(0);
 				break;
 //			case X:
 //				triadGroup.setVisible(!triadGroup.isVisible());

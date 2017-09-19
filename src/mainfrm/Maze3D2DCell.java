@@ -1,6 +1,11 @@
 package mainfrm;
 
-public class Maze3D2DCell {
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
+import javafx.scene.shape.Cylinder;
+
+public class Maze3D2DCell extends Xform {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
 	private int zOrigin = 0;
@@ -30,7 +35,19 @@ public class Maze3D2DCell {
 	public void SetType( Maze2DCell.CellType _type )
 	{
 		type = _type;
+		if(_type == Maze2DCell.CellType.eCellTypeEntrance)
+		{
+			cylinder.setVisible(true);
+		}
+		else
+		if(_type == Maze2DCell.CellType.eCellTypeExit)
+		{
+			cylinder.setVisible(true);
+		}
 	}
+
+	private Box box = null;
+	private Cylinder cylinder = null;
 
 	public Maze3D2DCell(int _xOrigin, int _yOrigin, int _zOrigin, Maze3D2DWall west, Maze3D2DWall north, Maze3D2DWall east, Maze3D2DWall south)
 	{
@@ -41,6 +58,30 @@ public class Maze3D2DCell {
 		mazeCellWalls[1] = north;
 		mazeCellWalls[2] = east;
 		mazeCellWalls[3] = south;
+
+		final PhongMaterial greenMaterial = new PhongMaterial();
+		greenMaterial.setDiffuseColor(Color.DARKGREEN);
+		greenMaterial.setSpecularColor(Color.GREEN);
+
+		final PhongMaterial redMaterial = new PhongMaterial();
+		redMaterial.setDiffuseColor(Color.RED);
+		redMaterial.setSpecularColor(Color.WHITE);
+
+		setTx(xOrigin+5);
+		setTz(zOrigin+5);
+		setRotateX(90);
+		setRotateY(90);
+
+		box = new Box(5, .5, 5);
+		box.setMaterial(greenMaterial);
+		box.setVisible(false);
+
+		cylinder = new Cylinder(1, 6);
+		cylinder.setMaterial(redMaterial);
+		cylinder.setVisible(false);
+
+		getChildren().add(box);
+		getChildren().add(cylinder);
 	}
 
 	public Integer ID()
