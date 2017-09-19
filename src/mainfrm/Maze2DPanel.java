@@ -2,6 +2,7 @@ package mainfrm;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import mainfrm.ControlPanel.ControlPanel;
 
 import java.util.*;
 
@@ -139,18 +140,19 @@ public class Maze2DPanel extends Canvas {
 		if(exitMaze2DCell.W(Maze2DCell.east) != null)	exitMaze2DCell.W(Maze2DCell.east).Open(true);
 		if(exitMaze2DCell.W(Maze2DCell.south) != null)	exitMaze2DCell.W(Maze2DCell.south).Open(true);
 
-		for(int i=0; i<controlPanel.algorithmControl.algorithms.length; ++i) {
-			if (controlPanel.algorithmControl.cbAlgorithm.getValue().equals(controlPanel.algorithmControl.algorithms[i].title)) {
-				switch(controlPanel.algorithmControl.algorithms[i].index)
-				{
-					case 0:	recursiveBacktracker();	break;
-					case 1:	randomizedKruskalAlgorithm();	break;
-					case 2:	randomizedPrimAlgorithm();	break;
-					case 3:	randomizedPrimAlgorithmModified();	break;
-					case 4:	recursiveDivision();	break;
-				}
-			}
-		}
+//		for(int i=0; i<controlPanel.algorithmControl.algorithms.length; ++i) {
+//			if (controlPanel.algorithmControl.cbAlgorithm.getValue().equals(controlPanel.algorithmControl.algorithms[i].title)) {
+//				switch(controlPanel.algorithmControl.algorithms[i].index)
+//				{
+//					case 0:	recursiveBacktracker();	break;
+//					case 1:	randomizedKruskalAlgorithm();	break;
+//					case 2:	randomizedPrimAlgorithm();	break;
+//					case 3:	randomizedPrimAlgorithmModified();	break;
+//					case 4:	recursiveDivision();	break;
+//				}
+//			}
+//		}
+		recursiveBacktracker();
 
 		drawMaze();
 	}

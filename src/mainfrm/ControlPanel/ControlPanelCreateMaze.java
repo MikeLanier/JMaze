@@ -1,9 +1,10 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import mainfrm.MainFrm;
 
 public class ControlPanelCreateMaze extends HBox {
 	public Button btnMazeCreate		= new Button();

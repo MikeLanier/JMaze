@@ -1,4 +1,4 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;

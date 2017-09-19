@@ -1,7 +1,7 @@
 package mainfrm;
 
 
-import javafx.scene.canvas.GraphicsContext;
+import mainfrm.ControlPanel.ControlPanel;
 
 import java.util.*;
 

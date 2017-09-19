@@ -1,4 +1,4 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -10,16 +10,16 @@ import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
 
-public class ControlPanelExit extends HBox {
-	public ComboBox<String> tfExitX			= new ComboBox<>();
-	public ComboBox<String>	tfExitY			= new ComboBox<>();
-	public Button btnExitSet			= new Button();
-	public ControlPanelExit(int _sizeX, int _sizeY)
+public class ControlPanelEntrance extends HBox {
+	public ComboBox<String> tfEntranceX		= new ComboBox<>();
+	public ComboBox<String>	tfEntranceY		= new ComboBox<>();
+	public Button btnEntranceSet		= new Button();
+	public ControlPanelEntrance(int _sizeX, int _sizeY)
 	{
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Exit", 70, false));
+		getChildren().add(ControlPanel.Marker("Entrance", 70, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		ArrayList<String> itemsX = new ArrayList<>();
@@ -29,17 +29,17 @@ public class ControlPanelExit extends HBox {
 			itemsX.add(i.toString());
 		}
 
-		tfExitX.getItems().setAll(itemsX);
-		tfExitX.setValue(itemsX.get(1));
-		tfExitX.setMinWidth(70);
-		tfExitX.setMaxWidth(70);
+		tfEntranceX.getItems().setAll(itemsX);
+		tfEntranceX.setValue(itemsX.get(0));
+		tfEntranceX.setMinWidth(70);
+		tfEntranceX.setMaxWidth(70);
 
-		getChildren().add(tfExitX);
+		getChildren().add(tfEntranceX);
 
-//				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
+//				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
 //					@Override
 //					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfExitX");
+//						System.out.println("OnAction: tfEntranceX");
 //					}
 //				});
 
@@ -54,17 +54,17 @@ public class ControlPanelExit extends HBox {
 			itemsY.add(i.toString());
 		}
 
-		tfExitY.getItems().setAll(itemsY);
-		tfExitY.setValue(itemsY.get(_sizeY * 2 / 3 + 2));
-		tfExitY.setMinWidth(70);
-		tfExitY.setMaxWidth(70);
+		tfEntranceY.getItems().setAll(itemsY);
+		tfEntranceY.setValue(itemsY.get(_sizeY / 3 + 2));
+		tfEntranceY.setMinWidth(70);
+		tfEntranceY.setMaxWidth(70);
 
-		getChildren().add(tfExitY);
+		getChildren().add(tfEntranceY);
 
-//				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
+//				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
 //					@Override
 //					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfExitY");
+//						System.out.println("OnAction: tfEntranceY");
 //					}
 //				});
 
@@ -73,17 +73,18 @@ public class ControlPanelExit extends HBox {
 		Image img = new Image(getClass().getResource("random.png").toString());
 		ImageView iv = new ImageView(img);
 
-		btnExitSet.setGraphic(iv);
-		btnExitSet.setMinWidth(25);
-		btnExitSet.setMaxWidth(25);
-		btnExitSet.setDisable(true);
-		getChildren().add(btnExitSet);
+		btnEntranceSet.setGraphic(iv);
+		btnEntranceSet.setMinWidth(25);
+		btnEntranceSet.setMaxWidth(25);
+		btnEntranceSet.setDisable(true);
+		getChildren().add(btnEntranceSet);
 
-		btnExitSet.setOnMousePressed(new EventHandler<MouseEvent>() {
+		btnEntranceSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnExitSet");
+				System.out.println("OnMousePressed: btnEntranceSet");
 			}
 		});
+		
 	}
 }

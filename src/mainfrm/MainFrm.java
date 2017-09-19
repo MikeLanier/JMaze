@@ -1,6 +1,7 @@
 package mainfrm;
 
 import javafx.scene.layout.*;
+import mainfrm.ControlPanel.ControlPanel;
 
 public class MainFrm extends GridPane
 {

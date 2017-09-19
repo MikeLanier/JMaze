@@ -1,4 +1,4 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

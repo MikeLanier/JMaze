@@ -1,15 +1,9 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mainfrm.MainFrm;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class ControlPanel extends VBox {

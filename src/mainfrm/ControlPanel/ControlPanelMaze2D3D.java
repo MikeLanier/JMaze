@@ -1,15 +1,16 @@
-package mainfrm;
+package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import mainfrm.MainFrm;
 
 public class ControlPanelMaze2D3D extends HBox {
 	public CheckBox cbMaze2D			= new CheckBox();
 	public CheckBox		cbMaze3D2D			= new CheckBox();
 	public CheckBox		cbMaze3D			= new CheckBox();
-	private MainFrm	mainFrm = null;
+	private MainFrm mainFrm = null;
 	public ControlPanelMaze2D3D(MainFrm _mainFrm)
 	{
 		mainFrm = _mainFrm;

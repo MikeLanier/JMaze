@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import mainfrm.ControlPanel.ControlPanel;
 
 public class Maze3D2DPanel extends HBox {
 
