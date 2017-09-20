@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -20,7 +21,8 @@ public class ControlPanelLoadMazes extends HBox {
 		btnMazeOpen.setText("Load");
 		btnMazeOpen.setMinWidth(70);
 		btnMazeOpen.setMaxWidth(70);
-		btnMazeOpen.setDisable(true);
+		btnMazeOpen.setTooltip(new Tooltip("Load mazes from the named file"));
+//		btnMazeOpen.setDisable(true);
 		getChildren().add(btnMazeOpen);
 
 		btnMazeOpen.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -35,7 +37,8 @@ public class ControlPanelLoadMazes extends HBox {
 		// contains the name of the filename containing the maze to load
 		tfMazeFilename.setText("filename");
 		tfMazeFilename.setMinWidth(150);
-		tfMazeFilename.setDisable(true);
+		tfMazeFilename.setTooltip(new Tooltip("Name of file from which to load mazes"));
+//		tfMazeFilename.setDisable(true);
 		getChildren().add(tfMazeFilename);
 
 		tfMazeFilename.setOnAction(new EventHandler<ActionEvent>() {
@@ -50,7 +53,8 @@ public class ControlPanelLoadMazes extends HBox {
 		// press this button to show the fileopen dialog.
 		btnMazeSelect.setText("^");
 		btnMazeSelect.setMinWidth(25);
-		btnMazeSelect.setDisable(true);
+		btnMazeSelect.setTooltip(new Tooltip("Open FileOpenDialog to select file\nfrom which to load mazes"));
+//		btnMazeSelect.setDisable(true);
 		getChildren().add(btnMazeSelect);
 
 		btnMazeSelect.setOnMousePressed(new EventHandler<MouseEvent>() {

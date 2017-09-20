@@ -1,6 +1,7 @@
 package mainfrm.ControlPanel;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 public class ControlPanelMazeSize extends HBox {
@@ -19,6 +20,7 @@ public class ControlPanelMazeSize extends HBox {
 		tfMazeSizeX.setText(x.toString());
 		tfMazeSizeX.setMinWidth(40);
 		tfMazeSizeX.setMaxWidth(40);
+		tfMazeSizeX.setTooltip(new Tooltip("Number of cells in a row of the maze"));
 		getChildren().add(tfMazeSizeX);
 
 //				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
@@ -37,6 +39,7 @@ public class ControlPanelMazeSize extends HBox {
 		tfMazeSizeY.setText(y.toString());
 		tfMazeSizeY.setMinWidth(40);
 		tfMazeSizeY.setMaxWidth(40);
+		tfMazeSizeY.setTooltip(new Tooltip("Number of cells in a column of the maze"));
 		getChildren().add(tfMazeSizeY);
 
 //				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {

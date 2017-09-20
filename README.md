@@ -107,6 +107,7 @@ display panel
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button
 * look at other algorithms
+* prelim for using this for a game, randomly add doors and rooms
 
 ## 09/19/2017
 * ~~For 3D/2D maze, draw arrow at entrance/exit (Moved to J3DSandbox)~~

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -21,7 +22,8 @@ public class ControlPanelSaveMazes extends HBox {
 		btnMazeSave.setText("Save");
 		btnMazeSave.setMinWidth(70);
 		btnMazeSave.setMaxWidth(70);
-		btnMazeSave.setDisable(true);
+		btnMazeSave.setTooltip(new Tooltip("Add current maze to those in the named file"));
+//		btnMazeSave.setDisable(true);
 		getChildren().add(btnMazeSave);
 
 		btnMazeSave.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -36,7 +38,8 @@ public class ControlPanelSaveMazes extends HBox {
 		// contains the filename to which the current maze will be saved
 		tfMazeSaveFilename.setText("filename");
 		tfMazeSaveFilename.setMinWidth(150);
-		tfMazeSaveFilename.setDisable(true);
+		tfMazeSaveFilename.setTooltip(new Tooltip("Name of file to which to add the current maze"));
+//		tfMazeSaveFilename.setDisable(true);
 		getChildren().add(tfMazeSaveFilename);
 
 		tfMazeSaveFilename.setOnAction(new EventHandler<ActionEvent>() {
@@ -51,7 +54,8 @@ public class ControlPanelSaveMazes extends HBox {
 		// press this button to show the filesave dialog
 		btnMazeSaveSelect.setText(">");
 		btnMazeSaveSelect.setMinWidth(25);
-		btnMazeSaveSelect.setDisable(true);
+		btnMazeSaveSelect.setTooltip(new Tooltip("Open FileSaveDialog to select maze\nfile to which to add the current maze"));
+//		btnMazeSaveSelect.setDisable(true);
 		getChildren().add(btnMazeSaveSelect);
 
 		btnMazeSaveSelect.setOnMousePressed(new EventHandler<MouseEvent>() {

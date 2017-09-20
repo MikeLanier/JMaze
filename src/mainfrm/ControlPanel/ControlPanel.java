@@ -2,6 +2,7 @@ package mainfrm.ControlPanel;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import mainfrm.MainFrm;
 
 import java.util.Random;
@@ -52,12 +53,12 @@ public class ControlPanel extends VBox {
 
 		getChildren().add(new ControlPanelLoadMazes());
 		getChildren().add(new ControlPanelSaveMazes());
+		getChildren().add(new ControlPanelMazeName());
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(mazeSizeControl = new ControlPanelMazeSize(_sizeX, _sizeY));
 		getChildren().add(cellSizeControl = new ControlPanelCellSize(this, mainFrm, _sizeCell));
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
-		getChildren().add(new ControlPanelMazeName());
 //		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
 		getChildren().add(startCellControl = new ControlPanelStartCell(_sizeX, _sizeY));
 		getChildren().add(entranceControl = new ControlPanelEntrance(_sizeX, _sizeY));
@@ -67,6 +68,6 @@ public class ControlPanel extends VBox {
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(new ControlPanelStartWalkthrough());
+		getChildren().add(new ControlPanelOrientation(mainFrm));
 	}
 }
