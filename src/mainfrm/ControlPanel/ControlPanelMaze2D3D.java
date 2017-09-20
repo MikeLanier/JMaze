@@ -35,7 +35,7 @@ public class ControlPanelMaze2D3D extends HBox {
 				System.out.println("OnMouseClicked: cbMaze2D: " + cbMaze2D.isSelected());
 				if(cbMaze2D.isSelected()) {
 					cbMaze3D2D.setSelected(false);
-					mainFrm.SwitchTo2DMaze();
+//					mainFrm.SwitchTo2DMaze();
 				}
 			}
 		});
@@ -55,7 +55,7 @@ public class ControlPanelMaze2D3D extends HBox {
 				if(cbMaze3D2D.isSelected())	{
 					System.out.println("OnMouseClicked: cbMaze3D2D: " + cbMaze3D2D.isSelected());
 					cbMaze2D.setSelected(false);
-					mainFrm.SwitchTo3D2DMaze();
+//					mainFrm.SwitchTo3D2DMaze();
 				}
 			}
 		});

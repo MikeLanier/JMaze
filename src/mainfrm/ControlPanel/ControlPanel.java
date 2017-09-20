@@ -41,6 +41,7 @@ public class ControlPanel extends VBox {
 	public ControlPanelMaze2D3D maze2D3DControl = null;
 	public ControlPanelStartCell startCellControl = null;
 	public ControlPanelEntrance entranceControl = null;
+	public ControlPanelExit exitControl = null;
 
 	public ControlPanel(MainFrm _mainFrm) {
 		System.out.println("buildControls");
@@ -55,9 +56,10 @@ public class ControlPanel extends VBox {
 		getChildren().add(cellSizeControl = new ControlPanelCellSize(_sizeCell));
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
 		getChildren().add(new ControlPanelMazeName());
-		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
+//		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
 		getChildren().add(startCellControl = new ControlPanelStartCell(_sizeX, _sizeY));
 		getChildren().add(entranceControl = new ControlPanelEntrance(_sizeX, _sizeY));
+		getChildren().add(exitControl = new ControlPanelExit(_sizeX, _sizeY));
 		getChildren().add(new ControlPanelCreateMaze(mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());

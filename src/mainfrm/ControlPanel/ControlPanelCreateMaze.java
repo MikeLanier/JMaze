@@ -26,7 +26,6 @@ public class ControlPanelCreateMaze extends HBox {
 			public void handle(MouseEvent event) {
 				System.out.println("OnMousePressed: btnMazeCreate");
 				mainFrm.maze2DPanel.createMaze();
-				mainFrm.maze3D2DPanel.mazeGridGroup.createMaze();
 			}
 		});
 	}

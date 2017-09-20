@@ -8,7 +8,6 @@ public class MainFrm extends GridPane
 {
 	private ControlPanel controlPanel = null;
 	public Maze2DPanel	maze2DPanel = null;
-	public Maze3D2DPanel	maze3D2DPanel = null;
 
 	public MainFrm() {
 //		System.out.println("MainFrm");
@@ -28,10 +27,6 @@ public class MainFrm extends GridPane
 
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		add(maze2DPanel=new Maze2DPanel(controlPanel), 1, 0);
-		add(maze3D2DPanel=new Maze3D2DPanel(controlPanel), 1, 0);
-		maze3D2DPanel.ShowMazeGrid(true);
-		maze2DPanel.setVisible(controlPanel.maze2D3DControl.cbMaze2D.isSelected());
-		maze3D2DPanel.setVisible(controlPanel.maze2D3DControl.cbMaze3D2D.isSelected());
 
 		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
@@ -47,21 +42,8 @@ public class MainFrm extends GridPane
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("GridPane: OnKeyPressed");
-				maze3D2DPanel.OnKeyPressed(event);
 			}
 		});
 
-	}
-
-	public void SwitchTo2DMaze()
-	{
-		maze2DPanel.setVisible(true);
-		maze3D2DPanel.setVisible(false);
-	}
-
-	public void SwitchTo3D2DMaze()
-	{
-		maze2DPanel.setVisible(false);
-		maze3D2DPanel.setVisible(true);
 	}
 }

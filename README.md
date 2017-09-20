@@ -88,12 +88,16 @@ This is basically the simplest and fastest algorithm possible, however Mazes pro
 This simple algorithm is very similar to the binary tree algorithm, and only slightly more complicated. The Maze is generated one row at a time: For each cell randomly decide whether to carve a passage leading right. If a passage is not carved, then consider the horizontal passage just completed, formed by the current cell and any cells to the left that carved passages leading to it. Randomly pick one cell along this passage, and carve a passage leading up from it (which must be the current cell if the adjacent cell didn't carve). While a binary tree Maze always goes up from the leftmost cell of a horizontal passage, a sidewinder Maze goes up from a random cell. While binary tree has the top and left edges of the Maze one long passage, a sidewinder Maze has just the top edge one long passage. Like binary tree, a sidewinder Maze can be solved deterministically without error from bottom to top, because at each row, there will always be exactly one passage leading up. A solution to a sidewinder Maze will never double back on itself or visit a row more than once, although it will "wind from side to side". The only cell type that can't exist in a sidewinder Maze is a dead end with the passage facing down, because that would contradict the fact that every passage going up leads back to the start. A sidewinder Maze tends to have an elitist solution, where the right path is very direct, but there are many long false paths leading down from the top next to it. 
   
 
-## 09/19/2017
+## 09/20/2017
+Not comfortable with having the 3D/2D stuff in this app, so, moving it over to
+the J3DSandbox app. (Maybe over-complicating what I want to do with this app).  
+
+* ~~move 2D/3D stuff out over to J3DSandbox~~
 * Look for a way to post events from the ControlPanel to be caught by the
-MainFrm or Maze display panel
-* For 3D/2D maze, draw arrow at entrance/exit
-* For 3D/2D maze, tie to controls
-* Merge code for 2D and 3D/2D mazes
+MainFrm or Maze display panel  
+* when change cell size, automatically redraw the maze
+* maze walkthrough. I have an old C++ app which did this.  Try to recall it.
+* create a separator object for the control panel.  space and/or line
 
 
 * create a global class for data shared between the ControlPanel and Maze
@@ -102,9 +106,13 @@ display panel
 * pick start cell by clicking the random button
 * look at other algorithms
 * tooltips for controls
-* For 3D/2D maze, walkthrough 
-* Hide control not pertinant to 2D, 3D/2D and/or 3D mazes
-* Add controls for 3D manipulation
+
+## 09/19/2017
+* ~~For 3D/2D maze, draw arrow at entrance/exit (Moved to J3DSandbox)~~
+* ~~For 3D/2D maze, tie to controls(Moved to J3DSandbox)~~
+* ~~Merge code for 2D and 3D/2D mazes(Moved to J3DSandbox)~~
+* ~~Hide control not pertinant to 2D, 3D/2D and/or 3D mazes(Moved to J3DSandbox)~~
+* ~~Add controls for 3D manipulation(Moved to J3DSandbox)~~
 
 ## 09/18/2017
 * ~~move maze display to separate module~~
