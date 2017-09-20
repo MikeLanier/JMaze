@@ -2,6 +2,7 @@ package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import mainfrm.MainFrm;
@@ -19,6 +20,7 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeCreate.setText("Create");
 		btnMazeCreate.setMinWidth(70);
 		btnMazeCreate.setMaxWidth(70);
+		btnMazeCreate.setTooltip(new Tooltip("Create a maze"));
 		getChildren().add(btnMazeCreate);
 
 		btnMazeCreate.setOnMousePressed(new EventHandler<MouseEvent>() {

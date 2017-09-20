@@ -3,6 +3,7 @@ package mainfrm.ControlPanel;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,10 @@ public class ControlPanelEntrance extends HBox {
 		tfEntranceX.setValue(itemsX.get(0));
 		tfEntranceX.setMinWidth(70);
 		tfEntranceX.setMaxWidth(70);
+		tfEntranceX.setTooltip(new Tooltip("The X position of the maze entrance can be\n" +
+												"on the east or west side of the grid, or \n" +
+												"the nth (with 1 begin the first) cell from \n" +
+												"the left across the top or bottom of the grid"));
 
 		getChildren().add(tfEntranceX);
 

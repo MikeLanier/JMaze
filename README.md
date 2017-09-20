@@ -97,7 +97,8 @@ the J3DSandbox app. (Maybe over-complicating what I want to do with this app).
 MainFrm or Maze display panel  
 * when change cell size, automatically redraw the maze
 * maze walkthrough. I have an old C++ app which did this.  Try to recall it.
-* create a separator object for the control panel.  space and/or line
+* ~~create a separator object for the control panel.  space and/or line~~
+* tooltips for controls. Have on a couple, but not all
 
 
 * create a global class for data shared between the ControlPanel and Maze
@@ -105,7 +106,6 @@ display panel
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button
 * look at other algorithms
-* tooltips for controls
 
 ## 09/19/2017
 * ~~For 3D/2D maze, draw arrow at entrance/exit (Moved to J3DSandbox)~~

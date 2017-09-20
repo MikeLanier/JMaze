@@ -1,12 +1,14 @@
 package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 
 public class ControlPanelStartCell extends HBox {
 	public TextField tfStartCellX		= new TextField();
@@ -24,34 +26,36 @@ public class ControlPanelStartCell extends HBox {
 		Integer y = _sizeY / 2;
 
 		tfStartCellX.setText(x.toString());
-		tfStartCellX.setMinWidth(40);
-		tfStartCellX.setMaxWidth(40);
-//				tfStartCellX.setDisable(true);
+		tfStartCellX.setMinWidth(70);
+		tfStartCellX.setMaxWidth(70);
+//		tfStartCellX.setAlignment(Pos.CENTER);
+//		tfStartCellX.setDisable(true);
 		getChildren().add(tfStartCellX);
 
-//				tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfStartCellX");
-//					}
-//				});
+//		tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfStartCellX");
+//			}
+//		});
 
 		getChildren().add(ControlPanel.Spacer());
 		getChildren().add(ControlPanel.Marker("x", 0, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		tfStartCellY.setText(y.toString());
-		tfStartCellY.setMinWidth(40);
-		tfStartCellY.setMaxWidth(40);
-//				tfStartCellY.setDisable(true);
+		tfStartCellY.setMinWidth(70);
+		tfStartCellY.setMaxWidth(70);
+//		tfStartCellY.setAlignment(Pos.CENTER);
+//		tfStartCellY.setDisable(true);
 		getChildren().add(tfStartCellY);
 
-//				tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfStartCellY");
-//					}
-//				});
+//		tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfStartCellY");
+//			}
+//		});
 
 		getChildren().add(ControlPanel.Spacer());
 

@@ -52,17 +52,21 @@ public class ControlPanel extends VBox {
 
 		getChildren().add(new ControlPanelLoadMazes());
 		getChildren().add(new ControlPanelSaveMazes());
+		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(mazeSizeControl = new ControlPanelMazeSize(_sizeX, _sizeY));
-		getChildren().add(cellSizeControl = new ControlPanelCellSize(_sizeCell));
+		getChildren().add(cellSizeControl = new ControlPanelCellSize(mainFrm, _sizeCell));
+		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
 		getChildren().add(new ControlPanelMazeName());
 //		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
 		getChildren().add(startCellControl = new ControlPanelStartCell(_sizeX, _sizeY));
 		getChildren().add(entranceControl = new ControlPanelEntrance(_sizeX, _sizeY));
 		getChildren().add(exitControl = new ControlPanelExit(_sizeX, _sizeY));
+		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanelCreateMaze(mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());
+		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanelStartWalkthrough());
 	}
 }
