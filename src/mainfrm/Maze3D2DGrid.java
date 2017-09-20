@@ -23,7 +23,7 @@ public class Maze3D2DGrid extends Xform {
 				createCell(x, 0, z);
 			}
 		}
-		createMaze();
+//		createMaze();
 	}
 
 	public Integer ID(int xOrigin, int yOrigin, int zOrigin, boolean horizonal)
@@ -87,24 +87,12 @@ public class Maze3D2DGrid extends Xform {
 		controlPanel._sizeY = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeY.getText());
 		controlPanel._sizeCell = Integer.parseInt(controlPanel.cellSizeControl.tfCellSize.getText());
 
-//		cells = new HashMap<Integer, Maze3D2DCell>();
-//		walls = new HashMap<Integer, Maze3D2DWall>();
-//
-//		buildMazePanel();
-
-//		Integer x = 0;
-//		Integer z = controlPanel._sizeY/3;
-//		Maze3D2DCell entranceMaze2DCell = createCell(x,y);
 		Maze3D2DCell entranceMaze2DCell = createCell(-60, 0, -20);
-//
-//		x = controlPanel._sizeX+1;
-//		z = controlPanel._sizeY*2/3;
-//		Maze2DCell exitMaze2DCell = createCell(x,y);
 		Maze3D2DCell exitMaze2DCell = createCell(60, 0, 20);
-//
+
 		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
-//		currentMaze2DCell = cells.get(ID(startCellX, 0, startCellY, false));
+
 		currentMaze2DCell = cells.get(ID(0, 0, 0, false));
 		if(currentMaze2DCell != null)
 		{
