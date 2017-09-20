@@ -9,8 +9,10 @@ import mainfrm.MainFrm;
 public class ControlPanelCellSize extends HBox {
 	public TextField tfCellSize			= new TextField();
 	private MainFrm mainFrm = null;
-	public ControlPanelCellSize(MainFrm _mainFrm, int _sizeCell) {
+	private ControlPanel controlPanel = null;
+	public ControlPanelCellSize(ControlPanel _controlPanel, MainFrm _mainFrm, int _sizeCell) {
 		mainFrm = _mainFrm;
+		controlPanel = _controlPanel;
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
@@ -27,7 +29,9 @@ public class ControlPanelCellSize extends HBox {
 		tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				controlPanel._sizeCell = Integer.parseInt(tfCellSize.getText());
 				System.out.println("OnAction: tfCellSize");
+				mainFrm.maze2DPanel.resetMazePanel();
 				mainFrm.maze2DPanel.drawMaze();
 			}
 		});

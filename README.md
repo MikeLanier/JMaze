@@ -95,7 +95,8 @@ the J3DSandbox app. (Maybe over-complicating what I want to do with this app).
 * ~~move 2D/3D stuff out over to J3DSandbox~~
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
-* when change cell size, automatically redraw the maze
+* ~~when change cell size, automatically redraw the maze~~
+* ~~create the maze independed of the size then apply the size when drawing~~
 * maze walkthrough. I have an old C++ app which did this.  Try to recall it.
 * ~~create a separator object for the control panel.  space and/or line~~
 * tooltips for controls. Have on a couple, but not all

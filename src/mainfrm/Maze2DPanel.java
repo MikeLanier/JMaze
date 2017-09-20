@@ -28,24 +28,33 @@ public class Maze2DPanel extends Canvas {
 				h;
 	}
 
-	private void buildMazePanel()
+	public void resetMazePanel()
 	{
-		System.out.println("buildMazepanel");
-
-//		HBox vbMazeBox = new HBox();
-//		add(vbMazeBox, 1, 0);
-
 		int width = (controlPanel._sizeX + 2) * controlPanel._sizeCell + 1;
 		int height = (controlPanel._sizeY + 2) * controlPanel._sizeCell + 1;
-//		System.out.println("width, height: " + width + ", " + height);
 
 		this.setWidth(width+controlPanel._xOffset);
 		this.setHeight(height+controlPanel._yOffset);
 
-//		vbMazeBox.getChildren().add(this);
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(javafx.scene.paint.Color.WHITE);
 		gc.fillRect(controlPanel._xOffset, controlPanel._yOffset, width, height);
+	}
+
+	public void buildMazePanel()
+	{
+		System.out.println("buildMazepanel");
+
+		resetMazePanel();
+//		int width = (controlPanel._sizeX + 2) * controlPanel._sizeCell + 1;
+//		int height = (controlPanel._sizeY + 2) * controlPanel._sizeCell + 1;
+//
+//		this.setWidth(width+controlPanel._xOffset);
+//		this.setHeight(height+controlPanel._yOffset);
+//
+//		GraphicsContext gc = this.getGraphicsContext2D();
+//		gc.setFill(javafx.scene.paint.Color.WHITE);
+//		gc.fillRect(controlPanel._xOffset, controlPanel._yOffset, width, height);
 
 		for(int x=1; x<=controlPanel._sizeX; x++)
 		{
