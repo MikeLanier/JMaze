@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -52,7 +54,11 @@ public class ControlPanelSaveMazes extends HBox {
 		getChildren().add(ControlPanel.Spacer());
 
 		// press this button to show the filesave dialog
-		btnMazeSaveSelect.setText(">");
+		Image img = new Image(getClass().getResource("Save.png").toString());
+		ImageView iv = new ImageView(img);
+
+		btnMazeSaveSelect.setGraphic(iv);
+//		btnMazeSaveSelect.setText(">");
 		btnMazeSaveSelect.setMinWidth(25);
 		btnMazeSaveSelect.setTooltip(new Tooltip("Open FileSaveDialog to select maze\nfile to which to add the current maze"));
 //		btnMazeSaveSelect.setDisable(true);

@@ -35,8 +35,8 @@ public class ControlPanelAlgorithm extends HBox {
 		getChildren().add(ControlPanel.Spacer());
 
 		// combobox containing the algorithms to use
-		cbAlgorithm.setMinWidth(150);
-		cbAlgorithm.setMaxWidth(150);
+		cbAlgorithm.setMinWidth(190);
+		cbAlgorithm.setMaxWidth(190);
 		getChildren().add(cbAlgorithm);
 
 		System.out.println("algorithms.length: " + algorithms.length);

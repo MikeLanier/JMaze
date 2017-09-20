@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -51,7 +53,11 @@ public class ControlPanelLoadMazes extends HBox {
 		getChildren().add(ControlPanel.Spacer());
 
 		// press this button to show the fileopen dialog.
-		btnMazeSelect.setText("^");
+		Image img = new Image(getClass().getResource("Load.png").toString());
+		ImageView iv = new ImageView(img);
+
+		btnMazeSelect.setGraphic(iv);
+//		btnMazeSelect.setText("^");
 		btnMazeSelect.setMinWidth(25);
 		btnMazeSelect.setTooltip(new Tooltip("Open FileOpenDialog to select file\nfrom which to load mazes"));
 //		btnMazeSelect.setDisable(true);
