@@ -4,16 +4,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import mainfrm.MainFrm;
+import mainfrm.MazeGlobal;
 
 import java.util.Random;
 
 public class ControlPanel extends VBox {
 
-	public int			_sizeX = 10;
-	public int			_sizeY = 10;
-	public int			_sizeCell = 50;
-	public int			_xOffset = 10 + _sizeCell;
-	public int			_yOffset = 10 + _sizeCell;
+//	public int			_sizeX = 10;
+//	public int			_sizeY = 10;
+//	public int			_sizeCell = 50;
+//	public int			_xOffset = 10 + MazeGlobal.sizeCell;
+//	public int			_yOffset = 10 + MazeGlobal.sizeCell;
 
 	public Random rand = new Random(System.currentTimeMillis());
 
@@ -55,14 +56,14 @@ public class ControlPanel extends VBox {
 		getChildren().add(new ControlPanelSaveMazes());
 		getChildren().add(new ControlPanelMazeName());
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(mazeSizeControl = new ControlPanelMazeSize(_sizeX, _sizeY));
-		getChildren().add(cellSizeControl = new ControlPanelCellSize(this, mainFrm, _sizeCell));
+		getChildren().add(mazeSizeControl = new ControlPanelMazeSize(MazeGlobal.sizeX, MazeGlobal.sizeY));
+		getChildren().add(cellSizeControl = new ControlPanelCellSize(this, mainFrm, MazeGlobal.sizeCell));
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
 //		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
-		getChildren().add(startCellControl = new ControlPanelStartCell(_sizeX, _sizeY));
-		getChildren().add(entranceControl = new ControlPanelEntrance(_sizeX, _sizeY));
-		getChildren().add(exitControl = new ControlPanelExit(_sizeX, _sizeY));
+		getChildren().add(startCellControl = new ControlPanelStartCell(MazeGlobal.sizeX, MazeGlobal.sizeY));
+		getChildren().add(entranceControl = new ControlPanelEntrance(MazeGlobal.sizeX, MazeGlobal.sizeY));
+		getChildren().add(exitControl = new ControlPanelExit(MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanelCreateMaze(mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
