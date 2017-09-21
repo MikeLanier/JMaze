@@ -26,14 +26,7 @@ public class Maze2DWall {
 
 	public Integer ID()
 	{
-		int h = (horizontal) ? 0x40000000 : 0;
-
-		int _id = 	(xOrigin & 0x7fff) |
-					(yOrigin & 0x7fff) << 15 |
-					h;
-//		System.out.println(_id);
-
-		return new Integer(_id);
+		return MazeGlobal.ID(xOrigin, yOrigin, horizontal);
 	}
 
 	public void draw(GraphicsContext gc, int xOffset, int yOffset, int cellSize)

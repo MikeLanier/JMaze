@@ -53,8 +53,7 @@ public class Maze2DCell {
 
 	public Integer ID()
 	{
-		int _id = (xOrigin & 0x7fff) | ((yOrigin & 0x7fff) << 15);
-		return new Integer(_id);
+		return MazeGlobal.ID(xOrigin, yOrigin, false);
 	}
 
 	public void draw(GraphicsContext gc, int xOffset, int yOffset, int cellSize)

@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import mainfrm.MainFrm;
+import mainfrm.MazeGlobal;
 
 public class ControlPanelCellSize extends HBox {
 	public TextField tfCellSize			= new TextField();
@@ -31,7 +32,7 @@ public class ControlPanelCellSize extends HBox {
 		tfCellSize.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				controlPanel._sizeCell = Integer.parseInt(tfCellSize.getText());
+				MazeGlobal.sizeCell = Integer.parseInt(tfCellSize.getText());
 				System.out.println("OnAction: tfCellSize");
 				mainFrm.maze2DPanel.resetMazePanel();
 				mainFrm.maze2DPanel.drawMaze();

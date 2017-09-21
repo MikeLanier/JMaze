@@ -19,26 +19,20 @@ public class Maze2DPanel extends Canvas {
 
 	public Maze2DCell currentMaze2DCell = null;
 
-	public Integer ID(int xOrigin, int yOrigin, boolean horizontal)
-	{
-		int h = (horizontal) ? 0x40000000 : 0;
-
-		return (xOrigin & 0x7fff) |
-				(yOrigin & 0x7fff) << 15 |
-				h;
-	}
+	private int		xOffset = 10 + MazeGlobal.sizeCell;
+	private int		yOffset = 10 + MazeGlobal.sizeCell;
 
 	public void resetMazePanel()
 	{
-		int width = (controlPanel._sizeX + 2) * controlPanel._sizeCell + 1;
-		int height = (controlPanel._sizeY + 2) * controlPanel._sizeCell + 1;
+		int width = (MazeGlobal.sizeX + 2) * MazeGlobal.sizeCell + 1;
+		int height = (MazeGlobal.sizeY + 2) * MazeGlobal.sizeCell + 1;
 
-		this.setWidth(width+controlPanel._xOffset);
-		this.setHeight(height+controlPanel._yOffset);
+		this.setWidth(width+xOffset);
+		this.setHeight(height+yOffset);
 
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(javafx.scene.paint.Color.WHITE);
-		gc.fillRect(controlPanel._xOffset, controlPanel._yOffset, width, height);
+		gc.fillRect(xOffset, yOffset, width, height);
 	}
 
 	public void buildMazePanel()
@@ -56,9 +50,9 @@ public class Maze2DPanel extends Canvas {
 //		gc.setFill(javafx.scene.paint.Color.WHITE);
 //		gc.fillRect(controlPanel._xOffset, controlPanel._yOffset, width, height);
 
-		for(int x=1; x<=controlPanel._sizeX; x++)
+		for(int x=1; x<=MazeGlobal.sizeX; x++)
 		{
-			for(int y=1; y<=controlPanel._sizeY; y++)
+			for(int y=1; y<=MazeGlobal.sizeY; y++)
 			{
 				createCell(x, y);
 			}
@@ -67,28 +61,28 @@ public class Maze2DPanel extends Canvas {
 
 	private Maze2DCell createCell(int x, int y)
 	{
-		Maze2DWall west = walls.get(ID(x, y, false));
+		Maze2DWall west = walls.get(MazeGlobal.ID(x, y, false));
 		if(west == null)
 		{
 			west = new Maze2DWall(x, y, false);
 			walls.put(west.ID(), west);
 		}
 
-		Maze2DWall north = walls.get(ID(x, y, true));
+		Maze2DWall north = walls.get(MazeGlobal.ID(x, y, true));
 		if(north == null)
 		{
 			north = new Maze2DWall(x, y, true);
 			walls.put(north.ID(), north);
 		}
 
-		Maze2DWall east = walls.get(ID(x+1, y, false));
+		Maze2DWall east = walls.get(MazeGlobal.ID(x+1, y, false));
 		if(east == null)
 		{
 			east = new Maze2DWall(x+1, y, false);
 			walls.put(east.ID(), east);
 		}
 
-		Maze2DWall south = walls.get(ID(x, y+1, true));
+		Maze2DWall south = walls.get(MazeGlobal.ID(x, y+1, true));
 		if(south == null)
 		{
 			south = new Maze2DWall(x, y+1, true);
@@ -108,9 +102,9 @@ public class Maze2DPanel extends Canvas {
 		System.out.println("createMaze");
 		System.out.println("algorithm: " + controlPanel.algorithmControl.cbAlgorithm.getValue());
 
-		controlPanel._sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
-		controlPanel._sizeY = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeY.getText());
-		controlPanel._sizeCell = Integer.parseInt(controlPanel.cellSizeControl.tfCellSize.getText());
+		MazeGlobal.sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
+		MazeGlobal.sizeY = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeY.getText());
+		MazeGlobal.sizeCell = Integer.parseInt(controlPanel.cellSizeControl.tfCellSize.getText());
 
 		cells = new HashMap<Integer, Maze2DCell>();
 		walls = new HashMap<Integer, Maze2DWall>();
@@ -118,16 +112,16 @@ public class Maze2DPanel extends Canvas {
 		buildMazePanel();
 
 		Integer x = 0;
-		Integer y = controlPanel._sizeY/3;
+		Integer y = MazeGlobal.sizeY/3;
 		Maze2DCell entranceMaze2DCell = createCell(x,y);
 
-		x = controlPanel._sizeX+1;
-		y = controlPanel._sizeY*2/3;
+		x = MazeGlobal.sizeX+1;
+		y = MazeGlobal.sizeY*2/3;
 		Maze2DCell exitMaze2DCell = createCell(x,y);
 
 		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
-		currentMaze2DCell = cells.get(ID(startCellX, startCellY, false));
+		currentMaze2DCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
 		if(currentMaze2DCell != null)
 		{
 			currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
@@ -175,13 +169,13 @@ public class Maze2DPanel extends Canvas {
 		Collection<Maze2DCell> cc = cells.values();
 		for(Maze2DCell c: cc)
 		{
-			c.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
+			c.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 		}
 
 		Collection<Maze2DWall> wc = walls.values();
 		for(Maze2DWall w: wc)
 		{
-			w.draw(gc, controlPanel._xOffset, controlPanel._yOffset, controlPanel._sizeCell);
+			w.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 		}
 	}
 
@@ -220,10 +214,10 @@ public class Maze2DPanel extends Canvas {
 
 				currentMaze2DCell.Visited(true);
 
-				Maze2DCell westMaze2DCell = cells.get(ID(x - 1, y, false));
-				Maze2DCell northMaze2DCell = cells.get(ID(x, y - 1, false));
-				Maze2DCell eastMaze2DCell = cells.get(ID(x + 1, y, false));
-				Maze2DCell southMaze2DCell = cells.get(ID(x, y + 1, false));
+				Maze2DCell westMaze2DCell = cells.get(MazeGlobal.ID(x - 1, y, false));
+				Maze2DCell northMaze2DCell = cells.get(MazeGlobal.ID(x, y - 1, false));
+				Maze2DCell eastMaze2DCell = cells.get(MazeGlobal.ID(x + 1, y, false));
+				Maze2DCell southMaze2DCell = cells.get(MazeGlobal.ID(x, y + 1, false));
 
 				class Group3 {
 					private Maze2DCell cell;

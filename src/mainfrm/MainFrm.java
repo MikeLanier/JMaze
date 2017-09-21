@@ -30,7 +30,7 @@ public class MainFrm extends GridPane
 
 		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
-		maze2DPanel.currentMaze2DCell = maze2DPanel.cells.get(maze2DPanel.ID(startCellX, startCellY, false));
+		maze2DPanel.currentMaze2DCell = maze2DPanel.cells.get(MazeGlobal.ID(startCellX, startCellY, false));
 		if(maze2DPanel.currentMaze2DCell != null)
 		{
 			maze2DPanel.currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
