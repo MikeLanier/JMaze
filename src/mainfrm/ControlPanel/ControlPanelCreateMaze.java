@@ -9,6 +9,7 @@ import mainfrm.MainFrm;
 
 public class ControlPanelCreateMaze extends HBox {
 	public Button btnMazeCreate		= new Button();
+	public Button btnMazeStep		= new Button();
 	private MainFrm mainFrm = null;
 	public ControlPanelCreateMaze(MainFrm _mainFrm)
 	{
@@ -27,7 +28,23 @@ public class ControlPanelCreateMaze extends HBox {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("OnMousePressed: btnMazeCreate");
-				mainFrm.maze2DPanel.createMaze();
+				mainFrm.maze2DPanel.createMaze(false);
+			}
+		});
+
+		getChildren().add(ControlPanel.Spacer());
+
+		btnMazeStep.setText("Animate Create");
+		btnMazeStep.setMinWidth(100);
+		btnMazeStep.setMaxWidth(100);
+		btnMazeStep.setTooltip(new Tooltip("Create a maze"));
+		getChildren().add(btnMazeStep);
+
+		btnMazeStep.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				System.out.println("OnMousePressed: btnMazeStep");
+				mainFrm.maze2DPanel.createMaze(true);
 			}
 		});
 	}

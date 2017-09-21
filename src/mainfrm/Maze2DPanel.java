@@ -1,7 +1,11 @@
 package mainfrm;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.util.Duration;
 import mainfrm.ControlPanel.ControlPanel;
 
 import java.util.*;
@@ -97,7 +101,7 @@ public class Maze2DPanel extends Canvas {
 
 	private Stack<Maze2DCell> stack = null; //new Stack<Maze2DCell>();
 
-	public void createMaze()
+	public void createMaze(boolean animate)
 	{
 		System.out.println("createMaze");
 		System.out.println("algorithm: " + controlPanel.algorithmControl.cbAlgorithm.getValue());
@@ -155,15 +159,13 @@ public class Maze2DPanel extends Canvas {
 //				}
 //			}
 //		}
-		recursiveBacktracker();
+		recursiveBacktracker(animate);
 
 		drawMaze();
 	}
 
 	public void drawMaze()
 	{
-		System.out.println("drawMaze");
-
 		GraphicsContext gc = getGraphicsContext2D();
 
 		Collection<Maze2DCell> cc = cells.values();
@@ -199,7 +201,66 @@ public class Maze2DPanel extends Canvas {
 		System.out.println("recursiveDivision");
 	}
 
-	private void recursiveBacktracker() {
+	public void createMazeStep()
+	{
+		int x = currentMaze2DCell.X();
+		int y = currentMaze2DCell.Y();
+
+		currentMaze2DCell.Visited(true);
+
+		Maze2DCell westMaze2DCell = cells.get(MazeGlobal.ID(x - 1, y, false));
+		Maze2DCell northMaze2DCell = cells.get(MazeGlobal.ID(x, y - 1, false));
+		Maze2DCell eastMaze2DCell = cells.get(MazeGlobal.ID(x + 1, y, false));
+		Maze2DCell southMaze2DCell = cells.get(MazeGlobal.ID(x, y + 1, false));
+
+		class Group3 {
+			private Maze2DCell cell;
+			private Maze2DWall wall;
+
+			private Group3(Maze2DCell _cell, Maze2DWall _wall) {
+				cell = _cell;
+				wall = _wall;
+			}
+		}
+
+		List<Group3> cells = new ArrayList<Group3>();
+
+		if (westMaze2DCell != null && !westMaze2DCell.Visited())
+			cells.add(new Group3(westMaze2DCell, currentMaze2DCell.W(Maze2DCell.west)));
+		if (northMaze2DCell != null && !northMaze2DCell.Visited())
+			cells.add(new Group3(northMaze2DCell, currentMaze2DCell.W(Maze2DCell.north)));
+		if (eastMaze2DCell != null && !eastMaze2DCell.Visited())
+			cells.add(new Group3(eastMaze2DCell, currentMaze2DCell.W(Maze2DCell.east)));
+		if (southMaze2DCell != null && !southMaze2DCell.Visited())
+			cells.add(new Group3(southMaze2DCell, currentMaze2DCell.W(Maze2DCell.south)));
+		if (cells.size() > 0) {
+			int r = controlPanel.rand.nextInt(cells.size());
+
+			cells.get(r).wall.Open(true);
+			currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+			currentMaze2DCell = cells.get(r).cell;
+			currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+			currentMaze2DCell.Visited(true);
+			stack.push(currentMaze2DCell);
+		} else {
+			currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+			currentMaze2DCell = stack.pop();
+
+			if (stack.size() > 0)
+				currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+			else
+				currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+		}
+
+		drawMaze();
+		if(stack.size() == 0) timeline.stop();
+	}
+
+	private Timeline timeline = new Timeline(new KeyFrame(
+			Duration.millis(30),
+			ae -> createMazeStep()));
+
+	private void recursiveBacktracker(boolean animate) {
 		System.out.println("recursiveBacktracker");
 
 		if (currentMaze2DCell != null) {
@@ -208,54 +269,13 @@ public class Maze2DPanel extends Canvas {
 			}
 			stack.push(currentMaze2DCell);
 
-			while (stack.size() > 0) {
-				int x = currentMaze2DCell.X();
-				int y = currentMaze2DCell.Y();
-
-				currentMaze2DCell.Visited(true);
-
-				Maze2DCell westMaze2DCell = cells.get(MazeGlobal.ID(x - 1, y, false));
-				Maze2DCell northMaze2DCell = cells.get(MazeGlobal.ID(x, y - 1, false));
-				Maze2DCell eastMaze2DCell = cells.get(MazeGlobal.ID(x + 1, y, false));
-				Maze2DCell southMaze2DCell = cells.get(MazeGlobal.ID(x, y + 1, false));
-
-				class Group3 {
-					private Maze2DCell cell;
-					private Maze2DWall wall;
-
-					private Group3(Maze2DCell _cell, Maze2DWall _wall) {
-						cell = _cell;
-						wall = _wall;
-					}
-				}
-
-				List<Group3> cells = new ArrayList<Group3>();
-
-				if (westMaze2DCell != null && !westMaze2DCell.Visited())
-					cells.add(new Group3(westMaze2DCell, currentMaze2DCell.W(Maze2DCell.west)));
-				if (northMaze2DCell != null && !northMaze2DCell.Visited())
-					cells.add(new Group3(northMaze2DCell, currentMaze2DCell.W(Maze2DCell.north)));
-				if (eastMaze2DCell != null && !eastMaze2DCell.Visited())
-					cells.add(new Group3(eastMaze2DCell, currentMaze2DCell.W(Maze2DCell.east)));
-				if (southMaze2DCell != null && !southMaze2DCell.Visited())
-					cells.add(new Group3(southMaze2DCell, currentMaze2DCell.W(Maze2DCell.south)));
-				if (cells.size() > 0) {
-					int r = controlPanel.rand.nextInt(cells.size());
-
-					cells.get(r).wall.Open(true);
-					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
-					currentMaze2DCell = cells.get(r).cell;
-					currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
-					currentMaze2DCell.Visited(true);
-					stack.push(currentMaze2DCell);
-				} else {
-					currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
-					currentMaze2DCell = stack.pop();
-
-					if (stack.size() > 0)
-						currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
-					else
-						currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
+			if(animate) {
+				timeline.setCycleCount(Animation.INDEFINITE);
+				timeline.play();
+			}
+			else {
+				while (stack.size() > 0) {
+					createMazeStep();
 				}
 			}
 		}
