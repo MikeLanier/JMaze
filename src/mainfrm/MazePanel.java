@@ -176,13 +176,23 @@ public class MazePanel extends Canvas {
 		if(entranceMazeCell != null) {
 //			System.out.println( entranceMazeCell.X() + ", " + entranceMazeCell.Y());
 
-			int x = entranceMazeCell.X();
-			int y = entranceMazeCell.Y();
+			int x = currentMazeCell.X();
+			int y = currentMazeCell.Y();
+			System.out.println("currentCell: " + x + ", " + y);
 
 			int yindex[] = {-2,-1,2,1,0};
-			for(int i=5; i>0; i--) {
+			for(int i=5; i>=0; i--) {
 				for(int j=0; j<5; j++) {
-					MazeCell c = cells.get(MazeGlobal.ID(i, y+yindex[j], false));
+					MazeCell c = null;
+					if(currentMazeCell.facingEast())
+						c = cells.get(MazeGlobal.ID(i+x, y+yindex[j], false));
+					else if(currentMazeCell.facingWest())
+						c = cells.get(MazeGlobal.ID(x-i, y+yindex[j], false));
+					else if(currentMazeCell.facingSouth())
+						c = cells.get(MazeGlobal.ID(yindex[j]+x, y+i, false));
+					else if(currentMazeCell.facingNorth())
+						c = cells.get(MazeGlobal.ID(yindex[j]+x, y-i, false));
+
 					if (c != null) {
 //						System.out.println("cell: (" + i + "," + y + ") west : " + c.W(MazeCell.west).Open());
 //						System.out.println("cell: (" + i + "," + y + ") north: " + c.W(MazeCell.north).Open());
@@ -255,11 +265,11 @@ public class MazePanel extends Canvas {
 		Collection<MazeCell> cc = cells.values();
 		for(MazeCell c: cc)
 		{
-			if(c.facingNorth())	System.out.println("facing north: " + c.X() + ", " + c.Y());
-			else if(c.facingSouth())	System.out.println("facing south: " + c.X() + ", " + c.Y());
-			else if(c.facingEast())	System.out.println("facing east: " + c.X() + ", " + c.Y());
-			else if(c.facingWest())	System.out.println("facing west: " + c.X() + ", " + c.Y());
-			else System.out.println("facing none: " + c.X() + ", " + c.Y());
+//			if(c.facingNorth())	System.out.println("facing north: " + c.X() + ", " + c.Y());
+//			else if(c.facingSouth())	System.out.println("facing south: " + c.X() + ", " + c.Y());
+//			else if(c.facingEast())	System.out.println("facing east: " + c.X() + ", " + c.Y());
+//			else if(c.facingWest())	System.out.println("facing west: " + c.X() + ", " + c.Y());
+//			else System.out.println("facing none: " + c.X() + ", " + c.Y());
 			c.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 		}
 
@@ -273,6 +283,9 @@ public class MazePanel extends Canvas {
 	public void drawMaze() {
 		System.out.println("drawMaze");
 		GraphicsContext gc = getGraphicsContext2D();
+
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, 1000, 1000);
 
 		drawMaze3D(gc);
 		drawMaze2D(gc);
@@ -366,7 +379,7 @@ public class MazePanel extends Canvas {
 			}
 		}
 
-//		drawMaze();
+		drawMaze();
 	}
 
 	public void turnAround()
