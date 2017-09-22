@@ -16,6 +16,10 @@ public class Maze2DWall {
 	{
 		open = _open;
 	}
+	public boolean Open()
+	{
+		return open;
+	}
 
 	public Maze2DWall(int _xOrigin, int _yOrigin, boolean _horizontal )
 	{

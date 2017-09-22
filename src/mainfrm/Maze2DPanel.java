@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import mainfrm.ControlPanel.ControlPanel;
 
@@ -22,6 +23,7 @@ public class Maze2DPanel extends Canvas {
 	public Map<Integer, Maze2DWall> walls = new HashMap<Integer, Maze2DWall>();
 
 	public Maze2DCell currentMaze2DCell = null;
+	public Maze2DCell entranceMaze2DCell = null;
 
 	private int		xOffset = 10 + MazeGlobal.sizeCell;
 	private int		yOffset = 10 + MazeGlobal.sizeCell;
@@ -30,6 +32,8 @@ public class Maze2DPanel extends Canvas {
 	{
 		int width = (MazeGlobal.sizeX + 2) * MazeGlobal.sizeCell + 1;
 		int height = (MazeGlobal.sizeY + 2) * MazeGlobal.sizeCell + 1;
+
+		width += 600;
 
 		this.setWidth(width+xOffset);
 		this.setHeight(height+yOffset);
@@ -117,7 +121,7 @@ public class Maze2DPanel extends Canvas {
 
 		Integer x = 0;
 		Integer y = MazeGlobal.sizeY/3;
-		Maze2DCell entranceMaze2DCell = createCell(x,y);
+		entranceMaze2DCell = createCell(x,y);
 
 		x = MazeGlobal.sizeX+1;
 		y = MazeGlobal.sizeY*2/3;
@@ -164,9 +168,86 @@ public class Maze2DPanel extends Canvas {
 		drawMaze();
 	}
 
-	public void drawMaze()
-	{
+	public void drawMaze() {
+		System.out.println("draw maze");
 		GraphicsContext gc = getGraphicsContext2D();
+
+		System.out.println("Create maze");
+		if(entranceMaze2DCell != null) {
+			System.out.println( entranceMaze2DCell.X() + ", " + entranceMaze2DCell.Y());
+
+			int x = entranceMaze2DCell.X();
+			int y = entranceMaze2DCell.Y();
+
+			int yindex[] = {-1,1,0};
+			for(int i=5; i>0; i--) {
+				for(int j=0; j<3; j++) {
+					Maze2DCell c = cells.get(MazeGlobal.ID(i, y+yindex[j], false));
+					if (c != null) {
+						System.out.println("cell: (" + i + "," + y + ") west : " + c.W(Maze2DCell.west).Open());
+						System.out.println("cell: (" + i + "," + y + ") north: " + c.W(Maze2DCell.north).Open());
+						System.out.println("cell: (" + i + "," + y + ") east : " + c.W(Maze2DCell.east).Open());
+						System.out.println("cell: (" + i + "," + y + ") south: " + c.W(Maze2DCell.south).Open());
+
+						c.SetType(Maze2DCell.CellType.eCellTypeStart);
+
+						double x1 = -1+(yindex[j]*2);
+						double x2 = 1+(yindex[j]*2);
+						double y1 = -1;
+						double y2 = 1;
+						double z1 = i-.5;
+						double z2 = i+.5;
+
+						MazeMath.point p000 = new MazeMath.point(x1, y1, z1);
+						MazeMath.point p100 = new MazeMath.point(x2, y1, z1);
+						MazeMath.point p010 = new MazeMath.point(x1, y2, z1);
+						MazeMath.point p110 = new MazeMath.point(x2, y2, z1);
+						MazeMath.point p001 = new MazeMath.point(x1, y1, z2);
+						MazeMath.point p101 = new MazeMath.point(x2, y1, z2);
+						MazeMath.point p011 = new MazeMath.point(x1, y2, z2);
+						MazeMath.point p111 = new MazeMath.point(x2, y2, z2);
+
+						MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
+						MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
+						MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
+						MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
+
+						MazeMath.matrix m = new MazeMath.matrix();
+						m.scale(100);
+
+						left = m.dot(left);
+						back = m.dot(back);
+						right = m.dot(right);
+						front = m.dot(front);
+
+						left.perspective(800.0);
+						back.perspective(800.0);
+						right.perspective(800.0);
+						front.perspective(800.0);
+
+						gc.setLineDashes(0);
+						gc.setLineWidth(1);
+
+						double xOffset = 650;
+						double yOffset = 200;
+
+						left.move(xOffset, yOffset);
+						back.move(xOffset, yOffset);
+						right.move(xOffset, yOffset);
+						front.move(xOffset, yOffset);
+
+						front.dump("front");
+
+						gc.setStroke(Color.BLACK);
+						gc.setFill(Color.LIGHTBLUE);
+						if (!c.W(Maze2DCell.east).Open()) back.draw(gc);
+						if (!c.W(Maze2DCell.north).Open()) left.draw(gc);
+						if (!c.W(Maze2DCell.south).Open()) right.draw(gc);
+						if (!c.W(Maze2DCell.west).Open()) front.draw(gc);
+					}
+				}
+			}
+		}
 
 		Collection<Maze2DCell> cc = cells.values();
 		for(Maze2DCell c: cc)
@@ -179,6 +260,7 @@ public class Maze2DPanel extends Canvas {
 		{
 			w.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 		}
+
 	}
 
 	private void randomizedKruskalAlgorithm()
@@ -201,7 +283,7 @@ public class Maze2DPanel extends Canvas {
 		System.out.println("recursiveDivision");
 	}
 
-	public void createMazeStep()
+	public void createMazeStep(boolean redrawMaze)
 	{
 		int x = currentMaze2DCell.X();
 		int y = currentMaze2DCell.Y();
@@ -252,13 +334,13 @@ public class Maze2DPanel extends Canvas {
 				currentMaze2DCell.SetType(Maze2DCell.CellType.eNormal);
 		}
 
-		drawMaze();
+		if(redrawMaze) drawMaze();
 		if(stack.size() == 0) timeline.stop();
 	}
 
 	private Timeline timeline = new Timeline(new KeyFrame(
 			Duration.millis(30),
-			ae -> createMazeStep()));
+			ae -> createMazeStep(true)));
 
 	private void recursiveBacktracker(boolean animate) {
 		System.out.println("recursiveBacktracker");
@@ -275,7 +357,7 @@ public class Maze2DPanel extends Canvas {
 			}
 			else {
 				while (stack.size() > 0) {
-					createMazeStep();
+					createMazeStep(false);
 				}
 			}
 		}

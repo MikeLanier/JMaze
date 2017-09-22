@@ -3,7 +3,7 @@ package mainfrm;
 public class MazeGlobal {
 	public static int			sizeX = 10;
 	public static int			sizeY = 10;
-	public static int			sizeCell = 50;
+	public static int			sizeCell = 25;
 
 	public MazeGlobal()
 	{
