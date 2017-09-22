@@ -3,7 +3,7 @@ package mainfrm;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Maze2DWall {
+public class MazeWall {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
 	private boolean horizontal = true;
@@ -21,7 +21,7 @@ public class Maze2DWall {
 		return open;
 	}
 
-	public Maze2DWall(int _xOrigin, int _yOrigin, boolean _horizontal )
+	public MazeWall(int _xOrigin, int _yOrigin, boolean _horizontal )
 	{
 		xOrigin = _xOrigin;
 		yOrigin = _yOrigin;

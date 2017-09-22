@@ -1,5 +1,6 @@
 package mainfrm;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import mainfrm.ControlPanel.ControlPanel;
@@ -7,7 +8,7 @@ import mainfrm.ControlPanel.ControlPanel;
 public class MainFrm extends GridPane
 {
 	private ControlPanel controlPanel = null;
-	public Maze2DPanel	maze2DPanel = null;
+	public MazePanel mazePanel = null;
 
 	public MainFrm() {
 //		System.out.println("MainFrm");
@@ -26,22 +27,27 @@ public class MainFrm extends GridPane
 		setGridLinesVisible(true);
 
 		add(controlPanel=new ControlPanel(this), 0, 0);
-		add(maze2DPanel=new Maze2DPanel(controlPanel), 1, 0);
+		add(mazePanel =new MazePanel(controlPanel), 1, 0);
 
 		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
 		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
-		maze2DPanel.currentMaze2DCell = maze2DPanel.cells.get(MazeGlobal.ID(startCellX, startCellY, false));
-		if(maze2DPanel.currentMaze2DCell != null)
+		mazePanel.currentMazeCell = mazePanel.cells.get(MazeGlobal.ID(startCellX, startCellY, false));
+		if(mazePanel.currentMazeCell != null)
 		{
-			maze2DPanel.currentMaze2DCell.SetType(Maze2DCell.CellType.eCellTypeStart);
+			mazePanel.currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
 		}
 
-		maze2DPanel.drawMaze();
+		mazePanel.drawMaze();
 
 		setOnKeyPressed(new javafx.event.EventHandler<KeyEvent>() {
 			@Override
-			public void handle(KeyEvent event) {
-				System.out.println("GridPane: OnKeyPressed");
+			public void handle(KeyEvent event)
+			{
+				System.out.println("GridPane: OnKeyPressed: [" + event.getCode() + "]");
+				if(event.getCode() == KeyCode.NUMPAD4) mazePanel.turnLeft();
+				if(event.getCode() == KeyCode.NUMPAD6) mazePanel.turnRight();
+				if(event.getCode() == KeyCode.NUMPAD2) mazePanel.turnAround();
+				if(event.getCode() == KeyCode.NUMPAD8) mazePanel.stepForward();
 			}
 		});
 	}

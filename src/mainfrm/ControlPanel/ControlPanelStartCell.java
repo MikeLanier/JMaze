@@ -19,7 +19,7 @@ public class ControlPanelStartCell extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Start Maze2DCell", 70, false));
+		getChildren().add(ControlPanel.Marker("Start MazeCell", 70, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		Integer x = _sizeX / 2;

@@ -34,8 +34,8 @@ public class ControlPanelCellSize extends HBox {
 			public void handle(ActionEvent event) {
 				MazeGlobal.sizeCell = Integer.parseInt(tfCellSize.getText());
 				System.out.println("OnAction: tfCellSize");
-				mainFrm.maze2DPanel.resetMazePanel();
-				mainFrm.maze2DPanel.drawMaze();
+				mainFrm.mazePanel.resetMazePanel();
+				mainFrm.mazePanel.drawMaze();
 			}
 		});
 	}

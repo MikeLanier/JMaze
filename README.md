@@ -90,6 +90,14 @@ This simple algorithm is very similar to the binary tree algorithm, and only sli
 
 ## 09/22/2017
 * 3D "in maze" view using 2D graphics
+  * step forward using up arrow
+  * turn left/right using left/right arrow
+  * adjust the code for looking in a direction other than east
+  * BUG: when I hit the right arrow, focus change to the a TextField control. 
+Using 2, 4, 6, 8 on the keypad for now.
+* in the 2D maze, in the current cell, (which will be the entrance right
+after the maze is created) draw an arrow (triangle) pointer in the direction
+facing.
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * tooltips for controls. Have on a couple, but not all
