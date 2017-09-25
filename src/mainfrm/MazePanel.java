@@ -236,9 +236,9 @@ public class MazePanel extends Canvas {
 		right.perspective(500.0);
 		front.perspective(500.0);
 
-		left.dump("left");
+//		left.dump("left");
 //		back.dump("back");
-		right.dump("right");
+//		right.dump("right");
 //		front.dump("front");
 
 		double xOffset = 500;
@@ -250,31 +250,47 @@ public class MazePanel extends Canvas {
 		front.move(xOffset, yOffset);
 
 		gc.setStroke(Color.BLACK);
-		gc.setFill(Color.LIGHTBLUE);
+		gc.setFill(Color.WHITE);
 
 		if(direction == MazeCell.CellType.eCellFacingEast) {
+//			gc.setFill(Color.LIGHTBLUE);
 			if (!cell.W(MazeCell.east).Open()) back.draw(gc);
+//			gc.setFill(Color.PINK);
 			if (!cell.W(MazeCell.north).Open()) left.draw(gc);
+//			gc.setFill(Color.LIGHTGREEN);
 			if (!cell.W(MazeCell.south).Open()) right.draw(gc);
-			if (!cell.W(MazeCell.west).Open()) front.draw(gc);
+//			gc.setFill(Color.YELLOW);
+//			if (!cell.W(MazeCell.west).Open()) front.draw(gc);
 		}
 		else if(direction == MazeCell.CellType.eCellFacingWest) {
-			if (!cell.W(MazeCell.east).Open()) front.draw(gc);
-			if (!cell.W(MazeCell.north).Open()) right.draw(gc);
-			if (!cell.W(MazeCell.south).Open()) left.draw(gc);
+//			gc.setFill(Color.YELLOW);
 			if (!cell.W(MazeCell.west).Open()) back.draw(gc);
+//			gc.setFill(Color.LIGHTGREEN);
+			if (!cell.W(MazeCell.south).Open()) left.draw(gc);
+//			gc.setFill(Color.PINK);
+			if (!cell.W(MazeCell.north).Open()) right.draw(gc);
+//			gc.setFill(Color.LIGHTBLUE);
+//			if (!cell.W(MazeCell.east).Open()) front.draw(gc);
 		}
 		else if(direction == MazeCell.CellType.eCellFacingNorth) {
-			if (!cell.W(MazeCell.east).Open()) right.draw(gc);
+//			gc.setFill(Color.PINK);
 			if (!cell.W(MazeCell.north).Open()) back.draw(gc);
-//			if (!cell.W(MazeCell.south).Open()) back.draw(gc);
+//			gc.setFill(Color.YELLOW);
 			if (!cell.W(MazeCell.west).Open()) left.draw(gc);
+//			gc.setFill(Color.LIGHTBLUE);
+			if (!cell.W(MazeCell.east).Open()) right.draw(gc);
+//			gc.setFill(Color.LIGHTGREEN);
+//			if (!cell.W(MazeCell.south).Open()) front.draw(gc);
 		}
 		else if(direction == MazeCell.CellType.eCellFacingSouth) {
-			if (!cell.W(MazeCell.east).Open()) left.draw(gc);
-			if (!cell.W(MazeCell.north).Open()) front.draw(gc);
+//			gc.setFill(Color.LIGHTGREEN);
 			if (!cell.W(MazeCell.south).Open()) back.draw(gc);
+//			gc.setFill(Color.YELLOW);
+			if (!cell.W(MazeCell.east).Open()) left.draw(gc);
+//			gc.setFill(Color.LIGHTBLUE);
 			if (!cell.W(MazeCell.west).Open()) right.draw(gc);
+//			gc.setFill(Color.PINK);
+//			if (!cell.W(MazeCell.north).Open()) front.draw(gc);
 		}
 	}
 
@@ -285,23 +301,40 @@ public class MazePanel extends Canvas {
 
 			int x = currentMazeCell.X();
 			int y = currentMazeCell.Y();
-			System.out.println("currentCell: " + x + ", " + y);
-			if(currentMazeCell.facingEast()) System.out.println("facing east");
-			if(currentMazeCell.facingWest()) System.out.println("facing west");
-			if(currentMazeCell.facingNorth()) System.out.println("facing north");
-			if(currentMazeCell.facingSouth()) System.out.println("facing south");
+//			System.out.println("currentCell: " + x + ", " + y);
+//			if(currentMazeCell.facingEast()) System.out.println("facing east");
+//			if(currentMazeCell.facingWest()) System.out.println("facing west");
+//			if(currentMazeCell.facingNorth()) System.out.println("facing north");
+//			if(currentMazeCell.facingSouth()) System.out.println("facing south");
 
+//			System.out.println("draw");
 			MazeCell cell = null;
-			for(int j=5; j>0; j--) {
+			for(int j=5; j>=0; j--) {
 				for (int i = 0; i < 5; i++) {
-					if(currentMazeCell.facingEast())
-						cell = cells.get(MazeGlobal.ID(x+j, y+index[i], false));
-					else if(currentMazeCell.facingWest())
-						cell = cells.get(MazeGlobal.ID(x-j, y+index[i], false));
-					else if(currentMazeCell.facingSouth())
-						cell = cells.get(MazeGlobal.ID(index[i]+x, y+j, false));
-					else if(currentMazeCell.facingNorth())
-						cell = cells.get(MazeGlobal.ID(index[i]+x, y-j, false));
+					if(currentMazeCell.facingEast()) {
+						int cx = x + j;
+						int cy = y + index[i];
+						cell = cells.get(MazeGlobal.ID(x + j, y + index[i], false));
+//						System.out.println("   " + cx + ", " + cy + ", " + cell);
+					}
+					else if(currentMazeCell.facingWest()) {
+						int cx = x - j;
+						int cy = y + index[i];
+						cell = cells.get(MazeGlobal.ID(x - j, y + index[i], false));
+//						System.out.println("   " + cx + ", " + cy + ", " + cell);
+					}
+					else if(currentMazeCell.facingSouth()) {
+						int cx = x + index[i];
+						int cy = y + j;
+						cell = cells.get(MazeGlobal.ID(index[i] + x, y + j, false));
+//						System.out.println("   " + cx + ", " + cy + ", " + cell);
+					}
+					else if(currentMazeCell.facingNorth()) {
+						int cx = x + index[i];
+						int cy = y - j;
+						cell = cells.get(MazeGlobal.ID(index[i] + x, y - j, false));
+//						System.out.println("   " + cx + ", " + cy + ", " + cell);
+					}
 
 					if(cell != null) {
 						drawCell3D(gc, cell, index[i], j+1, currentMazeCell.direction());
@@ -309,7 +342,7 @@ public class MazePanel extends Canvas {
 				}
 			}
 
-			drawCell3D(gc, currentMazeCell, index[4], 1, currentMazeCell.direction());
+//			drawCell3D(gc, currentMazeCell, index[4], 1, currentMazeCell.direction());
 		}
 	}
 
