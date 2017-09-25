@@ -2,6 +2,7 @@ package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -15,6 +16,7 @@ public class ControlPanelPrintMaze extends HBox {
 		btnMazePrint.setText("Print");
 		btnMazePrint.setMinWidth(70);
 		btnMazePrint.setMaxWidth(70);
+		btnMazePrint.setTooltip(new Tooltip("Print the maze"));
 		btnMazePrint.setDisable(true);
 		getChildren().add(btnMazePrint);
 

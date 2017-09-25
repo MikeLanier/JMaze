@@ -1,6 +1,7 @@
 package mainfrm.ControlPanel;
 
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 public class ControlPanelAlgorithm extends HBox {
@@ -31,12 +32,14 @@ public class ControlPanelAlgorithm extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Algorithm", 70, false));
+		getChildren().add(ControlPanel.Marker("Algorithm", 70, true));
 		getChildren().add(ControlPanel.Spacer());
 
 		// combobox containing the algorithms to use
 		cbAlgorithm.setMinWidth(190);
 		cbAlgorithm.setMaxWidth(190);
+		cbAlgorithm.setVisible(false);
+		cbAlgorithm.setTooltip(new Tooltip("List of maze creating algorithm.\nSelect which one to use"));
 		getChildren().add(cbAlgorithm);
 
 		System.out.println("algorithms.length: " + algorithms.length);

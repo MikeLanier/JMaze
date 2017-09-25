@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +20,7 @@ public class ControlPanelStartCell extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Start MazeCell", 70, false));
+		getChildren().add(ControlPanel.Marker("Start MazeCell", 70, true));
 		getChildren().add(ControlPanel.Spacer());
 
 		Integer x = _sizeX / 2;
@@ -28,8 +29,9 @@ public class ControlPanelStartCell extends HBox {
 		tfStartCellX.setText(x.toString());
 		tfStartCellX.setMinWidth(70);
 		tfStartCellX.setMaxWidth(70);
+		tfStartCellX.setTooltip(new Tooltip("x coordinate of cell at which to start\ncreating the maze."));
 //		tfStartCellX.setAlignment(Pos.CENTER);
-//		tfStartCellX.setDisable(true);
+		tfStartCellX.setDisable(true);
 		getChildren().add(tfStartCellX);
 
 //		tfStartCellX.setOnAction(new EventHandler<ActionEvent>() {
@@ -40,14 +42,15 @@ public class ControlPanelStartCell extends HBox {
 //		});
 
 		getChildren().add(ControlPanel.Spacer());
-		getChildren().add(ControlPanel.Marker("x", 0, false));
+		getChildren().add(ControlPanel.Marker("x", 0, true));
 		getChildren().add(ControlPanel.Spacer());
 
 		tfStartCellY.setText(y.toString());
 		tfStartCellY.setMinWidth(70);
 		tfStartCellY.setMaxWidth(70);
+		tfStartCellY.setTooltip(new Tooltip("y coordinate of cell at which to start\ncreating the maze."));
 //		tfStartCellY.setAlignment(Pos.CENTER);
-//		tfStartCellY.setDisable(true);
+		tfStartCellY.setDisable(true);
 		getChildren().add(tfStartCellY);
 
 //		tfStartCellY.setOnAction(new EventHandler<ActionEvent>() {
@@ -65,6 +68,8 @@ public class ControlPanelStartCell extends HBox {
 		btnStartCellSet.setGraphic(iv);
 		btnStartCellSet.setMinWidth(25);
 		btnStartCellSet.setMaxWidth(25);
+		btnStartCellSet.setVisible(false);
+		btnStartCellSet.setTooltip(new Tooltip("randomly select the start cell"));
 //				btnStartCellSet.setDisable(true);
 		getChildren().add(btnStartCellSet);
 

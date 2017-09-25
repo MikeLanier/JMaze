@@ -124,10 +124,21 @@ public class MazePanel extends Canvas {
 		Integer y = MazeGlobal.sizeY/3;
 		entranceMazeCell = createCell(x,y);
 		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
+
 //		Integer x = MazeGlobal.sizeX/2;
 //		Integer y = MazeGlobal.sizeY+1;
 //		entranceMazeCell = createCell(x,y);
 //		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
+
+//		Integer x = MazeGlobal.sizeX/2;
+//		Integer y = 0;
+//		entranceMazeCell = createCell(x,y);
+//		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
+
+//		Integer x = MazeGlobal.sizeX+1;
+//		Integer y = MazeGlobal.sizeY/3;
+//		entranceMazeCell = createCell(x,y);
+//		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
 
 		x = MazeGlobal.sizeX+1;
 		y = MazeGlobal.sizeY*2/3;
@@ -256,7 +267,7 @@ public class MazePanel extends Canvas {
 		else if(direction == MazeCell.CellType.eCellFacingNorth) {
 			if (!cell.W(MazeCell.east).Open()) right.draw(gc);
 			if (!cell.W(MazeCell.north).Open()) back.draw(gc);
-			if (!cell.W(MazeCell.south).Open()) front.draw(gc);
+//			if (!cell.W(MazeCell.south).Open()) back.draw(gc);
 			if (!cell.W(MazeCell.west).Open()) left.draw(gc);
 		}
 		else if(direction == MazeCell.CellType.eCellFacingSouth) {
@@ -288,9 +299,9 @@ public class MazePanel extends Canvas {
 					else if(currentMazeCell.facingWest())
 						cell = cells.get(MazeGlobal.ID(x-j, y+index[i], false));
 					else if(currentMazeCell.facingSouth())
-						cell = cells.get(MazeGlobal.ID(index[i]+x, y+i, false));
+						cell = cells.get(MazeGlobal.ID(index[i]+x, y+j, false));
 					else if(currentMazeCell.facingNorth())
-						cell = cells.get(MazeGlobal.ID(index[i]+x, y-i, false));
+						cell = cells.get(MazeGlobal.ID(index[i]+x, y-j, false));
 
 					if(cell != null) {
 						drawCell3D(gc, cell, index[i], j+1, currentMazeCell.direction());

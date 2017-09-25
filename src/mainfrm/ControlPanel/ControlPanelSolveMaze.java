@@ -2,6 +2,7 @@ package mainfrm.ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -15,6 +16,7 @@ public class ControlPanelSolveMaze extends HBox {
 		btnMazeSolve.setText("Solve");
 		btnMazeSolve.setMinWidth(70);
 		btnMazeSolve.setMaxWidth(70);
+		btnMazeSolve.setTooltip(new Tooltip("Solve the maze"));
 		btnMazeSolve.setDisable(true);
 		getChildren().add(btnMazeSolve);
 

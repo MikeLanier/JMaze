@@ -96,7 +96,7 @@ Using 2, 4, 6, 8 on the keypad for now.
   * show left/right wall of current cell
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
-* tooltips for controls. Have on a couple, but not all
+* ~~tooltips for controls. Have on a couple, but not all~~
 * on change to entrance/exit combo box, validate selection
 * pick start cell by clicking the random button
 * look at other algorithms
