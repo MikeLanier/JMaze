@@ -88,18 +88,12 @@ This is basically the simplest and fastest algorithm possible, however Mazes pro
 This simple algorithm is very similar to the binary tree algorithm, and only slightly more complicated. The Maze is generated one row at a time: For each cell randomly decide whether to carve a passage leading right. If a passage is not carved, then consider the horizontal passage just completed, formed by the current cell and any cells to the left that carved passages leading to it. Randomly pick one cell along this passage, and carve a passage leading up from it (which must be the current cell if the adjacent cell didn't carve). While a binary tree Maze always goes up from the leftmost cell of a horizontal passage, a sidewinder Maze goes up from a random cell. While binary tree has the top and left edges of the Maze one long passage, a sidewinder Maze has just the top edge one long passage. Like binary tree, a sidewinder Maze can be solved deterministically without error from bottom to top, because at each row, there will always be exactly one passage leading up. A solution to a sidewinder Maze will never double back on itself or visit a row more than once, although it will "wind from side to side". The only cell type that can't exist in a sidewinder Maze is a dead end with the passage facing down, because that would contradict the fact that every passage going up leads back to the start. A sidewinder Maze tends to have an elitist solution, where the right path is very direct, but there are many long false paths leading down from the top next to it. 
   
 
-## 09/22/2017
+## 09/25/2017
 * 3D "in maze" view using 2D graphics
-  * ~~step forward using up arrow~~
-  * ~~turn left/right using left/right arrow (4/6 keypad button)~~
-  * ~~adjust the code for looking in a direction other than east~~
   * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
 Using 2, 4, 6, 8 on the keypad for now.
   * _BUG:_ Display when at edge of maze grid shows too much
-  * show leftr/right wall of current cell
-* ~~in the 2D maze, in the current cell, (which will be the entrance right
-after the maze is created) draw an arrow (triangle) pointer in the direction
-facing.~~
+  * show left/right wall of current cell
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * tooltips for controls. Have on a couple, but not all
@@ -107,9 +101,30 @@ MainFrm or Maze display panel
 * pick start cell by clicking the random button
 * look at other algorithms
 * prelim for using this for a game, randomly add doors and rooms
+## 09/23/2017
+* 3D "in maze" view using 2D graphics
+  * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
+Using 2, 4, 6, 8 on the keypad for now.
+  * _BUG:_ Display when at edge of maze grid shows too much
+  * show left/right wall of current cell
+* Look for a way to post events from the ControlPanel to be caught by the
+MainFrm or Maze display panel  
+* tooltips for controls. Have on a couple, but not all
+* on change to entrance/exit combo box, validate selection
+* pick start cell by clicking the random button
+* look at other algorithms
+* prelim for using this for a game, randomly add doors and rooms
+## 09/22/2017
+* ~~3D "in maze" view using 2D graphics~~
+  * ~~step forward using up arrow~~
+  * ~~turn left/right using left/right arrow (4/6 keypad button)~~
+  * ~~adjust the code for looking in a direction other than east~~
+* ~~in the 2D maze, in the current cell, (which will be the entrance right
+after the maze is created) draw an arrow (triangle) pointer in the direction
+facing.~~
 ## 09/20/2017
-Not comfortable with having the 3D/2D stuff in this app, so, moving it over to
-the J3DSandbox app. (Maybe over-complicating what I want to do with this app).  
+~~Not comfortable with having the 3D/2D stuff in this app, so, moving it over to
+the J3DSandbox app. (Maybe over-complicating what I want to do with this app).~~  
 
 * ~~move 2D/3D stuff out over to J3DSandbox~~
 * ~~when change cell size, automatically redraw the maze~~

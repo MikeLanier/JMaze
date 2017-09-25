@@ -59,8 +59,10 @@ public class MazeMath {
 		}
 
 		public void perspective(double d) {
-			x = x * (d - z) / d;
-			y = y * (d - z) / d;
+			x = x * (d /z);
+			y = y * (d/z);
+//			x = x * (d - z) / d;
+//			y = y * (d - z) / d;
 		}
 
 		public void dump(String t) {

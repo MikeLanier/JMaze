@@ -44,6 +44,7 @@ public class MazeCell {
 	public boolean facingSouth() { return type == CellType.eCellFacingSouth ? true : false; }
 	public boolean facingEast() { return type == CellType.eCellFacingEast ? true : false; }
 	public boolean facingWest() { return type == CellType.eCellFacingWest ? true : false; }
+	public CellType direction() { return type; }
 
 	public void SetType( CellType _type )
 	{
