@@ -92,8 +92,8 @@ This simple algorithm is very similar to the binary tree algorithm, and only sli
 * 3D "in maze" view using 2D graphics
   * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
 Using 2, 4, 6, 8 on the keypad for now.
-  * _BUG:_ Display when at edge of maze grid shows too much
-  * show left/right wall of current cell
+  * ~~_BUG:_ Display when at edge of maze grid shows too much~~
+  * ~~show left/right wall of current cell~~
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * ~~tooltips for controls. Have on a couple, but not all~~

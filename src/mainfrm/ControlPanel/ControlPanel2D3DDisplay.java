@@ -6,19 +6,20 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import mainfrm.MainFrm;
+import mainfrm.MazeGlobal;
 
-public class ControlPanelOrientation extends HBox {
+public class ControlPanel2D3DDisplay extends HBox {
 	public CheckBox cb2DView			= new CheckBox();
 	public CheckBox		cb3DView			= new CheckBox();
 	private MainFrm mainFrm = null;
-	public ControlPanelOrientation(MainFrm _mainFrm)
+	public ControlPanel2D3DDisplay(MainFrm _mainFrm)
 	{
 		mainFrm = _mainFrm;
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Orientation", 70, true));
+		getChildren().add(ControlPanel.Marker("", 70, true));
 		getChildren().add(ControlPanel.Spacer());
 
 		cb2DView.setText("2D view");
@@ -27,17 +28,14 @@ public class ControlPanelOrientation extends HBox {
 		cb2DView.setIndeterminate(false);
 		cb2DView.setSelected(true);
 		cb2DView.setTooltip(new Tooltip("Show a 2D top view of the maze"));
-		cb2DView.setDisable(true);
+//		cb2DView.setDisable(true);
 		getChildren().add(cb2DView);
 
 		cb2DView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMouseClicked: cb2DView: " + cb2DView.isSelected());
-				if(cb2DView.isSelected()) {
-//					cb3DView.setSelected(false);
-//					mainFrm.SwitchTo2DMaze();
-				}
+				MazeGlobal.maze2Ddisplay = cb2DView.isSelected();
+				mainFrm.mazePanel.drawMaze();
 			}
 		});
 
@@ -48,17 +46,14 @@ public class ControlPanelOrientation extends HBox {
 		cb3DView.setMaxWidth(90);
 		cb3DView.setSelected(true);
 		cb3DView.setTooltip(new Tooltip("Show the maze in 3D from inside the maze"));
-		cb3DView.setDisable(true);
+//		cb3DView.setDisable(true);
 		getChildren().add(cb3DView);
 
 		cb3DView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				if(cb3DView.isSelected())	{
-					System.out.println("OnMouseClicked: cb3DView: " + cb3DView.isSelected());
-//					cb2DView.setSelected(false);
-//					mainFrm.SwitchTo3D2DMaze();
-				}
+				MazeGlobal.maze3Ddisplay = cb3DView.isSelected();
+				mainFrm.mazePanel.drawMaze();
 			}
 		});
 	}

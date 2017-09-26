@@ -2,19 +2,12 @@ package mainfrm.ControlPanel;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import mainfrm.MainFrm;
 import mainfrm.MazeGlobal;
 
 import java.util.Random;
 
 public class ControlPanel extends VBox {
-
-//	public int			_sizeX = 10;
-//	public int			_sizeY = 10;
-//	public int			_sizeCell = 50;
-//	public int			_xOffset = 10 + MazeGlobal.sizeCell;
-//	public int			_yOffset = 10 + MazeGlobal.sizeCell;
 
 	public Random rand = new Random(System.currentTimeMillis());
 
@@ -69,6 +62,6 @@ public class ControlPanel extends VBox {
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(new ControlPanelOrientation(mainFrm));
+		getChildren().add(new ControlPanel2D3DDisplay(mainFrm));
 	}
 }

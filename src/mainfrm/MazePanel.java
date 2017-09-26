@@ -198,7 +198,6 @@ public class MazePanel extends Canvas {
 
 	public void drawCell3D(GraphicsContext gc, MazeCell cell, int x, double z, MazeCell.CellType direction)
 	{
-
 		double x1 = -1+(x*2);
 		double x2 = 1+(x*2);
 		double y1 = -1;
@@ -295,6 +294,7 @@ public class MazePanel extends Canvas {
 	}
 
 	public void drawMaze3D(GraphicsContext gc) {
+		if(!MazeGlobal.maze3Ddisplay) return;
 		if(entranceMazeCell != null) {
 
 			int index[] = {-2,-1,2,1,0};
@@ -347,6 +347,8 @@ public class MazePanel extends Canvas {
 	}
 
 	public void drawMaze2D(GraphicsContext gc) {
+		System.out.println("MazeGlobal.maze2Ddisplay: " + MazeGlobal.maze2Ddisplay);
+		if(!MazeGlobal.maze2Ddisplay) return;
 		System.out.println("drawMaze2D");
 		Collection<MazeCell> cc = cells.values();
 		for(MazeCell c: cc)

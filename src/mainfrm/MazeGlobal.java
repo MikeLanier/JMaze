@@ -4,6 +4,8 @@ public class MazeGlobal {
 	public static int			sizeX = 10;
 	public static int			sizeY = 10;
 	public static int			sizeCell = 25;
+	public static boolean		maze2Ddisplay = true;
+	public static boolean		maze3Ddisplay = true;
 
 	public MazeGlobal()
 	{
