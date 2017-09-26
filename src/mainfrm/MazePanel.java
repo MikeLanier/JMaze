@@ -320,13 +320,13 @@ public class MazePanel extends Canvas {
 					else if(currentMazeCell.facingWest()) {
 						int cx = x - j;
 						int cy = y + index[i];
-						cell = cells.get(MazeGlobal.ID(x - j, y + index[i], false));
+						cell = cells.get(MazeGlobal.ID(x - j, y - index[i], false));
 //						System.out.println("   " + cx + ", " + cy + ", " + cell);
 					}
 					else if(currentMazeCell.facingSouth()) {
 						int cx = x + index[i];
 						int cy = y + j;
-						cell = cells.get(MazeGlobal.ID(index[i] + x, y + j, false));
+						cell = cells.get(MazeGlobal.ID(x  - index[i], y + j, false));
 //						System.out.println("   " + cx + ", " + cy + ", " + cell);
 					}
 					else if(currentMazeCell.facingNorth()) {
