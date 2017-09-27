@@ -94,7 +94,7 @@ public class ControlPanelEntrance extends HBox {
 		btnEntranceSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnEntranceSet");
+//				System.out.println("OnMousePressed: btnEntranceSet");
 			}
 		});
 		
