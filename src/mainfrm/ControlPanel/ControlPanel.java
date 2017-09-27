@@ -66,7 +66,7 @@ public class ControlPanel extends VBox {
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanel2D3DDisplay(mainFrm));
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(createRoomControl = new ControlPanelCreateRoom());
+		getChildren().add(createRoomControl = new ControlPanelCreateRoom(mainFrm));
 
 		createRoomControl.setDisable(true);
 	}

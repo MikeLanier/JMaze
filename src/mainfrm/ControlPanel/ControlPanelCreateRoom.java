@@ -8,13 +8,24 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import mainfrm.MainFrm;
+import mainfrm.MazeGlobal;
 
 public class ControlPanelCreateRoom extends VBox {
 
-	public ControlPanelCreateRoom()
+	private MainFrm mainFrm = null;
+	private Integer roomOriginX = 3;
+	private Integer roomOriginY = 3;
+	private Integer roomSizeX = 2;
+	private Integer roomSizeY = 2;
+
+	public ControlPanelCreateRoom(MainFrm _mainFrm)
 	{
+		mainFrm = _mainFrm;
+
 		{
 			HBox hboxTitle = new HBox();
 			getChildren().add(hboxTitle);
@@ -38,8 +49,7 @@ public class ControlPanelCreateRoom extends VBox {
 			hboxRoomOrigin.getChildren().add(ControlPanel.Marker("x", 10, false));
 			hboxRoomOrigin.getChildren().add(ControlPanel.Spacer());
 
-			// number of cells in x
-			Integer x = 3; //_sizeX;
+			Integer x = roomOriginX;
 			TextField tfRoomOriginX = new TextField();
 			tfRoomOriginX.setText(x.toString());
 			tfRoomOriginX.setMinWidth(40);
@@ -49,8 +59,10 @@ public class ControlPanelCreateRoom extends VBox {
 
 			tfRoomOriginX.setOnKeyReleased(new EventHandler<KeyEvent>() {
 				@Override
-				public void handle(KeyEvent event) {
+				public void handle(KeyEvent event)
+				{
 					System.out.println("Room Origin X: Key event");
+					roomOriginX = MazeGlobal.parseTextField(tfRoomOriginX, roomOriginX);
 				}
 			});
 
@@ -58,8 +70,7 @@ public class ControlPanelCreateRoom extends VBox {
 			hboxRoomOrigin.getChildren().add(ControlPanel.Marker("y", 10, false));
 			hboxRoomOrigin.getChildren().add(ControlPanel.Spacer());
 
-			// number of cells in y
-			Integer y = 3;//_sizeY;
+			Integer y = roomOriginX;
 			TextField tfRoomOriginY = new TextField();
 			tfRoomOriginY.setText(y.toString());
 			tfRoomOriginY.setMinWidth(40);
@@ -69,8 +80,10 @@ public class ControlPanelCreateRoom extends VBox {
 
 			tfRoomOriginY.setOnKeyReleased(new EventHandler<KeyEvent>() {
 				@Override
-				public void handle(KeyEvent event) {
+				public void handle(KeyEvent event)
+				{
 					System.out.println("Room Origin Y: Key event");
+					roomOriginY = MazeGlobal.parseTextField(tfRoomOriginY, roomOriginY);
 				}
 			});
 
@@ -102,8 +115,7 @@ public class ControlPanelCreateRoom extends VBox {
 			hboxRoomSize.getChildren().add(ControlPanel.Marker("w", 10, false));
 			hboxRoomSize.getChildren().add(ControlPanel.Spacer());
 
-			// number of cells in x
-			Integer x = 2; //_sizeX;
+			Integer x = roomSizeX;
 			TextField tfRoomSizeX = new TextField();
 			tfRoomSizeX.setText(x.toString());
 			tfRoomSizeX.setMinWidth(40);
@@ -113,8 +125,10 @@ public class ControlPanelCreateRoom extends VBox {
 
 			tfRoomSizeX.setOnKeyReleased(new EventHandler<KeyEvent>() {
 				@Override
-				public void handle(KeyEvent event) {
+				public void handle(KeyEvent event)
+				{
 					System.out.println("Room Size X: Key event");
+					roomSizeX = MazeGlobal.parseTextField(tfRoomSizeX, roomSizeX);
 				}
 			});
 
@@ -122,8 +136,7 @@ public class ControlPanelCreateRoom extends VBox {
 			hboxRoomSize.getChildren().add(ControlPanel.Marker("h", 10, false));
 			hboxRoomSize.getChildren().add(ControlPanel.Spacer());
 
-			// number of cells in y
-			Integer y = 2;//_sizeY;
+			Integer y = roomSizeY;
 			TextField tfRoomSizeY = new TextField();
 			tfRoomSizeY.setText(y.toString());
 			tfRoomSizeY.setMinWidth(40);
@@ -133,8 +146,10 @@ public class ControlPanelCreateRoom extends VBox {
 
 			tfRoomSizeY.setOnKeyReleased(new EventHandler<KeyEvent>() {
 				@Override
-				public void handle(KeyEvent event) {
+				public void handle(KeyEvent event)
+				{
 					System.out.println("Room Size Y: Key Event");
+					roomSizeY = MazeGlobal.parseTextField(tfRoomSizeY, roomSizeY);
 				}
 			});
 
@@ -166,6 +181,13 @@ public class ControlPanelCreateRoom extends VBox {
 			btnRoomPreview.setTooltip(new Tooltip("Print the maze"));
 //			btnRoomPreview.setDisable(true);
 			hboxPreview.getChildren().add(btnRoomPreview);
+
+			btnRoomPreview.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					mainFrm.mazePanel.createRoom(roomOriginX, roomOriginY, roomSizeX, roomSizeY);
+				}
+			});
 		}
 	}
 }

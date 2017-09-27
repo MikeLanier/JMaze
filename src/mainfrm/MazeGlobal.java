@@ -1,5 +1,7 @@
 package mainfrm;
 
+import javafx.scene.control.TextField;
+
 public class MazeGlobal {
 	public static int			sizeX = 10;
 	public static int			sizeY = 10;
@@ -11,12 +13,29 @@ public class MazeGlobal {
 	{
 	}
 
-	static Integer ID(int xOrigin, int yOrigin, boolean horizontal)
+	public static Integer ID(int xOrigin, int yOrigin, boolean horizontal)
 	{
 		int h = (horizontal) ? 0x40000000 : 0;
 
 		return (xOrigin & 0x7fff) |
 				(yOrigin & 0x7fff) << 15 |
 				h;
+	}
+
+	public static Integer parseTextField(TextField tf, Integer value)
+	{
+		try {
+			if(tf.getText().isEmpty()) {
+				value = 0;
+			}
+			else
+				value = Integer.parseInt(tf.getText());
+		}
+		catch(Exception e) {
+//			System.out.println("Invalid value entered");
+			tf.setText(value.toString());
+		}
+
+		return value;
 	}
 }
