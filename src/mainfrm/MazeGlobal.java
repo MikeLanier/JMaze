@@ -11,7 +11,7 @@ public class MazeGlobal {
 	{
 	}
 
-	public static Integer ID(int xOrigin, int yOrigin, boolean horizontal)
+	static Integer ID(int xOrigin, int yOrigin, boolean horizontal)
 	{
 		int h = (horizontal) ? 0x40000000 : 0;
 

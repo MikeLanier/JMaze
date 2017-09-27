@@ -61,7 +61,7 @@ I still have)
   3D in maze view, draw and up/down staircase.
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
 Using 2, 4, 6, 8 on the keypad for now.
-* _BUG:_ when using animate create, the entrance cell is not marked and 3D
+* ~~_BUG:_ when using animate create, the entrance cell is not marked and 3D
 in Maze view is blank
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
