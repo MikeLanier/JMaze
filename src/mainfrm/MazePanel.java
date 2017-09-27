@@ -483,6 +483,21 @@ public class MazePanel extends Canvas {
 	public void createRoom(int roomOriginX, int roomOriginY, int roomSizeX, int roomSizeY)
 	{
 		System.out.println("createRoom: " + roomOriginX + ",  " + roomOriginY + ", " + roomSizeX + ", " + roomSizeY);
+		int right = roomOriginX + roomSizeX - 1;
+		int bottom = roomOriginY + roomSizeY - 1;
+
+		for(int x=roomOriginX; x<=right; x++) {
+			for(int y=roomOriginY; y<=bottom; y++) {
+				MazeCell cell = this.cells.get(MazeGlobal.ID(x,y,false));
+				if(cell != null) {
+					cell.SetType(MazeCell.CellType.eCellTypeRoom);
+
+					if(x != right) cell.W(MazeCell.east).Open(true);
+					if(y != bottom) cell.W(MazeCell.south).Open(true);
+				}
+			}
+		}
+		drawMaze();
 	}
 
 }

@@ -32,6 +32,7 @@ class MazeCell {
 		eCellTypeStart,
 		eCellTypeEntrance,
 		eCellTypeExit,
+		eCellTypeRoom,
 		eCellFacingEast,
 		eCellFacingWest,
 		eCellFacingNorth,
@@ -118,7 +119,18 @@ class MazeCell {
 		if (type == CellType.eCellTypeStart) {
 			gc.setFill(Color.YELLOW);
 			gc.fillRect(x, y, cellSize, cellSize);
-		} else if (type == CellType.eCellTypeEntrance) {
+		}
+		else if (type == CellType.eCellTypeRoom) {
+			gc.setFill(Color.LIGHTBLUE);
+			gc.fillRect(x, y, cellSize, cellSize);
+		}
+		else {
+			gc.setFill(Color.WHITE);
+			gc.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
+		}
+
+		// these draw on top of the background
+		if (type == CellType.eCellTypeEntrance) {
 			gc.setFill((Color.RED));
 			gc.fillPolygon(xpointsEast, ypointsEast, 8);
 		} else if (type == CellType.eCellTypeExit) {
@@ -136,9 +148,6 @@ class MazeCell {
 		} else if (type == CellType.eCellFacingWest) {
 			gc.setFill((Color.GREEN));
 			gc.fillPolygon(xpointsWest, ypointsWest, 8);
-		} else {
-			gc.setFill(Color.WHITE);
-			gc.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
 		}
 	}
 }

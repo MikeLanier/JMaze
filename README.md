@@ -36,13 +36,15 @@ the rules and character generation from that game. Although I no longer
 have the hardware to play that game, I'll do my best given the rule book
 I still have)
   * randomly add rooms
-    * controls to define x/y for the top/left corner of the room
-    * controls to define width/height of the room.
-    * make sure width/height is adjusted to not extend beyond the outer edge
-    of the maze
-    * room cannot include the cell adjacent to the entrance (the cell
-    you enter when stepping from the entrance).
-    * room cannot include the cell adjacent to the exit (the cell
+    * ~~controls to define x/y for the top/left corner of the room~~
+    * ~~controls to define width/height of the room.~~
+    * method to create the room
+      * mark all cells as room cells. change background to blue.  Update display
+      * make sure width/height is adjusted to not extend beyond the outer edge
+      of the maze
+      * room cannot include the cell adjacent to the entrance (the cell
+      you enter when stepping from the entrance).
+      * room cannot include the cell adjacent to the exit (the cell
     you leave when stepping into the exit).
   * number of rooms a factor of the size of the maze
   * size of a room is random
