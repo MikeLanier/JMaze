@@ -37,9 +37,11 @@ public class ControlPanel extends VBox {
 	public ControlPanelStartCell startCellControl = null;
 	public ControlPanelEntrance entranceControl = null;
 	public ControlPanelExit exitControl = null;
+	public ControlPanelCreateRoom createRoomControl = null;
 
-	public ControlPanel(MainFrm _mainFrm) {
-		System.out.println("buildControls");
+	public ControlPanel(MainFrm _mainFrm)
+	{
+//		System.out.println("buildControls");
 
 		mainFrm = _mainFrm;
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
@@ -58,10 +60,14 @@ public class ControlPanel extends VBox {
 		getChildren().add(entranceControl = new ControlPanelEntrance(MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(exitControl = new ControlPanelExit(MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(new ControlPanelCreateMaze(mainFrm));
+		getChildren().add(new ControlPanelCreateMaze(this, mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanel2D3DDisplay(mainFrm));
+		getChildren().add(new ControlPanelSeparator());
+		getChildren().add(createRoomControl = new ControlPanelCreateRoom());
+
+		createRoomControl.setDisable(true);
 	}
 }

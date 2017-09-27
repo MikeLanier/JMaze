@@ -30,7 +30,7 @@ public class ControlPanelLoadMazes extends HBox {
 		btnMazeOpen.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazeOpen");
+//				System.out.println("OnMousePressed: btnMazeOpen");
 			}
 		});
 
@@ -46,7 +46,7 @@ public class ControlPanelLoadMazes extends HBox {
 		tfMazeFilename.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("OnAction: tfMazeFilename");
+//				System.out.println("OnAction: tfMazeFilename");
 			}
 		});
 
@@ -66,7 +66,7 @@ public class ControlPanelLoadMazes extends HBox {
 		btnMazeSelect.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazeSelect");
+//				System.out.println("OnMousePressed: btnMazeSelect");
 			}
 		});
 	}

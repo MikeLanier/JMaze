@@ -23,7 +23,7 @@ public class ControlPanelSolveMaze extends HBox {
 		btnMazeSolve.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazeSolve");
+//				System.out.println("OnMousePressed: btnMazeSolve");
 			}
 		});
 	}

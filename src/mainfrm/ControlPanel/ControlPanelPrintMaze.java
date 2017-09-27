@@ -23,7 +23,7 @@ public class ControlPanelPrintMaze extends HBox {
 		btnMazePrint.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazePrint");
+//				System.out.println("OnMousePressed: btnMazePrint");
 			}
 		});
 	}

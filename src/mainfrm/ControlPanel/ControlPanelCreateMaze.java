@@ -11,8 +11,10 @@ public class ControlPanelCreateMaze extends HBox {
 	public Button btnMazeCreate		= new Button();
 	public Button btnMazeStep		= new Button();
 	private MainFrm mainFrm = null;
-	public ControlPanelCreateMaze(MainFrm _mainFrm)
+	private ControlPanel controlPanel = null;
+	public ControlPanelCreateMaze(ControlPanel _controlPanel, MainFrm _mainFrm)
 	{
+		controlPanel = _controlPanel;
 		mainFrm = _mainFrm;
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
@@ -27,7 +29,7 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazeCreate");
+				controlPanel.createRoomControl.setDisable(false);
 				mainFrm.mazePanel.createMaze(false);
 			}
 		});
@@ -43,7 +45,8 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeStep.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnMazeStep");
+//				System.out.println("OnMousePressed: btnMazeStep");
+				controlPanel.createRoomControl.setDisable(false);
 				mainFrm.mazePanel.createMaze(true);
 			}
 		});

@@ -68,15 +68,14 @@ public class ControlPanelStartCell extends HBox {
 		btnStartCellSet.setGraphic(iv);
 		btnStartCellSet.setMinWidth(25);
 		btnStartCellSet.setMaxWidth(25);
-		btnStartCellSet.setVisible(false);
 		btnStartCellSet.setTooltip(new Tooltip("randomly select the start cell"));
-//				btnStartCellSet.setDisable(true);
+		btnStartCellSet.setDisable(true);
 		getChildren().add(btnStartCellSet);
 
 		btnStartCellSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnStartCellSet");
+//				System.out.println("OnMousePressed: btnStartCellSet");
 			}
 		});
 		

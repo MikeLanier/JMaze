@@ -43,7 +43,7 @@ public class MainFrm extends GridPane
 			@Override
 			public void handle(KeyEvent event)
 			{
-				System.out.println("GridPane: OnKeyPressed: [" + event.getCode() + "]");
+//				System.out.println("GridPane: OnKeyPressed: [" + event.getCode() + "]");
 				if(event.getCode() == KeyCode.NUMPAD4) mazePanel.turnLeft();
 				if(event.getCode() == KeyCode.NUMPAD6) mazePanel.turnRight();
 				if(event.getCode() == KeyCode.NUMPAD2) mazePanel.turnAround();

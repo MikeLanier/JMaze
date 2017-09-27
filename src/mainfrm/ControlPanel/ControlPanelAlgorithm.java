@@ -21,10 +21,10 @@ public class ControlPanelAlgorithm extends HBox {
 
 	public Group2 algorithms[] = {
 			new Group2("Recursive backtracker", 0),
-			new Group2("Randomized Kruskal's algorithm", 1),
-			new Group2("Randomized Prim's algorithm", 2),
-			new Group2("Randomized Prim's algorithm: Modified version", 3),
-			new Group2("Recursive division method", 4),
+//			new Group2("Randomized Kruskal's algorithm", 1),
+//			new Group2("Randomized Prim's algorithm", 2),
+//			new Group2("Randomized Prim's algorithm: Modified version", 3),
+//			new Group2("Recursive division method", 4),
 	};
 
 	public ControlPanelAlgorithm()
@@ -32,13 +32,13 @@ public class ControlPanelAlgorithm extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Algorithm", 70, true));
+		getChildren().add(ControlPanel.Marker("Algorithm", 70, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		// combobox containing the algorithms to use
 		cbAlgorithm.setMinWidth(190);
 		cbAlgorithm.setMaxWidth(190);
-		cbAlgorithm.setVisible(false);
+//		cbAlgorithm.setVisible(false);
 		cbAlgorithm.setTooltip(new Tooltip("List of maze creating algorithm.\nSelect which one to use"));
 		getChildren().add(cbAlgorithm);
 

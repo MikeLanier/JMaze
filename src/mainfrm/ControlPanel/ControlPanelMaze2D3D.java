@@ -33,7 +33,7 @@ public class ControlPanelMaze2D3D extends HBox {
 		cbMaze2D.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMouseClicked: cbMaze2D: " + cbMaze2D.isSelected());
+//				System.out.println("OnMouseClicked: cbMaze2D: " + cbMaze2D.isSelected());
 				MazeGlobal.maze2Ddisplay = cbMaze2D.isSelected();
 			}
 		});
@@ -65,7 +65,7 @@ public class ControlPanelMaze2D3D extends HBox {
 			@Override
 			public void handle(MouseEvent event)
 			{
-				System.out.println("OnMouseClicked: cbMAze3D");
+//				System.out.println("OnMouseClicked: cbMaze3D");
 				MazeGlobal.maze3Ddisplay = cbMaze3D.isSelected();
 			}
 		});

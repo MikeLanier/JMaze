@@ -12,12 +12,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage _primaryStage) throws Exception{
-        System.out.println("start");
+//        System.out.println("start");
         primaryStage = _primaryStage;
 
 		//GridPane root = FXMLLoader.load(getClass().getResource("sample\\sample.fxml"));
         GridPane root = new MainFrm();
-        System.out.println(root.getClass().getName());
+//        System.out.println(root.getClass().getName());
         primaryStage.setTitle("Maze");
 //        primaryStage.setScene(new Scene(root, 800, 500));
 //        primaryStage.show();
@@ -42,14 +42,14 @@ public class Main extends Application {
     @Override
     public void stop()
     {
-        System.out.println("stop: enter");
+//        System.out.println("stop: enter");
         // when the app closes, save the frame size and location
         Preferences userPrefs = Preferences.userNodeForPackage(getClass());
         userPrefs.putDouble("stage.x", primaryStage.getX());
         userPrefs.putDouble("stage.y", primaryStage.getY());
         userPrefs.putDouble("stage.width", primaryStage.getWidth());
         userPrefs.putDouble("stage.height", primaryStage.getHeight());
-        System.out.println("stop: exit");
+//        System.out.println("stop: exit");
     }
 
     public static void main(String[] args) {

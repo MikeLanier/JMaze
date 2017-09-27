@@ -94,7 +94,7 @@ public class ControlPanelExit extends HBox {
 		btnExitSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("OnMousePressed: btnExitSet");
+//				System.out.println("OnMousePressed: btnExitSet");
 			}
 		});
 	}
