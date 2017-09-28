@@ -28,18 +28,34 @@ during maze creation. The description for this algorithm sounds similar to my
 interpretation of_ Depth-first search. _For that reason I've not created a separate
 implementation for_ Recursize backtracker.
 
+## The Game
+My ultimate goal is to use these mazes for a game based old Apple ][ game 
+called Wizardry. I enjoyed the game way back when and would like to play
+it again. But, I no longer have an Apple ][. The PC emulators I found year
+ago are not compatable with today's computers and the version ported to
+PC's for sale is way expensive.  So, I thought about writing my own.
+
+As I said, I plan to base this game on Wizardry, enough so, someone might
+be justified in calling me a thief.  But, since I have no plans to sell
+my game, and since I'll probably be the only one to play this game, who
+cares.  I am using GitHub for saving my code, so, anyone curious enough 
+to load and build the code, I say "yes, it is a rip off. It is not for sale,
+and it is not for public distribution."
+
+In developing the game, I'll take the rules from Wizardry (for which I still
+have the book), algorithms from the internet for building characters, 
+monsters, enemies, treasures, etc, and my own imagination for designing
+the play of the game.  I'm hoping to build in enough randomness so that
+no two adventures will be alike.  Honestly, I have no idea what the end
+result will be like.  I have ideas as to what I want. But, as I'm
+implementing the game, I expect those ideas to change.  Very agile like
+huh.
+
 ## 09/27/2017
 * Create code to name, save and load mazes.
-* prelim for using this for a game (The game I have in mind will be based
-on the old Apple ][ game called Wizardry.  I will probably take much of
-the rules and character generation from that game. Although I no longer
-have the hardware to play that game, I'll do my best given the rule book
-I still have)
+* Stuff for the game
   * randomly add rooms
-    * ~~controls to define x/y for the top/left corner of the room~~
-    * ~~controls to define width/height of the room.~~
     * method to create the room
-      * mark all cells as room cells. change background to blue.  Update display
       * make sure width/height is adjusted to not extend beyond the outer edge
       of the maze
       * room cannot include the cell adjacent to the entrance (the cell
@@ -48,7 +64,6 @@ I still have)
     you leave when stepping into the exit).
   * number of rooms a factor of the size of the maze
   * size of a room is random
-  * all paths in/out of a room has a door
   * some doors will be locked, must search maze for key.
   * rooms cannot overlap (I think.  Might not be a bad idea for
   creating odd shaped rooms)
@@ -63,8 +78,6 @@ I still have)
   3D in maze view, draw and up/down staircase.
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
 Using 2, 4, 6, 8 on the keypad for now.
-* ~~_BUG:_ when using animate create, the entrance cell is not marked and 3D
-in Maze view is blank
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * on change to entrance/exit combo box, validate selection
@@ -73,6 +86,16 @@ MainFrm or Maze display panel
 * need to learn how to "package" my app so that I can run it outside of the 
 IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
 already have a hook for Maven
+## 09/27/2017
+* ~~prelim for using this...~~
+  * ~~randomly add rooms~~
+    * ~~controls to define x/y for the top/left corner of the room~~
+    * ~~controls to define width/height of the room.~~
+    * ~~method to create the room~~
+      * ~~mark all cells as room cells. change background to blue.  Update display~~
+  * ~~all paths in/out of a room has a door~~
+* ~~_BUG:_ when using animate create, the entrance cell is not marked and 3D
+in Maze view is blank~~
 ## 09/26/2017
 ## 09/25/2017
 * ~~3D "in maze" view using 2D graphics~~

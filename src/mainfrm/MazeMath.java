@@ -8,10 +8,10 @@ class MazeMath {
 	}
 
 	static class point {
-		double x = 0.0;
-		double y = 0.0;
-		double z = 0.0;
-		double w = 1.0;
+		public double x = 0.0;
+		public double y = 0.0;
+		public double z = 0.0;
+		public double w = 1.0;
 
 		point(double _x, double _y, double _z, double _w)
 		{
@@ -67,7 +67,7 @@ class MazeMath {
 	}
 
 	static class rectangle {
-		point p[] = new point[4];
+		public point p[] = new point[4];
 
 		rectangle( point topLeft, point topRight, point bottomRight, point bottomLeft)
 		{

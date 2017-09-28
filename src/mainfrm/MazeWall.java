@@ -26,6 +26,10 @@ public class MazeWall {
 	{
 		door = true;
 	}
+	public boolean Door()
+	{
+		return door;
+	}
 
 	public MazeWall(int _xOrigin, int _yOrigin, boolean _horizontal )
 	{

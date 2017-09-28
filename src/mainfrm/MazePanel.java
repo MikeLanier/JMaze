@@ -172,6 +172,105 @@ public class MazePanel extends Canvas {
 		drawMaze();
 	}
 
+	private void drawDoors3D(GraphicsContext gc, MazeCell cell, int x, double z, MazeCell.CellFacing facing)
+	{
+		double x1 = -1+(x*2);
+		double x2 = 1+(x*2);
+		double y1 = -1;
+		double y2 = 1;
+		double z1 = z;
+		double z2 = z+1;
+
+		MazeMath.point p000 = new MazeMath.point(x1, y1, z1);
+		MazeMath.point p100 = new MazeMath.point(x2, y1, z1);
+		MazeMath.point p010 = new MazeMath.point(x1, y2, z1);
+		MazeMath.point p110 = new MazeMath.point(x2, y2, z1);
+		MazeMath.point p001 = new MazeMath.point(x1, y1, z2);
+		MazeMath.point p101 = new MazeMath.point(x2, y1, z2);
+		MazeMath.point p011 = new MazeMath.point(x1, y2, z2);
+		MazeMath.point p111 = new MazeMath.point(x2, y2, z2);
+
+		MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
+		MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
+		MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
+//		MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
+
+		MazeMath.matrix m = new MazeMath.matrix();
+		m.scale(100);
+
+		left = m.dot(left);
+		back = m.dot(back);
+		right = m.dot(right);
+//		front = m.dot(front);
+
+		double doorFrameSize = 15;
+		left.p[0].y += doorFrameSize;
+		left.p[1].y += doorFrameSize;
+		left.p[0].z += doorFrameSize;
+		left.p[1].z -= doorFrameSize;
+		left.p[2].z -= doorFrameSize;
+		left.p[3].z += doorFrameSize;
+
+		right.p[0].y += doorFrameSize;
+		right.p[1].y += doorFrameSize;
+		right.p[0].z += doorFrameSize;
+		right.p[1].z -= doorFrameSize;
+		right.p[2].z -= doorFrameSize;
+		right.p[3].z += doorFrameSize;
+
+//		front.p[0].y += doorFrameSize;
+//		front.p[1].y += doorFrameSize;
+
+		back.p[0].y += doorFrameSize;
+		back.p[1].y += doorFrameSize;
+		back.p[0].x += doorFrameSize;
+		back.p[1].x -= doorFrameSize;
+		back.p[2].x -= doorFrameSize;
+		back.p[3].x += doorFrameSize;
+
+//		left.dump("left");
+//		right.dump("right");
+//		back.dump("back");
+////		front.dump("front");
+
+		left.perspective(500.0);
+		back.perspective(500.0);
+		right.perspective(500.0);
+//		front.perspective(500.0);
+
+		double xOffset = 500;
+		double yOffset = 250;
+
+		left.move(xOffset, yOffset);
+		back.move(xOffset, yOffset);
+		right.move(xOffset, yOffset);
+//		front.move(xOffset, yOffset);
+
+		gc.setStroke(Color.BLACK);
+		gc.setFill(Color.LIGHTGRAY);
+
+		if(facing == MazeCell.CellFacing.eCellFacingEast) {
+			if (cell.W(MazeCell.east).Door()) back.draw(gc);
+			if (cell.W(MazeCell.north).Door()) left.draw(gc);
+			if (cell.W(MazeCell.south).Door()) right.draw(gc);
+		}
+		else if(facing == MazeCell.CellFacing.eCellFacingWest) {
+			if (cell.W(MazeCell.west).Door()) back.draw(gc);
+			if (cell.W(MazeCell.south).Door()) left.draw(gc);
+			if (cell.W(MazeCell.north).Door()) right.draw(gc);
+		}
+		else if(facing == MazeCell.CellFacing.eCellFacingNorth) {
+			if (cell.W(MazeCell.north).Door()) back.draw(gc);
+			if (cell.W(MazeCell.west).Door()) left.draw(gc);
+			if (cell.W(MazeCell.east).Door()) right.draw(gc);
+		}
+		else if(facing == MazeCell.CellFacing.eCellFacingSouth) {
+			if (cell.W(MazeCell.south).Door()) back.draw(gc);
+			if (cell.W(MazeCell.east).Door()) left.draw(gc);
+			if (cell.W(MazeCell.west).Door()) right.draw(gc);
+		}
+	}
+
 	private void drawCell3D(GraphicsContext gc, MazeCell cell, int x, double z, MazeCell.CellFacing facing)
 	{
 		double x1 = -1+(x*2);
@@ -193,7 +292,7 @@ public class MazePanel extends Canvas {
 		MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
 		MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
 		MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
-		MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
+//		MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
 
 		MazeMath.matrix m = new MazeMath.matrix();
 		m.scale(100);
@@ -201,12 +300,12 @@ public class MazePanel extends Canvas {
 		left = m.dot(left);
 		back = m.dot(back);
 		right = m.dot(right);
-		front = m.dot(front);
+//		front = m.dot(front);
 
 		left.perspective(500.0);
 		back.perspective(500.0);
 		right.perspective(500.0);
-		front.perspective(500.0);
+//		front.perspective(500.0);
 
 		double xOffset = 500;
 		double yOffset = 250;
@@ -214,31 +313,33 @@ public class MazePanel extends Canvas {
 		left.move(xOffset, yOffset);
 		back.move(xOffset, yOffset);
 		right.move(xOffset, yOffset);
-		front.move(xOffset, yOffset);
+//		front.move(xOffset, yOffset);
 
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.WHITE);
 
 		if(facing == MazeCell.CellFacing.eCellFacingEast) {
-			if (!cell.W(MazeCell.east).Open()) back.draw(gc);
-			if (!cell.W(MazeCell.north).Open()) left.draw(gc);
-			if (!cell.W(MazeCell.south).Open()) right.draw(gc);
+			if (!cell.W(MazeCell.east).Open() || cell.W(MazeCell.east).Door()) back.draw(gc);
+			if (!cell.W(MazeCell.north).Open() || cell.W(MazeCell.north).Door()) left.draw(gc);
+			if (!cell.W(MazeCell.south).Open() || cell.W(MazeCell.south).Door()) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingWest) {
-			if (!cell.W(MazeCell.west).Open()) back.draw(gc);
-			if (!cell.W(MazeCell.south).Open()) left.draw(gc);
-			if (!cell.W(MazeCell.north).Open()) right.draw(gc);
+			if (!cell.W(MazeCell.west).Open() || cell.W(MazeCell.west).Door()) back.draw(gc);
+			if (!cell.W(MazeCell.south).Open() || cell.W(MazeCell.south).Door()) left.draw(gc);
+			if (!cell.W(MazeCell.north).Open() ||cell.W(MazeCell.north).Door() ) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingNorth) {
-			if (!cell.W(MazeCell.north).Open()) back.draw(gc);
-			if (!cell.W(MazeCell.west).Open()) left.draw(gc);
-			if (!cell.W(MazeCell.east).Open()) right.draw(gc);
+			if (!cell.W(MazeCell.north).Open() || cell.W(MazeCell.north).Door()) back.draw(gc);
+			if (!cell.W(MazeCell.west).Open() || cell.W(MazeCell.west).Door()) left.draw(gc);
+			if (!cell.W(MazeCell.east).Open() || cell.W(MazeCell.east).Door()) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingSouth) {
-			if (!cell.W(MazeCell.south).Open()) back.draw(gc);
-			if (!cell.W(MazeCell.east).Open()) left.draw(gc);
-			if (!cell.W(MazeCell.west).Open()) right.draw(gc);
+			if (!cell.W(MazeCell.south).Open() || cell.W(MazeCell.south).Door()) back.draw(gc);
+			if (!cell.W(MazeCell.east).Open() || cell.W(MazeCell.east).Door()) left.draw(gc);
+			if (!cell.W(MazeCell.west).Open() || cell.W(MazeCell.west).Door()) right.draw(gc);
 		}
+
+		drawDoors3D(gc, cell, x, z, facing);
 	}
 
 	private void drawMaze3D(GraphicsContext gc) {

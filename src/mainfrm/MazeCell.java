@@ -123,7 +123,7 @@ class MazeCell {
 		if (type == CellType.eCellTypeStart) {
 			gc.setFill(Color.YELLOW);
 		} else if (type == CellType.eCellTypeRoom) {
-			gc.setFill(Color.LIGHTBLUE);
+			gc.setFill(Color.WHITE);
 		} else if (type == CellType.eCellTypeEntrance) {
 			gc.setFill((Color.LIGHTGREEN));
 		} else if (type == CellType.eCellTypeExit) {
