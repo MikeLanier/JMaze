@@ -77,7 +77,10 @@ huh.
   * entrance cell will be the bottom of a staircase, exit the top.  For the 
   3D in maze view, draw and up/down staircase.
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
-Using 2, 4, 6, 8 on the keypad for now.
+Using 2, 4, 6, 8 on the keypad for now. (9/28/17) Update. Tried a kludge
+where I forward keypress events on a control field to the maze.  But, it
+seems, sometimes the arrows move focus around the controls.  Something
+I really don't want to happen.  Need to rethink this.
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * on change to entrance/exit combo box, validate selection

@@ -44,11 +44,30 @@ public class MainFrm extends GridPane
 			public void handle(KeyEvent event)
 			{
 //				System.out.println("GridPane: OnKeyPressed: [" + event.getCode() + "]");
+				if(event.getCode() == KeyCode.LEFT) mazePanel.turnLeft();
+				if(event.getCode() == KeyCode.RIGHT) mazePanel.turnRight();
+				if(event.getCode() == KeyCode.DOWN) mazePanel.turnAround();
+				if(event.getCode() == KeyCode.UP) mazePanel.stepForward();
+
 				if(event.getCode() == KeyCode.NUMPAD4) mazePanel.turnLeft();
 				if(event.getCode() == KeyCode.NUMPAD6) mazePanel.turnRight();
 				if(event.getCode() == KeyCode.NUMPAD2) mazePanel.turnAround();
 				if(event.getCode() == KeyCode.NUMPAD8) mazePanel.stepForward();
 			}
 		});
+	}
+
+	public void OnKeyPressed(KeyEvent event)
+	{
+//		System.out.println("OnKeyPressed: [" + event.getCode() + "]");
+		if(event.getCode() == KeyCode.LEFT) mazePanel.turnLeft();
+		if(event.getCode() == KeyCode.RIGHT) mazePanel.turnRight();
+		if(event.getCode() == KeyCode.DOWN) mazePanel.turnAround();
+		if(event.getCode() == KeyCode.UP) mazePanel.stepForward();
+
+		if(event.getCode() == KeyCode.NUMPAD4) mazePanel.turnLeft();
+		if(event.getCode() == KeyCode.NUMPAD6) mazePanel.turnRight();
+		if(event.getCode() == KeyCode.NUMPAD2) mazePanel.turnAround();
+		if(event.getCode() == KeyCode.NUMPAD8) mazePanel.stepForward();
 	}
 }

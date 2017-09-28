@@ -1,14 +1,23 @@
 package mainfrm.ControlPanel;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import mainfrm.MainFrm;
 
 public class ControlPanelMazeSize extends HBox {
 	public TextField tfMazeSizeX			= new TextField();
 	public TextField	tfMazeSizeY			= new TextField();
-	public ControlPanelMazeSize(int _sizeX, int _sizeY)
+
+	private MainFrm mainFrm = null;
+
+	public ControlPanelMazeSize(MainFrm _mainFrm, int _sizeX, int _sizeY)
 	{
+		mainFrm = _mainFrm;
+
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
@@ -23,12 +32,13 @@ public class ControlPanelMazeSize extends HBox {
 		tfMazeSizeX.setTooltip(new Tooltip("Number of cells in a row of the maze"));
 		getChildren().add(tfMazeSizeX);
 
-//				tfMazeSizeX.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfMazeSizeX");
-//					}
-//				});
+		tfMazeSizeX.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				System.out.println("OnKeyReleased: tfMazeSizeX");
+				mainFrm.OnKeyPressed(event);
+			}
+		});
 
 		getChildren().add(ControlPanel.Spacer());
 		getChildren().add(ControlPanel.Marker("x", 0, false));
@@ -42,11 +52,12 @@ public class ControlPanelMazeSize extends HBox {
 		tfMazeSizeY.setTooltip(new Tooltip("Number of cells in a column of the maze"));
 		getChildren().add(tfMazeSizeY);
 
-//				tfMazeSizeY.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfMazeSizeY");
-//					}
-//				});
+		tfMazeSizeY.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				System.out.println("OnKeyReleased: tfMazeSizeY");
+				mainFrm.OnKeyPressed(event);
+			}
+		});
 	}
 }
