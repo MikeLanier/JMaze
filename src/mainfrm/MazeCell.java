@@ -26,31 +26,35 @@ class MazeCell {
 		return mazeWalls[which];
 	}
 
-	public enum CellType
-	{
-		eNormal,
+	public enum CellType {
+		eCellTypeNormal,
 		eCellTypeStart,
 		eCellTypeEntrance,
 		eCellTypeExit,
-		eCellTypeRoom,
+		eCellTypeRoom
+	}
+
+	public enum CellFacing {
+		eCellFacingNone,
 		eCellFacingEast,
 		eCellFacingWest,
 		eCellFacingNorth,
 		eCellFacingSouth
 	}
 
-	private CellType type = CellType.eNormal;
+	private CellType type = CellType.eCellTypeNormal;
+	private CellFacing facing = CellFacing.eCellFacingNone;
 
-	boolean facingNorth() { return type == CellType.eCellFacingNorth; }// ? true : false; }
-	boolean facingSouth() { return type == CellType.eCellFacingSouth; }// ? true : false; }
-	boolean facingEast() { return type == CellType.eCellFacingEast; }// ? true : false; }
-	boolean facingWest() { return type == CellType.eCellFacingWest; }// ? true : false; }
-	CellType direction() { return type; }
+	boolean facingNorth() { return facing == CellFacing.eCellFacingNorth; }// ? true : false; }
+	boolean facingSouth() { return facing == CellFacing.eCellFacingSouth; }// ? true : false; }
+	boolean facingEast() { return facing == CellFacing.eCellFacingEast; }// ? true : false; }
+	boolean facingWest() { return facing == CellFacing.eCellFacingWest; }// ? true : false; }
+	boolean facingNone() { return facing == CellFacing.eCellFacingNone; }// ? true : false; }
 
-	void SetType( CellType _type )
-	{
-		type = _type;
-	}
+	CellFacing direction() { return facing; }
+
+	public void setType( CellType _type ) { type = _type; }
+	public void setFacing( CellFacing _facing ) { facing = _facing; }
 
 	MazeCell(int _xOrigin, int _yOrigin, MazeWall west, MazeWall north, MazeWall east, MazeWall south)
 	{
@@ -118,36 +122,35 @@ class MazeCell {
 
 		if (type == CellType.eCellTypeStart) {
 			gc.setFill(Color.YELLOW);
-			gc.fillRect(x, y, cellSize, cellSize);
-		}
-		else if (type == CellType.eCellTypeRoom) {
+		} else if (type == CellType.eCellTypeRoom) {
 			gc.setFill(Color.LIGHTBLUE);
-			gc.fillRect(x, y, cellSize, cellSize);
-		}
-		else {
-			gc.setFill(Color.WHITE);
-			gc.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
-		}
-
-		// these draw on top of the background
-		if (type == CellType.eCellTypeEntrance) {
-			gc.setFill((Color.RED));
-			gc.fillPolygon(xpointsEast, ypointsEast, 8);
+		} else if (type == CellType.eCellTypeEntrance) {
+			gc.setFill((Color.LIGHTGREEN));
 		} else if (type == CellType.eCellTypeExit) {
-			gc.setFill((Color.RED));
-			gc.fillPolygon(xpointsEast, ypointsEast, 8);
-		} else if (type == CellType.eCellFacingEast) {
-			gc.setFill((Color.GREEN));
-			gc.fillPolygon(xpointsEast, ypointsEast, 8);
-		} else if (type == CellType.eCellFacingNorth) {
-			gc.setFill((Color.GREEN));
-			gc.fillPolygon(xpointsNorth, ypointsNorth, 8);
-		} else if (type == CellType.eCellFacingSouth) {
-			gc.setFill((Color.GREEN));
-			gc.fillPolygon(xpointsSouth, ypointsSouth, 8);
-		} else if (type == CellType.eCellFacingWest) {
-			gc.setFill((Color.GREEN));
-			gc.fillPolygon(xpointsWest, ypointsWest, 8);
+			gc.setFill((Color.LIGHTPINK));
+		} else {
+			gc.setFill(Color.WHITE);
+		}
+		gc.fillRect(x, y, cellSize, cellSize);
+
+		if(!facingNone()) {
+			if (type == CellType.eCellTypeEntrance) {
+				gc.setFill((Color.RED));
+			} else if (type == CellType.eCellTypeExit) {
+				gc.setFill((Color.RED));
+			} else {
+				gc.setFill((Color.GREEN));
+			}
+
+			if (facingEast()) {
+				gc.fillPolygon(xpointsEast, ypointsEast, 8);
+			} else if (facingNorth()) {
+				gc.fillPolygon(xpointsNorth, ypointsNorth, 8);
+			} else if (facingSouth()) {
+				gc.fillPolygon(xpointsSouth, ypointsSouth, 8);
+			} else if (facingWest()) {
+				gc.fillPolygon(xpointsWest, ypointsWest, 8);
+			}
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class MainFrm extends GridPane
 		mazePanel.currentMazeCell = mazePanel.cells.get(MazeGlobal.ID(startCellX, startCellY, false));
 		if(mazePanel.currentMazeCell != null)
 		{
-			mazePanel.currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+			mazePanel.currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
 		}
 
 		mazePanel.drawMaze();

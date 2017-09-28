@@ -109,22 +109,23 @@ public class MazePanel extends Canvas {
 		Integer x = 0;
 		Integer y = MazeGlobal.sizeY/3;
 		entranceMazeCell = createCell(x,y);
-		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
+		entranceMazeCell.setType(MazeCell.CellType.eCellTypeEntrance);
+		entranceMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 
 //		Integer x = MazeGlobal.sizeX/2;
 //		Integer y = MazeGlobal.sizeY+1;
 //		entranceMazeCell = createCell(x,y);
-//		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
+//		entranceMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
 
 //		Integer x = MazeGlobal.sizeX/2;
 //		Integer y = 0;
 //		entranceMazeCell = createCell(x,y);
-//		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
+//		entranceMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
 
 //		Integer x = MazeGlobal.sizeX+1;
 //		Integer y = MazeGlobal.sizeY/3;
 //		entranceMazeCell = createCell(x,y);
-//		entranceMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
+//		entranceMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
 
 		x = MazeGlobal.sizeX+1;
 		y = MazeGlobal.sizeY*2/3;
@@ -135,10 +136,12 @@ public class MazePanel extends Canvas {
 		currentMazeCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
 		if(currentMazeCell != null)
 		{
-			currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
 		}
 
-		exitMazeCell.SetType(MazeCell.CellType.eCellTypeExit);
+		exitMazeCell.setType(MazeCell.CellType.eCellTypeExit);
+		exitMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 
 		entranceMazeCell.setVisited();
 		exitMazeCell.setVisited();
@@ -169,7 +172,7 @@ public class MazePanel extends Canvas {
 		drawMaze();
 	}
 
-	private void drawCell3D(GraphicsContext gc, MazeCell cell, int x, double z, MazeCell.CellType direction)
+	private void drawCell3D(GraphicsContext gc, MazeCell cell, int x, double z, MazeCell.CellFacing facing)
 	{
 		double x1 = -1+(x*2);
 		double x2 = 1+(x*2);
@@ -216,22 +219,22 @@ public class MazePanel extends Canvas {
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.WHITE);
 
-		if(direction == MazeCell.CellType.eCellFacingEast) {
+		if(facing == MazeCell.CellFacing.eCellFacingEast) {
 			if (!cell.W(MazeCell.east).Open()) back.draw(gc);
 			if (!cell.W(MazeCell.north).Open()) left.draw(gc);
 			if (!cell.W(MazeCell.south).Open()) right.draw(gc);
 		}
-		else if(direction == MazeCell.CellType.eCellFacingWest) {
+		else if(facing == MazeCell.CellFacing.eCellFacingWest) {
 			if (!cell.W(MazeCell.west).Open()) back.draw(gc);
 			if (!cell.W(MazeCell.south).Open()) left.draw(gc);
 			if (!cell.W(MazeCell.north).Open()) right.draw(gc);
 		}
-		else if(direction == MazeCell.CellType.eCellFacingNorth) {
+		else if(facing == MazeCell.CellFacing.eCellFacingNorth) {
 			if (!cell.W(MazeCell.north).Open()) back.draw(gc);
 			if (!cell.W(MazeCell.west).Open()) left.draw(gc);
 			if (!cell.W(MazeCell.east).Open()) right.draw(gc);
 		}
-		else if(direction == MazeCell.CellType.eCellFacingSouth) {
+		else if(facing == MazeCell.CellFacing.eCellFacingSouth) {
 			if (!cell.W(MazeCell.south).Open()) back.draw(gc);
 			if (!cell.W(MazeCell.east).Open()) left.draw(gc);
 			if (!cell.W(MazeCell.west).Open()) right.draw(gc);
@@ -307,19 +310,19 @@ public class MazePanel extends Canvas {
 
 	void turnLeft()
 	{
-		if(currentMazeCell.facingNorth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
-		else if(currentMazeCell.facingWest())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
-		else if(currentMazeCell.facingSouth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
-		else if(currentMazeCell.facingEast())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
+		if(currentMazeCell.facingNorth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		else if(currentMazeCell.facingWest())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
+		else if(currentMazeCell.facingSouth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
+		else if(currentMazeCell.facingEast())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
 		drawMaze();
 	}
 
 	void turnRight()
 	{
-		if(currentMazeCell.facingNorth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
-		else if(currentMazeCell.facingEast())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
-		else if(currentMazeCell.facingSouth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
-		else if(currentMazeCell.facingWest())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
+		if(currentMazeCell.facingNorth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
+		else if(currentMazeCell.facingEast())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
+		else if(currentMazeCell.facingSouth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		else if(currentMazeCell.facingWest())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
 		drawMaze();
 	}
 
@@ -333,55 +336,53 @@ public class MazePanel extends Canvas {
 		if(currentMazeCell.facingEast() && !currentMazeCell.W(MazeCell.east).Open())	return;
 		if(currentMazeCell.facingWest() && !currentMazeCell.W(MazeCell.west).Open())	return;
 
+		GraphicsContext gc = getGraphicsContext2D();
+
 		if(currentMazeCell.facingNorth()) {
 			y--;
-			GraphicsContext gc = getGraphicsContext2D();
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
-			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			currentMazeCell = cells.get(MazeGlobal.ID(x,y,false));
 			if(currentMazeCell != null)
 			{
-				currentMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
+				currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
 				currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			}
 		}
 		else if(currentMazeCell.facingEast()) {
 			x++;
-			GraphicsContext gc = getGraphicsContext2D();
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
-			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			currentMazeCell = cells.get(MazeGlobal.ID(x,y,false));
 			if(currentMazeCell != null)
 			{
-				currentMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
+				currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 				currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			}
 		}
 		else if(currentMazeCell.facingSouth()) {
 			y++;
-			GraphicsContext gc = getGraphicsContext2D();
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
-			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			currentMazeCell = cells.get(MazeGlobal.ID(x,y,false));
 			if(currentMazeCell != null)
 			{
-				currentMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
+				currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
 				currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			}
 		}
 		else if(currentMazeCell.facingWest()) {
 			x--;
-			GraphicsContext gc = getGraphicsContext2D();
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
-			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+			currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			currentMazeCell = cells.get(MazeGlobal.ID(x,y,false));
 			if(currentMazeCell != null)
 			{
-				currentMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
+				currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
 				currentMazeCell.draw(gc, xOffset, yOffset, MazeGlobal.sizeCell);
 			}
 		}
@@ -391,10 +392,10 @@ public class MazePanel extends Canvas {
 
 	void turnAround()
 	{
-		if(currentMazeCell.facingNorth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingSouth);
-		else if(currentMazeCell.facingEast())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingWest);
-		else if(currentMazeCell.facingSouth())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingNorth);
-		else if(currentMazeCell.facingWest())	currentMazeCell.SetType(MazeCell.CellType.eCellFacingEast);
+		if(currentMazeCell.facingNorth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
+		else if(currentMazeCell.facingEast())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		else if(currentMazeCell.facingSouth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
+		else if(currentMazeCell.facingWest())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 		drawMaze();
 	}
 
@@ -431,19 +432,19 @@ public class MazePanel extends Canvas {
 			int r = controlPanel.rand.nextInt(cells.size());
 
 			cells.get(r).wall.Open(true);
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeNormal);
 			currentMazeCell = cells.get(r).cell;
-			currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
 			currentMazeCell.setVisited();
 			stack.push(currentMazeCell);
 		} else {
-			currentMazeCell.SetType(MazeCell.CellType.eNormal);
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeNormal);
 			currentMazeCell = stack.pop();
 
 			if (stack.size() > 0)
-				currentMazeCell.SetType(MazeCell.CellType.eCellTypeStart);
+				currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
 			else
-				currentMazeCell.SetType(MazeCell.CellType.eNormal);
+				currentMazeCell.setType(MazeCell.CellType.eCellTypeNormal);
 		}
 
 		if(redrawMaze) drawMaze();
@@ -490,7 +491,7 @@ public class MazePanel extends Canvas {
 			for(int y=roomOriginY; y<=bottom; y++) {
 				MazeCell cell = this.cells.get(MazeGlobal.ID(x,y,false));
 				if(cell != null) {
-					cell.SetType(MazeCell.CellType.eCellTypeRoom);
+					cell.setType(MazeCell.CellType.eCellTypeRoom);
 
 					if(x != right) cell.W(MazeCell.east).Open(true);
 					if(y != bottom) cell.W(MazeCell.south).Open(true);
@@ -499,5 +500,4 @@ public class MazePanel extends Canvas {
 		}
 		drawMaze();
 	}
-
 }
