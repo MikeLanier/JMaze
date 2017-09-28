@@ -29,8 +29,8 @@ public class MainFrm extends GridPane
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		add(mazePanel =new MazePanel(controlPanel), 1, 0);
 
-		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
-		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
+		int startCellX = MazeGlobal.startCellX;
+		int startCellY = MazeGlobal.startCellY;
 		mazePanel.currentMazeCell = mazePanel.cells.get(MazeGlobal.ID(startCellX, startCellY, false));
 		if(mazePanel.currentMazeCell != null)
 		{

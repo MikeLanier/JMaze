@@ -95,6 +95,23 @@ public class MazePanel extends Canvas {
 
 	private Stack<MazeCell> stack = null; //new Stack<MazeCell>();
 
+	public void updateStartCell() {
+		int startCellX = MazeGlobal.startCellX;
+		int startCellY = MazeGlobal.startCellY;
+
+		if(currentMazeCell != null)
+		{
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeNormal);
+		}
+
+		currentMazeCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
+		if(currentMazeCell != null)
+		{
+			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
+			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+		}
+	}
+
 	public void createMaze(boolean animate)
 	{
 		MazeGlobal.sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
@@ -131,14 +148,15 @@ public class MazePanel extends Canvas {
 		y = MazeGlobal.sizeY*2/3;
 		MazeCell exitMazeCell = createCell(x,y);
 
-		int startCellX = Integer.parseInt(controlPanel.startCellControl.tfStartCellX.getText());
-		int startCellY = Integer.parseInt(controlPanel.startCellControl.tfStartCellY.getText());
-		currentMazeCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
-		if(currentMazeCell != null)
-		{
-			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
-			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
-		}
+		updateStartCell();
+//		int startCellX = MazeGlobal.startCellX;
+//		int startCellY = MazeGlobal.startCellY;
+//		currentMazeCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
+//		if(currentMazeCell != null)
+//		{
+//			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
+//			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
+//		}
 
 		exitMazeCell.setType(MazeCell.CellType.eCellTypeExit);
 		exitMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
@@ -530,7 +548,7 @@ public class MazePanel extends Canvas {
 		if (southMazeCell != null && !southMazeCell.Visited())		cells.add(new Group3(southMazeCell, currentMazeCell.W(MazeCell.south)));
 
 		if (cells.size() > 0) {
-			int r = controlPanel.rand.nextInt(cells.size());
+			int r = MazeGlobal.rand.nextInt(cells.size());
 
 			cells.get(r).wall.Open(true);
 			currentMazeCell.setType(MazeCell.CellType.eCellTypeNormal);

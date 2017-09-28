@@ -5,11 +5,9 @@ import javafx.scene.layout.VBox;
 import mainfrm.MainFrm;
 import mainfrm.MazeGlobal;
 
-import java.util.Random;
 
 public class ControlPanel extends VBox {
 
-	public Random rand = new Random(System.currentTimeMillis());
 
 	public static Label Marker(String title, int size, boolean disabled)
 	{
@@ -56,7 +54,7 @@ public class ControlPanel extends VBox {
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
 //		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
-		getChildren().add(startCellControl = new ControlPanelStartCell(MazeGlobal.sizeX, MazeGlobal.sizeY));
+		getChildren().add(startCellControl = new ControlPanelStartCell(mainFrm, MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(entranceControl = new ControlPanelEntrance(MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(exitControl = new ControlPanelExit(MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(new ControlPanelSeparator());

@@ -53,6 +53,9 @@ huh.
 
 ## 09/27/2017
 * Create code to name, save and load mazes.
+* ~~pick start cell by clicking the random button~~
+  * ~~change x or y of start cell and update the display~~
+  * ~~click the random button, update the controls and display~~
 * Stuff for the game
   * randomly add rooms
     * method to create the room
@@ -84,7 +87,6 @@ I really don't want to happen.  Need to rethink this.
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * on change to entrance/exit combo box, validate selection
-* pick start cell by clicking the random button
 * look at other algorithms
 * need to learn how to "package" my app so that I can run it outside of the 
 IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
