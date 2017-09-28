@@ -495,9 +495,34 @@ public class MazePanel extends Canvas {
 
 					if(x != right) cell.W(MazeCell.east).Open(true);
 					if(y != bottom) cell.W(MazeCell.south).Open(true);
+
+					if(y == roomOriginY) {
+						if(cell.W(MazeCell.north) != null)
+							if(cell.W(MazeCell.north).Open())
+								cell.W(MazeCell.north).setDoor();
+					}
+
+					if(y == bottom) {
+						if(cell.W(MazeCell.south) != null)
+							if(cell.W(MazeCell.south).Open())
+								cell.W(MazeCell.south).setDoor();
+					}
+
+					if(x == roomOriginX) {
+						if(cell.W(MazeCell.west) != null)
+							if(cell.W(MazeCell.west).Open())
+								cell.W(MazeCell.west).setDoor();
+					}
+
+					if(x == right) {
+						if(cell.W(MazeCell.east) != null)
+							if(cell.W(MazeCell.east).Open())
+								cell.W(MazeCell.east).setDoor();
+					}
 				}
 			}
 		}
+
 		drawMaze();
 	}
 }

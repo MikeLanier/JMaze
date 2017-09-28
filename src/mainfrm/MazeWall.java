@@ -8,6 +8,7 @@ public class MazeWall {
 	private int yOrigin = 0;
 	private boolean horizontal = true;
 	private boolean open = false;
+	private boolean door = false;
 	private Color closedColor = Color.BLACK;
 
 //	public void ClosedColor(Color _closedColor) { closedColor = _closedColor; }
@@ -19,6 +20,11 @@ public class MazeWall {
 	public boolean Open()
 	{
 		return open;
+	}
+
+	public void setDoor()
+	{
+		door = true;
 	}
 
 	public MazeWall(int _xOrigin, int _yOrigin, boolean _horizontal )
@@ -42,7 +48,10 @@ public class MazeWall {
 		gc.setLineWidth(1);
 
 		if(open)
-			gc.setStroke(Color.WHITE);
+			if(door)
+				gc.setStroke(Color.RED);
+			else
+				gc.setStroke(Color.WHITE);
 		else
 			gc.setStroke(closedColor);
 
