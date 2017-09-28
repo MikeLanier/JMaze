@@ -53,6 +53,8 @@ huh.
 
 ## 09/27/2017
 * Create code to name, save and load mazes.
+* method for createing the entrance/exit cell, needs to clean up the
+old cell before creating a new one
 * pick entrance cell by clicking the random button
   * change x or y of entrance cell and update the display
   * click the random button, update the controls and display

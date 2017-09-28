@@ -12,6 +12,13 @@ public class MazeGlobal {
 	public static boolean		maze3Ddisplay = true;
 	public static Integer		startCellX = sizeX/2;
 	public static Integer		startCellY = sizeY/2;
+	public static Integer		entranceCellX = 0;
+	public static Integer		entranceCellY = sizeY / 3;
+	public static Integer		exitCellX = sizeX + 1;
+	public static Integer		exitCellY = sizeY * 2 / 3;
+	public static MazeCell		currentMazeCell = null;
+	public static MazeCell		entranceMazeCell = null;
+	public static MazeCell		exitMazeCell = null;
 
 	public static Random rand = new Random(System.currentTimeMillis());
 
