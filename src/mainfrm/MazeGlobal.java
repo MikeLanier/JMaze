@@ -10,8 +10,8 @@ public class MazeGlobal {
 	public static int			sizeCell = 25;
 	public static boolean		maze2Ddisplay = true;
 	public static boolean		maze3Ddisplay = true;
-	public static Integer		startCellX = 3;
-	public static Integer		startCellY = 3;
+	public static Integer		startCellX = sizeX/2;
+	public static Integer		startCellY = sizeY/2;
 
 	public static Random rand = new Random(System.currentTimeMillis());
 

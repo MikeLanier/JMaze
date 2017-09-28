@@ -149,14 +149,6 @@ public class MazePanel extends Canvas {
 		MazeCell exitMazeCell = createCell(x,y);
 
 		updateStartCell();
-//		int startCellX = MazeGlobal.startCellX;
-//		int startCellY = MazeGlobal.startCellY;
-//		currentMazeCell = cells.get(MazeGlobal.ID(startCellX, startCellY, false));
-//		if(currentMazeCell != null)
-//		{
-//			currentMazeCell.setType(MazeCell.CellType.eCellTypeStart);
-//			currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNone);
-//		}
 
 		exitMazeCell.setType(MazeCell.CellType.eCellTypeExit);
 		exitMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
@@ -211,7 +203,6 @@ public class MazePanel extends Canvas {
 		MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
 		MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
 		MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
-//		MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
 
 		MazeMath.matrix m = new MazeMath.matrix();
 		m.scale(100);
@@ -219,7 +210,6 @@ public class MazePanel extends Canvas {
 		left = m.dot(left);
 		back = m.dot(back);
 		right = m.dot(right);
-//		front = m.dot(front);
 
 		double doorFrameSize = 15;
 		left.p[0].y += doorFrameSize;
@@ -236,9 +226,6 @@ public class MazePanel extends Canvas {
 		right.p[2].z -= doorFrameSize;
 		right.p[3].z += doorFrameSize;
 
-//		front.p[0].y += doorFrameSize;
-//		front.p[1].y += doorFrameSize;
-
 		back.p[0].y += doorFrameSize;
 		back.p[1].y += doorFrameSize;
 		back.p[0].x += doorFrameSize;
@@ -246,15 +233,9 @@ public class MazePanel extends Canvas {
 		back.p[2].x -= doorFrameSize;
 		back.p[3].x += doorFrameSize;
 
-//		left.dump("left");
-//		right.dump("right");
-//		back.dump("back");
-////		front.dump("front");
-
 		left.perspective(500.0);
 		back.perspective(500.0);
 		right.perspective(500.0);
-//		front.perspective(500.0);
 
 		double xOffset = 500;
 		double yOffset = 250;
@@ -262,7 +243,6 @@ public class MazePanel extends Canvas {
 		left.move(xOffset, yOffset);
 		back.move(xOffset, yOffset);
 		right.move(xOffset, yOffset);
-//		front.move(xOffset, yOffset);
 
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.LIGHTGRAY);
@@ -310,7 +290,6 @@ public class MazePanel extends Canvas {
 		MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
 		MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
 		MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
-//		MazeMath.rectangle front = new MazeMath.rectangle(p000, p100, p110, p010);
 
 		MazeMath.matrix m = new MazeMath.matrix();
 		m.scale(100);
@@ -318,12 +297,10 @@ public class MazePanel extends Canvas {
 		left = m.dot(left);
 		back = m.dot(back);
 		right = m.dot(right);
-//		front = m.dot(front);
 
 		left.perspective(500.0);
 		back.perspective(500.0);
 		right.perspective(500.0);
-//		front.perspective(500.0);
 
 		double xOffset = 500;
 		double yOffset = 250;
@@ -331,7 +308,6 @@ public class MazePanel extends Canvas {
 		left.move(xOffset, yOffset);
 		back.move(xOffset, yOffset);
 		right.move(xOffset, yOffset);
-//		front.move(xOffset, yOffset);
 
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.WHITE);
@@ -373,23 +349,15 @@ public class MazePanel extends Canvas {
 			for(int j=5; j>=0; j--) {
 				for (int i = 0; i < 5; i++) {
 					if(currentMazeCell.facingEast()) {
-//						int cx = x + j;
-//						int cy = y + index[i];
 						cell = cells.get(MazeGlobal.ID(x + j, y + index[i], false));
 					}
 					else if(currentMazeCell.facingWest()) {
-//						int cx = x - j;
-//						int cy = y + index[i];
 						cell = cells.get(MazeGlobal.ID(x - j, y - index[i], false));
 					}
 					else if(currentMazeCell.facingSouth()) {
-//						int cx = x + index[i];
-//						int cy = y + j;
 						cell = cells.get(MazeGlobal.ID(x  - index[i], y + j, false));
 					}
 					else if(currentMazeCell.facingNorth()) {
-//						int cx = x + index[i];
-//						int cy = y - j;
 						cell = cells.get(MazeGlobal.ID(index[i] + x, y - j, false));
 					}
 
@@ -429,7 +397,7 @@ public class MazePanel extends Canvas {
 
 	void turnLeft()
 	{
-		if(currentMazeCell.facingNorth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		if(currentMazeCell.facingNorth())		currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
 		else if(currentMazeCell.facingWest())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
 		else if(currentMazeCell.facingSouth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 		else if(currentMazeCell.facingEast())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
@@ -438,7 +406,7 @@ public class MazePanel extends Canvas {
 
 	void turnRight()
 	{
-		if(currentMazeCell.facingNorth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
+		if(currentMazeCell.facingNorth())		currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 		else if(currentMazeCell.facingEast())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
 		else if(currentMazeCell.facingSouth())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
 		else if(currentMazeCell.facingWest())	currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingNorth);

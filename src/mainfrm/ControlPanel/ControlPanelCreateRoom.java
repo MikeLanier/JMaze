@@ -168,24 +168,41 @@ public class ControlPanelCreateRoom extends VBox {
 			hboxRoomSize.getChildren().add(btnRandomSize);
 		}
 		{
-			HBox hboxPreview = new HBox();
-			getChildren().add(hboxPreview);
+			HBox hboxCreate = new HBox();
+			getChildren().add(hboxCreate);
 
 			javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 0, 20);
-			hboxPreview.paddingProperty().setValue(margin);
+			hboxCreate.paddingProperty().setValue(margin);
 
-			Button btnRoomPreview = new Button();
-			btnRoomPreview.setText("Preview");
-			btnRoomPreview.setMinWidth(70);
-			btnRoomPreview.setMaxWidth(70);
-			btnRoomPreview.setTooltip(new Tooltip("Print the maze"));
-//			btnRoomPreview.setDisable(true);
-			hboxPreview.getChildren().add(btnRoomPreview);
+			Button btnRoomCreate = new Button();
+			btnRoomCreate.setText("Create");
+			btnRoomCreate.setMinWidth(70);
+			btnRoomCreate.setMaxWidth(70);
+			btnRoomCreate.setTooltip(new Tooltip("Print the maze"));
+//			btnRoomCreate.setDisable(true);
+			hboxCreate.getChildren().add(btnRoomCreate);
 
-			btnRoomPreview.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			btnRoomCreate.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
 					mainFrm.mazePanel.createRoom(roomOriginX, roomOriginY, roomSizeX, roomSizeY);
+				}
+			});
+
+			hboxCreate.getChildren().add(ControlPanel.Spacer());
+
+			Button btnRoomCreateAll = new Button();
+			btnRoomCreateAll.setText("Create All");
+			btnRoomCreateAll.setMinWidth(70);
+			btnRoomCreateAll.setMaxWidth(70);
+			btnRoomCreateAll.setTooltip(new Tooltip("Randomly create all the rooms in the maze"));
+//			btnRoomCreateAll.setDisable(true);
+			hboxCreate.getChildren().add(btnRoomCreateAll);
+
+			btnRoomCreateAll.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+//					mainFrm.mazePanel.CreateAllRoom(roomOriginX, roomOriginY, roomSizeX, roomSizeY);
 				}
 			});
 		}

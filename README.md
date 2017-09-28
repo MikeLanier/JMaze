@@ -53,6 +53,12 @@ huh.
 
 ## 09/27/2017
 * Create code to name, save and load mazes.
+* pick entrance cell by clicking the random button
+  * change x or y of entrance cell and update the display
+  * click the random button, update the controls and display
+* pick exit cell by clicking the random button
+  * change x or y of exit cell and update the display
+  * click the random button, update the controls and display
 * ~~pick start cell by clicking the random button~~
   * ~~change x or y of start cell and update the display~~
   * ~~click the random button, update the controls and display~~

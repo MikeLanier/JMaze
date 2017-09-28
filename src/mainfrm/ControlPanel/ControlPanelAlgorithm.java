@@ -32,6 +32,8 @@ public class ControlPanelAlgorithm extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
+		setDisable(true);
+
 		getChildren().add(ControlPanel.Marker("Algorithm", 70, false));
 		getChildren().add(ControlPanel.Spacer());
 
