@@ -227,7 +227,7 @@ public class ControlPanelEntranceExit extends VBox {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
-	public void Validate()
+	public void adjustEntranceExitParameters()
 	{
 		System.out.println("ControlPanelEntranceExit: Validate");
 		String strX = tfEntranceX.getValue();
@@ -269,61 +269,64 @@ public class ControlPanelEntranceExit extends VBox {
 		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
 	}
 
+	private boolean parametersValid() {
+
+		Integer entranceX = parseComboValue(tfEntranceX, MazeGlobal.sizeX);
+		Integer entranceY = parseComboValue(tfEntranceY, MazeGlobal.sizeY);
+		Integer exitX = parseComboValue(tfExitX, MazeGlobal.sizeX);
+		Integer exitY = parseComboValue(tfExitY, MazeGlobal.sizeY);
+		Integer maxX = MazeGlobal.sizeX + 1;
+		Integer maxY = MazeGlobal.sizeY + 1;
+		Integer centerX = maxX/2;
+		Integer centerY = maxY/2;
+
+		System.out.println("entrance, exit: [" + entranceX + ", " + entranceY + "], [" + exitX + ", " + exitY + "]");
+
+		// is the entrance/exit on the same side of the maze
+		if(entranceX == exitX) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+		if(entranceY == exitY) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+
+		// has a side been selected for both X and Y?
+		if(entranceX < 2 &&  entranceY < 2) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+		if(exitX < 2 &&  exitY < 2)			{ controlPanel.createMazeControl.setDisableCreate(true); return false; }
+
+		// has a side been selected for neither X and Y?
+		if((entranceX > 1 && entranceX < maxX) &&  (entranceY > 1 && entranceY < maxY)) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+		if((exitX > 1 && exitX < maxX) &&  (exitY > 1 && exitY < maxY)) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+
+		if(entranceX == 0 && exitX < centerX) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+		if(entranceX == maxX && exitX > centerX) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+
+		if(entranceY == 0 && exitY < centerY) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+		if(entranceY == maxY && exitY > centerY) { controlPanel.createMazeControl.setDisableCreate(true); return false; }
+
+		controlPanel.createMazeControl.setDisableCreate(false);
+		return true;
+	}
+
+	private Integer parseComboValue(ComboBox<String> cb, int max) {
+		Integer value = 0;
+		String str = cb.getValue();
+
+		if (str == "west") value = 0;
+		else if (str == "north") value = 0;
+		else if (str == "east") value = max + 1;
+		else if (str == "west") value = max + 1;
+		else value = MazeGlobal.parseTextField(str, -1);
+
+		return value;
+	}
 	private void updateEntranceCellParameters() {
-		Validate();
-
-		String strX = tfEntranceX.getValue();
-		String strY = tfEntranceY.getValue();
-		Integer x = 0;
-		Integer y = 0;
-//		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
-//		System.out.println("x, y: " + strX + ", " + strY);
-
-		if(strX == "west")	x = 0;
-		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
-		else x = MazeGlobal.parseTextField(strX, -1);
-
-		if(strY == "north")	y = 0;
-		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
-		else y = MazeGlobal.parseTextField(strY, -1);
-
-		MazeGlobal.entranceCellX = x;
-		MazeGlobal.entranceCellY = y;
-//		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
-
-//		mainFrm.mazePanel.
-//
-//		deleteEntranceExitCell(MazeGlobal.exitMazeCell);
-//		MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
-//		mainFrm.mazePanel.drawMaze();
+		if(parametersValid()) {
+			MazeGlobal.entranceCellX = parseComboValue(tfEntranceX, MazeGlobal.sizeX);
+			MazeGlobal.entranceCellY = parseComboValue(tfEntranceY, MazeGlobal.sizeY);
+		}
 	}
 
 	private void updateExitCellParameters() {
-		Validate();
-
-		String strX = tfExitX.getValue();
-		String strY = tfExitY.getValue();
-		Integer x = 0;
-		Integer y = 0;
-//		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
-//		System.out.println("x, y: " + strX + ", " + strY);
-
-		if(strX == "west")	x = 0;
-		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
-		else x = MazeGlobal.parseTextField(strX, -1);
-
-		if(strY == "north")	y = 0;
-		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
-		else y = MazeGlobal.parseTextField(strY, -1);
-
-		MazeGlobal.exitCellX = x;
-		MazeGlobal.exitCellY = y;
-//		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
-
-//		mainFrm.mazePanel.
-//
-//		deleteEntranceExitCell(MazeGlobal.exitMazeCell);
-//		MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
-//		mainFrm.mazePanel.drawMaze();
+		if(parametersValid()) {
+			MazeGlobal.exitCellX = parseComboValue(tfExitX, MazeGlobal.sizeX);
+			MazeGlobal.exitCellY = parseComboValue(tfExitY, MazeGlobal.sizeY);
+		}
 	}
 }

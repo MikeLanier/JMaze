@@ -83,20 +83,20 @@ huh.
 * create entrance/exit cell for down/up stairs
 * ~~If the maze size changes, validate the entrance/exit cell parameters.~~
 * entrance/edit cells
-  * validate when values in x/y controls change. If not valid disable
+  * ~~validate when values in x/y controls change. If not valid disable
   create buttons. Show an error icon with tooltip that explains the nature
-  of the problem.
+  of the problem.~~
   * ~~add a create button.  Only want to change when satisfied with values
    in controls.  Turns out, don't need~~
   * ~~clean up the old cell before creating a new one~~
   * ~~make sure new cell is facing the right direction~~
-  * rules for cell relationship
-    * cell must enter/exit the maze in a quadrant opposite the other cell. 
+  * ~~rules for cell relationship~~
+    * ~~cell must enter/exit the maze in a quadrant opposite the other cell. 
     IE. If the entrance cell is on the top-left quadrant, the exit cell must
-    be on either the top-right or bottom-right quadrant.  
-    * cells cannot be on same side of the maze. IE. If the entrance is to 
+    be on either the top-right or bottom-right quadrant.~~  
+    * ~~cells cannot be on same side of the maze. IE. If the entrance is to 
     the top of the top-left quadrant, the exit cannot be on the top of 
-    the top-right quadrant.
+    the top-right quadrant.~~
   * pick entrance/exit cell by clicking the random button. the randomly
   picked cell will obey the relationship rules outlined above. Cell will
   be automatically created.  No need to click create button

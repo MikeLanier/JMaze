@@ -41,7 +41,7 @@ public class ControlPanelMazeSize extends HBox {
 				System.out.println("OnKeyReleased: tfMazeSizeX");
 //				mainFrm.OnKeyPressed(event);
 				MazeGlobal.sizeX = MazeGlobal.parseTextField(tfMazeSizeX, MazeGlobal.sizeX);
-				controlPanel.entranceExitControl.Validate();
+				controlPanel.entranceExitControl.adjustEntranceExitParameters();
 			}
 		});
 
@@ -63,7 +63,7 @@ public class ControlPanelMazeSize extends HBox {
 				System.out.println("OnKeyReleased: tfMazeSizeY");
 //				mainFrm.OnKeyPressed(event);
 				MazeGlobal.sizeY = MazeGlobal.parseTextField(tfMazeSizeY, MazeGlobal.sizeY);
-				controlPanel.entranceExitControl.Validate();
+				controlPanel.entranceExitControl.adjustEntranceExitParameters();
 			}
 		});
 	}

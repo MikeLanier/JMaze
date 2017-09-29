@@ -35,6 +35,7 @@ public class ControlPanel extends VBox {
 	public ControlPanelStartCell startCellControl = null;
 	public ControlPanelEntranceExit entranceExitControl = null;
 	public ControlPanelCreateRoom createRoomControl = null;
+	public ControlPanelCreateMaze createMazeControl = null;
 
 	public ControlPanel(MainFrm _mainFrm)
 	{
@@ -56,7 +57,7 @@ public class ControlPanel extends VBox {
 		getChildren().add(startCellControl = new ControlPanelStartCell(mainFrm, MazeGlobal.sizeX, MazeGlobal.sizeY));
 		getChildren().add(entranceExitControl = new ControlPanelEntranceExit(this, mainFrm));
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(new ControlPanelCreateMaze(this, mainFrm));
+		getChildren().add(createMazeControl = new ControlPanelCreateMaze(this, mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
 		getChildren().add(new ControlPanelPrintMaze());
 		getChildren().add(new ControlPanelSeparator());
