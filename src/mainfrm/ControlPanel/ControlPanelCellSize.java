@@ -19,7 +19,7 @@ public class ControlPanelCellSize extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Cell Size", 70, false));
+		getChildren().add(ControlPanel.Marker("Cell Size", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		Integer cs = _sizeCell;

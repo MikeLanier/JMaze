@@ -18,10 +18,12 @@ public class ControlPanelEntranceExit extends VBox {
 	private ComboBox<String> tfEntranceX	= new ComboBox<>();
 	private ComboBox<String> tfEntranceY	= new ComboBox<>();
 	private Button btnEntranceSet			= new Button();
+	private Button btnEntranceCreate		= new Button();
 
 	public ComboBox<String> tfExitX			= new ComboBox<>();
 	public ComboBox<String>	tfExitY			= new ComboBox<>();
 	public Button btnExitSet				= new Button();
+	public Button btnExitCreate				= new Button();
 
 	private MainFrm mainFrm = null;
 	public ControlPanelEntranceExit(MainFrm _mainFrm)
@@ -30,12 +32,24 @@ public class ControlPanelEntranceExit extends VBox {
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 
+		Image imgRandomEntrance = new Image(getClass().getResource("random.png").toString());
+		ImageView ivRandomEntrance = new ImageView(imgRandomEntrance);
+
+		Image imgRandomExit = new Image(getClass().getResource("random.png").toString());
+		ImageView ivRandomExit = new ImageView(imgRandomExit);
+
+		Image imgCreateEntrance = new Image(getClass().getResource("random.png").toString());
+		ImageView ivCreateEntrance = new ImageView(imgCreateEntrance);
+
+		Image imgCreateExit = new Image(getClass().getResource("random.png").toString());
+		ImageView ivCreateExit = new ImageView(imgCreateExit);
+
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		HBox hboxEntrance = new HBox();
 		getChildren().add(hboxEntrance);
 		hboxEntrance.paddingProperty().setValue(margin);
 
-		hboxEntrance.getChildren().add(ControlPanel.Marker("Entrance", 70, true));
+		hboxEntrance.getChildren().add(ControlPanel.Marker("Entrance", 60, false));
 		hboxEntrance.getChildren().add(ControlPanel.Spacer());
 
 		ArrayList<String> itemsEntranceX = new ArrayList<>();
@@ -87,8 +101,8 @@ public class ControlPanelEntranceExit extends VBox {
 
 		tfEntranceY.getItems().setAll(itemsEntranceY);
 		tfEntranceY.setValue(itemsEntranceY.get(index));
-		tfEntranceY.setMinWidth(70);
-		tfEntranceY.setMaxWidth(70);
+		tfEntranceY.setMinWidth(75);
+		tfEntranceY.setMaxWidth(75);
 //		tfEntranceY.setDisable(true);
 		tfEntranceY.setTooltip(new Tooltip("The Y position of the maze entrance can be\n" +
 				"on the north or south side of the grid, or \n" +
@@ -106,10 +120,23 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxEntrance.getChildren().add(ControlPanel.Spacer());
 
-		Image imgEntrance = new Image(getClass().getResource("random.png").toString());
-		ImageView ivEntrance = new ImageView(imgEntrance);
+		btnEntranceCreate.setGraphic(ivCreateEntrance);
+		btnEntranceCreate.setMinWidth(25);
+		btnEntranceCreate.setMaxWidth(25);
+//		btnEntranceCreate.setDisable(true);
+		btnEntranceCreate.setTooltip(new Tooltip("randomly select the maze entrance"));
+		hboxEntrance.getChildren().add(btnEntranceCreate);
 
-		btnEntranceSet.setGraphic(ivEntrance);
+		btnEntranceCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+//				System.out.println("OnMousePressed: btnEntranceSet");
+			}
+		});
+
+		hboxEntrance.getChildren().add(ControlPanel.Spacer());
+
+		btnEntranceSet.setGraphic(ivRandomEntrance);
 		btnEntranceSet.setMinWidth(25);
 		btnEntranceSet.setMaxWidth(25);
 //		btnEntranceSet.setDisable(true);
@@ -129,7 +156,7 @@ public class ControlPanelEntranceExit extends VBox {
 		getChildren().add(hboxExit);
 		hboxExit.paddingProperty().setValue(margin);
 
-		hboxExit.getChildren().add(ControlPanel.Marker("Exit", 70, false));
+		hboxExit.getChildren().add(ControlPanel.Marker("Exit", 60, false));
 		hboxExit.getChildren().add(ControlPanel.Spacer());
 
 		ArrayList<String> itemsExitX = new ArrayList<>();
@@ -171,8 +198,8 @@ public class ControlPanelEntranceExit extends VBox {
 
 		tfExitY.getItems().setAll(itemsExitY);
 		tfExitY.setValue(itemsExitY.get(MazeGlobal.sizeY * 2 / 3 + 2));
-		tfExitY.setMinWidth(70);
-		tfExitY.setMaxWidth(70);
+		tfExitY.setMinWidth(75);
+		tfExitY.setMaxWidth(75);
 //		tfExitY.setDisable(true);
 		tfExitY.setTooltip(new Tooltip("The Y position of the maze exit can be\n" +
 				"on the north or south side of the grid, or \n" +
@@ -190,10 +217,23 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxExit.getChildren().add(ControlPanel.Spacer());
 
-		Image imgExit = new Image(getClass().getResource("random.png").toString());
-		ImageView ivExit = new ImageView(imgExit);
+		btnExitCreate.setGraphic(ivCreateExit);
+		btnExitCreate.setMinWidth(25);
+		btnExitCreate.setMaxWidth(25);
+//		btnExitCreate.setDisable(true);
+		btnExitCreate.setTooltip(new Tooltip("randomly select the maze exit"));
+		hboxExit.getChildren().add(btnExitCreate);
 
-		btnExitSet.setGraphic(ivExit);
+		btnExitCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+//				System.out.println("OnMousePressed: btnExitSet");
+			}
+		});
+
+		hboxExit.getChildren().add(ControlPanel.Spacer());
+
+		btnExitSet.setGraphic(ivRandomExit);
 		btnExitSet.setMinWidth(25);
 		btnExitSet.setMaxWidth(25);
 //		btnExitSet.setDisable(true);

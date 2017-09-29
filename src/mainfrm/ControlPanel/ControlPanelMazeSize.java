@@ -21,7 +21,7 @@ public class ControlPanelMazeSize extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Size", 70, false));
+		getChildren().add(ControlPanel.Marker("Size", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		// number of cells in x

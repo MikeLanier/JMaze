@@ -22,8 +22,8 @@ public class ControlPanelSaveMazes extends HBox {
 
 		// press this button to save the current maze to the filename in the TextField control
 		btnMazeSave.setText("Save");
-		btnMazeSave.setMinWidth(70);
-		btnMazeSave.setMaxWidth(70);
+		btnMazeSave.setMinWidth(60);
+		btnMazeSave.setMaxWidth(60);
 		btnMazeSave.setTooltip(new Tooltip("Add current maze to those in the named file"));
 		btnMazeSave.setDisable(true);
 		getChildren().add(btnMazeSave);

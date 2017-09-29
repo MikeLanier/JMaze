@@ -34,7 +34,7 @@ public class ControlPanelAlgorithm extends HBox {
 
 		setDisable(true);
 
-		getChildren().add(ControlPanel.Marker("Algorithm", 70, false));
+		getChildren().add(ControlPanel.Marker("Algorithm", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		// combobox containing the algorithms to use

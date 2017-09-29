@@ -21,8 +21,8 @@ public class ControlPanelLoadMazes extends HBox {
 
 		// press this button to open the maze in the filename in the TextField
 		btnMazeOpen.setText("Load");
-		btnMazeOpen.setMinWidth(70);
-		btnMazeOpen.setMaxWidth(70);
+		btnMazeOpen.setMinWidth(60);
+		btnMazeOpen.setMaxWidth(60);
 		btnMazeOpen.setTooltip(new Tooltip("Load mazes from the named file"));
 		btnMazeOpen.setDisable(true);
 		getChildren().add(btnMazeOpen);

@@ -28,7 +28,7 @@ public class ControlPanelStartCell extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Start MazeCell", 70, true));
+		getChildren().add(ControlPanel.Marker("Start Cell", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		tfStartCellX.setText(MazeGlobal.startCellX.toString());
@@ -60,8 +60,8 @@ public class ControlPanelStartCell extends HBox {
 		getChildren().add(ControlPanel.Spacer());
 
 		tfStartCellY.setText(MazeGlobal.startCellY.toString());
-		tfStartCellY.setMinWidth(70);
-		tfStartCellY.setMaxWidth(70);
+		tfStartCellY.setMinWidth(75);
+		tfStartCellY.setMaxWidth(75);
 		tfStartCellY.setTooltip(new Tooltip("y coordinate of cell at which to start\ncreating the maze."));
 //		tfStartCellY.setAlignment(Pos.CENTER);
 //		tfStartCellY.setDisable(true);

@@ -11,7 +11,7 @@ public class ControlPanelMazeName extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("Maze Names", 70, true));
+		getChildren().add(ControlPanel.Marker("Names", 60, true));
 		getChildren().add(ControlPanel.Spacer());
 
 		tfMazeName.setMinWidth(150);
