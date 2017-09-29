@@ -249,9 +249,9 @@ public class ControlPanelEntranceExit extends VBox {
 				MazeGlobal.exitCellY = y;
 				System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
 
-				mainFrm.mazePanel.deleteCell(MazeGlobal.exitMazeCell);
-				MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
-				mainFrm.mazePanel.drawMaze();
+//				mainFrm.mazePanel.deleteCell(MazeGlobal.exitMazeCell);
+//				MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
+//				mainFrm.mazePanel.drawMaze();
 			}
 		});
 
@@ -276,5 +276,42 @@ public class ControlPanelEntranceExit extends VBox {
 	public void Validate()
 	{
 		System.out.println("ControlPanelEntranceExit: Validate");
+		String strX = tfEntranceX.getValue();
+		String strY = tfEntranceY.getValue();
+		Integer x = 0;
+		Integer y = 0;
+		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
+		System.out.println("x, y: " + strX + ", " + strY);
+
+		if(strX == "west")	x = 0;
+		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
+		else x = MazeGlobal.parseTextField(strX, -1);
+
+		if(strY == "north")	y = 0;
+		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
+		else y = MazeGlobal.parseTextField(strY, -1);
+
+		MazeGlobal.entranceCellX = x;
+		MazeGlobal.entranceCellY = y;
+		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
+
+		strX = tfExitX.getValue();
+		strY = tfExitY.getValue();
+		x = 0;
+		y = 0;
+		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+		System.out.println("x, y: " + strX + ", " + strY);
+
+		if(strX == "west")	x = 0;
+		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
+		else x = MazeGlobal.parseTextField(strX, -1);
+
+		if(strY == "north")	y = 0;
+		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
+		else y = MazeGlobal.parseTextField(strY, -1);
+
+		MazeGlobal.exitCellX = x;
+		MazeGlobal.exitCellY = y;
+		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
 	}
 }
