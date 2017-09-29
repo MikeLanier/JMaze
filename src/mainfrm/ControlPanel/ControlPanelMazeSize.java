@@ -7,16 +7,19 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import mainfrm.MainFrm;
+import mainfrm.MazeGlobal;
 
 public class ControlPanelMazeSize extends HBox {
 	public TextField tfMazeSizeX			= new TextField();
 	public TextField	tfMazeSizeY			= new TextField();
 
 	private MainFrm mainFrm = null;
+	private ControlPanel controlPanel = null;
 
-	public ControlPanelMazeSize(MainFrm _mainFrm, int _sizeX, int _sizeY)
+	public ControlPanelMazeSize(MainFrm _mainFrm, ControlPanel _controlPanel, int _sizeX, int _sizeY)
 	{
 		mainFrm = _mainFrm;
+		controlPanel = _controlPanel;
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
@@ -36,7 +39,9 @@ public class ControlPanelMazeSize extends HBox {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("OnKeyReleased: tfMazeSizeX");
-				mainFrm.OnKeyPressed(event);
+//				mainFrm.OnKeyPressed(event);
+				MazeGlobal.sizeX = MazeGlobal.parseTextField(tfMazeSizeX, MazeGlobal.sizeX);
+				controlPanel.entranceExitControl.Validate();
 			}
 		});
 
@@ -56,7 +61,9 @@ public class ControlPanelMazeSize extends HBox {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println("OnKeyReleased: tfMazeSizeY");
-				mainFrm.OnKeyPressed(event);
+//				mainFrm.OnKeyPressed(event);
+				MazeGlobal.sizeY = MazeGlobal.parseTextField(tfMazeSizeY, MazeGlobal.sizeY);
+				controlPanel.entranceExitControl.Validate();
 			}
 		});
 	}

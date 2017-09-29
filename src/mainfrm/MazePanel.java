@@ -109,7 +109,16 @@ public class MazePanel extends Canvas {
 		}
 	}
 
-	public MazeCell updateEntranceCell(Integer x, Integer y, MazeCell.CellType type) {
+	public void deleteCell(MazeCell cell) {
+		walls.remove(cell.W(MazeCell.north).ID());
+		walls.remove(cell.W(MazeCell.south).ID());
+		walls.remove(cell.W(MazeCell.east).ID());
+		cell.W(MazeCell.west).Open(false);
+		cells.remove(cell.ID());
+	}
+
+	public MazeCell createEntranceExitCell(Integer x, Integer y, MazeCell.CellType type) {
+		System.out.println("createEntranceExitCell: x, y: " + x + ", " + y);
 		MazeCell cell = null;
 
 		cell = createCell(x,y);
@@ -145,8 +154,8 @@ public class MazePanel extends Canvas {
 		Integer x = 0;
 		Integer y = MazeGlobal.sizeY/3;
 
-		MazeGlobal.entranceMazeCell = updateEntranceCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
-		MazeGlobal.exitMazeCell = updateEntranceCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
+		MazeGlobal.entranceMazeCell = createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
+		MazeGlobal.exitMazeCell = createEntranceExitCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
 
 		updateStartCell();
 

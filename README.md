@@ -6,7 +6,7 @@ http://www.astrolog.org/labyrnth/algrithm.htm .
 The app to demo these algorithms is written in Java.  I eventually
 plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
 create different repositories for these versions.  
-
+---
 ## Algorithms: 
 #### Recursive backtracker
 The depth-first search algorithm of maze generation is frequently implemented
@@ -27,7 +27,7 @@ _In my implementation of_ Depth-first search _I used a stack for backtracking
 during maze creation. The description for this algorithm sounds similar to my
 interpretation of_ Depth-first search. _For that reason I've not created a separate
 implementation for_ Recursize backtracker.
-
+---
 ## The Game
 My ultimate goal is to use these mazes for a game based old Apple ][ game 
 called Wizardry. I enjoyed the game way back when and would like to play
@@ -51,30 +51,10 @@ result will be like.  I have ideas as to what I want. But, as I'm
 implementing the game, I expect those ideas to change.  Very agile like
 huh.
 
-## 09/29/2017
-* Create code to name, save and load mazes.
-* entrance/edit cells
-  * validate when values in x/y controls change
-  * add a create button.  Only want to change when satisfied with values
-   in controls
-  * clean up the old cell before creating a new one
-  * make sure new cell is facing the right direction
-  * rules for cell relationship
-    * cell must enter/exit the maze in a quadrant opposite the other cell. 
-    IE. If the entrance cell is on the top-left quadrant, the exit cell must
-    be on either the top-right or bottom-right quadrant.  
-    * cells cannot be on same side of the maze. IE. If the entrance is to 
-    the top of the top-left quadrant, the exit cannot be on the top of 
-    the top-right quadrant.
-    * any change to the x/y controls will cause the create buttons
-    to disable
-* pick entrance/exit cell by clicking the random button. the randomly
-picked cell will obey the relationship rules outlined above. Cell will
-be automatically created.  No need to click create button
-* Stuff for the game
+#### Requirements for game
   * randomly add rooms
     * method to create the room
-      * ~~on create remove interior walls and place doors~~
+      * ~~on create remove interior walls and place doors (09/28/2017)~~
       * make sure width/height is adjusted to not extend beyond the outer edge
       of the maze
       * room cannot include the cell adjacent to the entrance (the cell
@@ -96,15 +76,38 @@ be automatically created.  No need to click create button
   * entrance cell will be the bottom of a staircase, exit the top.
     * For the 3D in maze view, draw and up/down staircase.
     * For the 2D display, draw cell with hash marks
+---
+
+## 09/29/2017
+* Create code to name, save and load mazes.
+* create entrance/exit cell for down/up stairs
+* ~~If the maze size changes, validate the entrance/exit cell parameters.~~
+* entrance/edit cells
+  * validate when values in x/y controls change. If not valid disable
+  create button. Show an error icon with tooltip that explains the nature
+  of the problem.
+  * add a create button.  Only want to change when satisfied with values
+   in controls
+  * clean up the old cell before creating a new one
+  * make sure new cell is facing the right direction
+  * rules for cell relationship
+    * cell must enter/exit the maze in a quadrant opposite the other cell. 
+    IE. If the entrance cell is on the top-left quadrant, the exit cell must
+    be on either the top-right or bottom-right quadrant.  
+    * cells cannot be on same side of the maze. IE. If the entrance is to 
+    the top of the top-left quadrant, the exit cannot be on the top of 
+    the top-right quadrant.
+  * pick entrance/exit cell by clicking the random button. the randomly
+  picked cell will obey the relationship rules outlined above. Cell will
+  be automatically created.  No need to click create button
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
-Using 2, 4, 6, 8 on the keypad for now. 
+  * Using 2, 4, 6, 8 on the keypad for now. 
   * (9/28/17) Update. Tried a kludge
 where I forward keypress events on a control field to the maze.  But, it
 seems, sometimes the arrows move focus around the controls.  Something
 I really don't want to happen.  Need to rethink this. 
   * Also need to think about other keys for controls.  Some keyboards 
-  don't have
-a keypad
+  don't have a keypad
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
 * look at other algorithms

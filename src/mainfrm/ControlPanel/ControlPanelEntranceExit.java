@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import mainfrm.MainFrm;
+import mainfrm.MazeCell;
 import mainfrm.MazeGlobal;
 
 import java.util.ArrayList;
@@ -229,6 +230,28 @@ public class ControlPanelEntranceExit extends VBox {
 			@Override
 			public void handle(MouseEvent event) {
 //				System.out.println("OnMousePressed: btnExitSet");
+				String strX = tfExitX.getValue();
+				String strY = tfExitY.getValue();
+				Integer x = 0;
+				Integer y = 0;
+				System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+				System.out.println("x, y: " + strX + ", " + strY);
+
+				if(strX == "west")	x = 0;
+				else if(strX == "east")	x = MazeGlobal.sizeX + 1;
+				else x = MazeGlobal.parseTextField(strX, -1);
+
+				if(strY == "north")	y = 0;
+				else if(strY == "south")	y = MazeGlobal.sizeY + 1;
+				else y = MazeGlobal.parseTextField(strY, -1);
+
+				MazeGlobal.exitCellX = x;
+				MazeGlobal.exitCellY = y;
+				System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+
+				mainFrm.mazePanel.deleteCell(MazeGlobal.exitMazeCell);
+				MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
+				mainFrm.mazePanel.drawMaze();
 			}
 		});
 
@@ -248,6 +271,10 @@ public class ControlPanelEntranceExit extends VBox {
 			}
 		});
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
 
+	public void Validate()
+	{
+		System.out.println("ControlPanelEntranceExit: Validate");
 	}
 }

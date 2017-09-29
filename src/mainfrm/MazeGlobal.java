@@ -35,6 +35,22 @@ public class MazeGlobal {
 				h;
 	}
 
+	public static Integer parseTextField(String str, Integer value)
+	{
+		try {
+			if(str.isEmpty()) {
+				value = 0;
+			}
+			else
+				value = Integer.parseInt(str);
+		}
+		catch(Exception e) {
+//			System.out.println("Invalid value entered");
+		}
+
+		return value;
+	}
+
 	public static Integer parseTextField(TextField tf, Integer value)
 	{
 		try {

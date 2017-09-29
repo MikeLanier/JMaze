@@ -30,8 +30,8 @@ public class MainFrm extends GridPane
 		add(mazePanel =new MazePanel(controlPanel), 1, 0);
 
 		mazePanel.updateStartCell();
-		MazeGlobal.entranceMazeCell = mazePanel.updateEntranceCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
-		MazeGlobal.exitMazeCell = mazePanel.updateEntranceCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
+		MazeGlobal.entranceMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
+		MazeGlobal.exitMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
 		mazePanel.drawMaze();
 
 		setOnKeyPressed(new javafx.event.EventHandler<KeyEvent>() {

@@ -3,7 +3,7 @@ package mainfrm;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-class MazeCell {
+public class MazeCell {
 	private int	xOrigin = 0;
 	private int yOrigin = 0;
 
