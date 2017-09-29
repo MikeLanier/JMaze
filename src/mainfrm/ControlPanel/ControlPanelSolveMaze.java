@@ -16,7 +16,7 @@ public class ControlPanelSolveMaze extends HBox {
 		btnMazeSolve.setText("Solve");
 		btnMazeSolve.setMinWidth(70);
 		btnMazeSolve.setMaxWidth(70);
-		btnMazeSolve.setTooltip(new Tooltip("Solve the maze"));
+		btnMazeSolve.setTooltip(new ControlPanelTooltip("Solve the maze"));
 		btnMazeSolve.setDisable(true);
 		getChildren().add(btnMazeSolve);
 

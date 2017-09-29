@@ -34,7 +34,7 @@ public class ControlPanelStartCell extends HBox {
 		tfStartCellX.setText(MazeGlobal.startCellX.toString());
 		tfStartCellX.setMinWidth(70);
 		tfStartCellX.setMaxWidth(70);
-		tfStartCellX.setTooltip(new Tooltip("x coordinate of cell at which to start\ncreating the maze."));
+		tfStartCellX.setTooltip(new ControlPanelTooltip("x coordinate of cell at which to start\ncreating the maze."));
 //		tfStartCellX.setAlignment(Pos.CENTER);
 //		tfStartCellX.setDisable(true);
 		getChildren().add(tfStartCellX);
@@ -62,7 +62,7 @@ public class ControlPanelStartCell extends HBox {
 		tfStartCellY.setText(MazeGlobal.startCellY.toString());
 		tfStartCellY.setMinWidth(75);
 		tfStartCellY.setMaxWidth(75);
-		tfStartCellY.setTooltip(new Tooltip("y coordinate of cell at which to start\ncreating the maze."));
+		tfStartCellY.setTooltip(new ControlPanelTooltip("y coordinate of cell at which to start\ncreating the maze."));
 //		tfStartCellY.setAlignment(Pos.CENTER);
 //		tfStartCellY.setDisable(true);
 		getChildren().add(tfStartCellY);
@@ -90,7 +90,7 @@ public class ControlPanelStartCell extends HBox {
 		btnStartCellSet.setGraphic(iv);
 		btnStartCellSet.setMinWidth(25);
 		btnStartCellSet.setMaxWidth(25);
-		btnStartCellSet.setTooltip(new Tooltip("randomly select the start cell"));
+		btnStartCellSet.setTooltip(new ControlPanelTooltip("randomly select the start cell"));
 //		btnStartCellSet.setDisable(true);
 		getChildren().add(btnStartCellSet);
 

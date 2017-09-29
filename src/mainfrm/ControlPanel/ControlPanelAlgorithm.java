@@ -41,7 +41,7 @@ public class ControlPanelAlgorithm extends HBox {
 		cbAlgorithm.setMinWidth(190);
 		cbAlgorithm.setMaxWidth(190);
 //		cbAlgorithm.setVisible(false);
-		cbAlgorithm.setTooltip(new Tooltip("List of maze creating algorithm.\nSelect which one to use"));
+		cbAlgorithm.setTooltip(new ControlPanelTooltip("List of maze creating algorithm.\nSelect which one to use"));
 		getChildren().add(cbAlgorithm);
 
 		System.out.println("algorithms.length: " + algorithms.length);

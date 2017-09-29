@@ -27,7 +27,7 @@ public class ControlPanel2D3DDisplay extends HBox {
 		cb2DView.setMaxWidth(90);
 		cb2DView.setIndeterminate(false);
 		cb2DView.setSelected(true);
-		cb2DView.setTooltip(new Tooltip("Show a 2D top view of the maze"));
+		cb2DView.setTooltip(new ControlPanelTooltip("Show a 2D top view of the maze"));
 //		cb2DView.setDisable(true);
 		getChildren().add(cb2DView);
 
@@ -45,7 +45,7 @@ public class ControlPanel2D3DDisplay extends HBox {
 		cb3DView.setMinWidth(90);
 		cb3DView.setMaxWidth(90);
 		cb3DView.setSelected(true);
-		cb3DView.setTooltip(new Tooltip("Show the maze in 3D from inside the maze"));
+		cb3DView.setTooltip(new ControlPanelTooltip("Show the maze in 3D from inside the maze"));
 //		cb3DView.setDisable(true);
 		getChildren().add(cb3DView);
 

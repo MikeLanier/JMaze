@@ -26,7 +26,7 @@ public class ControlPanelCellSize extends HBox {
 		tfCellSize.setText(cs.toString());
 		tfCellSize.setMinWidth(40);
 		tfCellSize.setMaxWidth(40);
-		tfCellSize.setTooltip(new Tooltip("Size, in pixels, of one cell of the maze"));
+		tfCellSize.setTooltip(new ControlPanelTooltip("Size, in pixels, of one cell of the maze"));
 		getChildren().add(tfCellSize);
 
 		tfCellSize.setOnAction(new EventHandler<ActionEvent>() {

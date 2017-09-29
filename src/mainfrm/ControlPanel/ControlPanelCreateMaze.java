@@ -23,7 +23,7 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeCreate.setText("Create");
 		btnMazeCreate.setMinWidth(70);
 		btnMazeCreate.setMaxWidth(70);
-		btnMazeCreate.setTooltip(new Tooltip("Create a maze"));
+		btnMazeCreate.setTooltip(new ControlPanelTooltip("Create a maze"));
 		getChildren().add(btnMazeCreate);
 
 		btnMazeCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -39,7 +39,7 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeStep.setText("Animate Create");
 		btnMazeStep.setMinWidth(100);
 		btnMazeStep.setMaxWidth(100);
-		btnMazeStep.setTooltip(new Tooltip("Create a maze, animating the process"));
+		btnMazeStep.setTooltip(new ControlPanelTooltip("Create a maze, animating the process"));
 		getChildren().add(btnMazeStep);
 
 		btnMazeStep.setOnMousePressed(new EventHandler<MouseEvent>() {

@@ -17,7 +17,7 @@ public class ControlPanelMazeName extends HBox {
 		tfMazeName.setMinWidth(150);
 		tfMazeName.setMaxWidth(150);
 		tfMazeName.setDisable(true);
-		tfMazeName.setTooltip(new Tooltip("Name of the current maze"));
+		tfMazeName.setTooltip(new ControlPanelTooltip("Name of the current maze"));
 		getChildren().add(tfMazeName);
 
 //				tfMazeName.setOnAction(new EventHandler<ActionEvent>() {

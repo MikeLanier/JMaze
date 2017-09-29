@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import mainfrm.MainFrm;
 import mainfrm.MazeGlobal;
 
@@ -69,7 +70,7 @@ public class ControlPanelEntranceExit extends VBox {
 		tfEntranceX.setMinWidth(70);
 		tfEntranceX.setMaxWidth(70);
 //		tfEntranceX.setDisable(true);
-		tfEntranceX.setTooltip(new Tooltip("The X position of the maze entrance can be\n" +
+		tfEntranceX.setTooltip(new ControlPanelTooltip("The X position of the maze entrance can be\n" +
 												"on the east or west side of the grid, or \n" +
 												"the nth (with 1 begin the first) cell from \n" +
 												"the left across the top or bottom of the grid"));
@@ -104,7 +105,7 @@ public class ControlPanelEntranceExit extends VBox {
 		tfEntranceY.setMinWidth(75);
 		tfEntranceY.setMaxWidth(75);
 //		tfEntranceY.setDisable(true);
-		tfEntranceY.setTooltip(new Tooltip("The Y position of the maze entrance can be\n" +
+		tfEntranceY.setTooltip(new ControlPanelTooltip("The Y position of the maze entrance can be\n" +
 				"on the north or south side of the grid, or \n" +
 				"the nth (with 1 begin the first) cell from \n" +
 				"the topmost across the left or right of the grid"));
@@ -124,7 +125,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnEntranceCreate.setMinWidth(25);
 		btnEntranceCreate.setMaxWidth(25);
 //		btnEntranceCreate.setDisable(true);
-		btnEntranceCreate.setTooltip(new Tooltip("create the entrance cell from the given parameters"));
+		btnEntranceCreate.setTooltip(new ControlPanelTooltip("create the entrance cell from the given parameters"));
 		hboxEntrance.getChildren().add(btnEntranceCreate);
 
 		btnEntranceCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -140,7 +141,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnEntranceSet.setMinWidth(25);
 		btnEntranceSet.setMaxWidth(25);
 //		btnEntranceSet.setDisable(true);
-		btnEntranceSet.setTooltip(new Tooltip("randomly select the maze entrance"));
+		btnEntranceSet.setTooltip(new ControlPanelTooltip("randomly select the maze entrance"));
 		hboxEntrance.getChildren().add(btnEntranceSet);
 
 		btnEntranceSet.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -171,7 +172,7 @@ public class ControlPanelEntranceExit extends VBox {
 		tfExitX.setMinWidth(70);
 		tfExitX.setMaxWidth(70);
 //		tfExitX.setDisable(true);
-		tfExitX.setTooltip(new Tooltip("The X position of the maze exit can be\n" +
+		tfExitX.setTooltip(new ControlPanelTooltip("The X position of the maze exit can be\n" +
 				"on the east or west side of the grid, or \n" +
 				"the nth (with 1 begin the first) cell from \n" +
 				"the left across the top or bottom of the grid"));
@@ -201,7 +202,7 @@ public class ControlPanelEntranceExit extends VBox {
 		tfExitY.setMinWidth(75);
 		tfExitY.setMaxWidth(75);
 //		tfExitY.setDisable(true);
-		tfExitY.setTooltip(new Tooltip("The Y position of the maze exit can be\n" +
+		tfExitY.setTooltip(new ControlPanelTooltip("The Y position of the maze exit can be\n" +
 				"on the north or south side of the grid, or \n" +
 				"the nth (with 1 begin the first) cell from \n" +
 				"the topmost across the left or right of the grid"));
@@ -221,7 +222,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnExitCreate.setMinWidth(25);
 		btnExitCreate.setMaxWidth(25);
 //		btnExitCreate.setDisable(true);
-		btnExitCreate.setTooltip(new Tooltip("create the exit cell from the given parameters"));
+		btnExitCreate.setTooltip(new ControlPanelTooltip("create the exit cell from the given parameters"));
 		hboxExit.getChildren().add(btnExitCreate);
 
 		btnExitCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -237,7 +238,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnExitSet.setMinWidth(25);
 		btnExitSet.setMaxWidth(25);
 //		btnExitSet.setDisable(true);
-		btnExitSet.setTooltip(new Tooltip("randomly select the maze exit"));
+		btnExitSet.setTooltip(new ControlPanelTooltip("randomly select the maze exit"));
 		hboxExit.getChildren().add(btnExitSet);
 
 		btnExitSet.setOnMousePressed(new EventHandler<MouseEvent>() {

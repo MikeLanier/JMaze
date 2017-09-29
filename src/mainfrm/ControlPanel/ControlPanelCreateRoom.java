@@ -54,7 +54,7 @@ public class ControlPanelCreateRoom extends VBox {
 			tfRoomOriginX.setText(x.toString());
 			tfRoomOriginX.setMinWidth(40);
 			tfRoomOriginX.setMaxWidth(40);
-			tfRoomOriginX.setTooltip(new Tooltip("Number of cells in a row of the maze"));
+			tfRoomOriginX.setTooltip(new ControlPanelTooltip("Number of cells in a row of the maze"));
 			hboxRoomOrigin.getChildren().add(tfRoomOriginX);
 
 			tfRoomOriginX.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -75,7 +75,7 @@ public class ControlPanelCreateRoom extends VBox {
 			tfRoomOriginY.setText(y.toString());
 			tfRoomOriginY.setMinWidth(40);
 			tfRoomOriginY.setMaxWidth(40);
-			tfRoomOriginY.setTooltip(new Tooltip("Number of cells in a column of the maze"));
+			tfRoomOriginY.setTooltip(new ControlPanelTooltip("Number of cells in a column of the maze"));
 			hboxRoomOrigin.getChildren().add(tfRoomOriginY);
 
 			tfRoomOriginY.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -97,7 +97,7 @@ public class ControlPanelCreateRoom extends VBox {
 			btnRandomOrigin.setGraphic(iv);
 			btnRandomOrigin.setMinWidth(25);
 			btnRandomOrigin.setMaxWidth(25);
-			btnRandomOrigin.setTooltip(new Tooltip("randomly select the start cell"));
+			btnRandomOrigin.setTooltip(new ControlPanelTooltip("randomly select the start cell"));
 			btnRandomOrigin.setDisable(true);
 			hboxRoomOrigin.getChildren().add(btnRandomOrigin);
 		}
@@ -120,7 +120,7 @@ public class ControlPanelCreateRoom extends VBox {
 			tfRoomSizeX.setText(x.toString());
 			tfRoomSizeX.setMinWidth(40);
 			tfRoomSizeX.setMaxWidth(40);
-			tfRoomSizeX.setTooltip(new Tooltip("Number of cells in a row of the maze"));
+			tfRoomSizeX.setTooltip(new ControlPanelTooltip("Number of cells in a row of the maze"));
 			hboxRoomSize.getChildren().add(tfRoomSizeX);
 
 			tfRoomSizeX.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -141,7 +141,7 @@ public class ControlPanelCreateRoom extends VBox {
 			tfRoomSizeY.setText(y.toString());
 			tfRoomSizeY.setMinWidth(40);
 			tfRoomSizeY.setMaxWidth(40);
-			tfRoomSizeY.setTooltip(new Tooltip("Number of cells in a column of the maze"));
+			tfRoomSizeY.setTooltip(new ControlPanelTooltip("Number of cells in a column of the maze"));
 			hboxRoomSize.getChildren().add(tfRoomSizeY);
 
 			tfRoomSizeY.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -163,7 +163,7 @@ public class ControlPanelCreateRoom extends VBox {
 			btnRandomSize.setGraphic(iv);
 			btnRandomSize.setMinWidth(25);
 			btnRandomSize.setMaxWidth(25);
-			btnRandomSize.setTooltip(new Tooltip("randomly select the start cell"));
+			btnRandomSize.setTooltip(new ControlPanelTooltip("randomly select the start cell"));
 			btnRandomSize.setDisable(true);
 			hboxRoomSize.getChildren().add(btnRandomSize);
 		}
@@ -178,7 +178,7 @@ public class ControlPanelCreateRoom extends VBox {
 			btnRoomCreate.setText("Create");
 			btnRoomCreate.setMinWidth(70);
 			btnRoomCreate.setMaxWidth(70);
-			btnRoomCreate.setTooltip(new Tooltip("Print the maze"));
+			btnRoomCreate.setTooltip(new ControlPanelTooltip("Print the maze"));
 //			btnRoomCreate.setDisable(true);
 			hboxCreate.getChildren().add(btnRoomCreate);
 
@@ -195,7 +195,7 @@ public class ControlPanelCreateRoom extends VBox {
 			btnRoomCreateAll.setText("Create All");
 			btnRoomCreateAll.setMinWidth(70);
 			btnRoomCreateAll.setMaxWidth(70);
-			btnRoomCreateAll.setTooltip(new Tooltip("Randomly create all the rooms in the maze"));
+			btnRoomCreateAll.setTooltip(new ControlPanelTooltip("Randomly create all the rooms in the maze"));
 //			btnRoomCreateAll.setDisable(true);
 			hboxCreate.getChildren().add(btnRoomCreateAll);
 

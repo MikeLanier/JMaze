@@ -23,7 +23,7 @@ public class ControlPanelLoadMazes extends HBox {
 		btnMazeOpen.setText("Load");
 		btnMazeOpen.setMinWidth(60);
 		btnMazeOpen.setMaxWidth(60);
-		btnMazeOpen.setTooltip(new Tooltip("Load mazes from the named file"));
+		btnMazeOpen.setTooltip(new ControlPanelTooltip("Load mazes from the named file"));
 		btnMazeOpen.setDisable(true);
 		getChildren().add(btnMazeOpen);
 
@@ -39,7 +39,7 @@ public class ControlPanelLoadMazes extends HBox {
 		// contains the name of the filename containing the maze to load
 		tfMazeFilename.setText("filename");
 		tfMazeFilename.setMinWidth(150);
-		tfMazeFilename.setTooltip(new Tooltip("Name of file from which to load mazes"));
+		tfMazeFilename.setTooltip(new ControlPanelTooltip("Name of file from which to load mazes"));
 		tfMazeFilename.setDisable(true);
 		getChildren().add(tfMazeFilename);
 
@@ -59,7 +59,7 @@ public class ControlPanelLoadMazes extends HBox {
 		btnMazeSelect.setGraphic(iv);
 //		btnMazeSelect.setText("^");
 		btnMazeSelect.setMinWidth(25);
-		btnMazeSelect.setTooltip(new Tooltip("Open FileOpenDialog to select file\nfrom which to load mazes"));
+		btnMazeSelect.setTooltip(new ControlPanelTooltip("Open FileOpenDialog to select file\nfrom which to load mazes"));
 		btnMazeSelect.setDisable(true);
 		getChildren().add(btnMazeSelect);
 
