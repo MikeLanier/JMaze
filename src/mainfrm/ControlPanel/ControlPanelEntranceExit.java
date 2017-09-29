@@ -38,10 +38,10 @@ public class ControlPanelEntranceExit extends VBox {
 		Image imgRandomExit = new Image(getClass().getResource("random.png").toString());
 		ImageView ivRandomExit = new ImageView(imgRandomExit);
 
-		Image imgCreateEntrance = new Image(getClass().getResource("random.png").toString());
+		Image imgCreateEntrance = new Image(getClass().getResource("create16.png").toString());
 		ImageView ivCreateEntrance = new ImageView(imgCreateEntrance);
 
-		Image imgCreateExit = new Image(getClass().getResource("random.png").toString());
+		Image imgCreateExit = new Image(getClass().getResource("create16.png").toString());
 		ImageView ivCreateExit = new ImageView(imgCreateExit);
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnEntranceCreate.setMinWidth(25);
 		btnEntranceCreate.setMaxWidth(25);
 //		btnEntranceCreate.setDisable(true);
-		btnEntranceCreate.setTooltip(new Tooltip("randomly select the maze entrance"));
+		btnEntranceCreate.setTooltip(new Tooltip("create the entrance cell from the given parameters"));
 		hboxEntrance.getChildren().add(btnEntranceCreate);
 
 		btnEntranceCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -221,7 +221,7 @@ public class ControlPanelEntranceExit extends VBox {
 		btnExitCreate.setMinWidth(25);
 		btnExitCreate.setMaxWidth(25);
 //		btnExitCreate.setDisable(true);
-		btnExitCreate.setTooltip(new Tooltip("randomly select the maze exit"));
+		btnExitCreate.setTooltip(new Tooltip("create the exit cell from the given parameters"));
 		hboxExit.getChildren().add(btnExitCreate);
 
 		btnExitCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
