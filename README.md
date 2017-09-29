@@ -51,28 +51,36 @@ result will be like.  I have ideas as to what I want. But, as I'm
 implementing the game, I expect those ideas to change.  Very agile like
 huh.
 
-## 09/27/2017
+## 09/29/2017
 * Create code to name, save and load mazes.
-* method for createing the entrance/exit cell, needs to clean up the
-old cell before creating a new one
-* pick entrance cell by clicking the random button
-  * change x or y of entrance cell and update the display
-  * click the random button, update the controls and display
-* pick exit cell by clicking the random button
-  * change x or y of exit cell and update the display
-  * click the random button, update the controls and display
-* ~~pick start cell by clicking the random button~~
-  * ~~change x or y of start cell and update the display~~
-  * ~~click the random button, update the controls and display~~
+* entrance/edit cells
+  * validate when values in x/y controls change
+  * add a create button.  Only want to change when satisfied with values
+   in controls
+  * clean up the old cell before creating a new one
+  * make sure new cell is facing the right direction
+  * rules for cell relationship
+    * cell must enter/exit the maze in a quadrant opposite the other cell. 
+    IE. If the entrance cell is on the top-left quadrant, the exit cell must
+    be on either the top-right or bottom-right quadrant.  
+    * cells cannot be on same side of the maze. IE. If the entrance is to 
+    the top of the top-left quadrant, the exit cannot be on the top of 
+    the top-right quadrant.
+    * any change to the x/y controls will cause the create buttons
+    to disable
+* pick entrance/exit cell by clicking the random button. the randomly
+picked cell will obey the relationship rules outlined above. Cell will
+be automatically created.  No need to click create button
 * Stuff for the game
   * randomly add rooms
     * method to create the room
+      * ~~on create remove interior walls and place doors~~
       * make sure width/height is adjusted to not extend beyond the outer edge
       of the maze
       * room cannot include the cell adjacent to the entrance (the cell
       you enter when stepping from the entrance).
       * room cannot include the cell adjacent to the exit (the cell
-    you leave when stepping into the exit).
+      you leave when stepping into the exit).
   * number of rooms a factor of the size of the maze
   * size of a room is random
   * some doors will be locked, must search maze for key.
@@ -85,20 +93,28 @@ old cell before creating a new one
   * number of monsters to battle is based on the size of the maze
   * monsters move around the maze at random
   * monsters can appear anywhere
-  * entrance cell will be the bottom of a staircase, exit the top.  For the 
-  3D in maze view, draw and up/down staircase.
+  * entrance cell will be the bottom of a staircase, exit the top.
+    * For the 3D in maze view, draw and up/down staircase.
+    * For the 2D display, draw cell with hash marks
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
-Using 2, 4, 6, 8 on the keypad for now. (9/28/17) Update. Tried a kludge
+Using 2, 4, 6, 8 on the keypad for now. 
+  * (9/28/17) Update. Tried a kludge
 where I forward keypress events on a control field to the maze.  But, it
 seems, sometimes the arrows move focus around the controls.  Something
-I really don't want to happen.  Need to rethink this.
+I really don't want to happen.  Need to rethink this. 
+  * Also need to think about other keys for controls.  Some keyboards 
+  don't have
+a keypad
 * Look for a way to post events from the ControlPanel to be caught by the
 MainFrm or Maze display panel  
-* on change to entrance/exit combo box, validate selection
 * look at other algorithms
 * need to learn how to "package" my app so that I can run it outside of the 
 IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
 already have a hook for Maven
+## 09/28/2017
+* ~~pick start cell by clicking the random button~~
+  * ~~change x or y of start cell and update the display~~
+  * ~~click the random button, update the controls and display~~
 ## 09/27/2017
 * ~~prelim for using this...~~
   * ~~randomly add rooms~~

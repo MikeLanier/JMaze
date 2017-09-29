@@ -33,8 +33,7 @@ public class ControlPanel extends VBox {
 	public ControlPanelAlgorithm algorithmControl = null;
 	public ControlPanelMaze2D3D maze2D3DControl = null;
 	public ControlPanelStartCell startCellControl = null;
-	public ControlPanelEntrance entranceControl = null;
-	public ControlPanelExit exitControl = null;
+	public ControlPanelEntranceExit entranceExitControl = null;
 	public ControlPanelCreateRoom createRoomControl = null;
 
 	public ControlPanel(MainFrm _mainFrm)
@@ -55,8 +54,7 @@ public class ControlPanel extends VBox {
 		getChildren().add(algorithmControl = new ControlPanelAlgorithm());
 //		getChildren().add(maze2D3DControl = new ControlPanelMaze2D3D(mainFrm));
 		getChildren().add(startCellControl = new ControlPanelStartCell(mainFrm, MazeGlobal.sizeX, MazeGlobal.sizeY));
-		getChildren().add(entranceControl = new ControlPanelEntrance(mainFrm));
-		getChildren().add(exitControl = new ControlPanelExit(MazeGlobal.sizeX, MazeGlobal.sizeY));
+		getChildren().add(entranceExitControl = new ControlPanelEntranceExit(mainFrm));
 		getChildren().add(new ControlPanelSeparator());
 		getChildren().add(new ControlPanelCreateMaze(this, mainFrm));
 		getChildren().add(new ControlPanelSolveMaze());
