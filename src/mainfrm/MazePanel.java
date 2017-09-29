@@ -109,7 +109,7 @@ public class MazePanel extends Canvas {
 		}
 	}
 
-	public void deleteCell(MazeCell cell) {
+	public void deleteEntranceExitCell(MazeCell cell) {
 		walls.remove(cell.W(MazeCell.north).ID());
 		walls.remove(cell.W(MazeCell.south).ID());
 		walls.remove(cell.W(MazeCell.east).ID());
@@ -123,9 +123,38 @@ public class MazePanel extends Canvas {
 
 		cell = createCell(x,y);
 		cell.setType(type);
-		cell.setFacing(MazeCell.CellFacing.eCellFacingEast);
-
 		cell.setVisited();
+
+		int west = 0;
+		int east = MazeGlobal.sizeX + 1;
+		int north = 0;
+		int south = MazeGlobal.sizeY + 1;
+
+		// is the cell on the west side?
+		if(x == west && type == MazeCell.CellType.eCellTypeEntrance) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingEast);
+		}
+		else if(x == west && type == MazeCell.CellType.eCellTypeExit) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		}
+		else if(x == east && type == MazeCell.CellType.eCellTypeEntrance) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingWest);
+		}
+		else if(x == east && type == MazeCell.CellType.eCellTypeExit) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingEast);
+		}
+		else if(y == north && type == MazeCell.CellType.eCellTypeEntrance) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
+		}
+		else if(y == north && type == MazeCell.CellType.eCellTypeExit) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
+		}
+		else if(y == south && type == MazeCell.CellType.eCellTypeEntrance) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingNorth);
+		}
+		else if(y == south && type == MazeCell.CellType.eCellTypeExit) {
+			cell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
+		}
 
 		if(cell.facingWest() || cell.facingEast())
 		{

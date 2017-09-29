@@ -1,5 +1,6 @@
 package mainfrm.ControlPanel;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,9 +29,12 @@ public class ControlPanelEntranceExit extends VBox {
 	public Button btnExitCreate				= new Button();
 
 	private MainFrm mainFrm = null;
-	public ControlPanelEntranceExit(MainFrm _mainFrm)
+	private ControlPanel controlPanel = null;
+
+	public ControlPanelEntranceExit(ControlPanel _controlPanel, MainFrm _mainFrm)
 	{
 		mainFrm = _mainFrm;
+		controlPanel = _controlPanel;
 
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 
@@ -78,12 +82,13 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxEntrance.getChildren().add(tfEntranceX);
 
-//				tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfEntranceX");
-//					}
-//				});
+		tfEntranceX.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfEntranceX");
+				updateEntranceCellParameters();
+			}
+		});
 
 		hboxEntrance.getChildren().add(ControlPanel.Spacer());
 		hboxEntrance.getChildren().add(ControlPanel.Marker("x", 0, true));
@@ -113,26 +118,11 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxEntrance.getChildren().add(tfEntranceY);
 
-//				tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfEntranceY");
-//					}
-//				});
-
-		hboxEntrance.getChildren().add(ControlPanel.Spacer());
-
-		btnEntranceCreate.setGraphic(ivCreateEntrance);
-		btnEntranceCreate.setMinWidth(25);
-		btnEntranceCreate.setMaxWidth(25);
-//		btnEntranceCreate.setDisable(true);
-		btnEntranceCreate.setTooltip(new ControlPanelTooltip("create the entrance cell from the given parameters"));
-		hboxEntrance.getChildren().add(btnEntranceCreate);
-
-		btnEntranceCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
+		tfEntranceY.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(MouseEvent event) {
-//				System.out.println("OnMousePressed: btnEntranceSet");
+			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfEntranceY");
+				updateEntranceCellParameters();
 			}
 		});
 
@@ -180,12 +170,13 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxExit.getChildren().add(tfExitX);
 
-//				tfExitX.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfExitX");
-//					}
-//				});
+		tfExitX.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfExitX");
+				updateExitCellParameters();
+			}
+		});
 
 		hboxExit.getChildren().add(ControlPanel.Spacer());
 		hboxExit.getChildren().add(ControlPanel.Marker("x", 0, false));
@@ -210,48 +201,11 @@ public class ControlPanelEntranceExit extends VBox {
 
 		hboxExit.getChildren().add(tfExitY);
 
-//				tfExitY.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle(ActionEvent event) {
-//						System.out.println("OnAction: tfExitY");
-//					}
-//				});
-
-		hboxExit.getChildren().add(ControlPanel.Spacer());
-
-		btnExitCreate.setGraphic(ivCreateExit);
-		btnExitCreate.setMinWidth(25);
-		btnExitCreate.setMaxWidth(25);
-//		btnExitCreate.setDisable(true);
-		btnExitCreate.setTooltip(new ControlPanelTooltip("create the exit cell from the given parameters"));
-		hboxExit.getChildren().add(btnExitCreate);
-
-		btnExitCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
+		tfExitY.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(MouseEvent event) {
-//				System.out.println("OnMousePressed: btnExitSet");
-				String strX = tfExitX.getValue();
-				String strY = tfExitY.getValue();
-				Integer x = 0;
-				Integer y = 0;
-				System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
-				System.out.println("x, y: " + strX + ", " + strY);
-
-				if(strX == "west")	x = 0;
-				else if(strX == "east")	x = MazeGlobal.sizeX + 1;
-				else x = MazeGlobal.parseTextField(strX, -1);
-
-				if(strY == "north")	y = 0;
-				else if(strY == "south")	y = MazeGlobal.sizeY + 1;
-				else y = MazeGlobal.parseTextField(strY, -1);
-
-				MazeGlobal.exitCellX = x;
-				MazeGlobal.exitCellY = y;
-				System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
-
-//				mainFrm.mazePanel.deleteCell(MazeGlobal.exitMazeCell);
-//				MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
-//				mainFrm.mazePanel.drawMaze();
+			public void handle(ActionEvent event) {
+//				System.out.println("OnAction: tfExitY");
+				updateExitCellParameters();
 			}
 		});
 
@@ -313,5 +267,63 @@ public class ControlPanelEntranceExit extends VBox {
 		MazeGlobal.exitCellX = x;
 		MazeGlobal.exitCellY = y;
 		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+	}
+
+	private void updateEntranceCellParameters() {
+		Validate();
+
+		String strX = tfEntranceX.getValue();
+		String strY = tfEntranceY.getValue();
+		Integer x = 0;
+		Integer y = 0;
+//		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
+//		System.out.println("x, y: " + strX + ", " + strY);
+
+		if(strX == "west")	x = 0;
+		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
+		else x = MazeGlobal.parseTextField(strX, -1);
+
+		if(strY == "north")	y = 0;
+		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
+		else y = MazeGlobal.parseTextField(strY, -1);
+
+		MazeGlobal.entranceCellX = x;
+		MazeGlobal.entranceCellY = y;
+//		System.out.println("x, y: " + MazeGlobal.entranceCellX + ", " + MazeGlobal.entranceCellY);
+
+//		mainFrm.mazePanel.
+//
+//		deleteEntranceExitCell(MazeGlobal.exitMazeCell);
+//		MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
+//		mainFrm.mazePanel.drawMaze();
+	}
+
+	private void updateExitCellParameters() {
+		Validate();
+
+		String strX = tfExitX.getValue();
+		String strY = tfExitY.getValue();
+		Integer x = 0;
+		Integer y = 0;
+//		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+//		System.out.println("x, y: " + strX + ", " + strY);
+
+		if(strX == "west")	x = 0;
+		else if(strX == "east")	x = MazeGlobal.sizeX + 1;
+		else x = MazeGlobal.parseTextField(strX, -1);
+
+		if(strY == "north")	y = 0;
+		else if(strY == "south")	y = MazeGlobal.sizeY + 1;
+		else y = MazeGlobal.parseTextField(strY, -1);
+
+		MazeGlobal.exitCellX = x;
+		MazeGlobal.exitCellY = y;
+//		System.out.println("x, y: " + MazeGlobal.exitCellX + ", " + MazeGlobal.exitCellY);
+
+//		mainFrm.mazePanel.
+//
+//		deleteEntranceExitCell(MazeGlobal.exitMazeCell);
+//		MazeGlobal.exitMazeCell = mainFrm.mazePanel.createEntranceExitCell(x, y, MazeCell.CellType.eCellTypeExit);
+//		mainFrm.mazePanel.drawMaze();
 	}
 }

@@ -51,4 +51,10 @@ public class ControlPanelCreateMaze extends HBox {
 			}
 		});
 	}
+
+	public void setDisableCreate(boolean disable)
+	{
+		if(btnMazeCreate != null)	btnMazeCreate.setDisable(disable);
+		if(btnMazeStep != null)		btnMazeStep.setDisable(disable);
+	}
 }

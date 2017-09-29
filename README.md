@@ -84,12 +84,12 @@ huh.
 * ~~If the maze size changes, validate the entrance/exit cell parameters.~~
 * entrance/edit cells
   * validate when values in x/y controls change. If not valid disable
-  create button. Show an error icon with tooltip that explains the nature
+  create buttons. Show an error icon with tooltip that explains the nature
   of the problem.
-  * add a create button.  Only want to change when satisfied with values
-   in controls
-  * clean up the old cell before creating a new one
-  * make sure new cell is facing the right direction
+  * ~~add a create button.  Only want to change when satisfied with values
+   in controls.  Turns out, don't need~~
+  * ~~clean up the old cell before creating a new one~~
+  * ~~make sure new cell is facing the right direction~~
   * rules for cell relationship
     * cell must enter/exit the maze in a quadrant opposite the other cell. 
     IE. If the entrance cell is on the top-left quadrant, the exit cell must
@@ -102,10 +102,10 @@ huh.
   be automatically created.  No need to click create button
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
   * Using 2, 4, 6, 8 on the keypad for now. 
-  * (9/28/17) Update. Tried a kludge
-where I forward keypress events on a control field to the maze.  But, it
-seems, sometimes the arrows move focus around the controls.  Something
-I really don't want to happen.  Need to rethink this. 
+  * (9/28/17) Update. Tried a kludge where I forward keypress events 
+  on a control field to the maze.  But, it seems, sometimes the arrows 
+  move focus around the controls.  Something I really don't want to 
+  happen.  Need to rethink this. 
   * Also need to think about other keys for controls.  Some keyboards 
   don't have a keypad
 * Look for a way to post events from the ControlPanel to be caught by the
