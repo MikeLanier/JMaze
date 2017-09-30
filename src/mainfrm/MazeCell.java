@@ -52,6 +52,8 @@ public class MazeCell {
 	boolean facingEast() { return facing == CellFacing.eCellFacingEast; }// ? true : false; }
 	boolean facingWest() { return facing == CellFacing.eCellFacingWest; }// ? true : false; }
 	boolean facingNone() { return facing == CellFacing.eCellFacingNone; }// ? true : false; }
+	boolean stairsUp() { return type == CellType.eCellTypeStairsUp; }
+	boolean stairsDown() { return type == CellType.eCellTypeStairsDown; }
 
 	CellFacing direction() { return facing; }
 

@@ -80,7 +80,7 @@ huh.
 
 ## 09/30/2017
 * Create code to name, save and load mazes.
-* create entrance/exit cell for down/up stairs
+* ~~create entrance/exit cell for down/up stairs~~
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
   * Using 2, 4, 6, 8 on the keypad for now. 
   * (9/28/17) Update. Tried a kludge where I forward keypress events 
