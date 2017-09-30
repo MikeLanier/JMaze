@@ -78,9 +78,25 @@ huh.
     * For the 2D display, draw cell with hash marks
 ---
 
-## 09/29/2017
+## 09/30/2017
 * Create code to name, save and load mazes.
 * create entrance/exit cell for down/up stairs
+* _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
+  * Using 2, 4, 6, 8 on the keypad for now. 
+  * (9/28/17) Update. Tried a kludge where I forward keypress events 
+  on a control field to the maze.  But, it seems, sometimes the arrows 
+  move focus around the controls.  Something I really don't want to 
+  happen.  Need to rethink this. 
+  * Also need to think about other keys for controls.  Some keyboards 
+  don't have a keypad. Maybe make key map customizable.
+* Look for a way to post events from the ControlPanel to be caught by the
+MainFrm or Maze display panel  
+* look at other algorithms
+* need to learn how to "package" my app so that I can run it outside of the 
+IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
+already have a hook for Maven
+
+## 09/29/2017
 * ~~If the maze size changes, validate the entrance/exit cell parameters.~~
 * ~~entrance/edit cells~~
   * ~~validate when values in x/y controls change. If not valid disable
@@ -100,20 +116,6 @@ huh.
   * ~~pick entrance/exit cell by clicking the random button. the randomly
   picked cell will obey the relationship rules outlined above. Cell will
   be automatically created.  No need to click create button~~
-* _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
-  * Using 2, 4, 6, 8 on the keypad for now. 
-  * (9/28/17) Update. Tried a kludge where I forward keypress events 
-  on a control field to the maze.  But, it seems, sometimes the arrows 
-  move focus around the controls.  Something I really don't want to 
-  happen.  Need to rethink this. 
-  * Also need to think about other keys for controls.  Some keyboards 
-  don't have a keypad
-* Look for a way to post events from the ControlPanel to be caught by the
-MainFrm or Maze display panel  
-* look at other algorithms
-* need to learn how to "package" my app so that I can run it outside of the 
-IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
-already have a hook for Maven
 ## 09/28/2017
 * ~~pick start cell by clicking the random button~~
   * ~~change x or y of start cell and update the display~~

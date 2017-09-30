@@ -90,7 +90,7 @@ public class MazePanel extends Canvas {
 		return mazeCell;
 	}
 
-	private Stack<MazeCell> stack = null; //new Stack<MazeCell>();
+	private Stack<MazeCell> stack = null;
 
 	public void updateStartCell() {
 		int startCellX = MazeGlobal.startCellX;
@@ -169,6 +169,41 @@ public class MazePanel extends Canvas {
 		return cell;
 	}
 
+	public void createStairCell(MazeCell cell, MazeCell.CellType type) {
+		int x = cell.X();
+		int y = cell.Y();
+		System.out.println("cell: x, y: " + x + ", " + y);
+
+		if(x == 0)  // on the west size
+		{
+			x = x - 1;
+		}
+		if(x == (MazeGlobal.sizeX+1))  // on the west size
+		{
+			x = x + 1;
+		}
+		MazeCell stair = null;
+
+		stair = createCell(x,y);
+		stair.setType(type);
+		stair.setVisited();
+
+//		int west = 0;
+//		int east = MazeGlobal.sizeX + 1;
+//		int north = 0;
+//		int south = MazeGlobal.sizeY + 1;
+
+		if(cell.facingWest() || cell.facingEast())
+		{
+			if(stair.W(MazeCell.west) != null)	stair.W(MazeCell.west).Open(true);
+			if(stair.W(MazeCell.east) != null)	stair.W(MazeCell.east).Open(true);
+		}
+		else {
+			if (stair.W(MazeCell.north) != null) stair.W(MazeCell.north).Open(true);
+			if (stair.W(MazeCell.south) != null) stair.W(MazeCell.south).Open(true);
+		}
+	}
+
 	public void createMaze(boolean animate)
 	{
 		MazeGlobal.sizeX = Integer.parseInt(controlPanel.mazeSizeControl.tfMazeSizeX.getText());
@@ -185,6 +220,9 @@ public class MazePanel extends Canvas {
 
 		MazeGlobal.entranceMazeCell = createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
 		MazeGlobal.exitMazeCell = createEntranceExitCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
+
+		createStairCell(MazeGlobal.entranceMazeCell, MazeCell.CellType.eCellTypeStairsUp);
+		createStairCell(MazeGlobal.exitMazeCell, MazeCell.CellType.eCellTypeStairsDown);
 
 		updateStartCell();
 

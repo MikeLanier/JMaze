@@ -31,7 +31,9 @@ public class MazeCell {
 		eCellTypeStart,
 		eCellTypeEntrance,
 		eCellTypeExit,
-		eCellTypeRoom
+		eCellTypeRoom,
+		eCellTypeStairsDown,
+		eCellTypeStairsUp
 	}
 
 	public enum CellFacing {
@@ -150,6 +152,19 @@ public class MazeCell {
 				gc.fillPolygon(xpointsSouth, ypointsSouth, 8);
 			} else if (facingWest()) {
 				gc.fillPolygon(xpointsWest, ypointsWest, 8);
+			}
+		}
+		else {
+			if(type == CellType.eCellTypeStairsDown ||
+				type == CellType.eCellTypeStairsUp) {
+//				gc.fillRect(x, y, cellSize, cellSize);
+
+				gc.setStroke(Color.BLACK);
+				int s = cellSize / 4;
+				for(int i=0; i<cellSize; i+=s)
+				{
+					gc.strokeLine(x+i, y, x+i, y+cellSize);
+				}
 			}
 		}
 	}
