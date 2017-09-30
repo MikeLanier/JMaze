@@ -111,6 +111,5 @@ public class ControlPanelStartCell extends HBox {
 				mainFrm.mazePanel.drawMaze();
 			}
 		});
-		
 	}
 }

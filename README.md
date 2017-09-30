@@ -82,7 +82,7 @@ huh.
 * Create code to name, save and load mazes.
 * create entrance/exit cell for down/up stairs
 * ~~If the maze size changes, validate the entrance/exit cell parameters.~~
-* entrance/edit cells
+* ~~entrance/edit cells~~
   * ~~validate when values in x/y controls change. If not valid disable
   create buttons. Show an error icon with tooltip that explains the nature
   of the problem.~~
@@ -97,9 +97,9 @@ huh.
     * ~~cells cannot be on same side of the maze. IE. If the entrance is to 
     the top of the top-left quadrant, the exit cannot be on the top of 
     the top-right quadrant.~~
-  * pick entrance/exit cell by clicking the random button. the randomly
+  * ~~pick entrance/exit cell by clicking the random button. the randomly
   picked cell will obey the relationship rules outlined above. Cell will
-  be automatically created.  No need to click create button
+  be automatically created.  No need to click create button~~
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
   * Using 2, 4, 6, 8 on the keypad for now. 
   * (9/28/17) Update. Tried a kludge where I forward keypress events 

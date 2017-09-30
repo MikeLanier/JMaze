@@ -138,7 +138,21 @@ public class ControlPanelEntranceExit extends VBox {
 		btnEntranceSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-//				System.out.println("OnMousePressed: btnEntranceSet");
+				System.out.println("OnMousePressed: btnEntranceSet");
+				int side = MazeGlobal.rand.nextInt(4);
+				int index = 0;
+				if(side < 2) {
+					index = MazeGlobal.rand.nextInt(MazeGlobal.sizeX);
+					tfEntranceX.setValue(itemsEntranceX.get(side));
+					tfEntranceY.setValue(itemsEntranceY.get(index+2));
+				}
+				else {
+					index = MazeGlobal.rand.nextInt(MazeGlobal.sizeY);
+					tfEntranceY.setValue(itemsEntranceY.get(side-2));
+					tfEntranceX.setValue(itemsEntranceX.get(index+2));
+				}
+
+				parametersValid();
 			}
 		});
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,7 +235,21 @@ public class ControlPanelEntranceExit extends VBox {
 		btnExitSet.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-//				System.out.println("OnMousePressed: btnExitSet");
+				System.out.println("OnMousePressed: btnExitSet");
+				int side = MazeGlobal.rand.nextInt(4);
+				int index = 0;
+				if(side < 2) {
+					index = MazeGlobal.rand.nextInt(MazeGlobal.sizeX);
+					tfExitX.setValue(itemsExitX.get(side));
+					tfExitY.setValue(itemsExitY.get(index+2));
+				}
+				else {
+					index = MazeGlobal.rand.nextInt(MazeGlobal.sizeY);
+					tfExitY.setValue(itemsExitY.get(side-2));
+					tfExitX.setValue(itemsExitX.get(index+2));
+				}
+
+				parametersValid();
 			}
 		});
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -275,6 +303,7 @@ public class ControlPanelEntranceExit extends VBox {
 		Integer entranceY = parseComboValue(tfEntranceY, MazeGlobal.sizeY);
 		Integer exitX = parseComboValue(tfExitX, MazeGlobal.sizeX);
 		Integer exitY = parseComboValue(tfExitY, MazeGlobal.sizeY);
+
 		Integer maxX = MazeGlobal.sizeX + 1;
 		Integer maxY = MazeGlobal.sizeY + 1;
 		Integer centerX = maxX/2;
