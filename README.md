@@ -82,8 +82,20 @@ huh.
     * For the 2D display, draw cell with hash marks
 ---
 
-## 10/4/2017
-* Create code to name, save and load mazes.
+## 10/5/2017
+* Create code to name, save and load mazes. As for the game, will not
+need this to start and adventure, but will need it to save and
+adventure
+   * ~~Create a class which contains all info for a given maze~~
+   * class will read/write the maze to output file
+   * keep mazes in MAP<>
+   * change name to Mazes on control panel
+   * change maze name TextField to combo box
+   * add button with + to create a new maze
+   * add button with - to delete current maze.  if MAP<> only has one
+   maze, - will be disabled
+* _BUG:_ Change the location of the entrance/exit through control panel
+does not update the display
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
   * Using 2, 4, 6, 8 on the keypad for now. 
   * (9/28/17) Update. Tried a kludge where I forward keypress events 
