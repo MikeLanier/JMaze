@@ -37,7 +37,7 @@ public class ControlPanelLoadMazes extends HBox {
 
 		// contains the name of the filename containing the maze to load
 		tfMazeFilename.setText("filename");
-		tfMazeFilename.setMinWidth(150);
+		tfMazeFilename.setMinWidth(165);
 		tfMazeFilename.setTooltip(new ControlPanelTooltip("Name of file from which to load mazes"));
 		getChildren().add(tfMazeFilename);
 

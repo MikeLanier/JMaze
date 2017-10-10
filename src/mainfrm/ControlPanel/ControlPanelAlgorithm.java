@@ -38,8 +38,8 @@ public class ControlPanelAlgorithm extends HBox {
 		getChildren().add(ControlPanel.Spacer());
 
 		// combobox containing the algorithms to use
-		cbAlgorithm.setMinWidth(190);
-		cbAlgorithm.setMaxWidth(190);
+		cbAlgorithm.setMinWidth(165);
+		cbAlgorithm.setMaxWidth(165);
 //		cbAlgorithm.setVisible(false);
 		cbAlgorithm.setTooltip(new ControlPanelTooltip("List of maze creating algorithm.\nSelect which one to use"));
 		getChildren().add(cbAlgorithm);

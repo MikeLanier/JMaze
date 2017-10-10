@@ -22,8 +22,8 @@ public class ControlPanelMazes extends HBox {
 		getChildren().add(ControlPanel.Marker("Mazes", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
-		cbMazeName.setMinWidth(150);
-		cbMazeName.setMaxWidth(150);
+		cbMazeName.setMinWidth(165);
+		cbMazeName.setMaxWidth(165);
 		cbMazeName.setTooltip(new ControlPanelTooltip("Name of the current maze"));
 		getChildren().add(cbMazeName);
 

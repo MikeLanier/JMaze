@@ -91,7 +91,7 @@ public class ControlPanelEntranceExit extends VBox {
 		});
 
 		hboxEntrance.getChildren().add(ControlPanel.Spacer());
-		hboxEntrance.getChildren().add(ControlPanel.Marker("x", 0, true));
+		hboxEntrance.getChildren().add(ControlPanel.Marker("x", 10, false));
 		hboxEntrance.getChildren().add(ControlPanel.Spacer());
 
 		ArrayList<String> itemsEntranceY = new ArrayList<>();
@@ -193,7 +193,7 @@ public class ControlPanelEntranceExit extends VBox {
 		});
 
 		hboxExit.getChildren().add(ControlPanel.Spacer());
-		hboxExit.getChildren().add(ControlPanel.Marker("x", 0, false));
+		hboxExit.getChildren().add(ControlPanel.Marker("x", 10, false));
 		hboxExit.getChildren().add(ControlPanel.Spacer());
 
 		ArrayList<String> itemsExitY = new ArrayList<>();

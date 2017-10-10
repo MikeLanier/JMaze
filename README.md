@@ -82,11 +82,14 @@ huh.
     * For the 2D display, draw cell with hash marks
 ---
 
-## 10/5/2017
+## 10/10/2017
+* Maintain multiple mazes
+  * When starting app, create one raw maze and add it to list
+  * Names start with "Maze-1" and increment
+  * Maze size is per maze, but cell size is a display parameter, move it
 * Create code to name, save and load mazes. As for the game, will not
 need this to start and adventure, but will need it to save and
 adventure
-   * ~~Create a class which contains all info for a given maze~~
    * class will read/write the maze to output file
    * keep mazes in MAP<>
    * change name to Mazes on control panel
@@ -110,6 +113,12 @@ MainFrm or Maze display panel
 * need to learn how to "package" my app so that I can run it outside of the 
 IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
 already have a hook for Maven
+
+## 10/5/2017
+* ~~Create code to name, save and load mazes. As for the game, will not
+need this to start and adventure, but will need it to save and
+adventure~~
+   * ~~Create a class which contains all info for a given maze~~
 
 ## 10/1/2017
 ## 09/30/2017

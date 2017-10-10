@@ -21,8 +21,8 @@ public class ControlPanelCreateMaze extends HBox {
 		paddingProperty().setValue(margin);
 
 		btnMazeCreate.setText("Create");
-		btnMazeCreate.setMinWidth(70);
-		btnMazeCreate.setMaxWidth(70);
+		btnMazeCreate.setMinWidth(60);
+		btnMazeCreate.setMaxWidth(60);
 		btnMazeCreate.setTooltip(new ControlPanelTooltip("Create a maze"));
 		getChildren().add(btnMazeCreate);
 

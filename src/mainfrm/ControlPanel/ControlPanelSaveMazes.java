@@ -38,7 +38,7 @@ public class ControlPanelSaveMazes extends HBox {
 
 		// contains the filename to which the current maze will be saved
 		tfMazeSaveFilename.setText("filename");
-		tfMazeSaveFilename.setMinWidth(150);
+		tfMazeSaveFilename.setMinWidth(165);
 		tfMazeSaveFilename.setTooltip(new ControlPanelTooltip("Name of file to which to add the current maze"));
 		getChildren().add(tfMazeSaveFilename);
 

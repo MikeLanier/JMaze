@@ -14,8 +14,8 @@ public class ControlPanelPrintMaze extends HBox {
 		paddingProperty().setValue(margin);
 
 		btnMazePrint.setText("Print");
-		btnMazePrint.setMinWidth(70);
-		btnMazePrint.setMaxWidth(70);
+		btnMazePrint.setMinWidth(60);
+		btnMazePrint.setMaxWidth(60);
 		btnMazePrint.setTooltip(new ControlPanelTooltip("Print the maze"));
 		btnMazePrint.setDisable(true);
 		getChildren().add(btnMazePrint);

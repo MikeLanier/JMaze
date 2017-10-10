@@ -30,8 +30,8 @@ public class ControlPanelMazeSize extends HBox {
 		// number of cells in x
 		Integer x = _sizeX;
 		tfMazeSizeX.setText(x.toString());
-		tfMazeSizeX.setMinWidth(40);
-		tfMazeSizeX.setMaxWidth(40);
+		tfMazeSizeX.setMinWidth(70);
+		tfMazeSizeX.setMaxWidth(70);
 		tfMazeSizeX.setTooltip(new ControlPanelTooltip("Number of cells in a row of the maze"));
 		getChildren().add(tfMazeSizeX);
 
@@ -46,14 +46,14 @@ public class ControlPanelMazeSize extends HBox {
 		});
 
 		getChildren().add(ControlPanel.Spacer());
-		getChildren().add(ControlPanel.Marker("x", 0, false));
+		getChildren().add(ControlPanel.Marker("x", 10, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		// number of cells in y
 		Integer y = _sizeY;
 		tfMazeSizeY.setText(y.toString());
-		tfMazeSizeY.setMinWidth(40);
-		tfMazeSizeY.setMaxWidth(40);
+		tfMazeSizeY.setMinWidth(75);
+		tfMazeSizeY.setMaxWidth(75);
 		tfMazeSizeY.setTooltip(new ControlPanelTooltip("Number of cells in a column of the maze"));
 		getChildren().add(tfMazeSizeY);
 

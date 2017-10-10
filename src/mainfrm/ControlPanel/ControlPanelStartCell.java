@@ -56,7 +56,7 @@ public class ControlPanelStartCell extends HBox {
 		});
 
 		getChildren().add(ControlPanel.Spacer());
-		getChildren().add(ControlPanel.Marker("x", 0, true));
+		getChildren().add(ControlPanel.Marker("x", 10, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		tfStartCellY.setText(MazeGlobal.startCellY.toString());

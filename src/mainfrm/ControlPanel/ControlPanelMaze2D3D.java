@@ -19,7 +19,7 @@ public class ControlPanelMaze2D3D extends HBox {
 		javafx.geometry.Insets margin = new javafx.geometry.Insets(5, 5, 5, 5);
 		paddingProperty().setValue(margin);
 
-		getChildren().add(ControlPanel.Marker("", 70, false));
+		getChildren().add(ControlPanel.Marker("", 60, false));
 		getChildren().add(ControlPanel.Spacer());
 
 		cbMaze2D.setText("2D");
