@@ -258,7 +258,7 @@ public class MazeCell {
 		}
 	}
 
-	private void drawStairsUpDown(GraphicsContext gc, int x, double z, MazeCell.CellFacing facing) {
+	private void drawStairsDown3D(GraphicsContext gc, int x, double z, MazeCell.CellFacing facing) {
 		double x1 = -1+(x*2);
 		double x2 = 1+(x*2);
 		double y1 = -1;
@@ -272,8 +272,8 @@ public class MazeCell {
 		MazeMath.point p110 = new MazeMath.point(x2, y2, z1);
 		MazeMath.point p001 = new MazeMath.point(x1, y1, z2);
 		MazeMath.point p101 = new MazeMath.point(x2, y1, z2);
-		MazeMath.point p011 = new MazeMath.point(x1, y2, z2);
-		MazeMath.point p111 = new MazeMath.point(x2, y2, z2);
+		MazeMath.point p011 = new MazeMath.point(x1, y2+1, z2);
+		MazeMath.point p111 = new MazeMath.point(x2, y2+1, z2);
 
 		MazeMath.rectangle bottom = new MazeMath.rectangle(p010, p011, p111, p110);
 
@@ -438,8 +438,8 @@ public class MazeCell {
 
 		drawDoors3D(gc, x, z, facing);
 
-		if(stairsUp())	drawStairsUp3D(gc, x, z, facing);
-		if(stairsDown())	drawStairsUpDown(gc, x, z, facing);
+		if(stairsUp())		drawStairsUp3D(gc, x, z, facing);
+		if(stairsDown())	drawStairsDown3D(gc, x, z, facing);
 	}
 
 }

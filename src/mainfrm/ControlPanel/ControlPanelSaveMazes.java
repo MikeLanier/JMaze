@@ -25,7 +25,6 @@ public class ControlPanelSaveMazes extends HBox {
 		btnMazeSave.setMinWidth(60);
 		btnMazeSave.setMaxWidth(60);
 		btnMazeSave.setTooltip(new ControlPanelTooltip("Add current maze to those in the named file"));
-		btnMazeSave.setDisable(true);
 		getChildren().add(btnMazeSave);
 
 		btnMazeSave.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -41,7 +40,6 @@ public class ControlPanelSaveMazes extends HBox {
 		tfMazeSaveFilename.setText("filename");
 		tfMazeSaveFilename.setMinWidth(150);
 		tfMazeSaveFilename.setTooltip(new ControlPanelTooltip("Name of file to which to add the current maze"));
-		tfMazeSaveFilename.setDisable(true);
 		getChildren().add(tfMazeSaveFilename);
 
 		tfMazeSaveFilename.setOnAction(new EventHandler<ActionEvent>() {
@@ -61,7 +59,6 @@ public class ControlPanelSaveMazes extends HBox {
 //		btnMazeSaveSelect.setText(">");
 		btnMazeSaveSelect.setMinWidth(25);
 		btnMazeSaveSelect.setTooltip(new ControlPanelTooltip("Open FileSaveDialog to select maze\nfile to which to add the current maze"));
-		btnMazeSaveSelect.setDisable(true);
 		getChildren().add(btnMazeSaveSelect);
 
 		btnMazeSaveSelect.setOnMousePressed(new EventHandler<MouseEvent>() {

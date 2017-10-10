@@ -1,6 +1,9 @@
 package mainfrm;
 
 import javafx.scene.control.TextField;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -19,6 +22,12 @@ public class MazeGlobal {
 	public static MazeCell		currentMazeCell = null;
 	public static MazeCell		entranceMazeCell = null;
 	public static MazeCell		exitMazeCell = null;
+
+	public static Map<Integer, MazeCell>	cells = null;
+	public static Map<Integer, MazeWall>	walls = null;
+
+	public static Map<String, MazeInfo>		mazes = new HashMap<>();
+	public static String		mazeFilename = "mazes.mazes";
 
 	public static Random rand = new Random(System.currentTimeMillis());
 
