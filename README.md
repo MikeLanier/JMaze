@@ -49,8 +49,7 @@ IDE.  Maven or Gradle may be the solution for this.  Intellij seems to
 already have a hook for Maven
 * Auto solve the maze
 * Print the maze
-
-
+---
 * _BUG:_ Change the location of the entrance/exit through control panel
 does not update the display
 * _BUG:_ Pick an entrance with Y set to south, draws one cell above maze to north
