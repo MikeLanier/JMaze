@@ -29,7 +29,7 @@ public class ControlPanelCreateMaze extends HBox {
 		btnMazeCreate.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				controlPanel.createRoomControl.setDisable(false);
+				if(controlPanel.createRoomControl != null) controlPanel.createRoomControl.setDisable(false);
 				mainFrm.mazePanel.createMaze(false);
 			}
 		});
@@ -46,7 +46,7 @@ public class ControlPanelCreateMaze extends HBox {
 			@Override
 			public void handle(MouseEvent event) {
 //				System.out.println("OnMousePressed: btnMazeStep");
-				controlPanel.createRoomControl.setDisable(false);
+				if(controlPanel.createRoomControl != null) controlPanel.createRoomControl.setDisable(false);
 				mainFrm.mazePanel.createMaze(true);
 			}
 		});

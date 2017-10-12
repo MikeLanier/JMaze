@@ -63,8 +63,8 @@ public class ControlPanel extends VBox {
 		getChildren().add(cellSizeControl = new ControlPanelCellSize(this, mainFrm, MazeGlobal.sizeCell));
 		getChildren().add(new ControlPanel2D3DDisplay(mainFrm));
 		getChildren().add(new ControlPanelSeparator());
-		getChildren().add(createRoomControl = new ControlPanelCreateRoom(mainFrm));
+//		getChildren().add(createRoomControl = new ControlPanelCreateRoom(mainFrm));
 
-		createRoomControl.setDisable(true);
+		if(createRoomControl != null) createRoomControl.setDisable(true);
 	}
 }
