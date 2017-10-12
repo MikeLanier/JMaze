@@ -1,13 +1,7 @@
 # JMaze  
 #### Overview
-In this repository, I'm studing algorithms for making mazes.  The 
-algorithms used are defined at 
-https://en.wikipedia.org/wiki/Maze_generation_algorithm and 
-http://www.astrolog.org/labyrnth/algrithm.htm .
-The app to demo these algorithms is written in Java.  I eventually
-plan to port this code to JavaScript using AngularJS and/or Vue.  I'll
-create different repositories for these versions.  
----
+In this repository, I'm studing algorithms for making mazes.  The algorithms used are defined at https://en.wikipedia.org/wiki/Maze_generation_algorithm and http://www.astrolog.org/labyrnth/algrithm.htm . The app to demo these algorithms is written in Java.  I eventually plan to port this code to JavaScript using AngularJS and/or Vue.  I'll create different repositories for these versions.  
+
 ## Algorithms: 
 #### Recursive backtracker
 The depth-first search algorithm of maze generation is frequently implemented
