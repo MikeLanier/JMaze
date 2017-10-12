@@ -1,5 +1,5 @@
 # JMaze  
-#### 
+#### Overview
 In this repository, I'm studing algorithms for making mazes.  The 
 algorithms used are defined at 
 https://en.wikipedia.org/wiki/Maze_generation_algorithm and 
