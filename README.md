@@ -27,7 +27,6 @@ _In my implementation of_ Depth-first search _I used a stack for backtracking
 during maze creation. The description for this algorithm sounds similar to my
 interpretation of_ Depth-first search. _For that reason I've not created a separate
 implementation for_ Recursize backtracker.
----
 
 ## 10/12/2017
 * On screen controls
