@@ -41,6 +41,19 @@ implementation for_ Recursize backtracker.
   * add button with + to create a new maze
   * add button with - to delete current maze.
 * Code to load/save a collection of mazes
+* Look for a way to post events from the ControlPanel to be caught by the
+MainFrm or Maze display panel  
+* look at other algorithms
+* need to learn how to "package" my app so that I can run it outside of the 
+IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
+already have a hook for Maven
+* Auto solve the maze
+* Print the maze
+
+
+* _BUG:_ Change the location of the entrance/exit through control panel
+does not update the display
+* _BUG:_ Pick an entrance with Y set to south, draws one cell above maze to north
 * _BUG:_ when I hit the right arrow, focus change to the a TextField control. 
   * Using 2, 4, 6, 8 on the keypad for now. 
   * (9/28/17) Update. Tried a kludge where I forward keypress events 
@@ -49,15 +62,6 @@ implementation for_ Recursize backtracker.
   happen.  Need to rethink this. 
   * Also need to think about other keys for controls.  Some keyboards 
   don't have a keypad. Maybe make key map customizable.
-* Look for a way to post events from the ControlPanel to be caught by the
-MainFrm or Maze display panel  
-* look at other algorithms
-* need to learn how to "package" my app so that I can run it outside of the 
-IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
-already have a hook for Maven
-* _BUG:_ Change the location of the entrance/exit through control panel
-does not update the display
-* _BUG:_ Pick an entrance with Y set to south, draws one cell above maze to north
 #### 10/10/2017
 * ~~Maintain multiple mazes~~
   * ~~Maze size is per maze, but cell size is a display parameter, move control~~
