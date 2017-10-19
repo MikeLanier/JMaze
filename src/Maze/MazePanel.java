@@ -35,7 +35,7 @@ public class MazePanel extends Canvas {
 		this.setHeight(height+yOffset);
 
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(javafx.scene.paint.Color.BLUE);
+		gc.setFill(javafx.scene.paint.Color.WHITE);
 		gc.fillRect(xOffset, yOffset, width, height);
 	}
 
@@ -204,8 +204,8 @@ public class MazePanel extends Canvas {
 		MazeGlobal.entranceMazeCell = createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
 		MazeGlobal.exitMazeCell = createEntranceExitCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
 
-//		createStairCell(MazeGlobal.entranceMazeCell, MazeCell.CellType.eCellTypeStairsUp);
-//		createStairCell(MazeGlobal.exitMazeCell, MazeCell.CellType.eCellTypeStairsDown);
+		createStairCell(MazeGlobal.entranceMazeCell, MazeCell.CellType.eCellTypeStairsUp);
+		createStairCell(MazeGlobal.exitMazeCell, MazeCell.CellType.eCellTypeStairsDown);
 
 		updateStartCell();
 
