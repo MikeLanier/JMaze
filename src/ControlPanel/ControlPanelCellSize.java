@@ -1,12 +1,11 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import mainfrm.MainFrm;
-import mainfrm.MazeGlobal;
+import MainFrm.MainFrm;
+import Maze.MazeGlobal;
 
 public class ControlPanelCellSize extends HBox {
 	public TextField tfCellSize			= new TextField();

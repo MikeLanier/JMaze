@@ -1,7 +1,6 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 
 public class ControlPanelAlgorithm extends HBox {

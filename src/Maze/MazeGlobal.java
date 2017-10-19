@@ -1,4 +1,4 @@
-package mainfrm;
+package Maze;
 
 import javafx.scene.control.TextField;
 

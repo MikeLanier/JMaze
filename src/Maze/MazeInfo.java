@@ -1,7 +1,4 @@
-package mainfrm;
-
-import mainfrm.MazeCell;
-import mainfrm.MazeWall;
+package Maze;
 
 import java.util.Map;
 

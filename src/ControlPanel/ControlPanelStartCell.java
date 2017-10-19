@@ -1,18 +1,15 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.TextAlignment;
-import mainfrm.MainFrm;
-import mainfrm.MazeGlobal;
+import MainFrm.MainFrm;
+import Maze.MazeGlobal;
 
 public class ControlPanelStartCell extends HBox {
 	private TextField tfStartCellX		= new TextField();

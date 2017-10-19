@@ -1,7 +1,6 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class ControlPanelSeparator extends HBox {

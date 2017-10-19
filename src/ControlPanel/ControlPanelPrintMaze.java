@@ -1,8 +1,7 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 

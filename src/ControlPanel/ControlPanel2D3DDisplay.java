@@ -1,12 +1,11 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import mainfrm.MainFrm;
-import mainfrm.MazeGlobal;
+import MainFrm.MainFrm;
+import Maze.MazeGlobal;
 
 public class ControlPanel2D3DDisplay extends HBox {
 	public CheckBox cb2DView			= new CheckBox();

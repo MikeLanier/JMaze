@@ -29,9 +29,10 @@ interpretation of_ Depth-first search. _For that reason I've not created a separ
 implementation for_ Recursize backtracker.
 
 ## Implementation Diary: 
-#### 10/12/2017
+#### 10/19/2017
 * On screen controls
-  * Radial Menu with four buttons; move forward, turn left, turn right and turn around
+  * ~~Radial Menu with four buttons; move forward, turn left, turn right and turn around~~
+  * wire up radial menu to walk through maze
 * Maintain multiple mazes
   * When starting app, 
     * create one raw maze 

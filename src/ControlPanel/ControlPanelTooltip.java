@@ -1,4 +1,4 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.scene.control.Tooltip;
 import javafx.scene.text.Font;

@@ -1,14 +1,19 @@
-package mainfrm;
+package MainFrm;
 
+import Maze.MazeCell;
+import Maze.MazeGlobal;
+import Maze.MazePanel;
+import RadialMenu.CommandEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import mainfrm.ControlPanel.ControlPanel;
+import ControlPanel.ControlPanel;
 
 public class MainFrm extends GridPane
 {
 	private ControlPanel controlPanel = null;
 	public MazePanel mazePanel = null;
+	public static RadialMenu.Command	commands = null;
 
 	public MainFrm() {
 //		System.out.println("MainFrm");
@@ -28,6 +33,36 @@ public class MainFrm extends GridPane
 
 		add(controlPanel=new ControlPanel(this), 0, 0);
 		add(mazePanel =new MazePanel(controlPanel), 1, 0);
+
+		commands = new RadialMenu.Command(-2, "Commands", "Commands", "");
+		commands.add(new RadialMenu.Command(1, "Forward", "Move forward one cell", "..\\Images\\Forward32.png"));
+//		commands.add(new RadialMenu.Command(5, "Open Door", "Open Door", "..\\Images\\OpenDoor32.png"));
+//		commands.add(null);
+		commands.add(new RadialMenu.Command(3, "Turn Right", "Turn right", "..\\Images\\TurnRight32.png"));
+//		commands.add(new RadialMenu.Command(8, "Retreat", "Run away", "..\\Images\\Retreat32.png"));
+//		commands.add(null);
+		commands.add(new RadialMenu.Command(4, "Turn Around", "Turn Around", "..\\Images\\TurnAround32.png"));
+//		commands.add(new RadialMenu.Command(7, "Fight", "Fight", "..\\Images\\Fight32.png"));
+//		commands.add(null);
+		commands.add(new RadialMenu.Command(2, "Turn Left", "Turn left", "..\\Images\\TurnLeft32.png"));
+//		commands.add(new RadialMenu.Command(6, "Get Item", "Get visible item", "..\\Images\\GetItem32.png"));
+//		commands.add(null);
+
+		add(new RadialMenu.RadialMenu(40, 100, commands),1, 0);
+
+		addEventFilter(
+				CommandEvent.RUN_COMMAND,
+				event -> System.out.println(
+						"Field filtered strike: " + event.getCommand()
+				)
+		);
+
+		addEventHandler(
+				CommandEvent.RUN_COMMAND,
+				event -> System.out.println(
+						"Field handled strike: " + event.getCommand().toString()
+				)
+		);
 
 		mazePanel.updateStartCell();
 		MazeGlobal.entranceMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);

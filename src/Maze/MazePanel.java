@@ -1,20 +1,19 @@
-package mainfrm;
+package Maze;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import mainfrm.ControlPanel.ControlPanel;
+import ControlPanel.ControlPanel;
 
 import java.util.*;
 
 public class MazePanel extends Canvas {
 	private ControlPanel controlPanel = null;
 	
-	MazePanel(ControlPanel _controlPanel) {
+	public MazePanel(ControlPanel _controlPanel) {
 		controlPanel = _controlPanel;
 		MazeGlobal.cells = new HashMap<>();
 		MazeGlobal.walls = new HashMap<>();
@@ -36,11 +35,11 @@ public class MazePanel extends Canvas {
 		this.setHeight(height+yOffset);
 
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(javafx.scene.paint.Color.WHITE);
+		gc.setFill(javafx.scene.paint.Color.BLUE);
 		gc.fillRect(xOffset, yOffset, width, height);
 	}
 
-	void buildMazePanel()
+	public void buildMazePanel()
 	{
 		resetMazePanel();
 
@@ -268,14 +267,14 @@ public class MazePanel extends Canvas {
 	public void drawMaze() {
 		GraphicsContext gc = getGraphicsContext2D();
 
-		gc.setFill(Color.WHITE);
-		gc.fillRect(0, 0, 1000, 1000);
+//		gc.setFill(Color.RED);
+//		gc.fillRect(0, 0, 1000, 1000);
 
 		drawMaze3D(gc);
 		drawMaze2D(gc);
 	}
 
-	void turnLeft()
+	public void turnLeft()
 	{
 		if(MazeGlobal.currentMazeCell.facingNorth())		MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);
 		else if(MazeGlobal.currentMazeCell.facingWest())	MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
@@ -284,7 +283,7 @@ public class MazePanel extends Canvas {
 		drawMaze();
 	}
 
-	void turnRight()
+	public void turnRight()
 	{
 		if(MazeGlobal.currentMazeCell.facingNorth())		MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingEast);
 		else if(MazeGlobal.currentMazeCell.facingEast())	MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
@@ -293,7 +292,7 @@ public class MazePanel extends Canvas {
 		drawMaze();
 	}
 
-	void stepForward()
+	public void stepForward()
 	{
 		int x = MazeGlobal.currentMazeCell.X();
 		int y = MazeGlobal.currentMazeCell.Y();
@@ -357,7 +356,7 @@ public class MazePanel extends Canvas {
 		drawMaze();
 	}
 
-	void turnAround()
+	public void turnAround()
 	{
 		if(MazeGlobal.currentMazeCell.facingNorth())		MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingSouth);
 		else if(MazeGlobal.currentMazeCell.facingEast())	MazeGlobal.currentMazeCell.setFacing(MazeCell.CellFacing.eCellFacingWest);

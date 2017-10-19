@@ -1,19 +1,16 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import mainfrm.MainFrm;
-import mainfrm.MazeCell;
-import mainfrm.MazeGlobal;
+import MainFrm.MainFrm;
+import Maze.MazeGlobal;
 
 import java.util.ArrayList;
 

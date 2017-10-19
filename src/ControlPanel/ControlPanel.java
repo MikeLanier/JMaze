@@ -1,9 +1,9 @@
-package mainfrm.ControlPanel;
+package ControlPanel;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import mainfrm.MainFrm;
-import mainfrm.MazeGlobal;
+import MainFrm.MainFrm;
+import Maze.MazeGlobal;
 
 
 public class ControlPanel extends VBox {
