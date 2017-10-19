@@ -4,6 +4,8 @@ import Maze.MazeCell;
 import Maze.MazeGlobal;
 import Maze.MazePanel;
 import RadialMenu.CommandEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -59,10 +61,23 @@ public class MainFrm extends GridPane
 
 		addEventHandler(
 				CommandEvent.RUN_COMMAND,
-				event -> System.out.println(
-						"Field handled strike: " + event.getCommand().toString()
-				)
+				new EventHandler<CommandEvent>() {
+					@Override
+					public void handle(CommandEvent event) {
+						System.out.println("Handle RUN_COMMAND: " + event.getCommand().toString());
+
+						if(event.getCommand().id == 1)	mazePanel.stepForward();
+						if(event.getCommand().id == 2)	mazePanel.turnLeft();
+						if(event.getCommand().id == 3)	mazePanel.turnRight();
+						if(event.getCommand().id == 4)	mazePanel.turnAround();
+					}
+				}
+//				event -> System.out.println(
+//						"Field handled strike: " + event.getCommand().toString()
+//				)
+//
 		);
+
 
 		mazePanel.updateStartCell();
 		MazeGlobal.entranceMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
