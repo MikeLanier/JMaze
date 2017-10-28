@@ -83,8 +83,8 @@ public class MainFrm extends GridPane
 		MazeGlobal.entranceMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.entranceCellX, MazeGlobal.entranceCellY, MazeCell.CellType.eCellTypeEntrance);
 		MazeGlobal.exitMazeCell = mazePanel.createEntranceExitCell(MazeGlobal.exitCellX, MazeGlobal.exitCellY, MazeCell.CellType.eCellTypeExit);
 
-//		mazePanel.createStairCell(MazeGlobal.entranceMazeCell, MazeCell.CellType.eCellTypeStairsUp);
-//		mazePanel.createStairCell(MazeGlobal.exitMazeCell, MazeCell.CellType.eCellTypeStairsDown);
+		mazePanel.createStairCell(MazeGlobal.entranceMazeCell, MazeCell.CellType.eCellTypeStairsUp);
+		mazePanel.createStairCell(MazeGlobal.exitMazeCell, MazeCell.CellType.eCellTypeStairsDown);
 
 		mazePanel.drawMaze();
 

@@ -1,7 +1,9 @@
 package Maze;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 public class MazeCell {
 	private int	xOrigin = 0;
@@ -393,6 +395,8 @@ public class MazeCell {
 		MazeMath.rectangle left = new MazeMath.rectangle(p000, p001, p011, p010);
 		MazeMath.rectangle back = new MazeMath.rectangle(p001, p101, p111, p011);
 		MazeMath.rectangle right = new MazeMath.rectangle(p100, p101, p111, p110);
+		MazeMath.rectangle floor = new MazeMath.rectangle(p010, p011, p111, p110);
+		MazeMath.rectangle ceiling = new MazeMath.rectangle(p000, p001, p101, p100);
 
 		MazeMath.matrix m = new MazeMath.matrix();
 		m.scale(100);
@@ -400,10 +404,14 @@ public class MazeCell {
 		left = m.dot(left);
 		back = m.dot(back);
 		right = m.dot(right);
+		floor = m.dot(floor);
+		ceiling = m.dot(ceiling);
 
 		left.perspective(500.0);
 		back.perspective(500.0);
 		right.perspective(500.0);
+		floor.perspective(500.0);
+		ceiling.perspective(500.0);
 
 		double xOffset = 500;
 		double yOffset = 250;
@@ -411,6 +419,19 @@ public class MazeCell {
 		left.move(xOffset, yOffset);
 		back.move(xOffset, yOffset);
 		right.move(xOffset, yOffset);
+		floor.move(xOffset, yOffset);
+		ceiling.move(xOffset, yOffset);
+
+//		Image img = new Image(getClass().getResource("..\\images\\RockFloor256.jpg").toString());
+//
+//		gc.setFill(new ImagePattern(img, 0, 0, 1, 1, true));
+		gc.setFill(Color.LIGHTGRAY);
+		gc.setStroke(Color.TRANSPARENT);
+		floor.draw(gc);
+
+		gc.setStroke(Color.SKYBLUE);
+		gc.setFill(Color.SKYBLUE);
+		ceiling.draw(gc);
 
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.WHITE);
@@ -435,6 +456,14 @@ public class MazeCell {
 			if (!W(MazeCell.east).Open() || W(MazeCell.east).Door()) left.draw(gc);
 			if (!W(MazeCell.west).Open() || W(MazeCell.west).Door()) right.draw(gc);
 		}
+//
+//		gc.setStroke(Color.GREEN);
+//		gc.setFill(Color.GREEN);
+//		floor.draw(gc);
+//
+//		gc.setStroke(Color.LIGHTBLUE);
+//		gc.setFill(Color.LIGHTBLUE);
+//		ceiling.draw(gc);
 
 		drawDoors3D(gc, x, z, facing);
 

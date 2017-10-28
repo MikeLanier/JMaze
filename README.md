@@ -29,10 +29,13 @@ interpretation of_ Depth-first search. _For that reason I've not created a separ
 implementation for_ Recursize backtracker.
 
 ## Implementation Diary: 
-#### 10/19/2017
-* ~~On screen controls~~
-  * ~~Radial Menu with four buttons; move forward, turn left, turn right and turn around~~
-  * ~~wire up radial menu to walk through maze~~
+#### 10/23/2017
+* ~~Getting some drawing issue.  May be best to draw the floor and ceiling as well. Maybe
+use a texture to give it some character.~~
+  * ~~draw floors~~
+  * ~~draw ceiling~~
+  * ~~fit bitmap to shape~~
+* How to read/write XML files  
 * Maintain multiple mazes
   * When starting app, 
     * create one raw maze 
@@ -43,14 +46,14 @@ implementation for_ Recursize backtracker.
   * add button with - to delete current maze.
 * Code to load/save a collection of mazes
 * Look for a way to post events from the ControlPanel to be caught by the
-MainFrm or Maze display panel  
+MainFrm or Maze display panel. (Found a way to post events from the RadialMenu.  Can use that
+to post events from the control panel)
 * look at other algorithms
 * need to learn how to "package" my app so that I can run it outside of the 
 IDE.  Maven or Gradle may be the solution for this.  Intellij seems to 
 already have a hook for Maven
 * Auto solve the maze
 * Print the maze
----
 * _BUG:_ Change the location of the entrance/exit through control panel
 does not update the display
 * _BUG:_ Pick an entrance with Y set to south, draws one cell above maze to north
@@ -62,6 +65,10 @@ does not update the display
   happen.  Need to rethink this. 
   * Also need to think about other keys for controls.  Some keyboards 
   don't have a keypad. Maybe make key map customizable.
+#### 10/19/2017
+* ~~On screen controls~~
+  * ~~Radial Menu with four buttons; move forward, turn left, turn right and turn around~~
+  * ~~wire up radial menu to walk through maze~~
 #### 10/10/2017
 * ~~Maintain multiple mazes~~
   * ~~Maze size is per maze, but cell size is a display parameter, move control~~
