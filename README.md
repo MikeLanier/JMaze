@@ -29,12 +29,7 @@ interpretation of_ Depth-first search. _For that reason I've not created a separ
 implementation for_ Recursize backtracker.
 
 ## Implementation Diary: 
-#### 10/23/2017
-* ~~Getting some drawing issue.  May be best to draw the floor and ceiling as well. Maybe
-use a texture to give it some character.~~
-  * ~~draw floors~~
-  * ~~draw ceiling~~
-  * ~~fit bitmap to shape~~
+#### 10/29/2017
 * How to read/write XML files  
 * Maintain multiple mazes
   * When starting app, 
@@ -65,6 +60,12 @@ does not update the display
   happen.  Need to rethink this. 
   * Also need to think about other keys for controls.  Some keyboards 
   don't have a keypad. Maybe make key map customizable.
+#### 10/28/2017
+* ~~Getting some drawing issue.  May be best to draw the floor and ceiling as well. Maybe
+use a texture to give it some character.~~
+  * ~~draw floors~~
+  * ~~draw ceiling~~
+  * ~~fit bitmap to shape~~
 #### 10/19/2017
 * ~~On screen controls~~
   * ~~Radial Menu with four buttons; move forward, turn left, turn right and turn around~~
