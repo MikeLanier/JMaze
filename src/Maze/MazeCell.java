@@ -380,15 +380,22 @@ public class MazeCell {
 		double x2 = 1+(x*2);
 		double y1 = -1;
 		double y2 = 1;
+		double y3 = 1;
+		double y4 = -1;
 		double z1 = z;
 		double z2 = z+1;
 
+		if(stairsDown()) {
+			y2 = 1.75;
+			y4 = -.25;
+		}
+
 		MazeMath.point p000 = new MazeMath.point(x1, y1, z1);
 		MazeMath.point p100 = new MazeMath.point(x2, y1, z1);
-		MazeMath.point p010 = new MazeMath.point(x1, y2, z1);
-		MazeMath.point p110 = new MazeMath.point(x2, y2, z1);
-		MazeMath.point p001 = new MazeMath.point(x1, y1, z2);
-		MazeMath.point p101 = new MazeMath.point(x2, y1, z2);
+		MazeMath.point p010 = new MazeMath.point(x1, y3, z1);
+		MazeMath.point p110 = new MazeMath.point(x2, y3, z1);
+		MazeMath.point p001 = new MazeMath.point(x1, y4, z2);
+		MazeMath.point p101 = new MazeMath.point(x2, y4, z2);
 		MazeMath.point p011 = new MazeMath.point(x1, y2, z2);
 		MazeMath.point p111 = new MazeMath.point(x2, y2, z2);
 
@@ -429,30 +436,56 @@ public class MazeCell {
 		gc.setStroke(Color.TRANSPARENT);
 		floor.draw(gc);
 
-		gc.setStroke(Color.SKYBLUE);
-		gc.setFill(Color.SKYBLUE);
+		Color ceilingColor = Color.BLACK;
+		
+		gc.setStroke(ceilingColor);
+		gc.setFill(ceilingColor);
 		ceiling.draw(gc);
 
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.WHITE);
 
 		if(facing == MazeCell.CellFacing.eCellFacingEast) {
+			if(stairsUp()) {
+				gc.setStroke(Color.TRANSPARENT);
+				gc.setFill(ceilingColor);
+			}
 			if (!W(MazeCell.east).Open() || W(MazeCell.east).Door()) back.draw(gc);
+			gc.setStroke(Color.BLACK);
+			gc.setFill(Color.WHITE);
 			if (!W(MazeCell.north).Open() || W(MazeCell.north).Door()) left.draw(gc);
 			if (!W(MazeCell.south).Open() || W(MazeCell.south).Door()) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingWest) {
+			if(stairsUp()) {
+				gc.setStroke(Color.TRANSPARENT);
+				gc.setFill(ceilingColor);
+			}
 			if (!W(MazeCell.west).Open() || W(MazeCell.west).Door()) back.draw(gc);
+			gc.setStroke(Color.BLACK);
+			gc.setFill(Color.WHITE);
 			if (!W(MazeCell.south).Open() || W(MazeCell.south).Door()) left.draw(gc);
 			if (!W(MazeCell.north).Open() ||W(MazeCell.north).Door() ) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingNorth) {
+			if(stairsUp()) {
+				gc.setStroke(Color.TRANSPARENT);
+				gc.setFill(ceilingColor);
+			}
 			if (!W(MazeCell.north).Open() || W(MazeCell.north).Door()) back.draw(gc);
+			gc.setStroke(Color.BLACK);
+			gc.setFill(Color.WHITE);
 			if (!W(MazeCell.west).Open() || W(MazeCell.west).Door()) left.draw(gc);
 			if (!W(MazeCell.east).Open() || W(MazeCell.east).Door()) right.draw(gc);
 		}
 		else if(facing == MazeCell.CellFacing.eCellFacingSouth) {
+			if(stairsUp()) {
+				gc.setStroke(Color.TRANSPARENT);
+				gc.setFill(ceilingColor);
+			}
 			if (!W(MazeCell.south).Open() || W(MazeCell.south).Door()) back.draw(gc);
+			gc.setStroke(Color.BLACK);
+			gc.setFill(Color.WHITE);
 			if (!W(MazeCell.east).Open() || W(MazeCell.east).Door()) left.draw(gc);
 			if (!W(MazeCell.west).Open() || W(MazeCell.west).Door()) right.draw(gc);
 		}
@@ -468,7 +501,7 @@ public class MazeCell {
 		drawDoors3D(gc, x, z, facing);
 
 		if(stairsUp())		drawStairsUp3D(gc, x, z, facing);
-		if(stairsDown())	drawStairsDown3D(gc, x, z, facing);
+//		if(stairsDown())	drawStairsDown3D(gc, x, z, facing);
 	}
 
 }
