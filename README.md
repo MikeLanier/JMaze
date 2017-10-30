@@ -8,6 +8,7 @@ in Java.  I eventually plan to port this code to JavaScript using AngularJS and/
 I'll create different repositories for these versions.  
 
 ## Algorithms: 
+### Maze Creation
 #### Recursive backtracker
 The depth-first search algorithm of maze generation is frequently implemented
 using backtracking:
@@ -27,6 +28,43 @@ _In my implementation of_ Depth-first search _I used a stack for backtracking
 during maze creation. The description for this algorithm sounds similar to my
 interpretation of_ Depth-first search. _For that reason I've not created a separate
 implementation for_ Recursize backtracker.
+
+### Maze Solutions
+#### Wall follower
+The wall follower, the best-known rule for traversing mazes, is also known as either the 
+left-hand rule or the right-hand rule. If the maze is simply connected, that is, all its 
+walls are connected together or to the maze's outer boundary, then by keeping one hand in 
+contact with one wall of the maze the solver is guaranteed not to get lost and will reach a 
+different exit if there is one; otherwise, he or she will return to the entrance having 
+traversed every corridor next to that connected section of walls at least once.
+
+Another perspective into why wall following works is topological. If the walls are connected, 
+then they may be deformed into a loop or circle.[2] Then wall following reduces to walking 
+around a circle from start to finish. To further this idea, notice that by grouping together 
+connected components of the maze walls, the boundaries between these are precisely the 
+solutions, even if there is more than one solution (see figures on the right).
+
+If the maze is not simply-connected (i.e. if the start or endpoints are in the center of the 
+structure surrounded by passage loops, or the pathways cross over and under each other and 
+such parts of the solution path are surrounded by passage loops), this method will not reach 
+the goal.
+
+Another concern is that care should be taken to begin wall-following at the entrance to the 
+maze. If the maze is not simply-connected and one begins wall-following at an arbitrary point 
+inside the maze, one could find themselves trapped along a separate wall that loops around on 
+itself and containing no entrances or exits. Should it be the case that wall-following begins 
+late, attempt to mark the position in which wall-following began. Because wall-following will 
+always lead you back to where you started, if you come across your starting point a second 
+time, you can conclude the maze is not simply-connected, and you should switch to an 
+alternative wall not yet followed. See the Pledge Algorithm, below, for an alternative 
+methodology.
+
+Wall-following can be done in 3D or higher-dimensional mazes if its higher-dimensional passages 
+can be projected onto the 2D plane in a deterministic manner. For example, if in a 3D maze 
+"up" passages can be assumed to lead northwest, and "down" passages can be assumed to lead 
+southeast, then standard wall following rules can apply. However, unlike in 2D, this requires 
+that the current orientation be known, to determine which direction is the first on the left 
+or right.
 
 ## Implementation Diary: 
 #### 10/29/2017
